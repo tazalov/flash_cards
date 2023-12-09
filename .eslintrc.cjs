@@ -9,4 +9,7 @@ module.exports = {
       },
     },
   ],
+  rules: {
+    "react/jsx-curly-brace-presence": [2, { props: "never", children: "never" }]
+  }
 }
