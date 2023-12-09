@@ -8,9 +8,12 @@
     "build": "tsc && vite build",
     "format": "prettier --write src",
     "lint": "eslint src --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sb": "storybook dev -p 6006",
+    "sb:b": "storybook build"
   },
   "dependencies": {
+    "@fontsource/roboto": "^5.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -18,12 +21,22 @@
     "@it-incubator/eslint-config": "^1.0.1",
     "@it-incubator/prettier-config": "^0.1.2",
     "@it-incubator/stylelint-config": "^0.1.5",
+    "@storybook/addon-essentials": "7.6.4",
+    "@storybook/addon-interactions": "7.6.4",
+    "@storybook/addon-links": "7.6.4",
+    "@storybook/addon-onboarding": "1.0.9",
+    "@storybook/blocks": "7.6.4",
+    "@storybook/react": "7.6.4",
+    "@storybook/react-vite": "7.6.4",
+    "@storybook/test": "7.6.4",
     "@types/node": "^20.10.4",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint-plugin-storybook": "^0.6.15",
     "sass": "^1.69.5",
-    "stylelint": "^16.0.1",
+    "storybook": "7.6.4",
+    "stylelint": "^15.11.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
   }
