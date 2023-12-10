@@ -1,0 +1,83 @@
+.label {
+  cursor: pointer;
+  user-select: none;
+
+  display: flex;
+  gap: 2px;
+  align-items: center;
+
+  color: var(--color-light-100);
+
+  &.disabled {
+    cursor: initial;
+    color: var(--color-light-900);
+  }
+}
+
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.25rem;
+  height: 2.25rem;
+
+  background-color: transparent;
+  border-radius: 50%;
+
+  transition: all 0.3s ease-out;
+
+  &:hover:not(.disabled) {
+    background-color: var(--color-dark-500);
+  }
+
+  &:hover:active:not(.disabled) {
+    background-color: var(--color-light-900);
+  }
+}
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1.125rem;
+  height: 1.125rem;
+
+  background-color: transparent;
+  border-radius: 2px;
+
+  .indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: var(--color-dark-900);
+    }
+  }
+
+  &[data-state='checked'][data-disabled] {
+    background-color: var(--color-light-100);
+  }
+
+  &[data-state='unchecked'] {
+    border: 2px solid var(--color-light-900);
+  }
+
+  &[data-state='checked'] {
+    background-color: var(--color-dark-900);
+  }
+
+  &:not([data-disabled]) {
+    cursor: pointer;
+  }
+}
+
+.checked {
+  fill: var(--color-light-100);
+
+  &.disabled {
+    fill: var(--color-light-900);
+  }
+}
