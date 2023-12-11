@@ -1,0 +1,10 @@
+.item {
+  padding: 6px 12px;
+  outline: none;
+
+  &:hover,
+  &[data-highlighted] {
+    color: var(--color-accent-300);
+    background-color: var(--color-accent-900);
+  }
+}
