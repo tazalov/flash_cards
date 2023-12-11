@@ -19,8 +19,8 @@ export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: boolean
   errorText?: string
   label?: string
+  onChangeValue?: (value: string) => void
   onPressEnter?: ComponentPropsWithoutRef<'input'>['onKeyDown']
-  setValue?: (value: string) => void
 }
 
 export const TextField = (props: TextFieldProps) => {
@@ -32,8 +32,8 @@ export const TextField = (props: TextFieldProps) => {
     label = 'Input',
     name,
     onChange,
+    onChangeValue,
     onPressEnter,
-    setValue,
     type,
     ...restProps
   } = props
@@ -63,11 +63,12 @@ export const TextField = (props: TextFieldProps) => {
   }
 
   const handleClickClearField = () => {
-    setValue?.('')
+    onChangeValue?.('')
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange?.(e)
+    onChangeValue?.(e.currentTarget.value)
   }
 
   const handlePressOnEnter = (e: KeyboardEvent<HTMLInputElement>) => {
