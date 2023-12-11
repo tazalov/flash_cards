@@ -1,5 +1,6 @@
 .item {
   padding: 0.3125rem 0.75rem;
+  background-color: var(--color-dark-900);
   outline: none;
 
   &:hover,
@@ -12,8 +13,4 @@
 .paginationItem {
   padding: 1px 6px;
   background-color: var(--color-dark-700);
-
-  &[data-state='open'] {
-    background-color: var(--color-dark-700);
-  }
 }
