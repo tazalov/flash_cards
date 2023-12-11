@@ -1,36 +1,41 @@
-import { ComponentPropsWithoutRef, ElementType } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode, forwardRef } from 'react'
+
+import cn from 'classnames'
 
 import s from './Button.module.scss'
 
-type Props<T extends ElementType = 'button'> = {
+type Props<T extends ElementType> = {
   as?: T
   className?: string
+  endIcon?: ReactNode
   fullWidth?: boolean
-  icon?: string
+  startIcon?: ReactNode
   variant?: 'link' | 'outlined' | 'primary' | 'secondary'
 } & ComponentPropsWithoutRef<T>
 
-export const Button = <T extends ElementType>(
-  props: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>
-) => {
-  const {
-    as: Component = 'button',
-    children,
-    className,
-    fullWidth,
-    icon,
-    variant = 'primary',
-    ...rest
-  } = props
+export const Button = forwardRef(
+  <T extends ElementType = 'button'>(
+    {
+      as,
+      children,
+      className,
+      endIcon,
+      fullWidth,
+      startIcon,
+      variant = 'primary',
+      ...restProps
+    }: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>,
+    ref: ElementRef<T>
+  ) => {
+    const Component: ElementType = as || 'button'
+    const finalClassNames = cn(s.button, s[variant], { [s.fullWidth]: fullWidth }, className)
 
-  const finalClassNames = `${s.button} ${s[variant]}${fullWidth ? ' ' + s.fullWidth : ''}${
-    className ? ' ' + className : ''
-  }`
-
-  return (
-    <Component className={finalClassNames} {...rest}>
-      {icon && <img alt="icon" src={icon} />}
-      {children}
-    </Component>
-  )
-}
+    return (
+      <Component className={finalClassNames} {...restProps} ref={ref}>
+        {startIcon}
+        {children}
+        {endIcon}
+      </Component>
+    )
+  }
+)
