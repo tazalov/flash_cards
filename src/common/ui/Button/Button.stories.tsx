@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import exitIcon from '../../assets/sprites/exitIcon.svg'
+import { CloseEye } from '@/common/assets/icons'
+
 import { Button } from './Button'
 
 const meta = {
@@ -26,11 +27,12 @@ export const Primary: Story = {
   },
 }
 
-export const PrimaryWithExitIcon: Story = {
+export const PrimaryWithIcons: Story = {
   args: {
     children: 'Primary Button',
     disabled: false,
-    icon: exitIcon,
+    endIcon: <CloseEye />,
+    startIcon: <CloseEye />,
     variant: 'primary',
   },
 }
@@ -43,11 +45,20 @@ export const Secondary: Story = {
   },
 }
 
-export const SecondaryWithExitIcon: Story = {
+export const SecondaryDisabled: Story = {
+  args: {
+    children: 'Secondary Disabled',
+    disabled: true,
+    variant: 'secondary',
+  },
+}
+
+export const SecondaryWithIcons: Story = {
   args: {
     children: 'Secondary Button',
     disabled: false,
-    icon: exitIcon,
+    endIcon: <CloseEye />,
+    startIcon: <CloseEye />,
     variant: 'secondary',
   },
 }
