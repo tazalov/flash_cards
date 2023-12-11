@@ -16,12 +16,12 @@
   cursor: pointer;
 
   display: inline-flex;
-  gap: 5px;
+  gap: 2px;
   align-items: center;
   justify-content: space-between;
 
   width: 13rem;
-  padding: 5px 12px;
+  padding: 0.3125rem 0.75rem;
 
   color: var(--color-light-100);
 
@@ -31,7 +31,8 @@
 
   transition: background-color 0.3s ease-out;
 
-  &:focus {
+  &:focus,
+  &:focus-visible {
     border: 2px solid var(--color-info-700);
     outline: none;
   }
@@ -79,6 +80,16 @@
 
   &[data-state='open'] {
     background-color: var(--color-dark-900);
+  }
+}
+
+.paginationTrigger {
+  width: 3.125rem;
+  padding: 0 6px;
+  background-color: var(--color-dark-700);
+
+  &[data-state='open'] {
+    background-color: var(--color-dark-700);
   }
 }
 

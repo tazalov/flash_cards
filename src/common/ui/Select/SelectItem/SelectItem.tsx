@@ -9,14 +9,20 @@ import s from './SelectItem.module.scss'
 
 type Props = {
   className?: string
+  pagination?: boolean
+  variant: TypographyVariant
 } & ComponentPropsWithoutRef<typeof RadixSelect.Item>
 
 export const SelectItem = forwardRef<ElementRef<typeof RadixSelect.Item>, Props>(
-  ({ children, className, ...props }, ref) => {
+  ({ children, className, pagination, variant, ...restProps }, ref) => {
     return (
-      <RadixSelect.Item className={cn(s.item, className)} ref={ref} {...props}>
+      <RadixSelect.Item
+        className={cn(s.item, { [s.paginationItem]: pagination }, className)}
+        ref={ref}
+        {...restProps}
+      >
         <RadixSelect.ItemText>
-          <Typography variant={TypographyVariant.body1}>{children}</Typography>
+          <Typography variant={variant}>{children}</Typography>
         </RadixSelect.ItemText>
       </RadixSelect.Item>
     )

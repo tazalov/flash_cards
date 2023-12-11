@@ -1,10 +1,19 @@
 .item {
-  padding: 6px 12px;
+  padding: 0.3125rem 0.75rem;
   outline: none;
 
   &:hover,
   &[data-highlighted] {
     color: var(--color-accent-300);
     background-color: var(--color-accent-900);
+  }
+}
+
+.paginationItem {
+  padding: 1px 6px;
+  background-color: var(--color-dark-700);
+
+  &[data-state='open'] {
+    background-color: var(--color-dark-700);
   }
 }
