@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { Check } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
@@ -15,21 +15,23 @@ type Props = {
   onCheckedChange: (checked: boolean) => void
 } & Omit<ComponentPropsWithoutRef<typeof RadixCheckbox.Root>, 'asChild'>
 
-export const Checkbox = ({ className, disabled, label, ...restProps }: Props) => {
-  return (
-    <Typography
-      as="label"
-      className={cn(s.label, { [s.disabled]: disabled }, className)}
-      variant={TypographyVariant.body2}
-    >
-      <div className={cn(s.checkboxWrapper, { [s.disabled]: disabled })}>
-        <RadixCheckbox.Root className={s.root} disabled={disabled} {...restProps}>
-          <RadixCheckbox.Indicator className={s.indicator}>
-            <Check />
-          </RadixCheckbox.Indicator>
-        </RadixCheckbox.Root>
-      </div>
-      {label}
-    </Typography>
-  )
-}
+export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Props>(
+  ({ className, disabled, label, ...restProps }: Props, ref) => {
+    return (
+      <Typography
+        as="label"
+        className={cn(s.label, { [s.disabled]: disabled }, className)}
+        variant={TypographyVariant.body2}
+      >
+        <div className={cn(s.checkboxWrapper, { [s.disabled]: disabled })}>
+          <RadixCheckbox.Root className={s.root} disabled={disabled} ref={ref} {...restProps}>
+            <RadixCheckbox.Indicator className={s.indicator}>
+              <Check />
+            </RadixCheckbox.Indicator>
+          </RadixCheckbox.Root>
+        </div>
+        {label}
+      </Typography>
+    )
+  }
+)
