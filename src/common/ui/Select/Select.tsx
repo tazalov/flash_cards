@@ -37,7 +37,6 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, Props>(
     },
     ref
   ) => {
-    //TODO pagination
     const textVariant = pagination ? TypographyVariant.body2 : TypographyVariant.body1
 
     const classes = {
@@ -46,7 +45,10 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, Props>(
       label: cn(s.label, { [s.disabled]: restProps.disabled }),
       trigger: cn(
         s.trigger,
-        { [s.fullWidth]: fullWidth, [s.paginationTrigger]: pagination },
+        {
+          [s.fullWidth]: fullWidth,
+          [s.paginationTrigger]: pagination,
+        },
         className
       ),
     }
@@ -59,7 +61,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, Props>(
           </Typography>
         )}
         <RadixSelect.Trigger className={classes.trigger} ref={ref}>
-          <Typography as="div" variant={textVariant}>
+          <Typography as="p" variant={textVariant}>
             <RadixSelect.Value placeholder={placeholder} />
           </Typography>
           <RadixSelect.Icon>
