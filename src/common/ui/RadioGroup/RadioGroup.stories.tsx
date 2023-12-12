@@ -14,18 +14,18 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const defaultState = [
-  { disabled: false, title: 'Radio Group', value: 'rg1' },
-  { disabled: false, title: 'Radio Group', value: 'rg2' },
-  { disabled: false, title: 'Radio Group', value: 'rg3' },
-  { disabled: false, title: 'Radio Group', value: 'rg4' },
-  { disabled: false, title: 'Radio Group', value: 'rg5' },
+  { disabled: false, label: 'Radio Group', value: 'rg1' },
+  { disabled: false, label: 'Radio Group', value: 'rg2' },
+  { disabled: false, label: 'Radio Group', value: 'rg3' },
+  { disabled: false, label: 'Radio Group', value: 'rg4' },
+  { disabled: false, label: 'Radio Group', value: 'rg5' },
 ]
 const defaultStateWithDisabledFirstValue = [
-  { disabled: true, title: 'Radio Group', value: 'rg1' },
-  { disabled: false, title: 'Radio Group', value: 'rg2' },
-  { disabled: false, title: 'Radio Group', value: 'rg3' },
-  { disabled: false, title: 'Radio Group', value: 'rg4' },
-  { disabled: false, title: 'Radio Group', value: 'rg5' },
+  { disabled: true, label: 'Radio Group', value: 'rg1' },
+  { disabled: false, label: 'Radio Group', value: 'rg2' },
+  { disabled: false, label: 'Radio Group', value: 'rg3' },
+  { disabled: false, label: 'Radio Group', value: 'rg4' },
+  { disabled: false, label: 'Radio Group', value: 'rg5' },
 ]
 
 const Component = () => {
