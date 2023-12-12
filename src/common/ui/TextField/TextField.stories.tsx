@@ -21,9 +21,8 @@ export const DefaultTextField: Story = {}
 export const ErrorTextField: Story = {
   args: {
     error: true,
-    errorText: 'some error',
-    label: 'error input',
-    placeholder: 'some error',
+    errorText: 'Some error',
+    label: '',
     type: 'text',
   },
 }
@@ -31,17 +30,18 @@ export const ErrorTextField: Story = {
 export const DisabledTextField: Story = {
   args: {
     disabled: true,
-    label: 'disabled',
-    placeholder: 'disabled ',
+    label: 'Input',
+    placeholder: 'Disabled ',
     type: 'text',
+    value: 'Disabled',
   },
 }
 
 export const SearchTextField: Story = {
   args: {
-    label: 'Search input',
+    label: 'Search',
     type: 'search',
-    value: 'Search input',
+    value: 'Search',
   },
 }
 
@@ -73,11 +73,11 @@ const Component = (props: TextFieldProps) => {
 }
 
 export const DefaultControlled: Story = {
-  render: () => <Component errorText="Some error" label="default" />,
+  render: () => <Component errorText="Some error" label="Input" />,
 }
 export const SearchControlled: Story = {
-  render: () => <Component label="search" type="search" />,
+  render: () => <Component label="" type="search" />,
 }
 export const PasswordControlled: Story = {
-  render: () => <Component label="password" type="password" />,
+  render: () => <Component label="Password" type="password" />,
 }
