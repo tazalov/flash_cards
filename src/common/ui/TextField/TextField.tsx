@@ -77,7 +77,7 @@ export const TextField = (props: TextFieldProps) => {
   }
 
   return (
-    <div className={cn(s.root, className)}>
+    <div className={cnStyle.root}>
       {label && (
         <Typography as="label" className={cnStyle.label} variant={TypographyVariant.body2}>
           {label}

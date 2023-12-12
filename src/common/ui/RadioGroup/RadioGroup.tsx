@@ -5,10 +5,16 @@ import cn from 'classnames'
 
 import s from './RadioGroup.module.scss'
 
-import { SingleRadio, SingleRadioProps } from './SingleRadio'
+import { SingleRadio } from './SingleRadio'
+
+export interface RadioOption {
+  disabled: boolean
+  label: string
+  value: string
+}
 
 type Props = {
-  options: SingleRadioProps[]
+  options: RadioOption[]
 } & Omit<ComponentPropsWithoutRef<typeof RadixRadioGroup.Root>, 'asChild'>
 
 export const RadioGroup = ({ className, options, ...rest }: Props) => {

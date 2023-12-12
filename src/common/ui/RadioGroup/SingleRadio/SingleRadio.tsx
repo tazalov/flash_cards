@@ -7,20 +7,22 @@ import cn from 'classnames'
 
 import s from './SingleRadio.module.scss'
 
-export type SingleRadioProps = {
+type Props = {
   className?: string
   label: string
 } & Omit<ComponentPropsWithoutRef<typeof RadixRadio.Item>, 'asChild'>
 
-export const SingleRadio = ({ className, disabled, label, ...rest }: SingleRadioProps) => {
+export const SingleRadio = ({ className, disabled, label, ...rest }: Props) => {
   return (
-    <Typography as="label" className={cn(s.labelWrapper, { [s.disabled]: disabled }, className)}>
+    <Typography
+      as="label"
+      className={cn(s.labelWrapper, { [s.disabled]: disabled }, className)}
+      variant={TypographyVariant.body2}
+    >
       <RadixRadio.Item className={s.item} disabled={disabled} {...rest}>
         <RadixRadio.Indicator className={s.indicator} />
       </RadixRadio.Item>
-      <Typography as="span" className={s.label} variant={TypographyVariant.body2}>
-        {label}
-      </Typography>
+      {label}
     </Typography>
   )
 }
