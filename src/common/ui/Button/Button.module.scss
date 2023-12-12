@@ -1,0 +1,106 @@
+.button {
+  all: unset;
+
+  cursor: pointer;
+
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 28px;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+
+  border-radius: 4px;
+
+  &:disabled {
+    cursor: inherit;
+    color: var(--color-light-900);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-info-700);
+  }
+}
+
+.primary {
+  background-color: var(--color-accent-500);
+
+  &:hover {
+    background-color: var(--color-accent-300);
+  }
+
+  &:active {
+    background-color: var(--color-accent-700);
+  }
+
+  &:disabled {
+    background-color: var(--color-accent-900);
+  }
+}
+
+.secondary {
+  background-color: var(--color-dark-300);
+
+  &:hover {
+    background-color: var(--color-dark-100);
+  }
+
+  &:active {
+    background-color: var(--color-dark-500);
+  }
+
+  &:disabled {
+    background-color: var(--color-dark-300);
+  }
+}
+
+.outlined {
+  color: var(--color-accent-500);
+  border: 1px solid var(--color-accent-500);
+
+  &:hover {
+    background-color: var(--color-dark-500);
+    border-color: var(--color-accent-700);
+  }
+
+  &:active {
+    background-color: var(--color-accent-900);
+    border-color: var(--color-accent-700);
+  }
+
+  &:disabled {
+    color: var(--color-accent-900);
+    background-color: inherit;
+    border-color: var(--color-accent-900);
+  }
+}
+
+.link {
+  font-size: var(--font-size-m);
+  color: var(--color-accent-500);
+
+  &:hover {
+    color: var(--color-accent-300);
+  }
+
+  &:active {
+    color: var(--color-accent-700);
+  }
+
+  &:disabled {
+    color: var(--color-accent-900);
+  }
+
+  &:focus-visible {
+    border-radius: 130px;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
