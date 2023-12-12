@@ -8,10 +8,10 @@ import cn from 'classnames'
 
 import s from './Select.module.scss'
 
-import { SelectItem } from './SelectItem/SelectItem'
+import { SelectItem } from './SelectItem'
 
 export interface Option {
-  title: string
+  title: ReactNode
   value: string
 }
 
@@ -41,7 +41,6 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, Props>(
 
     const classes = {
       arrow: cn(s.triggerIcon, { [s.disabled]: restProps.disabled }),
-      container: s.container,
       label: cn(s.label, { [s.disabled]: restProps.disabled }),
       trigger: cn(
         s.trigger,
