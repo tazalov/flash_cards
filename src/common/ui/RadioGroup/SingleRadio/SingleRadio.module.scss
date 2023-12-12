@@ -3,8 +3,7 @@
   display: flex;
   align-items: center;
 
-  &.disabled,
-  &.disabled .label {
+  &.disabled {
     cursor: default;
     color: var(--color-light-900);
   }
@@ -57,17 +56,13 @@
     background-color: var(--color-dark-700);
   }
 
-  &:disabled {
+  &[data-disabled] {
     cursor: default;
     border-color: var(--color-accent-900);
   }
 
-  &:disabled:hover::before {
+  &[data-disabled]:hover::before {
     background-color: transparent;
-  }
-
-  &:disabled span::after {
-    background-color: var(--color-accent-900);
   }
 }
 
@@ -89,5 +84,9 @@
 
     background-color: var(--color-accent-500);
     border-radius: 50%;
+  }
+
+  &[data-disabled]::after {
+    background-color: var(--color-accent-900);
   }
 }
