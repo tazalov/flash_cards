@@ -23,13 +23,11 @@ export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Props>
         className={cn(s.label, { [s.disabled]: disabled }, className)}
         variant={TypographyVariant.body2}
       >
-        <div className={cn(s.checkboxWrapper, { [s.disabled]: disabled })}>
-          <RadixCheckbox.Root className={s.root} disabled={disabled} ref={ref} {...restProps}>
-            <RadixCheckbox.Indicator className={s.indicator}>
-              <Check />
-            </RadixCheckbox.Indicator>
-          </RadixCheckbox.Root>
-        </div>
+        <RadixCheckbox.Root className={s.root} disabled={disabled} ref={ref} {...restProps}>
+          <RadixCheckbox.Indicator className={s.indicator}>
+            <Check />
+          </RadixCheckbox.Indicator>
+        </RadixCheckbox.Root>
         {label}
       </Typography>
     )
