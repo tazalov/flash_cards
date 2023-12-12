@@ -3,7 +3,8 @@
   display: flex;
   align-items: center;
 
-  &.disabled {
+  &.disabled,
+  &.disabled .label {
     cursor: default;
     color: var(--color-light-900);
   }
@@ -72,9 +73,6 @@
 
 .indicator {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   &::after {
     content: '';
