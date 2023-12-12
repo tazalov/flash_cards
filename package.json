@@ -10,7 +10,8 @@
     "lint": "eslint src --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
     "preview": "vite preview",
     "sb": "storybook dev -p 6006",
-    "sb:b": "storybook build"
+    "sb:b": "storybook build",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.0.8",
@@ -36,6 +37,7 @@
     "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint-plugin-storybook": "^0.6.15",
+    "husky": "^8.0.3",
     "sass": "^1.69.5",
     "storybook": "7.6.4",
     "stylelint": "^15.11.0",
