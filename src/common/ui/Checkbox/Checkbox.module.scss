@@ -52,13 +52,13 @@
     outline: none;
   }
 
-  &:hover::before {
-    background-color: var(--color-dark-500);
-  }
-
   &:active::before,
   &:focus::before {
     background-color: var(--color-dark-100);
+  }
+
+  &:hover:not([data-disabled])::before {
+    background-color: var(--color-dark-500);
   }
 
   &[data-state='checked'][data-disabled] {
