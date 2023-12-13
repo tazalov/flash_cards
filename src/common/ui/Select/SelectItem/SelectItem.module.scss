@@ -1,0 +1,16 @@
+.item {
+  padding: 0.3125rem 0.75rem;
+  background-color: var(--color-dark-900);
+  outline: none;
+
+  &:hover,
+  &[data-highlighted] {
+    color: var(--color-accent-300);
+    background-color: var(--color-accent-900);
+  }
+}
+
+.paginationItem {
+  padding: 1px 6px;
+  background-color: var(--color-dark-700);
+}
