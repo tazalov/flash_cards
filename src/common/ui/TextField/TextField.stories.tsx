@@ -64,8 +64,8 @@ const Component = (props: TextFieldProps) => {
       errorText={errorText}
       label={label}
       onChange={onChangeValueHandler}
+      onChangeValue={setValue}
       onPressEnter={handlePressOnEnter}
-      setValue={setValue}
       type={type}
       value={value}
     />
