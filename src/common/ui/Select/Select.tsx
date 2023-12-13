@@ -52,6 +52,8 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
       ),
     }
 
+    const currentPlaceholder = pagination ? options[0].title : placeholder
+
     return (
       <RadixSelect.Root {...restProps}>
         {label && (
@@ -61,7 +63,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
         )}
         <RadixSelect.Trigger className={classes.trigger} ref={ref}>
           <Typography as="p" variant={textVariant}>
-            <RadixSelect.Value placeholder={placeholder} />
+            <RadixSelect.Value placeholder={currentPlaceholder} />
           </Typography>
           <RadixSelect.Icon>
             <ChevronUp className={classes.arrow} />
