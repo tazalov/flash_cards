@@ -3,3 +3,28 @@
   font-weight: $fontWeight;
   line-height: $lineHeight;
 }
+
+@mixin input-icon($left, $right) {
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1.25rem;
+  height: 1.25rem;
+
+  color: var(--color-dark-100);
+
+  @if $right != 0 {
+    right: $right;
+  }
+
+  @if $left != 0 {
+    left: $left;
+  }
+}
