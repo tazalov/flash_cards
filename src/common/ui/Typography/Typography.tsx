@@ -26,7 +26,7 @@ export const Typography = <T extends ElementType = 'p'>(
   } = props
 
   return (
-    <Component className={cn(s.typography, s[variant], className)} style={{ textAlign }}>
+    <Component className={cn(s[variant], className)} style={{ textAlign }}>
       {children}
     </Component>
   )

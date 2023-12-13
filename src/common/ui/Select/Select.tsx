@@ -15,7 +15,7 @@ export interface Option {
   value: string
 }
 
-type Props = {
+export type SelectProps = {
   className?: string
   fullWidth?: boolean
   label?: string
@@ -24,7 +24,7 @@ type Props = {
   placeholder?: ReactNode
 } & ComponentPropsWithoutRef<typeof RadixSelect.Root>
 
-export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, Props>(
+export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProps>(
   (
     {
       className,
