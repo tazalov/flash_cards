@@ -1,5 +1,9 @@
 @import '@/styles/mixins';
 
+.typography {
+  margin: 0;
+}
+
 .large {
   @include typography(var(--font-size-xxl), var(--font-weight-bold), var(--line-height-l));
 }
