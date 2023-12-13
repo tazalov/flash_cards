@@ -18,7 +18,7 @@ export const Tabs = (props: Props) => {
   return (
     <RadixTabsUI.Root className={s.root} {...rest}>
       {label && (
-        <Typography as="label" variant={TypographyVariant.body2}>
+        <Typography as="label" className={s.label} variant={TypographyVariant.body2}>
           {label}
         </Typography>
       )}
