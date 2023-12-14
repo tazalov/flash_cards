@@ -1,0 +1,21 @@
+.root {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid var(--color-dark-500);
+}
+
+.row {
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--color-dark-500);
+  }
+}
+
+.title {
+  padding: 0.375rem 1.5rem;
+  text-align: left;
+  background-color: var(--color-dark-500);
+}
+
+.cell {
+  padding: 0.375rem 1.5rem;
+}
