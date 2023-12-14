@@ -27,7 +27,7 @@ export const Modal = (props: Props) => {
           <RadixModal.Overlay className={s.overlay} />
           <div className={cn(s.main, className)}>
             <RadixModal.Content>
-              <Card className={s.card}>
+              <Card>
                 {title && (
                   <div className={s.title}>
                     <Typography variant={TypographyVariant.h2}>{title}</Typography>
@@ -36,7 +36,7 @@ export const Modal = (props: Props) => {
                     </RadixModal.Close>
                   </div>
                 )}
-                <div className={s.content}>{children}</div>
+                <div>{children}</div>
               </Card>
             </RadixModal.Content>
           </div>
