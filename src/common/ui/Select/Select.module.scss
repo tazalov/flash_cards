@@ -27,8 +27,7 @@
 
   &:focus,
   &:focus-visible {
-    border: 2px solid var(--color-info-700);
-    outline: none;
+    outline: 2px solid var(--color-info-700);
   }
 
   &:hover:not([data-disabled]) {

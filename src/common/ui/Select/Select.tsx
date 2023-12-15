@@ -15,7 +15,7 @@ export interface Option {
   value: string
 }
 
-type Props = {
+export type SelectProps = {
   className?: string
   fullWidth?: boolean
   label?: string
@@ -24,7 +24,7 @@ type Props = {
   placeholder?: ReactNode
 } & ComponentPropsWithoutRef<typeof RadixSelect.Root>
 
-export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, Props>(
+export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProps>(
   (
     {
       className,
@@ -52,6 +52,8 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, Props>(
       ),
     }
 
+    const currentPlaceholder = pagination ? options[0].title : placeholder
+
     return (
       <RadixSelect.Root {...restProps}>
         {label && (
@@ -61,7 +63,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, Props>(
         )}
         <RadixSelect.Trigger className={classes.trigger} ref={ref}>
           <Typography as="p" variant={textVariant}>
-            <RadixSelect.Value placeholder={placeholder} />
+            <RadixSelect.Value placeholder={currentPlaceholder} />
           </Typography>
           <RadixSelect.Icon>
             <ChevronUp className={classes.arrow} />
