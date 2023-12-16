@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { CloseEye } from '@/common/assets/icons'
+import { ButtonVariant } from '@/common/enums'
 
 import { Button } from './Button'
 
@@ -23,7 +24,7 @@ export const Primary: Story = {
   args: {
     children: 'Primary Button',
     disabled: false,
-    variant: 'primary',
+    variant: ButtonVariant.primary,
   },
 }
 
@@ -33,7 +34,7 @@ export const PrimaryWithIcons: Story = {
     disabled: false,
     endIcon: <CloseEye />,
     startIcon: <CloseEye />,
-    variant: 'primary',
+    variant: ButtonVariant.primary,
   },
 }
 
@@ -41,7 +42,7 @@ export const Secondary: Story = {
   args: {
     children: 'Secondary Button',
     disabled: false,
-    variant: 'secondary',
+    variant: ButtonVariant.secondary,
   },
 }
 
@@ -49,7 +50,7 @@ export const SecondaryDisabled: Story = {
   args: {
     children: 'Secondary Disabled',
     disabled: true,
-    variant: 'secondary',
+    variant: ButtonVariant.secondary,
   },
 }
 
@@ -59,21 +60,21 @@ export const SecondaryWithIcons: Story = {
     disabled: false,
     endIcon: <CloseEye />,
     startIcon: <CloseEye />,
-    variant: 'secondary',
+    variant: ButtonVariant.secondary,
   },
 }
 export const Outlined: Story = {
   args: {
     children: 'Outlined Button',
     disabled: false,
-    variant: 'outlined',
+    variant: ButtonVariant.outlined,
   },
 }
 export const Link: Story = {
   args: {
     children: 'Link Button',
     disabled: false,
-    variant: 'link',
+    variant: ButtonVariant.link,
   },
 }
 
@@ -82,7 +83,7 @@ export const FullWidth: Story = {
     children: 'Full Width Button',
     disabled: false,
     fullWidth: true,
-    variant: 'primary',
+    variant: ButtonVariant.primary,
   },
 }
 
@@ -91,7 +92,7 @@ export const AsLink: Story = {
     as: 'a',
     children: 'Link that looks like a button',
     disabled: true,
-    fullWidth: true,
-    variant: 'primary',
+    fullWidth: false,
+    variant: ButtonVariant.primary,
   },
 }
