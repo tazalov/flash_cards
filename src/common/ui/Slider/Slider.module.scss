@@ -1,0 +1,114 @@
+.wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 155px;
+}
+
+.track {
+  position: relative;
+
+  flex-grow: 1;
+
+  height: 0.3125rem;
+
+  background-color: var(--color-accent-900);
+  border-radius: 4px;
+}
+
+.range {
+  position: absolute;
+  height: 100%;
+  background-color: var(--color-accent-500);
+  border-radius: inherit;
+}
+
+.thumb {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  aspect-ratio: 1 / 1;
+  height: 1rem;
+
+  background-color: var(--color-accent-500);
+  border-radius: 50%;
+
+  &::before {
+    content: '';
+
+    z-index: 1;
+
+    aspect-ratio: 1 / 1;
+    height: 0.5rem;
+
+    background-color: var(--color-light-100);
+    border-radius: 50%;
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    z-index: -1;
+
+    aspect-ratio: 1 / 1;
+    height: 1.5rem;
+
+    border-radius: 50%;
+
+    transition: all 0.3s linear;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:hover:not(:active)::after {
+    background-color: var(--color-accent-100);
+  }
+
+  &:focus::after {
+    height: 1.75rem;
+    background-color: var(--color-accent-100);
+  }
+}
+
+.labels {
+  user-select: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  aspect-ratio: 1 / 1;
+  height: 2.25rem;
+
+  border: 1px solid var(--color-dark-300);
+  border-radius: 1px;
+}
+
+.textField > div {
+  transform: translateX(-1px);
+  aspect-ratio: 1/1;
+  width: 2.25rem;
+
+  & > input {
+    padding: 0;
+    color: var(--color-light-100);
+    text-align: center;
+  }
+
+  & > input::-webkit-inner-spin-button {
+    appearance: none;
+  }
+}
