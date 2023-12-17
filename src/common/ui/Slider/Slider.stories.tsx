@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ComponentPropsWithoutRef, useRef, useState } from 'react'
+import { ComponentPropsWithoutRef, useState } from 'react'
 
 import * as RadixSlider from '@radix-ui/react-slider'
 
@@ -29,9 +29,8 @@ export const DefaultWithoutInput: Story = {
 
 const RenderComp = (props: ComponentPropsWithoutRef<typeof RadixSlider.Root>) => {
   const [values, setValues] = useState(props.value)
-  const ref = useRef<any>()
 
-  return <Slider {...props} onValueChange={setValues} ref={ref} value={values} />
+  return <Slider {...props} onValueChange={setValues} value={values} />
 }
 
 export const SliderWithoutInputControl: Story = {

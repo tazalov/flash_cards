@@ -13,15 +13,7 @@ type Props = {
 } & ComponentPropsWithoutRef<typeof RadixSlider.Root>
 
 export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>((props, ref) => {
-  const {
-    className,
-    isInputControl = true,
-    minStepsBetweenThumbs = 1,
-    onValueChange,
-    tabIndex,
-    value,
-    ...restProps
-  } = props
+  const { className, isInputControl = true, onValueChange, tabIndex, value, ...restProps } = props
 
   const handleChangeValue =
     (valueCategory: 'max' | 'min') => (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,13 +25,13 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>((pr
         valueCategory === 'min' &&
         (restProps.min || restProps.min === 0) &&
         newValue >= restProps.min &&
-        newValue < value[1]
+        newValue <= value[1]
       const isMaxChanged =
         value &&
         valueCategory === 'max' &&
         restProps.max &&
         newValue <= restProps.max &&
-        newValue > value[0]
+        newValue >= value[0]
 
       if (isMaxChanged || isMinChanged) {
         onValueChange &&
@@ -64,7 +56,6 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>((pr
       </Typography>
       <RadixSlider.Root
         className={s.root}
-        minStepsBetweenThumbs={minStepsBetweenThumbs}
         onValueChange={onValueChange}
         ref={ref}
         value={value}
