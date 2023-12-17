@@ -9,7 +9,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 155px;
+  width: 100%;
 }
 
 .track {
@@ -101,14 +101,14 @@
   transform: translateX(-1px);
   aspect-ratio: 1/1;
   width: 2.25rem;
+}
 
-  & > input {
-    padding: 0;
-    color: var(--color-light-100);
-    text-align: center;
-  }
+.input {
+  padding: 0;
+  color: var(--color-light-100);
+  text-align: center;
 
-  & > input::-webkit-inner-spin-button {
+  &::-webkit-inner-spin-button {
     appearance: none;
   }
 }
