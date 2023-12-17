@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  ComponentPropsWithoutRef,
-  InputHTMLAttributes,
-  KeyboardEvent,
-  useState,
-} from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, KeyboardEvent, forwardRef, useState } from 'react'
 
 import { CloseEye, OpenEye, Search } from '@/common/assets/icons'
 import Cross from '@/common/assets/icons/cross'
@@ -15,26 +9,28 @@ import s from './TextField.module.scss'
 
 import { Typography } from '../Typography'
 
-export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  error?: boolean
+export type TextFieldProps = {
   errorText?: string
+  inputClassName?: string
   label?: string
   onChangeValue?: (value: string) => void
   onPressEnter?: ComponentPropsWithoutRef<'input'>['onKeyDown']
-}
+} & ComponentPropsWithoutRef<'input'>
 
-export const TextField = (props: TextFieldProps) => {
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   const {
     children,
     className,
-    error,
+    disabled,
     errorText,
-    label = 'Input',
+    inputClassName,
+    label,
     name,
     onChange,
     onChangeValue,
     onPressEnter,
     type,
+    value,
     ...restProps
   } = props
   const [showPassword, setShowPassword] = useState(false)
@@ -42,21 +38,21 @@ export const TextField = (props: TextFieldProps) => {
     setShowPassword(prev => !prev)
   }
   const inputType = type === 'password' && showPassword ? 'text' : type
+  const isShowCrossIcon = type === 'search' && value
   const cnStyle = {
-    crossIcon: s.cross,
     input: cn(
       s.input,
-      type === 'search' && s.isLeftIcon,
-      type === 'password' && s.isRightIcon,
-      type === 'search' && s.isCrossIcon
+      {
+        [s.active]: !!value,
+        [s.error]: !!errorText,
+        [s.isLeftIcon]: type === 'search',
+        [s.isRightIcon]: type === 'password' || isShowCrossIcon,
+      },
+      inputClassName
     ),
-    inputWrapper: cn(
-      s.inputWrapper,
-      !!restProps.value && s.active,
-      restProps.disabled && s.disabled,
-      !!error && s.error
-    ),
-    label: cn(s.label, restProps.disabled && s.disabledText),
+    inputWrapper: s.inputWrapper,
+    label: cn(s.label, { [s.disabled]: disabled }),
+    labelError: cn({ [s.error]: errorText }),
     leftIcon: s.left,
     rightIcon: s.right,
     root: cn(s.root, className),
@@ -84,22 +80,19 @@ export const TextField = (props: TextFieldProps) => {
           {label}
         </Typography>
       )}
-      <div className={cnStyle.inputWrapper} tabIndex={0}>
-        {type === 'search' && <Search className={cnStyle.leftIcon} fill="currentColor" />}
-        {type === 'search' && restProps.value && (
-          <Cross
-            className={cnStyle.crossIcon}
-            fill="currentColor"
-            onClick={handleClickClearField}
-          />
-        )}
+      <div className={cnStyle.inputWrapper}>
+        {type === 'search' && <Search className={cnStyle.leftIcon} />}
         <input
           className={cnStyle.input}
+          disabled={disabled}
           onChange={handleChange}
           onKeyDown={handlePressOnEnter}
+          ref={ref}
           type={inputType}
+          value={value}
           {...restProps}
         />
+        {isShowCrossIcon && <Cross className={cnStyle.rightIcon} onClick={handleClickClearField} />}
         {type === 'password' && (
           <div onClick={handleClickShowPassword}>
             {showPassword ? (
@@ -110,11 +103,11 @@ export const TextField = (props: TextFieldProps) => {
           </div>
         )}
       </div>
-      {error && (
-        <Typography as="span" className={error && s.labelError} variant={TypographyVariant.caption}>
+      {!!errorText && (
+        <Typography as="span" className={cnStyle.labelError} variant={TypographyVariant.caption}>
           {errorText}
         </Typography>
       )}
     </div>
   )
-}
+})

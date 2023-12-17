@@ -1,6 +1,7 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
 const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
+    fill="currentColor"
     height={20}
     ref={ref}
     viewBox="0 0 20 20"
@@ -13,7 +14,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =
     </g>
     <defs>
       <clipPath id="clip0_21547_180">
-        <rect fill="white" height={20} width={20} />
+        <rect height={20} width={20} />
       </clipPath>
     </defs>
   </svg>
