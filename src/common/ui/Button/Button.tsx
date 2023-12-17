@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode, forwardRef } from 'react'
 
+import { ButtonVariant } from '@/common/enums'
 import cn from 'classnames'
 
 import s from './Button.module.scss'
@@ -10,7 +11,7 @@ type Props<T extends ElementType> = {
   endIcon?: ReactNode
   fullWidth?: boolean
   startIcon?: ReactNode
-  variant?: 'link' | 'outlined' | 'primary' | 'secondary'
+  variant?: ButtonVariant
 } & ComponentPropsWithoutRef<T>
 
 export const Button = forwardRef(
@@ -22,7 +23,7 @@ export const Button = forwardRef(
       endIcon,
       fullWidth,
       startIcon,
-      variant = 'primary',
+      variant = ButtonVariant.primary,
       ...restProps
     }: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>,
     ref: ElementRef<T>

@@ -12,3 +12,10 @@ export enum TypographyVariant {
   subtitle1 = 'subtitle1',
   subtitle2 = 'subtitle2',
 }
+
+export enum ButtonVariant {
+  link = 'link',
+  outlined = 'outlined',
+  primary = 'primary',
+  secondary = 'secondary',
+}
