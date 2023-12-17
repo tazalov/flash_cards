@@ -8,12 +8,11 @@ import cn from 'classnames'
 import s from './Slider.module.scss'
 
 type Props = {
-  className?: string
   isInputControl?: boolean
 } & ComponentPropsWithoutRef<typeof RadixSlider.Root>
 
 export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>((props, ref) => {
-  const { className, isInputControl = true, onValueChange, tabIndex, value, ...restProps } = props
+  const { className, isInputControl = true, onValueChange, value, ...restProps } = props
 
   const handleChangeValue =
     (valueCategory: 'max' | 'min') => (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +44,7 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>((pr
         {isInputControl ? (
           <TextField
             className={s.textField}
-            label=""
+            inputClassName={s.input}
             onChange={handleChangeValue('min')}
             type="number"
             value={value?.[0].toString()}
@@ -70,7 +69,7 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>((pr
         {isInputControl ? (
           <TextField
             className={s.textField}
-            label=""
+            inputClassName={s.input}
             onChange={handleChangeValue('max')}
             type="number"
             value={value?.[1].toString()}
