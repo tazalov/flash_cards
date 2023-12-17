@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { Button } from '@/common/ui/Button'
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -17,41 +15,18 @@ const meta: Meta<typeof Modal> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const Component = () => {
-  const [openModal, setOpenModal] = useState(false)
-
-  const handleClick = () => {
-    setOpenModal(false)
-    console.log('MODAL CLOSE')
-  }
-
-  return (
-    <Modal
-      open={openModal}
-      setOpenModal={setOpenModal}
-      title="Delete pack"
-      trigger={<Button variant="secondary">Open modal</Button>}
-    >
+export const ModalWithTitle: Story = {
+  args: {
+    children: (
       <div style={{ padding: '18px 24px' }}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci perferendis
-        rem voluptatibus. Aperiam at consectetur consequatur doloremque dolorum eaque, eligendi
-        error exercitationem incidunt, inventore minus modi quae quidem quis.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus blanditiis eaque eveniet
+        expedita in iste necessitatibus nulla sint temporibus. Ipsam.
       </div>
-      <div
-        style={{
-          alignItems: 'center',
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: '18px 24px',
-        }}
-      >
-        <Button onClick={handleClick} variant="secondary">
-          Cancel
-        </Button>
-        <Button onClick={handleClick}>Delete Pack</Button>
-      </div>
-    </Modal>
-  )
+    ),
+    defaultOpen: false,
+    title: 'title',
+    trigger: <Button>Open modal</Button>,
+  },
 }
 
 export const DefaultModal: Story = {
@@ -65,10 +40,7 @@ export const DefaultModal: Story = {
         voluptatem?
       </div>
     ),
-    open: true,
+    defaultOpen: false,
+    trigger: <Button>Open modal</Button>,
   },
-}
-
-export const ModalWithTitle: Story = {
-  render: () => <Component />,
 }
