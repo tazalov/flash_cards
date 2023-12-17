@@ -10,9 +10,9 @@ type Props = {
   startIcon?: ReactNode
 } & ComponentPropsWithoutRef<typeof RadixDropdown.Item>
 
-export const Item = ({ children, className, endIcon, startIcon, ...restProps }: Props) => {
+export const Item = ({ children, className, endIcon, startIcon, ...rest }: Props) => {
   return (
-    <RadixDropdown.Item className={cn(s.item, className)} {...restProps}>
+    <RadixDropdown.Item className={cn(s.item, className)} {...rest}>
       {startIcon}
       {children}
       {endIcon}
