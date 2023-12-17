@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
 import Cross from '@/common/assets/icons/cross'
 import { TypographyVariant } from '@/common/enums'
@@ -9,39 +9,36 @@ import cn from 'classnames'
 
 import s from './Modals.module.scss'
 
+import { ModalClose } from './ModalClose'
+
 export type Props = {
-  open: boolean
-  setOpenModal: (open: boolean) => void
+  className?: string
   title?: string
   trigger: ReactNode
-} & ComponentProps<'div'>
+} & ComponentPropsWithoutRef<typeof RadixModal.Root>
 
-export const Modal = (props: Props) => {
-  const { children, className, open, setOpenModal, title, trigger } = props
+export const Modal = forwardRef<ElementRef<typeof RadixModal.Root>, Props>((props, ref) => {
+  const { children, className, title, trigger, ...rest } = props
 
   return (
-    <RadixModal.Root onOpenChange={setOpenModal} open={open}>
+    <RadixModal.Root {...rest}>
       <RadixModal.Trigger asChild>{trigger}</RadixModal.Trigger>
-      {open && (
-        <RadixModal.Portal forceMount>
-          <RadixModal.Overlay className={s.overlay} />
-          <div className={cn(s.main, className)}>
-            <RadixModal.Content>
-              <Card>
-                {title && (
-                  <div className={s.title}>
-                    <Typography variant={TypographyVariant.h2}>{title}</Typography>
-                    <RadixModal.Close asChild>
-                      <Cross fill="#FFF" style={{ cursor: 'pointer' }} />
-                    </RadixModal.Close>
-                  </div>
-                )}
-                <div>{children}</div>
-              </Card>
-            </RadixModal.Content>
-          </div>
-        </RadixModal.Portal>
-      )}
+      <RadixModal.Portal>
+        <RadixModal.Overlay className={s.overlay} />
+        <RadixModal.Content asChild className={cn(s.main, className)} ref={ref}>
+          <Card>
+            {title && (
+              <div className={s.title}>
+                <Typography variant={TypographyVariant.h2}>{title}</Typography>
+                <ModalClose>
+                  <Cross fill="#FFF" style={{ cursor: 'pointer' }} />
+                </ModalClose>
+              </div>
+            )}
+            {children}
+          </Card>
+        </RadixModal.Content>
+      </RadixModal.Portal>
     </RadixModal.Root>
   )
-}
+})
