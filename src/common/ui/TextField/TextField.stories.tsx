@@ -20,9 +20,7 @@ export const DefaultTextField: Story = {}
 
 export const ErrorTextField: Story = {
   args: {
-    error: true,
     errorText: 'Some error',
-    label: '',
     type: 'text',
   },
 }
@@ -45,9 +43,7 @@ export const SearchTextField: Story = {
   },
 }
 
-const Component = (props: TextFieldProps) => {
-  const { error, errorText, label, type } = props
-
+const Component = (args: TextFieldProps) => {
   const [value, setValue] = useState('')
 
   const onChangeValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,26 +54,35 @@ const Component = (props: TextFieldProps) => {
     setValue('')
   }
 
+  const handleChangeValue = (value: string) => {
+    setValue(value)
+  }
+
   return (
     <TextField
-      error={error}
-      errorText={errorText}
-      label={label}
+      {...args}
       onChange={onChangeValueHandler}
-      onChangeValue={setValue}
+      onChangeValue={handleChangeValue}
       onPressEnter={handlePressOnEnter}
-      type={type}
       value={value}
     />
   )
 }
 
 export const DefaultControlled: Story = {
-  render: () => <Component errorText="Some error" label="Input" />,
+  render: () => <Component />,
 }
 export const SearchControlled: Story = {
-  render: () => <Component label="" type="search" />,
+  args: {
+    label: 'Search input',
+    type: 'search',
+  },
+  render: (args: TextFieldProps) => <Component {...args} />,
 }
 export const PasswordControlled: Story = {
-  render: () => <Component label="Password" type="password" />,
+  args: {
+    label: 'Password',
+    type: 'password',
+  },
+  render: (args: TextFieldProps) => <Component {...args} />,
 }
