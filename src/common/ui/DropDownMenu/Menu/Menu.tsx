@@ -5,19 +5,15 @@ import cn from 'classnames'
 
 import s from './Menu.module.scss'
 
-type MenuProps = {
-  children: ReactNode
-  className?: string
-  trigger: ReactNode
-} & Omit<ComponentPropsWithoutRef<typeof RadixDropdown.Content>, 'asChild'>
+type MenuProps = { trigger: ReactNode } & ComponentPropsWithoutRef<typeof RadixDropdown.Content>
 
 export const Menu = forwardRef<ElementRef<typeof RadixDropdown.Content>, MenuProps>(
-  ({ children, className, trigger, ...restProps }: MenuProps) => {
+  ({ asChild, children, className, trigger, ...rest }, ref) => {
     return (
       <RadixDropdown.Root>
-        <RadixDropdown.Trigger className={cn(s.trigger)}>{trigger}</RadixDropdown.Trigger>
+        <RadixDropdown.Trigger asChild>{trigger}</RadixDropdown.Trigger>
         <RadixDropdown.Portal>
-          <RadixDropdown.Content className={cn(s.content, className)} {...restProps}>
+          <RadixDropdown.Content className={cn(s.content, className)} ref={ref} {...rest}>
             {children}
             <RadixDropdown.Arrow className={s.arrow} />
           </RadixDropdown.Content>

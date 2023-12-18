@@ -6,7 +6,6 @@ import { Button } from '@/common/ui/Button'
 import { Dropdown } from './'
 
 const meta = {
-  argTypes: {},
   component: Dropdown.Menu,
   parameters: {
     layout: 'centered',
