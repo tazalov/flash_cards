@@ -1,0 +1,34 @@
+.wrapper {
+  width: 420px;
+  padding: 33px 36px 28px;
+}
+
+.input {
+  margin-top: 27px;
+}
+
+.checkbox {
+  align-self: flex-start;
+  margin-top: 18px;
+}
+
+.forgotNav {
+  align-self: flex-end;
+  margin-top: 12px;
+  padding-right: 12px;
+}
+
+.signInBtn {
+  margin-top: 66px;
+}
+
+.signUpText {
+  margin-top: 20px;
+  color: var(--color-light-900);
+}
+
+.signUpNav {
+  margin-top: 11px;
+  padding: 0;
+  text-decoration: underline 1px;
+}
