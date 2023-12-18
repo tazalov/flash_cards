@@ -9,9 +9,7 @@ type Props<T extends ElementType> = {
   as?: T
 } & ComponentPropsWithoutRef<T>
 
-type CardComponent = <T extends ElementType = 'button'>(
-  props: Props<T> & PolymorphRef<T>
-) => ReactNode
+type CardComponent = <T extends ElementType = 'div'>(props: Props<T> & PolymorphRef<T>) => ReactNode
 export const Card: CardComponent = forwardRef(
   <T extends ElementType = 'div'>(
     { as, className, ...restProps }: Props<T>,
