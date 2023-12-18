@@ -13,11 +13,11 @@ export interface RadioOption {
   value: string
 }
 
-type Props = {
+export type RadioGroupProps = {
   options: RadioOption[]
 } & Omit<ComponentPropsWithoutRef<typeof RadixRadioGroup.Root>, 'asChild'>
 
-export const RadioGroup = forwardRef<ElementRef<typeof RadixRadioGroup.Root>, Props>(
+export const RadioGroup = forwardRef<ElementRef<typeof RadixRadioGroup.Root>, RadioGroupProps>(
   (props, ref) => {
     const { className, options, ...rest } = props
 
