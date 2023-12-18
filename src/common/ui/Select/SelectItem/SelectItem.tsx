@@ -8,7 +8,6 @@ import cn from 'classnames'
 import s from './SelectItem.module.scss'
 
 type Props = {
-  className?: string
   pagination?: boolean
   variant: TypographyVariant
 } & ComponentPropsWithoutRef<typeof RadixSelect.Item>

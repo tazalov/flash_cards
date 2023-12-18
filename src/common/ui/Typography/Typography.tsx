@@ -1,6 +1,7 @@
-import { ComponentPropsWithoutRef, ElementType } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode, forwardRef } from 'react'
 
 import { TypographyVariant } from '@/common/enums'
+import { PolymorphRef } from '@/common/types'
 import cn from 'classnames'
 
 import s from './Typography.module.scss'
@@ -14,20 +15,25 @@ type Props<T extends ElementType = 'p'> = {
   variant?: TypographyVariant
 } & ComponentPropsWithoutRef<T>
 
-export const Typography = <T extends ElementType = 'p'>(
-  props: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>
-) => {
-  const {
-    as: Component = 'p',
-    children,
-    className,
-    textAlign = 'left',
-    variant = TypographyVariant.body1,
-  } = props
+type TypographyComponent = <T extends ElementType = 'p'>(
+  props: Props<T> & PolymorphRef<T>
+) => ReactNode
 
-  return (
-    <Component className={cn(s.typography, s[variant], className)} style={{ textAlign }}>
-      {children}
-    </Component>
-  )
-}
+export const Typography: TypographyComponent = forwardRef(
+  <T extends ElementType = 'p'>(
+    { as, children, className, textAlign = 'left', variant = TypographyVariant.body1 }: Props<T>,
+    ref: ElementRef<T>
+  ) => {
+    const Component: ElementType = as || 'p'
+
+    return (
+      <Component
+        className={cn(s.typography, s[variant], className)}
+        ref={ref}
+        style={{ textAlign }}
+      >
+        {children}
+      </Component>
+    )
+  }
+)

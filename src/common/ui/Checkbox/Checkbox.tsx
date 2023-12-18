@@ -9,10 +9,7 @@ import cn from 'classnames'
 import s from './Checkbox.module.scss'
 
 type Props = {
-  checked: boolean
-  className?: string
   label?: string
-  onCheckedChange: (checked: boolean) => void
 } & Omit<ComponentPropsWithoutRef<typeof RadixCheckbox.Root>, 'asChild'>
 
 export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Props>(
