@@ -7,10 +7,11 @@ import { Card } from './Card'
 
 const paddingsAndGap = {
   '0': { padding: '0px' },
-  '1rem': { gap: '1rem', padding: '1rem' },
-  '2rem': { gap: '2rem', padding: '2rem' },
-  '10px': { gap: '10px', padding: '10px' },
-  '20px': { gap: '20px', padding: '20px' },
+  '1rem width fit-content': { gap: '1rem', padding: '1rem', width: 'fit-content' },
+  '1rem width inherit': { gap: '1rem', padding: '1rem', width: 'inherit' },
+  '2rem fit-content': { gap: '2rem', padding: '2rem' },
+  '10px width-300px': { gap: '10px', padding: '10px', width: '300px' },
+  '20px width-400px': { gap: '20px', padding: '20px', width: '400px' },
 }
 
 const meta = {
@@ -22,10 +23,6 @@ const meta = {
       mapping: paddingsAndGap,
       name: 'paddings and gap',
       options: Object.keys(paddingsAndGap),
-    },
-    width: {
-      control: { type: 'radio' },
-      options: ['fit-content', 'inherit', '300px', '400px', '20rem', '30rem'],
     },
   },
   component: Card,
