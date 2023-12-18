@@ -1,15 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { ButtonVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 
 import { Card } from './Card'
 
 const paddingsAndGap = {
   '0': { padding: '0px' },
-  '1rem': { gap: '1rem', padding: '1rem' },
-  '2rem': { gap: '2rem', padding: '2rem' },
-  '10px': { gap: '10px', padding: '10px' },
-  '20px': { gap: '20px', padding: '20px' },
+  '1rem width fit-content': { gap: '1rem', padding: '1rem', width: 'fit-content' },
+  '1rem width inherit': { gap: '1rem', padding: '1rem', width: 'inherit' },
+  '2rem fit-content': { gap: '2rem', padding: '2rem' },
+  '10px width-300px': { gap: '10px', padding: '10px', width: '300px' },
+  '20px width-400px': { gap: '20px', padding: '20px', width: '400px' },
 }
 
 const meta = {
@@ -21,10 +23,6 @@ const meta = {
       mapping: paddingsAndGap,
       name: 'paddings and gap',
       options: Object.keys(paddingsAndGap),
-    },
-    width: {
-      control: { type: 'radio' },
-      options: ['fit-content', 'inherit', '300px', '400px', '20rem', '30rem'],
     },
   },
   component: Card,
@@ -41,15 +39,15 @@ type Story = StoryObj<typeof meta>
 export const CardWithContent: Story = {
   args: {
     children: [
-      <Button key={0} variant="secondary">
+      <Button key={0} variant={ButtonVariant.secondary}>
         Button1
       </Button>,
-      <Button key={1} variant="secondary">
+      <Button fullWidth key={1} variant={ButtonVariant.secondary}>
         Button2
       </Button>,
       <div key={2}>
-        <Button variant="secondary">Button3</Button>
-        <Button variant="secondary">Button4</Button>
+        <Button variant={ButtonVariant.secondary}>Button3</Button>
+        <Button variant={ButtonVariant.secondary}>Button4</Button>
       </div>,
     ],
   },

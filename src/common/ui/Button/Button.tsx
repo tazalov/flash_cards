@@ -1,20 +1,24 @@
 import { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode, forwardRef } from 'react'
 
 import { ButtonVariant } from '@/common/enums'
+import { PolymorphRef } from '@/common/types/intex'
 import cn from 'classnames'
 
 import s from './Button.module.scss'
 
 type Props<T extends ElementType> = {
   as?: T
-  className?: string
   endIcon?: ReactNode
   fullWidth?: boolean
   startIcon?: ReactNode
   variant?: ButtonVariant
 } & ComponentPropsWithoutRef<T>
 
-export const Button = forwardRef(
+type ButtonComponent = <T extends ElementType = 'button'>(
+  props: Props<T> & PolymorphRef<T>
+) => ReactNode
+
+export const Button: ButtonComponent = forwardRef(
   <T extends ElementType = 'button'>(
     {
       as,
@@ -25,7 +29,7 @@ export const Button = forwardRef(
       startIcon,
       variant = ButtonVariant.primary,
       ...restProps
-    }: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>,
+    }: Props<T>,
     ref: ElementRef<T>
   ) => {
     const Component: ElementType = as || 'button'

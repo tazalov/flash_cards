@@ -97,18 +97,29 @@
   border-radius: 1px;
 }
 
-.textField > div {
-  transform: translateX(-1px);
-  aspect-ratio: 1/1;
-  width: 2.25rem;
-}
-
 .input {
+  aspect-ratio: 1/1;
   padding: 0;
+
   color: var(--color-light-100);
   text-align: center;
 
+  border-radius: 1px;
+
+  transition: background-color 0.2s linear;
+
   &::-webkit-inner-spin-button {
     appearance: none;
+  }
+
+  &,
+  &:disabled,
+  :hover {
+    border: none;
+  }
+
+  &:focus:not(.active) {
+    background-color: var(--color-accent-500);
+    border: none;
   }
 }
