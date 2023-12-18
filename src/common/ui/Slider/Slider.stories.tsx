@@ -7,11 +7,6 @@ import * as RadixSlider from '@radix-ui/react-slider'
 import { Slider } from './Slider'
 
 const meta = {
-  argTypes: {
-    asChild: {
-      control: false,
-    },
-  },
   component: Slider,
   tags: ['autodocs'],
   title: 'Components/Slider',
