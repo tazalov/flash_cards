@@ -8,7 +8,6 @@ import cn from 'classnames'
 import s from './SingleRadio.module.scss'
 
 type Props = {
-  className?: string
   label: string
 } & Omit<ComponentPropsWithoutRef<typeof RadixRadio.Item>, 'asChild'>
 
