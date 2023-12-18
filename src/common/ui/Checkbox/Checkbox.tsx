@@ -8,12 +8,12 @@ import cn from 'classnames'
 
 import s from './Checkbox.module.scss'
 
-type Props = {
+export type CheckboxProps = {
   label?: string
 } & Omit<ComponentPropsWithoutRef<typeof RadixCheckbox.Root>, 'asChild'>
 
-export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Props>(
-  ({ className, disabled, label, ...restProps }: Props, ref) => {
+export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, CheckboxProps>(
+  ({ className, disabled, label, ...restProps }, ref) => {
     return (
       <Typography
         as="label"
