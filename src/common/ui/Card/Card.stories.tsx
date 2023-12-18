@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { ButtonVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 
 import { Card } from './Card'
@@ -41,15 +42,15 @@ type Story = StoryObj<typeof meta>
 export const CardWithContent: Story = {
   args: {
     children: [
-      <Button key={0} variant="secondary">
+      <Button key={0} variant={ButtonVariant.secondary}>
         Button1
       </Button>,
-      <Button key={1} variant="secondary">
+      <Button fullWidth key={1} variant={ButtonVariant.secondary}>
         Button2
       </Button>,
       <div key={2}>
-        <Button variant="secondary">Button3</Button>
-        <Button variant="secondary">Button4</Button>
+        <Button variant={ButtonVariant.secondary}>Button3</Button>
+        <Button variant={ButtonVariant.secondary}>Button4</Button>
       </div>,
     ],
   },
