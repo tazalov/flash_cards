@@ -1,5 +1,7 @@
 export { default as Check } from './check'
 export { default as ChevronUp } from './chevronUp'
 export { default as CloseEye } from './closeEye'
+export { default as Edit } from './edit'
+export { default as Logout } from './logout'
 export { default as OpenEye } from './openEye'
 export { default as Search } from './search'
