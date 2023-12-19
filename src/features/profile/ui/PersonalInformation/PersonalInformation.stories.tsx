@@ -13,9 +13,9 @@ const meta = {
   },
   component: PersonalInformation,
   parameters: {
-    layout: 'fullscreen', //change
+    layout: 'fullscreen',
   },
-  title: 'features/profile/PersonalInformation', //change
+  title: 'features/Profile/PersonalInformation',
 } satisfies Meta<typeof PersonalInformation>
 
 export default meta
