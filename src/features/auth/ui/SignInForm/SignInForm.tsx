@@ -1,29 +1,68 @@
 import { ButtonVariant, TypographyVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 import { Card } from '@/common/ui/Card'
-import { Checkbox } from '@/common/ui/Checkbox'
-import { TextField } from '@/common/ui/TextField'
 import { Typography } from '@/common/ui/Typography'
+import { ControlledCheckbox } from '@/common/ui_controlled/ControlledCheckbox'
+import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
+import { SignInFormData, useSignInForm } from '@/features/auth/ui/SignInForm/useSignInForm'
 
 import s from './SignInForm.module.scss'
 
-export const SignInForm = () => {
+interface Props {
+  onSubmit: (data: SignInFormData) => void
+}
+export const SignInForm = ({ onSubmit }: Props) => {
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useSignInForm()
+
   return (
-    <Card as="div" className={s.wrapper}>
+    <Card as="form" className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <Typography variant={TypographyVariant.large}>Sign In</Typography>
-      <TextField className={s.input} label="Email" type="email"></TextField>
-      <TextField className={s.input} label="Password" type="password"></TextField>
-      <Checkbox className={s.checkbox} label="Remember me"></Checkbox>
-      <Typography as="a" className={s.forgotNav} variant={TypographyVariant.body2}>
+      <ControlledTextField
+        className={s.input}
+        control={control}
+        errorText={errors?.email?.message}
+        label="Email"
+        name="email"
+        type="email"
+      />
+      <ControlledTextField
+        className={s.input}
+        control={control}
+        errorText={errors?.password?.message}
+        label="Password"
+        name="password"
+        type="password"
+      />
+      <ControlledCheckbox
+        className={s.checkbox}
+        control={control}
+        label="Remember me"
+        name="rememberMe"
+      />
+      <Typography
+        as="a"
+        className={s.forgotNav}
+        onClick={() => 'navigate to forgot password form'}
+        variant={TypographyVariant.body2}
+      >
         Forgot Password?
       </Typography>
-      <Button as="a" className={s.signInBtn} fullWidth>
+      <Button className={s.signInBtn} fullWidth type="submit">
         Sign In
       </Button>
       <Typography className={s.signUpText} variant={TypographyVariant.body2}>
         Don`t have an account?
       </Typography>
-      <Button className={s.signUpNav} variant={ButtonVariant.link}>
+      <Button
+        as="a"
+        className={s.signUpNav}
+        onClick={() => 'navigate to Sign up form'}
+        variant={ButtonVariant.link}
+      >
         Sign Up
       </Button>
     </Card>
