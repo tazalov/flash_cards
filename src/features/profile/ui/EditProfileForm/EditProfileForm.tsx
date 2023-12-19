@@ -7,7 +7,7 @@ import cn from 'classnames'
 import s from './EditProfileForm.module.scss'
 
 export interface EditProfileValues {
-  nickname: string
+  username: string
 }
 
 interface Props {
@@ -25,8 +25,8 @@ export const EditProfileForm = ({ className, initialValue, onSubmit }: Props) =>
         className={s.nickname}
         control={control}
         defaultValue={initialValue}
-        label="Nickaname"
-        name="nickname"
+        label="Nickname"
+        name="username"
       />
       <Button fullWidth type="submit">
         Save changes
