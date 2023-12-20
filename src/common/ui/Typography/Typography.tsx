@@ -21,7 +21,14 @@ type TypographyComponent = <T extends ElementType = 'p'>(
 
 export const Typography: TypographyComponent = forwardRef(
   <T extends ElementType = 'p'>(
-    { as, children, className, textAlign = 'left', variant = TypographyVariant.body1 }: Props<T>,
+    {
+      as,
+      children,
+      className,
+      textAlign = 'left',
+      variant = TypographyVariant.body1,
+      ...rest
+    }: Props<T>,
     ref: ElementRef<T>
   ) => {
     const Component: ElementType = as || 'p'
@@ -31,6 +38,7 @@ export const Typography: TypographyComponent = forwardRef(
         className={cn(s.typography, s[variant], className)}
         ref={ref}
         style={{ textAlign }}
+        {...rest}
       >
         {children}
       </Component>
