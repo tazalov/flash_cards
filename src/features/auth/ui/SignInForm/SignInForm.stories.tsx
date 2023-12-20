@@ -9,6 +9,9 @@ const meta = {
     },
   },
   component: SignInForm,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'features/Auth/SignInForm',
 } satisfies Meta<typeof SignInForm>
@@ -16,4 +19,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const SignInFormDefault: Story = {}
+export const SignInFormDefault: Story = {
+  render: args => (
+    <div style={{ width: '420px' }}>
+      <SignInForm {...args} />
+    </div>
+  ),
+}
