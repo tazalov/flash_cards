@@ -5,13 +5,15 @@ import { Typography } from '@/common/ui/Typography'
 import { ControlledCheckbox } from '@/common/ui_controlled/ControlledCheckbox'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
 import { SignInFormData, useSignInForm } from '@/features/auth/ui/SignInForm/useSignInForm'
+import cn from 'classnames'
 
 import s from './SignInForm.module.scss'
 
 interface Props {
+  className?: string
   onSubmit: (data: SignInFormData) => void
 }
-export const SignInForm = ({ onSubmit }: Props) => {
+export const SignInForm = ({ className, onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -19,7 +21,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
   } = useSignInForm()
 
   return (
-    <Card as="form" className={s.form} onSubmit={handleSubmit(onSubmit)}>
+    <Card as="form" className={cn(s.form, className)} onSubmit={handleSubmit(onSubmit)}>
       <Typography variant={TypographyVariant.large}>Sign In</Typography>
       <ControlledTextField
         className={s.input}
