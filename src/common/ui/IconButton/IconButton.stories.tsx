@@ -1,14 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Search } from '@/common/assets/icons'
+
 import { IconButton } from './IconButton'
 
 const meta = {
-  argTypes: {},
+  argTypes: {
+    onClick: {
+      action: 'Clicked!',
+    },
+  },
   component: IconButton,
   parameters: {
-    layout: 'fullscreen', //change
+    layout: 'centered',
   },
-  title: 'components/IconButton', //change
+  title: 'components/IconButton',
 } satisfies Meta<typeof IconButton>
 
 export default meta
@@ -16,5 +22,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Demo: Story = {
-  args: {},
+  args: {
+    icon: <Search />,
+  },
 }
