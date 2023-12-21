@@ -1,0 +1,46 @@
+.form {
+  width: 100%;
+  max-width: 26.25rem;
+  margin: 0 auto;
+  padding: 2.062rem 2.25rem 1.75rem;
+}
+
+.headerText {
+  user-select: none;
+}
+
+.input {
+  margin-top: 1.687rem;
+}
+
+.checkbox {
+  align-self: flex-start;
+  margin-top: 1.125rem;
+}
+
+.forgotNav {
+  cursor: pointer;
+
+  align-self: flex-end;
+
+  margin-top: 0.75rem;
+  margin-right: 0.75rem;
+
+  transition: all 0.2s linear;
+}
+
+.signInBtn {
+  margin-top: 4.125rem;
+}
+
+.signUpText {
+  user-select: none;
+  margin-top: 1.25rem;
+  color: var(--color-light-900);
+}
+
+.signUpNav {
+  margin-top: 0.687rem;
+  padding: 0;
+  text-decoration: underline 1px;
+}

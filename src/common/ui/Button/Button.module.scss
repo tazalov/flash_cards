@@ -18,7 +18,7 @@
 
   border-radius: 4px;
 
-  transition: background-color 0.1s linear;
+  transition: all 0.1s linear;
 
   &:disabled {
     cursor: inherit;
@@ -32,6 +32,7 @@
 
 .primary {
   background-color: var(--color-accent-500);
+  box-shadow: 0 0.25rem 1.12rem 0 rgb(140 97 255 / 35%);
 
   &:hover {
     background-color: var(--color-accent-300);
@@ -48,6 +49,7 @@
 
 .secondary {
   background-color: var(--color-dark-300);
+  box-shadow: 0 0.125rem 0.625rem 0 rgb(109 109 109 / 25%);
 
   &:hover {
     background-color: var(--color-dark-100);
