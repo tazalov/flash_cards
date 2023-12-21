@@ -24,7 +24,9 @@ export const ForgotPasswordForm = ({ className, onSubmit }: Props) => {
 
   return (
     <Card as="form" className={cn(s.form, className)} onSubmit={handleSubmit(onSubmit)}>
-      <Typography variant={TypographyVariant.large}>Forgot your password?</Typography>
+      <Typography className={s.headerText} variant={TypographyVariant.large}>
+        Forgot your password?
+      </Typography>
       <ControlledTextField
         className={s.input}
         control={control}
