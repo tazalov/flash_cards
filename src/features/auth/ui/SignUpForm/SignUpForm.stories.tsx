@@ -1,7 +1,7 @@
-import { SignUpFormValues } from '@/features/auth/ui/SignUpForm/useSignUpForm'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { SignUpForm } from './'
+import { SignUpFormValues } from './useSignUpForm'
 
 const meta = {
   args: {
