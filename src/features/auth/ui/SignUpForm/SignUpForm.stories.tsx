@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { SignUpForm } from './'
-import { SignUpFormValues } from './useSignUpForm'
 
 const meta = {
-  args: {
-    onSubmit: (data: SignUpFormValues) => console.log(data),
+  argTypes: {
+    onSubmit: {
+      action: 'sign up',
+    },
   },
   component: SignUpForm,
   tags: ['autodocs'],
