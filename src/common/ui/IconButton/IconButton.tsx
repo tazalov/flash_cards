@@ -10,7 +10,7 @@ type Props = {
 } & ComponentPropsWithoutRef<'button'>
 
 export const IconButton = forwardRef<ElementRef<'button'>, Props>(
-  ({ className, icon, size = 1, ...restProps }, ref): JSX.Element => {
+  ({ className, icon, size = 1, ...restProps }, ref) => {
     return (
       <button
         className={cn(s.iconBtn, className)}

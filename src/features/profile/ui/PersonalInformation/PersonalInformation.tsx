@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { TypographyVariant } from '@/common/enums'
+import { ProfileData } from '@/common/types'
 import { Avatar } from '@/common/ui/Avatar'
 import { Card } from '@/common/ui/Card'
 import { Typography } from '@/common/ui/Typography'
@@ -10,12 +11,6 @@ import s from './PersonalInformation.module.scss'
 
 import { EditProfileForm, EditProfileValues } from '../EditProfileForm'
 import { ProfileInfo } from '../ProfileInfo'
-
-export interface ProfileData {
-  avatar?: string
-  email: string
-  username: string
-}
 
 interface Props {
   className?: string
