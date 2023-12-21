@@ -16,6 +16,4 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const SignInFormDefault: Story = {
-  render: args => <SignInForm {...args} />,
-}
+export const SignInFormDefault: Story = {}
