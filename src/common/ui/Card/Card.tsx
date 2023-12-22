@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode, forwardRef } from 'react'
 
-import { PolymorphRef } from '@/common/types/intex'
+import { PolymorphRef } from '@/common/types'
 import cn from 'classnames'
 
 import s from './Card.module.scss'
