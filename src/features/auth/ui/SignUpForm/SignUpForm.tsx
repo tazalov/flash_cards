@@ -16,36 +16,37 @@ export const SignUpForm = ({ onSubmit }: Props) => {
   const { control, errors, handleSubmit } = useSignUpForm()
 
   return (
-    <Card className={s.formContent}>
+    <Card as="form" className={s.formContent} onSubmit={handleSubmit(onSubmit)}>
       <Typography className={s.formTitle} variant={TypographyVariant.large}>
         Sign Up
       </Typography>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <ControlledTextField
-          control={control}
-          errorText={errors.email?.message}
-          label="Email"
-          name="email"
-          type="email"
-        />
-        <ControlledTextField
-          control={control}
-          errorText={errors.password?.message}
-          label="Password"
-          name="password"
-          type="password"
-        />
-        <ControlledTextField
-          control={control}
-          errorText={errors.confirmPassword?.message}
-          label="Confirm password"
-          name="confirmPassword"
-          type="password"
-        />
-        <Button fullWidth type="submit">
-          Sign Up
-        </Button>
-      </form>
+      <ControlledTextField
+        className={s.input}
+        control={control}
+        errorText={errors.email?.message}
+        label="Email"
+        name="email"
+        type="email"
+      />
+      <ControlledTextField
+        className={s.input}
+        control={control}
+        errorText={errors.password?.message}
+        label="Password"
+        name="password"
+        type="password"
+      />
+      <ControlledTextField
+        className={s.input}
+        control={control}
+        errorText={errors.confirmPassword?.message}
+        label="Confirm password"
+        name="confirmPassword"
+        type="password"
+      />
+      <Button className={s.btnSubmit} fullWidth type="submit">
+        Sign Up
+      </Button>
       <Typography className={s.formFooterText} variant={TypographyVariant.body2}>
         Already have an account?
       </Typography>

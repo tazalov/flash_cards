@@ -2,30 +2,24 @@
   width: 100%;
   max-width: 26.25rem;
   margin: 0 auto;
-  padding: 0 2.25rem;
+  padding: 2rem 2.25rem;
 }
 
 .formTitle {
-  margin-top: 2.063rem;
-  margin-bottom: 1.688rem;
+  margin-bottom: 1.7rem;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
+.input {
+  margin-bottom: 1.5rem;
+}
 
-  button {
-    margin-top: 2.25rem;
-    margin-bottom: 1.25rem;
-  }
+.btnSubmit {
+  margin-top: 2.25rem;
+  margin-bottom: 1.25rem;
 }
 
 .formBtnLink {
   position: relative;
-  margin-top: 0.688rem;
-  margin-bottom: 1.813rem;
   padding: 0;
 
   &::after {
@@ -50,5 +44,6 @@
 }
 
 .formFooterText {
+  margin-bottom: 0.7rem;
   color: var(--color-light-900);
 }
