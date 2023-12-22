@@ -1,4 +1,4 @@
-import checkEmail from '@/common/assets/image/checkEmail.svg'
+import checkEmail from '@/common/assets/images/checkEmail.svg'
 import { TypographyVariant } from '@/common/enums'
 import { Avatar } from '@/common/ui/Avatar'
 import { Button } from '@/common/ui/Button'
