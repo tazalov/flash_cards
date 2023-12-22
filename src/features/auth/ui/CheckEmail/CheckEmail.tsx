@@ -1,3 +1,4 @@
+import checkEmail from '@/common/assets/image/checkEmail.svg'
 import { TypographyVariant } from '@/common/enums'
 import { Avatar } from '@/common/ui/Avatar'
 import { Button } from '@/common/ui/Button'
@@ -6,8 +7,6 @@ import { Typography } from '@/common/ui/Typography'
 import cn from 'classnames'
 
 import s from './CheckEmail.module.scss'
-
-import checkEmail from '../../../../common/assets/image/checkEmail.svg'
 
 interface Props {
   className?: string
