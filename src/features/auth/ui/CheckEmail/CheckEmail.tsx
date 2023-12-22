@@ -15,7 +15,7 @@ interface Props {
 export const CheckEmail = ({ className, email }: Props) => {
   return (
     <Card className={cn(s.form, className)}>
-      <Typography className={s.headerText} variant={TypographyVariant.large}>
+      <Typography as="h2" className={s.headerText} variant={TypographyVariant.large}>
         Check Email
       </Typography>
       <Avatar className={s.image} src={checkEmail} title="" />
