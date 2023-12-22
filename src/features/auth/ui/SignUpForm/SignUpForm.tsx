@@ -17,7 +17,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
 
   return (
     <Card as="form" className={s.formContent} onSubmit={handleSubmit(onSubmit)}>
-      <Typography className={s.formTitle} variant={TypographyVariant.large}>
+      <Typography as="h2" className={s.formTitle} variant={TypographyVariant.large}>
         Sign Up
       </Typography>
       <ControlledTextField
