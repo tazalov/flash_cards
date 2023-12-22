@@ -31,7 +31,7 @@ export const HeaderUser = ({ data, logout }: Props) => {
         <Dropdown.Item>
           <div className={s.userInfo}>
             <Avatar size="small" src={avatar} title={titleNoAvatar} />
-            <div>
+            <div className={s.info}>
               <Typography variant={TypographyVariant.subtitle1}>{username}</Typography>
               <Typography className={s.email} variant={TypographyVariant.caption}>
                 {email}

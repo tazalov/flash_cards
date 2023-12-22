@@ -1,21 +1,23 @@
 .root {
-  cursor: pointer;
-  user-select: none;
-
   display: flex;
   gap: 0.875rem;
   align-items: center;
 }
 
 .trigger {
+  cursor: pointer;
+  user-select: none;
   border-bottom: 1px dashed var(--color-light-100);
 }
 
 .userInfo {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
   padding-right: 1.75rem;
+}
+
+.info {
+  margin-left: 0.5rem;
 }
 
 .email {
