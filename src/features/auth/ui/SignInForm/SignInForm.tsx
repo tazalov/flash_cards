@@ -22,7 +22,7 @@ export const SignInForm = ({ className, onSubmit }: Props) => {
 
   return (
     <Card as="form" className={cn(s.form, className)} onSubmit={handleSubmit(onSubmit)}>
-      <Typography as="header" className={s.headerText} variant={TypographyVariant.large}>
+      <Typography as="h2" className={s.headerText} variant={TypographyVariant.large}>
         Sign In
       </Typography>
       <ControlledTextField

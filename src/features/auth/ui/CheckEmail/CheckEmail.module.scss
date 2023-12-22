@@ -1,0 +1,26 @@
+.form {
+  width: 100%;
+  max-width: 26.25rem;
+  margin: 0 auto;
+  padding: 2.062rem 2.25rem 2.75rem;
+}
+
+.headerText {
+  user-select: none;
+}
+
+.image {
+  margin-top: 1.75rem;
+  background-color: rgb(140 97 255 / 5%);
+}
+
+.descriptionText {
+  user-select: none;
+  margin-top: 1.25rem;
+  color: var(--color-light-900);
+  opacity: 0.5;
+}
+
+.signInNav {
+  margin-top: 4.125rem;
+}
