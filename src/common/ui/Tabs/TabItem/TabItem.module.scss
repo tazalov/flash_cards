@@ -1,8 +1,11 @@
 .trigger {
   cursor: pointer;
 
-  padding: 6px 24px;
+  padding: 0.3125rem 0.75rem;
 
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
   color: var(--color-light-100);
 
   background-color: transparent;

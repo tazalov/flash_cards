@@ -9,7 +9,7 @@
   justify-content: center;
 
   box-sizing: border-box;
-  padding: 6px 28px;
+  padding: 0.375rem 1.75rem;
 
   font-size: var(--font-size-s);
   font-weight: var(--font-weight-bold);
@@ -65,6 +65,7 @@
 }
 
 .outlined {
+  padding: 0.3125rem 1.75rem;
   color: var(--color-accent-500);
   border: 1px solid var(--color-accent-500);
 
