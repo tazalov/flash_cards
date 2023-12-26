@@ -6,9 +6,12 @@ import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
 
 import s from './CreateNewPasswordForm.module.scss'
 
-import { CreateNewPasswordFormValues, useCreateNewPasswordForm } from './useCreateNewPasswordForm'
+import {
+  CreateNewPasswordFormValues,
+  useCreateNewPasswordForm,
+} from '../../model/hooks/useCreateNewPasswordForm'
 
-type Props = {
+interface Props {
   onSubmit: (data: CreateNewPasswordFormValues) => void
 }
 

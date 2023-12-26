@@ -12,6 +12,7 @@ interface Props {
   className?: string
   email: string
 }
+
 export const CheckEmail = ({ className, email }: Props) => {
   return (
     <Card className={cn(s.form, className)}>

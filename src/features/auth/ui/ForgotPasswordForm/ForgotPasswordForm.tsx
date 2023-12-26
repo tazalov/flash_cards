@@ -3,13 +3,11 @@ import { Button } from '@/common/ui/Button'
 import { Card } from '@/common/ui/Card'
 import { Typography } from '@/common/ui/Typography'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
-import {
-  ForgotPasswordFormData,
-  useForgotPassword,
-} from '@/features/auth/ui/ForgotPasswordForm/useForgotPasswordForm'
 import cn from 'classnames'
 
 import s from './ForgotPasswordForm.module.scss'
+
+import { ForgotPasswordFormData, useForgotPassword } from '../../model/hooks/useForgotPasswordForm'
 
 interface Props {
   className?: string

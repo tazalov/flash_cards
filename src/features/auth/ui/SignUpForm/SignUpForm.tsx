@@ -6,9 +6,9 @@ import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
 
 import s from './SignUpForm.module.scss'
 
-import { SignUpFormValues, useSignUpForm } from './useSignUpForm'
+import { SignUpFormValues, useSignUpForm } from '../../model/hooks/useSignUpForm'
 
-type Props = {
+interface Props {
   onSubmit: (data: SignUpFormValues) => void
 }
 
