@@ -4,10 +4,11 @@ import { Card } from '@/common/ui/Card'
 import { Typography } from '@/common/ui/Typography'
 import { ControlledCheckbox } from '@/common/ui_controlled/ControlledCheckbox'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
-import { SignInFormData, useSignInForm } from '@/features/auth/ui/SignInForm/useSignInForm'
 import cn from 'classnames'
 
 import s from './SignInForm.module.scss'
+
+import { SignInFormData, useSignInForm } from '../../model/hooks/useSignInForm'
 
 interface Props {
   className?: string
