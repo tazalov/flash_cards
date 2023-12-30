@@ -18,7 +18,7 @@ const meta = {
     },
     tabValue: {
       control: {
-        type: 'select',
+        type: 'radio',
       },
       options: ['all', 'my'],
     },
