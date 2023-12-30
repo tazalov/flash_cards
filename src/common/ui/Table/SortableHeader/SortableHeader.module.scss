@@ -1,0 +1,8 @@
+.headCell {
+  cursor: pointer;
+  transition: all 0.1s linear;
+
+  &:hover {
+    background-color: var(--color-accent-500);
+  }
+}
