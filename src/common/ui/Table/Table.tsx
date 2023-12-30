@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { TypographyVariant } from '@/common/enums'
+import { SortableHeader } from '@/common/ui/Table/SortableHeader'
 import { Typography } from '@/common/ui/Typography'
 import cn from 'classnames'
 
@@ -70,4 +71,4 @@ const Cell = forwardRef<ElementRef<'td'>, ComponentPropsWithoutRef<'td'>>(
   }
 )
 
-export const Table = { Body, Cell, Head, Root, Row, TitleCell }
+export const Table = { Body, Cell, Head, Root, Row, SortableHeader, TitleCell }
