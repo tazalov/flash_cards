@@ -12,7 +12,6 @@ export const useDecksFilters = () => {
   const itemsPerPage = Number(searchParams.get('items')) || 5
   const name = searchParams.get('search') === null ? '' : String(searchParams.get('search'))
   const show = searchParams.get('show') || 'all'
-  // const orderBy = sort ? `${sort?.key}-${sort?.direction}` : undefined
   const orderBy = searchParams.get('sort') || undefined
 
   const handleChangePage = (page: number) => {
