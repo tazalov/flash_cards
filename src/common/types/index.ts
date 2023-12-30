@@ -9,3 +9,14 @@ export interface ProfileData {
   email: string
   username: string
 }
+
+export type Sort = {
+  direction: 'asc' | 'desc'
+  key: string
+} | null
+
+export interface Column {
+  key: string
+  sortable: boolean
+  title: string
+}
