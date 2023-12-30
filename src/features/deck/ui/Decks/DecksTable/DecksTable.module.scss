@@ -1,0 +1,44 @@
+.name {
+  cursor: pointer;
+
+  display: flex;
+  flex-flow: row nowrap;
+  flex-wrap: nowrap;
+  gap: 0.625rem;
+  align-items: center;
+  justify-content: flex-start;
+
+  color: var(--color-light-100);
+  text-decoration: none;
+}
+
+.cover {
+  max-width: 7.5rem;
+  max-height: 3rem;
+}
+
+.nameCell,
+.authorCell {
+  width: 28%;
+  word-break: break-all;
+}
+
+.cardsCountCell {
+  width: 12%;
+}
+
+.updatedCell {
+  width: 20%;
+  word-break: break-all;
+}
+
+.actionsCell {
+  width: 12%;
+  word-break: break-all;
+
+  & > span {
+    display: flex;
+    gap: 0.625rem;
+    justify-content: center;
+  }
+}
