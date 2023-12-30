@@ -1,0 +1,24 @@
+.filters {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.input {
+  min-width: 17.5rem;
+  margin-right: 1.5rem;
+}
+
+.tabs {
+  min-width: 14.375rem;
+  margin-right: 1.5rem;
+}
+
+.slider {
+  min-width: 15.625rem;
+  margin-right: 2.25rem;
+}
+
+.button {
+  min-width: 9.5rem;
+}
