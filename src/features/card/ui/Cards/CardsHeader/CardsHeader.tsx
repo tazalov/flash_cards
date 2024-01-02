@@ -8,7 +8,7 @@ import { IconButton } from '@/common/ui/IconButton'
 import { Typography } from '@/common/ui/Typography'
 import cn from 'classnames'
 
-import s from './DeckHeader.module.scss'
+import s from './CardsHeader.module.scss'
 
 type Props = {
   isEmpty?: boolean
@@ -16,7 +16,7 @@ type Props = {
   name?: string
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
 
-export const DeckHeader = (props: Props) => {
+export const CardsHeader = (props: Props) => {
   const { className, isEmpty, isOwner, name } = props
 
   return (
@@ -33,12 +33,10 @@ export const DeckHeader = (props: Props) => {
             <Dropdown.Item startIcon={<Edit />}>Edit</Dropdown.Item>
             <Dropdown.Separator />
             <Dropdown.Item startIcon={<Trash />}>Delete</Dropdown.Item>
-            <Dropdown.Separator />
           </Dropdown.Menu>
         )}
       </div>
-      {!isEmpty && !isOwner && <Button>Learn to Pack</Button>}
-      {!isEmpty && isOwner && <Button>Add New Pack</Button>}
+      {!isEmpty && (isOwner ? <Button>Add New Pack</Button> : <Button>Learn to Pack</Button>)}
     </div>
   )
 }

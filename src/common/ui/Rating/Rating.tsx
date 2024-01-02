@@ -18,9 +18,9 @@ export const Rating = (props: Props) => {
     <div className={cn(s.root, className)} {...restProps}>
       {stars.map((star, index) => {
         return rating >= star ? (
-          <StarEmpty className={s.icon} key={index} />
-        ) : (
           <StarFill className={s.icon} key={index} />
+        ) : (
+          <StarEmpty className={s.icon} key={index} />
         )
       })}
     </div>

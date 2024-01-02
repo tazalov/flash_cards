@@ -1,11 +1,12 @@
-import { Page } from '@/common/ui/Page/Page'
+import { Page } from '@/common/ui/Page'
 import { Pagination } from '@/common/ui/Pagination'
-import { DecksFilters, DecksHeader, DecksTable } from '@/features/deck'
-import { useGetDecksQuery } from '@/features/deck/model/services/decks.service'
-import { getSortObj } from '@/features/deck/model/utils/getSortObj'
-import { useDecksFilters } from '@/pages/Decks/DecksList/useDecksFilters'
+import { getSortObj } from '@/common/utils'
+import { DecksFilters, DecksHeader, DecksTable, useGetDecksQuery } from '@/features/deck'
 
 import s from './DecksList.module.scss'
+
+import { useDecksFilters } from './useDecksFilters'
+
 export const DecksList = () => {
   const {
     currentPage,

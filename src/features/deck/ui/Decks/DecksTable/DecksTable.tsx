@@ -60,7 +60,7 @@ export const DecksTable = ({ authId, handleChangeSort, items, sort, ...rest }: P
                   as={Link}
                   className={s.name}
                   state={{ search: location.search }}
-                  to={`/${el.id}`}
+                  to={`/${el.id}/cards`}
                   variant={TypographyVariant.body2}
                 >
                   {el.cover && <img alt="cover" className={s.cover} src={el.cover} />}

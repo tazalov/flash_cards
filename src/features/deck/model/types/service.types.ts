@@ -1,13 +1,10 @@
-import { Card, Deck, Pagination } from './decks.types'
+import { Pagination } from '@/common/types'
+
+import { Deck } from './decks.types'
 
 export interface GetDecksResponse {
   items: Deck[]
   maxCardsCount: number
-  pagination: Pagination
-}
-
-export interface GetCardsResponse {
-  items: Card[]
   pagination: Pagination
 }
 
@@ -19,11 +16,4 @@ export type GetDecksArgs = {
   minCardsCount?: number
   name?: string
   orderBy?: string
-}
-
-export interface GetCardsArgs {
-  currentPage?: number
-  itemsPerPage?: number
-  orderBy?: string
-  question?: string
 }

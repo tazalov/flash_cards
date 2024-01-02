@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { DeckCards } from './DeckCards'
+import { CardsTable } from './CardsTable'
 
 const meta = {
-  component: DeckCards,
+  component: CardsTable,
   tags: ['autodocs'],
-  title: 'Features/Deck/DeckCards',
-} satisfies Meta<typeof DeckCards>
+  title: 'features/Card/CardsTable',
+} satisfies Meta<typeof CardsTable>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -44,15 +44,16 @@ const initialState = [
   },
 ]
 
-export const NotEmptyAndOwner: Story = {
+export const isOwner: Story = {
   args: {
     deckItems: initialState,
     isOwner: true,
     sort: null,
   },
 }
-export const EmptyAndOwner: Story = {
+export const NotIsOwner: Story = {
   args: {
+    deckItems: initialState,
     isOwner: false,
     sort: null,
   },

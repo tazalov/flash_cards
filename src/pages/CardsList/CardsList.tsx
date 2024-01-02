@@ -7,18 +7,15 @@ import { Page } from '@/common/ui/Page'
 import { Pagination } from '@/common/ui/Pagination'
 import { TextField } from '@/common/ui/TextField'
 import { Typography } from '@/common/ui/Typography'
-import { DeckCards, DeckHeader } from '@/features/deck'
-import {
-  useGetDeckByIdQuery,
-  useGetDecksCardsByIdQuery,
-} from '@/features/deck/model/services/decks.service'
-import { getSortObj } from '@/features/deck/model/utils/getSortObj'
+import { getSortObj } from '@/common/utils'
+import { CardsHeader, CardsTable, useGetCardsByIdQuery } from '@/features/card'
+import { useGetDeckByIdQuery } from '@/features/deck'
 
-import s from './DeckDetails.module.scss'
+import s from './CardsList.module.scss'
 
-import { useDeckDetails } from './useDeckDetails'
+import { useCardsList } from './useCardsList'
 
-export const DeckDetails = () => {
+export const CardsList = () => {
   const { deckId = '' } = useParams()
 
   const {
@@ -31,12 +28,12 @@ export const DeckDetails = () => {
     orderBy,
     page,
     question,
-  } = useDeckDetails()
+  } = useCardsList()
 
   const { data: deck } = useGetDeckByIdQuery({
     id: deckId,
   })
-  const { data, isLoading } = useGetDecksCardsByIdQuery({
+  const { data, isLoading } = useGetCardsByIdQuery({
     id: deckId,
     params: {
       currentPage: page,
@@ -58,7 +55,7 @@ export const DeckDetails = () => {
         <Arrow className={s.iconArrow} />
         <Typography variant={TypographyVariant.body2}>Back to Packs list</Typography>
       </div>
-      <DeckHeader className={s.header} isEmpty={isEmpty} isOwner={isOwner} name={deck?.name} />
+      <CardsHeader className={s.item} isEmpty={isEmpty} isOwner={isOwner} name={deck?.name} />
       {isEmpty ? (
         <div className={s.infoBlock}>
           <Typography className={s.infoText} textAlign="center" variant={TypographyVariant.body2}>
@@ -69,13 +66,13 @@ export const DeckDetails = () => {
       ) : (
         <>
           <TextField
-            className={s.input}
+            className={s.item}
             onChangeValue={handleChangeQuestion}
             type="search"
             value={question || ''}
           />
-          <DeckCards
-            className={s.table}
+          <CardsTable
+            className={s.item}
             deckItems={data?.items}
             handleChangeSort={handleChangeSort}
             isOwner={isOwner}
