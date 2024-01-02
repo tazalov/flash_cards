@@ -1,0 +1,9 @@
+.input {
+  display: none;
+}
+
+.error {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--color-danger-300);
+}
