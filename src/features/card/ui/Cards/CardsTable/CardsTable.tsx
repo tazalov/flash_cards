@@ -7,9 +7,9 @@ import { IconButton } from '@/common/ui/IconButton'
 import { Rating } from '@/common/ui/Rating'
 import { Table } from '@/common/ui/Table'
 import { Typography } from '@/common/ui/Typography'
-import { Card } from '@/features/deck/model/types/decks.types'
+import { Card } from '@/features/card'
 
-import s from './DeckCards.module.scss'
+import s from './CardsTable.module.scss'
 
 type Props = {
   deckItems?: Card[]
@@ -18,7 +18,7 @@ type Props = {
   sort?: Sort
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
 
-const columns: Array<Column> = [
+const columns: Column[] = [
   {
     key: 'question',
     sortable: true,
@@ -46,7 +46,7 @@ const columns: Array<Column> = [
   },
 ]
 
-export const DeckCards = (props: Props) => {
+export const CardsTable = (props: Props) => {
   const { className, deckItems, handleChangeSort, isOwner, sort } = props
 
   return (
@@ -61,25 +61,25 @@ export const DeckCards = (props: Props) => {
         {deckItems?.map(el => {
           return (
             <Table.Row key={el.id}>
-              <Table.Cell className={s.cell}>
-                <div className={s.question}>
-                  {el.questionImg && (
-                    <img alt={el.question} className={s.image} src={el.questionImg} />
-                  )}
-                  <Typography variant={TypographyVariant.body2}>{el.question}</Typography>
-                </div>
+              <Table.Cell className={s.questionCell}>
+                <Typography className={s.name} variant={TypographyVariant.body2}>
+                  {el.questionImg && <img alt="cover" className={s.cover} src={el.questionImg} />}
+                  {el.question}
+                </Typography>
               </Table.Cell>
-              <Table.Cell className={s.cell}>{el.answer}</Table.Cell>
-              <Table.Cell>{new Date(el.updated).toLocaleDateString()}</Table.Cell>
-              <Table.Cell>
+              <Table.Cell className={s.answerCell}>{el.answer}</Table.Cell>
+              <Table.Cell className={s.updatedCell}>
+                {new Date(el.updated).toLocaleDateString()}
+              </Table.Cell>
+              <Table.Cell className={s.gradeCell}>
                 <Rating rating={el.grade} />
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell className={s.actionsCell}>
                 {isOwner && (
-                  <div className={s.editIcons}>
+                  <>
                     <IconButton icon={<Edit />} />
                     <IconButton icon={<Trash />} />
-                  </div>
+                  </>
                 )}
               </Table.Cell>
             </Table.Row>

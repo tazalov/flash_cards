@@ -1,3 +1,7 @@
+.table {
+  user-select: none;
+}
+
 .name {
   cursor: pointer;
 
@@ -18,19 +22,19 @@
   object-fit: cover;
 }
 
-.nameCell,
-.authorCell {
-  width: 28%;
+.questionCell,
+.answerCell {
+  width: 26%;
   word-break: break-all;
-}
-
-.cardsCountCell {
-  width: 12%;
 }
 
 .updatedCell {
   width: 20%;
   word-break: break-all;
+}
+
+.gradeCell {
+  width: 16%;
 }
 
 .actionsCell {

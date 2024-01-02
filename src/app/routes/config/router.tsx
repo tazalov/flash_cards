@@ -1,15 +1,16 @@
 import { RouteObject, createBrowserRouter } from 'react-router-dom'
 
-import { ProtectedAuth } from '@/app/routes/ui/ProtectedAuth'
 import { MainLayout } from '@/layout/MainLayout'
-import { DeckDetails } from '@/pages/Decks/DeckDetails'
-import { DecksList } from '@/pages/Decks/DecksList'
+import { CardsList } from '@/pages/CardsList'
+import { DecksList } from '@/pages/DecksList'
+
+import { ProtectedAuth } from '../ui/ProtectedAuth'
 
 const publicRoutes: RouteObject[] = []
 
 const privateRoutes: RouteObject[] = [
   { element: <DecksList />, path: '/' },
-  { element: <DeckDetails />, path: '/:deckId' },
+  { element: <CardsList />, path: '/:deckId/cards' },
 ]
 
 const appRoutes: RouteObject[] = [

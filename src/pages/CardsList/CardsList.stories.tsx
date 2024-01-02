@@ -5,13 +5,13 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
 import { store } from '@/app/store'
 
-import { DeckDetails } from './DeckDetails'
+import { CardsList } from './CardsList'
 
 const meta = {
   args: {},
-  component: DeckDetails,
-  title: 'pages/DeckDetails',
-} satisfies Meta<typeof DeckDetails>
+  component: CardsList,
+  title: 'pages/CardsList',
+} satisfies Meta<typeof CardsList>
 
 export default meta
 
@@ -20,9 +20,9 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   render: args => (
     <Provider store={store}>
-      <MemoryRouter initialEntries={[`/clplfkvwx07k1wv2qode45fge`]}>
+      <MemoryRouter initialEntries={[`/clplfkvwx07k1wv2qode45fge/cards`]}>
         <Routes>
-          <Route element={<DeckDetails {...args} />} path="/:deckId" />
+          <Route element={<CardsList {...args} />} path="/:deckId/cards" />
         </Routes>
       </MemoryRouter>
     </Provider>
