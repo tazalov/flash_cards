@@ -1,0 +1,41 @@
+.pagination {
+  margin-bottom: 24px;
+}
+
+.link {
+  cursor: pointer;
+
+  display: flex;
+  gap: 6px;
+  align-items: center;
+
+  margin-bottom: 36px;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.input {
+  margin-bottom: 24px;
+}
+
+.table {
+  margin-bottom: 24px;
+}
+
+.infoText {
+  margin-bottom: 30px;
+  color: var(--color-dark-100);
+}
+
+.infoBlock {
+  margin-top: 45px;
+  text-align: center;
+}
+
+.iconArrow {
+  width: 16px;
+  height: 16px;
+  color: var(--color-light-100);
+}

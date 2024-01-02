@@ -1,3 +1,5 @@
+export { DeckCards } from './ui/Deck/DeckCards/DeckCards'
+export { DeckHeader } from './ui/Deck/DeckHeader/DeckHeader'
 export { DecksFilters } from './ui/Decks/DecksFilters/DecksFilters'
 export { DecksHeader } from './ui/Decks/DecksHeader/DecksHeader'
 export { DecksTable } from './ui/Decks/DecksTable/DecksTable'
