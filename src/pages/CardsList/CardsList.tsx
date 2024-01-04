@@ -42,7 +42,7 @@ export const CardsList = () => {
       question,
     },
   })
-  const isOwner = deck?.userId === 'af85a571-234b-463c-8762-c2e2e5c7970e'
+  const isOwner = deck?.userId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'
   const isEmpty = deck && deck.cardsCount === 0
 
   if (isLoading) {
