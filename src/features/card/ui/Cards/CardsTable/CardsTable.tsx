@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Edit, Trash } from '@/common/assets/icons'
+import { Edit } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Column, Sort } from '@/common/types'
 import { IconButton } from '@/common/ui/IconButton'
@@ -10,6 +10,8 @@ import { Typography } from '@/common/ui/Typography'
 import { Card } from '@/features/card'
 
 import s from './CardsTable.module.scss'
+
+import { RemoveCardModal } from '../../CardActions/RemoveCardModal/RemoveCardModal'
 
 type Props = {
   deckItems?: Card[]
@@ -78,7 +80,7 @@ export const CardsTable = (props: Props) => {
                 {isOwner && (
                   <>
                     <IconButton icon={<Edit />} />
-                    <IconButton icon={<Trash />} />
+                    <RemoveCardModal cardId={el.id} cardName={el.question} />
                   </>
                 )}
               </Table.Cell>
