@@ -7,18 +7,18 @@ const decksService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       getDeckById: builder.query<Deck, { id: string }>({
-        providesTags: ['Decks', { id: 'List', type: 'Decks' }],
-        query: ({ id }) => ({
-          method: 'GET',
-          url: `v1/decks/${id}`,
-        }),
+        query: ({ id }) => ({ url: `v1/decks/${id}` }),
       }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
         providesTags: ['Decks'],
         query: params => ({ params: params ?? {}, url: `v1/decks` }),
       }),
+      removeDeck: builder.mutation<Deck, { id: string }>({
+        invalidatesTags: ['Decks'],
+        query: ({ id }) => ({ method: 'DELETE', url: `v1/decks/${id}` }),
+      }),
     }
   },
 })
 
-export const { useGetDeckByIdQuery, useGetDecksQuery } = decksService
+export const { useGetDeckByIdQuery, useGetDecksQuery, useRemoveDeckMutation } = decksService
