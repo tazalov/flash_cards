@@ -1,12 +1,14 @@
 import { RouteObject, createBrowserRouter } from 'react-router-dom'
 
 import { MainLayout } from '@/layout/MainLayout'
+import { SignIn } from '@/pages/Auth/SignIn'
 import { CardsList } from '@/pages/CardsList'
 import { DecksList } from '@/pages/DecksList'
 
-import { ProtectedAuth } from '../ui/ProtectedAuth'
+import { PrivateRedirect } from '../ui/PrivateRedirect'
+import { PublicRedirect } from '../ui/PublicRedirect'
 
-const publicRoutes: RouteObject[] = []
+const publicRoutes: RouteObject[] = [{ element: <SignIn />, path: '/sign-in' }]
 
 const privateRoutes: RouteObject[] = [
   { element: <DecksList />, path: '/' },
@@ -14,11 +16,8 @@ const privateRoutes: RouteObject[] = [
 ]
 
 const appRoutes: RouteObject[] = [
-  {
-    children: privateRoutes,
-    element: <ProtectedAuth />,
-  },
-  ...publicRoutes,
+  { children: privateRoutes, element: <PrivateRedirect /> },
+  { children: publicRoutes, element: <PublicRedirect /> },
 ]
 
 export const router = createBrowserRouter([
