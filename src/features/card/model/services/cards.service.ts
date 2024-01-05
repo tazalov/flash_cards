@@ -1,5 +1,4 @@
 import { baseApi } from '@/api'
-import { Card } from '@/features/card'
 
 import { Card } from '../types/cards.types'
 import { GetCardsArgs, GetCardsResponse } from '../types/service.types'
@@ -27,4 +26,4 @@ const cardsService = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetCardsByIdQuery, useRemoveCardMutation } = cardsService
+export const { useCreateCardMutation, useGetCardsByIdQuery, useRemoveCardMutation } = cardsService
