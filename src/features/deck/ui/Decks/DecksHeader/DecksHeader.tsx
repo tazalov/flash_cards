@@ -2,9 +2,10 @@ import { ComponentPropsWithoutRef } from 'react'
 
 import { TypographyVariant } from '@/common/enums'
 import { Typography } from '@/common/ui/Typography'
-import { CreateDeckModal } from '@/features/deck/ui/DeckActions/CreateDeckModal'
 
 import s from './DecksHeader.module.scss'
+
+import { CreateDeckModal } from '../../DeckActions/CreateDeckModal'
 
 type Props = {
   headerText?: string

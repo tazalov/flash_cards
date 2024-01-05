@@ -1,9 +1,9 @@
 import { Button } from '@/common/ui/Button'
 import { Modal } from '@/common/ui/Modals'
-import { useCreateDeckMutation } from '@/features/deck/model/services/decks.service'
 
 import s from './CreateDeckModal.module.scss'
 
+import { useCreateDeckMutation } from '../../../model/services/decks.service'
 import { CreateDeckForm } from './CreateDeckForm'
 
 export const CreateDeckModal = () => {

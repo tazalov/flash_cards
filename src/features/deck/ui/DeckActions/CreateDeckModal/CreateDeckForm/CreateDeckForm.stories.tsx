@@ -1,9 +1,10 @@
 import { Button } from '@/common/ui/Button'
 import { Modal } from '@/common/ui/Modals'
-import { CreateDeckForm } from '@/features/deck/ui/DeckActions/CreateDeckModal/CreateDeckForm/CreateDeckForm'
 import { Meta, StoryObj } from '@storybook/react'
 
 import s from '../CreateDeckModal.module.scss'
+
+import { CreateDeckForm } from './CreateDeckForm'
 
 const meta = {
   argTypes: {
