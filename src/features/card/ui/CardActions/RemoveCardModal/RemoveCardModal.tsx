@@ -39,8 +39,6 @@ export const RemoveCardModal = ({ cardId, cardName, className }: Props) => {
       <div className={s.body}>
         <Typography className={s.text} variant={TypographyVariant.body1}>
           Do you really want to remove <b>{cardName}?</b>
-          <br />
-          All cards will be deleted.
         </Typography>
         <div className={s.buttons}>
           <ModalClose>
