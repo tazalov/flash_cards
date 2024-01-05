@@ -1,19 +1,18 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { LoadPicture } from '@/common/assets/icons'
+import { LoadPicture, Trash } from '@/common/assets/icons'
 import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
 import { ButtonVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 import { FileUploader } from '@/common/ui/FilesUploader'
+import { IconButton } from '@/common/ui/IconButton'
 import { ModalClose } from '@/common/ui/Modals/ModalClose'
 import { ControlledCheckbox } from '@/common/ui_controlled/ControlledCheckbox'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
-import {
-  CreateDeckFormData,
-  useCreateDeckForm,
-} from '@/features/deck/ui/DeckActions/CreateDeckModal/CreateDeckForm/useCreateDeckForm'
 
 import s from './CreateDeckForm.module.scss'
+
+import { CreateDeckFormData, useCreateDeckForm } from '../../../../model/hooks/useCreateDeckForm'
 
 type Props = {
   isLoading?: boolean
@@ -46,13 +45,26 @@ export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
 
   return (
     <form className={s.addNewDeckForm} onSubmit={handleSubmit(handleSubmitDeck)} {...props}>
-      {coverIsValid && <img alt="cover" className={s.cover} src={URL.createObjectURL(cover)} />}
+      {coverIsValid && (
+        <div className={s.coverWrapper}>
+          <img alt="cover" className={s.cover} src={URL.createObjectURL(cover)} />
+          <IconButton
+            className={s.clearCover}
+            icon={<Trash />}
+            onClick={() => setCover(null)}
+            size={1.5}
+            type="button"
+          >
+            clear
+          </IconButton>
+        </div>
+      )}
       <FileUploader
         setFile={setCover}
         trigger={
           <Button
             as="span"
-            className={s.uploaderTrigger}
+            className={s.marginItem}
             fullWidth
             startIcon={<LoadPicture />}
             variant={ButtonVariant.secondary}
@@ -63,7 +75,7 @@ export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
         validationSchema={coverSchema}
       />
       <ControlledTextField
-        className={s.addNewDeckInput}
+        className={s.marginItem}
         control={control}
         errorText={errors?.name?.message}
         label="Name Deck"
