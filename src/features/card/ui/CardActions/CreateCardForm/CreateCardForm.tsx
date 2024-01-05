@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, useState } from 'react'
 
 import { Trash } from '@/common/assets/icons'
-import { ALLOWED_IMAGES_FORMATS } from '@/common/const'
+import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
 import { ButtonVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 import { FileUploader } from '@/common/ui/FilesUploader'
@@ -40,8 +40,13 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
   const [selectAnswer, setSelectAnswer] = useState(options[0].value)
 
   const questionIsImage =
-    questionCover !== null && ALLOWED_IMAGES_FORMATS.includes(questionCover.type)
-  const answerIsImage = answerCover !== null && ALLOWED_IMAGES_FORMATS.includes(answerCover.type)
+    questionCover !== null &&
+    ALLOWED_IMAGES_FORMATS.includes(questionCover.type) &&
+    questionCover.size <= MAX_SIZE_IMAGE
+  const answerIsImage =
+    answerCover !== null &&
+    ALLOWED_IMAGES_FORMATS.includes(answerCover.type) &&
+    answerCover.size <= MAX_SIZE_IMAGE
 
   if (errors.question?.message && selectQuestion === 'image') {
     setSelectQuestion(options[0].value)
