@@ -1,3 +1,4 @@
+export { useMeQuery } from './model/services/auth.service'
 export { CheckEmail } from './ui/CheckEmail'
 export { CreateNewPasswordForm } from './ui/CreateNewPasswordForm'
 export { ForgotPasswordForm } from './ui/ForgotPasswordForm'
