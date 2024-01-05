@@ -1,0 +1,31 @@
+.form {
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.input {
+  margin-bottom: 1.5rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.75rem 0;
+}
+
+.image {
+  width: 100%;
+  max-height: 6.25rem;
+  object-fit: cover;
+}
+
+.answerWrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.clearCover {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 1rem;
+}

@@ -6,6 +6,10 @@ import { GetDecksArgs, GetDecksResponse } from '../types/service.types'
 const decksService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      createDeck: builder.mutation<Deck, FormData>({
+        invalidatesTags: ['Decks'],
+        query: body => ({ body, method: 'POST', url: `v1/decks` }),
+      }),
       getDeckById: builder.query<Deck, { id: string }>({
         query: ({ id }) => ({ url: `v1/decks/${id}` }),
       }),
@@ -21,4 +25,4 @@ const decksService = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetDeckByIdQuery, useGetDecksQuery, useRemoveDeckMutation } = decksService
+export const { useCreateDeckMutation, useGetDeckByIdQuery, useGetDecksQuery, useRemoveDeckMutation } = decksService

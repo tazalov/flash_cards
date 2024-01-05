@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Edit, Trash } from '@/common/assets/icons'
+import { Edit } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Column, Sort } from '@/common/types'
 import { IconButton } from '@/common/ui/IconButton'
@@ -10,6 +10,8 @@ import { Typography } from '@/common/ui/Typography'
 import { Card } from '@/features/card'
 
 import s from './CardsTable.module.scss'
+
+import { RemoveCardModal } from '../../CardActions/RemoveCardModal/RemoveCardModal'
 
 type Props = {
   deckItems?: Card[]
@@ -67,7 +69,12 @@ export const CardsTable = (props: Props) => {
                   {el.question}
                 </Typography>
               </Table.Cell>
-              <Table.Cell className={s.answerCell}>{el.answer}</Table.Cell>
+              <Table.Cell className={s.answerCell}>
+                <Typography className={s.name} variant={TypographyVariant.body2}>
+                  {el.answerImg && <img alt="cover" className={s.cover} src={el.answerImg} />}
+                  {el.answer}
+                </Typography>
+              </Table.Cell>
               <Table.Cell className={s.updatedCell}>
                 {new Date(el.updated).toLocaleDateString()}
               </Table.Cell>
@@ -78,7 +85,7 @@ export const CardsTable = (props: Props) => {
                 {isOwner && (
                   <>
                     <IconButton icon={<Edit />} />
-                    <IconButton icon={<Trash />} />
+                    <RemoveCardModal cardId={el.id} cardName={el.question} />
                   </>
                 )}
               </Table.Cell>

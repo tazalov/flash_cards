@@ -20,7 +20,7 @@ type Props = {
 } & ComponentPropsWithoutRef<'input'>
 
 export const FileUploader = forwardRef<ElementRef<'input'>, Props>(
-  ({ setFile, trigger, validationSchema, ...rest }, ref) => {
+  ({ name, setFile, trigger, validationSchema, ...rest }, ref) => {
     const [error, setError] = useState<null | string>(null)
 
     const handleChangeCover = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,10 +31,10 @@ export const FileUploader = forwardRef<ElementRef<'input'>, Props>(
       try {
         const file = e.target.files?.[0]
 
-        validationSchema.parse(file)
         if (file) {
           setFile(file)
           setError(null)
+          validationSchema.parse(file)
         }
       } catch (e) {
         const error = e as Error | ZodError
@@ -48,11 +48,11 @@ export const FileUploader = forwardRef<ElementRef<'input'>, Props>(
     }
 
     return (
-      <Typography as="label" htmlFor="cover" variant={TypographyVariant.caption}>
+      <Typography as="label" htmlFor={name} variant={TypographyVariant.caption}>
         {trigger}
         <input
           className={s.input}
-          id="cover"
+          id={name}
           onChange={handleChangeCover}
           ref={ref}
           type="file"

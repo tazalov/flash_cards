@@ -1,10 +1,11 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { TypographyVariant } from '@/common/enums'
-import { Button } from '@/common/ui/Button'
 import { Typography } from '@/common/ui/Typography'
 
 import s from './DecksHeader.module.scss'
+
+import { CreateDeckModal } from '../../DeckActions/CreateDeckModal'
 
 type Props = {
   headerText?: string
@@ -15,7 +16,7 @@ export const DecksHeader = ({ headerText = 'DecksList', ...props }: Props) => {
       <Typography as="h1" variant={TypographyVariant.large}>
         {headerText}
       </Typography>
-      <Button onClick={() => alert('Откроет модалку добавления колоды')}>Add New Deck</Button>
+      <CreateDeckModal />
     </div>
   )
 }
