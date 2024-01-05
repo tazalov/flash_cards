@@ -6,10 +6,11 @@ import { Button } from '@/common/ui/Button'
 import { Dropdown } from '@/common/ui/DropDownMenu'
 import { IconButton } from '@/common/ui/IconButton'
 import { Typography } from '@/common/ui/Typography'
-import { CreateCardModal } from '@/features/card/ui/CardActions/CreateCardModal/CreateCardModal'
 import cn from 'classnames'
 
 import s from './CardsHeader.module.scss'
+
+import { CreateCardModal } from '../../CardActions/CreateCardModal/CreateCardModal'
 
 type Props = {
   deckId: string
