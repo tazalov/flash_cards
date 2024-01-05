@@ -26,7 +26,7 @@ export const DecksList = () => {
   } = useDecksFilters()
 
   const { data, error, isLoading } = useGetDecksQuery({
-    authorId: show === 'my' ? '6dbbc288-038d-4af2-84a6-abd97c451576' : undefined,
+    authorId: show === 'my' ? 'f2be95b9-4d07-4751-a775-bd612fc9553a' : undefined,
     currentPage,
     itemsPerPage,
     maxCardsCount,
@@ -59,7 +59,7 @@ export const DecksList = () => {
         tabValue={show}
       />
       <DecksTable
-        authId="6dbbc288-038d-4af2-84a6-abd97c451576"
+        authId="f2be95b9-4d07-4751-a775-bd612fc9553a"
         className={s.table}
         handleChangeSort={handleChangeSort}
         items={data?.items ?? []}
