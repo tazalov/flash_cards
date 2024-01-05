@@ -3,6 +3,8 @@ import { Modal } from '@/common/ui/Modals'
 import { CreateDeckForm } from '@/features/deck/ui/DeckActions/CreateDeckModal/CreateDeckForm/CreateDeckForm'
 import { Meta, StoryObj } from '@storybook/react'
 
+import s from '../CreateDeckModal.module.scss'
+
 const meta = {
   argTypes: {
     onSubmit: {
@@ -19,7 +21,7 @@ type Story = StoryObj<typeof meta>
 
 export const CreateDeckFormDefault: Story = {
   render: args => (
-    <Modal title="Add new Deck" trigger={<Button>Add New Deck</Button>}>
+    <Modal className={s.modal} title="Add new Deck" trigger={<Button>Add New Deck</Button>}>
       <CreateDeckForm {...args} />
     </Modal>
   ),
