@@ -1,7 +1,9 @@
-import { Navigate, Outlet, useOutletContext } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
+
+import { useAppOutletContext } from '@/common/hooks/useAppOutletContext'
 
 export const PublicRedirect = () => {
-  const isAuth = useOutletContext()
+  const isAuth = useAppOutletContext()
 
   return isAuth ? <Navigate to="/" /> : <Outlet />
 }
