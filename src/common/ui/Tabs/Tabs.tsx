@@ -20,7 +20,7 @@ export const Tabs = forwardRef<ElementRef<typeof RadixTabsUI.Root>, Props>((prop
           {label}
         </Typography>
       )}
-      <RadixTabsUI.List>{children}</RadixTabsUI.List>
+      <RadixTabsUI.List className={s.list}>{children}</RadixTabsUI.List>
     </RadixTabsUI.Root>
   )
 })
