@@ -1,11 +1,11 @@
-// import { useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 import { Sort } from '@/common/types'
 
 export const useCardsList = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  // const { state } = useLocation()
+  const { state } = useLocation()
 
   const navigate = useNavigate()
 
@@ -51,13 +51,17 @@ export const useCardsList = () => {
     setSearchParams(searchParams)
   }
 
-  /*  useEffect(() => {
-    localStorage.setItem('prevUrl', `/${state.search}`)
+  useEffect(() => {
+    if (state) {
+      localStorage.setItem('prevUrl', `/${state.search}`)
+    }
 
-    // return () => {
-    //   localStorage.removeItem('prevUrl')
-    // }
-  }, [])*/
+    return () => {
+      if (state) {
+        localStorage.removeItem('prevUrl')
+      }
+    }
+  }, [])
 
   return {
     handleChangeItemsPerPage,
