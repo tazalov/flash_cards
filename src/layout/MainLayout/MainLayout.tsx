@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { Outlet } from 'react-router-dom'
 
+import { AppOutletContext } from '@/common/hooks/useAppOutletContext'
 import { useMeQuery } from '@/features/auth'
 import { Header } from '@/layout/Header'
 
@@ -31,7 +32,7 @@ export const MainLayout = forwardRef<ElementRef<'div'>, Props>((props, ref) => {
         logout={() => {}}
       />
       <main className={s.main}>
-        <Outlet />
+        <Outlet context={{ isAuth } satisfies AppOutletContext} />
       </main>
     </div>
   )
