@@ -42,7 +42,7 @@ export const CardsList = () => {
       question,
     },
   })
-  const isOwner = deck?.userId === 'af85a571-234b-463c-8762-c2e2e5c7970e'
+  const isOwner = deck?.userId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'
   const isEmpty = deck && deck.cardsCount === 0
 
   if (isLoading) {
@@ -55,7 +55,13 @@ export const CardsList = () => {
         <Arrow className={s.iconArrow} />
         <Typography variant={TypographyVariant.body2}>Back to Packs list</Typography>
       </div>
-      <CardsHeader className={s.item} isEmpty={isEmpty} isOwner={isOwner} name={deck?.name} />
+      <CardsHeader
+        className={s.item}
+        deckId={deckId}
+        isEmpty={isEmpty}
+        isOwner={isOwner}
+        name={deck?.name}
+      />
       {isEmpty ? (
         <div className={s.infoBlock}>
           <Typography className={s.infoText} textAlign="center" variant={TypographyVariant.body2}>
