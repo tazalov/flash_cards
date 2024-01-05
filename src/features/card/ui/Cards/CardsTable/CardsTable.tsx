@@ -69,7 +69,12 @@ export const CardsTable = (props: Props) => {
                   {el.question}
                 </Typography>
               </Table.Cell>
-              <Table.Cell className={s.answerCell}>{el.answer}</Table.Cell>
+              <Table.Cell className={s.answerCell}>
+                <Typography className={s.name} variant={TypographyVariant.body2}>
+                  {el.answerImg && <img alt="cover" className={s.cover} src={el.answerImg} />}
+                  {el.answer}
+                </Typography>
+              </Table.Cell>
               <Table.Cell className={s.updatedCell}>
                 {new Date(el.updated).toLocaleDateString()}
               </Table.Cell>

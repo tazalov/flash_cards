@@ -10,14 +10,17 @@ import cn from 'classnames'
 
 import s from './CardsHeader.module.scss'
 
+import { CreateCardModal } from '../../CardActions/CreateCardModal/CreateCardModal'
+
 type Props = {
+  deckId: string
   isEmpty?: boolean
   isOwner: boolean
   name?: string
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
 
 export const CardsHeader = (props: Props) => {
-  const { className, isEmpty, isOwner, name } = props
+  const { className, deckId, isEmpty, isOwner, name } = props
 
   return (
     <div className={cn(s.header, className)}>
@@ -36,7 +39,7 @@ export const CardsHeader = (props: Props) => {
           </Dropdown.Menu>
         )}
       </div>
-      {!isEmpty && (isOwner ? <Button>Add New Pack</Button> : <Button>Learn to Pack</Button>)}
+      {!isEmpty && (isOwner ? <CreateCardModal deckId={deckId} /> : <Button>Learn to Pack</Button>)}
     </div>
   )
 }

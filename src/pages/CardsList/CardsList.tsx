@@ -55,7 +55,13 @@ export const CardsList = () => {
         <Arrow className={s.iconArrow} />
         <Typography variant={TypographyVariant.body2}>Back to Packs list</Typography>
       </div>
-      <CardsHeader className={s.item} isEmpty={isEmpty} isOwner={isOwner} name={deck?.name} />
+      <CardsHeader
+        className={s.item}
+        deckId={deckId}
+        isEmpty={isEmpty}
+        isOwner={isOwner}
+        name={deck?.name}
+      />
       {isEmpty ? (
         <div className={s.infoBlock}>
           <Typography className={s.infoText} textAlign="center" variant={TypographyVariant.body2}>
