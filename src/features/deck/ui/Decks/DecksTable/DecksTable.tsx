@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import { Edit, Play, Remove } from '@/common/assets/icons'
+import { Edit, Play } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Column, Sort } from '@/common/types'
 import { IconButton } from '@/common/ui/IconButton'
@@ -10,6 +10,8 @@ import { Typography } from '@/common/ui/Typography'
 import { Deck } from '@/features/deck/model/types/decks.types'
 
 import s from './DecksTable.module.scss'
+
+import { RemoveDeckModal } from '../../DeckActions/RemoveDeckModal/RemoveDeckModal'
 
 const columns: Column[] = [
   {
@@ -85,7 +87,7 @@ export const DecksTable = ({ authId, handleChangeSort, items, sort, ...rest }: P
                       icon={<Edit />}
                       onClick={() => alert('Откроет модалку Edit')}
                     />
-                    <IconButton icon={<Remove />} onClick={() => alert('Откроет модалку Remove')} />
+                    <RemoveDeckModal deckId={el.id} deckName={el.name} />
                   </>
                 )}
               </Table.Cell>

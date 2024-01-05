@@ -29,7 +29,9 @@ export const Modal = forwardRef<ElementRef<typeof RadixModal.Root>, Props>((prop
           <Card>
             {title && (
               <div className={s.title}>
-                <Typography variant={TypographyVariant.h2}>{title}</Typography>
+                <Typography as="h2" variant={TypographyVariant.h2}>
+                  {title}
+                </Typography>
                 <ModalClose>
                   <Cross fill="#FFF" style={{ cursor: 'pointer' }} />
                 </ModalClose>
