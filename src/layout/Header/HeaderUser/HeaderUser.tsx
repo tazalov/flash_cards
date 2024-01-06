@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Logout, Person } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { ProfileData } from '@/common/types'
@@ -41,7 +43,9 @@ export const HeaderUser = ({ data, logout }: Props) => {
         </Dropdown.Item>
         <Dropdown.Separator />
         <Dropdown.Item startIcon={<Person />}>
-          <Typography variant={TypographyVariant.caption}>My profile</Typography>
+          <Typography as={Link} to="/profile" variant={TypographyVariant.caption}>
+            My profile
+          </Typography>
         </Dropdown.Item>
         <Dropdown.Separator />
         <Dropdown.Item onSelect={logout} startIcon={<Logout />}>

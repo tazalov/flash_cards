@@ -2,10 +2,10 @@ import { Ref, SVGProps, forwardRef, memo } from 'react'
 const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill="currentColor"
-    height="16"
+    height="18"
     ref={ref}
     viewBox="0 0 16 16"
-    width="16"
+    width="18"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >

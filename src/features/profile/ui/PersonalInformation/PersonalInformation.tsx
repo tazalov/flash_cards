@@ -9,26 +9,24 @@ import cn from 'classnames'
 
 import s from './PersonalInformation.module.scss'
 
-import { EditProfileForm, EditProfileValues } from '../EditProfileForm'
-import { ProfileInfo } from '../ProfileInfo'
+import { EditProfileForm } from '../EditProfileForm/EditProfileForm'
+import { ProfileInfo } from '../ProfileInfo/ProfileInfo'
 
 interface Props {
   className?: string
-  data: ProfileData
+  data?: ProfileData
   handleLogout: () => void
-  handleUpdate: (data: EditProfileValues) => void
+  handleUpdate: (data: FormData) => void
 }
 
 export const PersonalInformation = ({ className, data, handleLogout, handleUpdate }: Props) => {
-  const { avatar, email, username } = data
-
-  const titleNoAvatar = username.slice(0, 1).toUpperCase()
+  const titleNoAvatar = data?.username.slice(0, 1).toUpperCase() || 'UN'
 
   const [editMode, setEditMode] = useState(false)
 
   const handleActiveEditMode = () => setEditMode(true)
 
-  const handleSubmit = (data: EditProfileValues) => {
+  const handleSubmit = (data: FormData) => {
     handleUpdate(data)
     setEditMode(false)
   }
@@ -38,16 +36,22 @@ export const PersonalInformation = ({ className, data, handleLogout, handleUpdat
       <Typography as="h1" className={s.title} variant={TypographyVariant.large}>
         Personal information
       </Typography>
-      <Avatar src={avatar} title={titleNoAvatar} />
       {editMode ? (
-        <EditProfileForm initialValue={username} onSubmit={handleSubmit} />
-      ) : (
-        <ProfileInfo
-          email={email}
-          handleActiveEditMode={handleActiveEditMode}
-          handleLogout={handleLogout}
-          username={username}
+        <EditProfileForm
+          avatarUrl={data?.avatar}
+          initialValue={data?.username}
+          onSubmit={handleSubmit}
         />
+      ) : (
+        <>
+          <Avatar src={data?.avatar} title={titleNoAvatar} />
+          <ProfileInfo
+            email={data?.email}
+            handleActiveEditMode={handleActiveEditMode}
+            handleLogout={handleLogout}
+            username={data?.username}
+          />
+        </>
       )}
     </Card>
   )
