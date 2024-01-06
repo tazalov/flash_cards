@@ -43,7 +43,12 @@ export const HeaderUser = ({ data, logout }: Props) => {
         </Dropdown.Item>
         <Dropdown.Separator />
         <Dropdown.Item startIcon={<Person />}>
-          <Typography as={Link} to="/profile" variant={TypographyVariant.caption}>
+          <Typography
+            as={Link}
+            className={s.profileLink}
+            to="/profile"
+            variant={TypographyVariant.caption}
+          >
             My profile
           </Typography>
         </Dropdown.Item>
