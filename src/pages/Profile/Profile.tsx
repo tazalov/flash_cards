@@ -1,11 +1,13 @@
 import { Page } from '@/common/ui/Page'
-import { useMeQuery } from '@/features/auth'
+import { useLogoutMutation, useMeQuery } from '@/features/auth'
 import { PersonalInformation, useUpdateProfileMutation } from '@/features/profile'
 
 export const Profile = () => {
   const { data } = useMeQuery()
 
   const [updateProfile, {}] = useUpdateProfileMutation()
+
+  const [logout, {}] = useLogoutMutation()
 
   return (
     <Page>
@@ -17,7 +19,7 @@ export const Profile = () => {
             username: data.name,
           }
         }
-        handleLogout={() => console.log('logout')}
+        handleLogout={logout}
         handleUpdate={updateProfile}
       />
     </Page>

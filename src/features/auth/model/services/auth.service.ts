@@ -5,6 +5,10 @@ import { User } from '../types/service.types'
 const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      logout: builder.mutation<void, void>({
+        invalidatesTags: ['Me'],
+        query: () => ({ method: 'DELETE', url: '/v1/auth/logout' }),
+      }),
       me: builder.query<User, void>({
         providesTags: ['Me'],
         query: () => ({ url: '/v1/auth/me' }),
@@ -13,4 +17,4 @@ const authService = baseApi.injectEndpoints({
   },
 })
 
-export const { useMeQuery } = authService
+export const { useLogoutMutation, useMeQuery } = authService
