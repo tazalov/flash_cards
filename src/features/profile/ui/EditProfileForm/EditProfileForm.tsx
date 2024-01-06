@@ -6,7 +6,6 @@ import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
 import { Avatar } from '@/common/ui/Avatar'
 import { Button } from '@/common/ui/Button'
 import { FileUploader } from '@/common/ui/FilesUploader'
-import { IconButton } from '@/common/ui/IconButton'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
 import cn from 'classnames'
 import { z } from 'zod'
@@ -59,11 +58,10 @@ export const EditProfileForm = ({ avatarUrl, className, initialValue, onSubmit }
       <div className={s.avatarWrapper}>
         <Avatar src={avatarIsValid ? URL.createObjectURL(avatar) : avatarUrl} title="UN" />
         {avatarIsValid && (
-          <IconButton
-            className={s.delete}
-            icon={<Trash />}
+          <Button
+            className={cn(s.delete, s.trigger)}
             onClick={() => setAvatar(null)}
-            type="button"
+            startIcon={<Trash />}
           />
         )}
         <FileUploader
