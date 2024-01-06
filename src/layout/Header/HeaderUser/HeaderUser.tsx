@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { Logout, Person } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
@@ -18,6 +18,12 @@ export const HeaderUser = ({ data, logout }: Props) => {
   const { avatar, email, username } = data
 
   const titleNoAvatar = username.slice(0, 1).toUpperCase()
+
+  const navigate = useNavigate()
+
+  const handleNavigateToProfile = () => {
+    navigate('/profile')
+  }
 
   return (
     <div className={s.root}>
@@ -42,15 +48,8 @@ export const HeaderUser = ({ data, logout }: Props) => {
           </div>
         </Dropdown.Item>
         <Dropdown.Separator />
-        <Dropdown.Item startIcon={<Person />}>
-          <Typography
-            as={Link}
-            className={s.profileLink}
-            to="/profile"
-            variant={TypographyVariant.caption}
-          >
-            My profile
-          </Typography>
+        <Dropdown.Item onSelect={handleNavigateToProfile} startIcon={<Person />}>
+          <Typography variant={TypographyVariant.caption}>My profile</Typography>
         </Dropdown.Item>
         <Dropdown.Separator />
         <Dropdown.Item onSelect={logout} startIcon={<Logout />}>
