@@ -3,6 +3,30 @@
   margin: 0.75rem 0 3rem;
 }
 
+.avatarWrapper {
+  position: relative;
+  width: min-content;
+  margin: 0 auto;
+}
+
+.delete {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.avatarLoader {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.trigger {
+  padding: 0.3rem;
+  border-radius: 50%;
+}
+
 .nickname {
   margin-bottom: 2.25rem;
 }
