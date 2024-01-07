@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, useState } from 'react'
 
-import { Trash } from '@/common/assets/icons'
+import { LoadPicture, Trash } from '@/common/assets/icons'
 import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
 import { ButtonVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
@@ -115,7 +115,12 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
             name="questionImg"
             setFile={setQuestionCover}
             trigger={
-              <Button as="span" fullWidth variant={ButtonVariant.secondary}>
+              <Button
+                as="span"
+                fullWidth
+                startIcon={<LoadPicture />}
+                variant={ButtonVariant.secondary}
+              >
                 Change cover
               </Button>
             }
@@ -162,7 +167,12 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
             name="answerImg"
             setFile={setAnswerCover}
             trigger={
-              <Button as="span" fullWidth variant={ButtonVariant.secondary}>
+              <Button
+                as="span"
+                fullWidth
+                startIcon={<LoadPicture />}
+                variant={ButtonVariant.secondary}
+              >
                 Change cover
               </Button>
             }

@@ -7,3 +7,12 @@ export interface User {
   name: string
   updated: string
 }
+
+export interface SignUpArgs {
+  email: string
+  html?: string
+  name?: string
+  password: string
+  sendConfirmationEmail?: boolean
+  subject?: string
+}
