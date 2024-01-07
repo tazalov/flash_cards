@@ -1,6 +1,7 @@
 import { Page } from '@/common/ui/Page'
 import { Pagination } from '@/common/ui/Pagination'
 import { getSortObj } from '@/common/utils'
+import { useMeQuery } from '@/features/auth'
 import { DecksFilters, DecksHeader, DecksTable, useGetDecksQuery } from '@/features/deck'
 
 import s from './DecksList.module.scss'
@@ -25,8 +26,10 @@ export const DecksList = () => {
     show,
   } = useDecksFilters()
 
+  const { data: userData } = useMeQuery()
+
   const { data, error, isLoading } = useGetDecksQuery({
-    authorId: show === 'my' ? 'f2be95b9-4d07-4751-a775-bd612fc9553a' : undefined,
+    authorId: show === 'my' ? userData?.id : undefined,
     currentPage,
     itemsPerPage,
     maxCardsCount,
@@ -59,7 +62,7 @@ export const DecksList = () => {
         tabValue={show}
       />
       <DecksTable
-        authId="f2be95b9-4d07-4751-a775-bd612fc9553a"
+        authId={userData?.id ?? ''}
         className={s.table}
         handleChangeSort={handleChangeSort}
         items={data?.items ?? []}

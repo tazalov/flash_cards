@@ -1,5 +1,16 @@
-export { useLogoutMutation, useMeQuery } from './model/services/auth.service'
 export type { User } from './model/types/service.types'
+export type { SignUpArgs } from './model/types/service.types'
+export type { CreateNewPasswordFormValues } from './model/hooks/useCreateNewPasswordForm'
+export type { ForgotPasswordFormData } from './model/hooks/useForgotPasswordForm'
+export type { SignInFormData } from './model/hooks/useSignInForm'
+export {
+  useLoginMutation,
+  useLogoutMutation,
+  useMeQuery,
+  useRecoverPasswordMutation,
+  useResetPasswordMutation,
+  useSignUpMutation
+} from './model/services/auth.service'
 export { CheckEmail } from './ui/CheckEmail'
 export { CreateNewPasswordForm } from './ui/CreateNewPasswordForm'
 export { ForgotPasswordForm } from './ui/ForgotPasswordForm'
