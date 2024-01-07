@@ -4,6 +4,7 @@ import { MainLayout } from '@/layout/MainLayout'
 import { CreateNewPassword } from '@/pages/Auth/CreateNewPassword'
 import { ForgotPassword } from '@/pages/Auth/ForgotPassword'
 import { SignIn } from '@/pages/Auth/SignIn'
+import { SignUp } from '@/pages/Auth/SignUp'
 import { CardsList } from '@/pages/CardsList'
 import { DecksList } from '@/pages/DecksList'
 
@@ -12,6 +13,7 @@ import { PublicRedirect } from '../ui/PublicRedirect'
 
 const publicRoutes: RouteObject[] = [
   { element: <SignIn />, path: '/sign-in' },
+  { element: <SignUp />, path: '/sign-up' },
   { element: <ForgotPassword />, path: '/forgot-password' },
   { element: <CreateNewPassword />, path: '/create-new-password/:token' },
 ]

@@ -1,7 +1,7 @@
 import { baseApi } from '@/api'
 import { SignInFormData } from '@/features/auth/model/hooks/useSignInForm'
 
-import { User } from '../types/service.types'
+import { SignUpArgs, User } from '../types/service.types'
 
 const authService = baseApi.injectEndpoints({
   endpoints: builder => {
@@ -17,6 +17,13 @@ const authService = baseApi.injectEndpoints({
       me: builder.query<User, void>({
         providesTags: ['Me'],
         query: () => ({ url: '/v1/auth/me' }),
+      }),
+      signUp: builder.mutation<User, SignUpArgs>({
+        query: body => ({
+          body,
+          method: 'POST',
+          url: '/v1/auth/sign-up',
+        }),
       }),
       recoverPassword: builder.mutation<void, string>({
         query: email => ({
@@ -47,4 +54,5 @@ export const {
   useMeQuery,
   useRecoverPasswordMutation,
   useResetPasswordMutation,
+  useSignUpMutation
 } = authService

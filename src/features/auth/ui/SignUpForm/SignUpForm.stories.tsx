@@ -1,3 +1,5 @@
+import { MemoryRouter } from 'react-router-dom'
+
 import { Meta, StoryObj } from '@storybook/react'
 
 import { SignUpForm } from './'
@@ -7,6 +9,7 @@ const meta = {
     onSubmit: {
       action: 'sign up',
     },
+    setError: () => {},
   },
   component: SignUpForm,
   tags: ['autodocs'],
@@ -16,4 +19,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const SignUpFormStory: Story = {}
+export const SignUpFormStory: Story = {
+  args: {
+    errorMessage: '',
+  },
+  render: args => (
+    <MemoryRouter initialEntries={['/']}>
+      <SignUpForm {...args} />
+    </MemoryRouter>
+  ),
+}
