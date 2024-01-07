@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, useState } from 'react'
+import { ComponentPropsWithoutRef, useRef, useState } from 'react'
 
 import { LoadPicture, Trash } from '@/common/assets/icons'
 import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
@@ -74,6 +74,22 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
     clearErrors(['answer'])
   }
 
+  const answerFileRef = useRef<HTMLInputElement>(null)
+  const questionFileRef = useRef<HTMLInputElement>(null)
+
+  const handleClearQuestionCover = () => {
+    setQuestionCover(null)
+    if (questionFileRef.current) {
+      questionFileRef.current.value = ''
+    }
+  }
+  const handleClearAnswerCover = () => {
+    setAnswerCover(null)
+    if (answerFileRef.current) {
+      answerFileRef.current.value = ''
+    }
+  }
+
   return (
     <form className={cn(s.form, className)} onSubmit={handleSubmit(handleCreateCard)}>
       <Select
@@ -102,7 +118,7 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
               <IconButton
                 className={s.clearCover}
                 icon={<Trash />}
-                onClick={() => setQuestionCover(null)}
+                onClick={handleClearQuestionCover}
                 size={1.5}
                 type="button"
               >
@@ -113,6 +129,7 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
           <FileUploader
             disabled={isLoading}
             name="questionImg"
+            ref={questionFileRef}
             setFile={setQuestionCover}
             trigger={
               <Button
@@ -154,7 +171,7 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
               <IconButton
                 className={s.clearCover}
                 icon={<Trash />}
-                onClick={() => setAnswerCover(null)}
+                onClick={handleClearAnswerCover}
                 size={1.5}
                 type="button"
               >
@@ -165,6 +182,7 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
           <FileUploader
             disabled={isLoading}
             name="answerImg"
+            ref={answerFileRef}
             setFile={setAnswerCover}
             trigger={
               <Button
