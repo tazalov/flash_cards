@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import checkEmail from '@/common/assets/images/checkEmail.svg'
 import { TypographyVariant } from '@/common/enums'
 import { Avatar } from '@/common/ui/Avatar'
@@ -27,7 +29,7 @@ export const CheckEmail = ({ className, email }: Props) => {
       >
         We’ve sent an Email with instructions to {email}
       </Typography>
-      <Button as="a" className={s.signInNav} fullWidth>
+      <Button as={Link} className={s.signInNav} fullWidth to="/sign-in">
         Back to Sign In
       </Button>
     </Card>

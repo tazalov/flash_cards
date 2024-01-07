@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { ButtonVariant, TypographyVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 import { Card } from '@/common/ui/Card'
@@ -42,12 +44,7 @@ export const ForgotPasswordForm = ({ className, onSubmit }: Props) => {
       <Typography className={s.forgotPasswordText} variant={TypographyVariant.body2}>
         Did you remember your password?
       </Typography>
-      <Button
-        as="a"
-        className={s.signUpNav}
-        onClick={() => 'navigate to Sign In page'}
-        variant={ButtonVariant.link}
-      >
+      <Button as={Link} className={s.signUpNav} to="/sign-in" variant={ButtonVariant.link}>
         Try logging in
       </Button>
     </Card>

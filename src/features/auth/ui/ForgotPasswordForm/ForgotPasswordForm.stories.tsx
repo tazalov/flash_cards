@@ -1,3 +1,5 @@
+import { MemoryRouter } from 'react-router-dom'
+
 import { Meta, StoryObj } from '@storybook/react'
 
 import { ForgotPasswordForm } from './ForgotPasswordForm'
@@ -17,4 +19,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const ForgotPasswordFormDefault: Story = {}
+export const ForgotPasswordFormDefault: Story = {
+  render: args => (
+    <MemoryRouter initialEntries={['/']}>
+      <ForgotPasswordForm {...args} />
+    </MemoryRouter>
+  ),
+}

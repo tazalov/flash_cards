@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, useRef } from 'react'
 
 import { LoadPicture, Trash } from '@/common/assets/icons'
 import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
@@ -28,7 +28,7 @@ export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
       handleSubmit,
     },
   } = useCreateDeckForm()
-
+  const fileRef = useRef<HTMLInputElement>(null)
   const coverIsValid =
     cover !== null && ALLOWED_IMAGES_FORMATS.includes(cover.type) && cover.size <= MAX_SIZE_IMAGE
 
@@ -42,6 +42,12 @@ export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
     }
     onSubmit(formData)
   }
+  const handleClearCover = () => {
+    setCover(null)
+    if (fileRef.current) {
+      fileRef.current.value = ''
+    }
+  }
 
   return (
     <form className={s.addNewDeckForm} onSubmit={handleSubmit(handleSubmitDeck)} {...props}>
@@ -51,7 +57,7 @@ export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
           <IconButton
             className={s.clearCover}
             icon={<Trash />}
-            onClick={() => setCover(null)}
+            onClick={handleClearCover}
             size={1.5}
             type="button"
           >
@@ -60,6 +66,7 @@ export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
         </div>
       )}
       <FileUploader
+        ref={fileRef}
         setFile={setCover}
         trigger={
           <Button

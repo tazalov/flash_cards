@@ -1,6 +1,8 @@
 import { RouteObject, createBrowserRouter } from 'react-router-dom'
 
 import { MainLayout } from '@/layout/MainLayout'
+import { CreateNewPassword } from '@/pages/Auth/CreateNewPassword'
+import { ForgotPassword } from '@/pages/Auth/ForgotPassword'
 import { SignIn } from '@/pages/Auth/SignIn'
 import { CardsList } from '@/pages/CardsList'
 import { DecksList } from '@/pages/DecksList'
@@ -8,7 +10,11 @@ import { DecksList } from '@/pages/DecksList'
 import { PrivateRedirect } from '../ui/PrivateRedirect'
 import { PublicRedirect } from '../ui/PublicRedirect'
 
-const publicRoutes: RouteObject[] = [{ element: <SignIn />, path: '/sign-in' }]
+const publicRoutes: RouteObject[] = [
+  { element: <SignIn />, path: '/sign-in' },
+  { element: <ForgotPassword />, path: '/forgot-password' },
+  { element: <CreateNewPassword />, path: '/create-new-password/:token' },
+]
 
 const privateRoutes: RouteObject[] = [
   { element: <DecksList />, path: '/' },
