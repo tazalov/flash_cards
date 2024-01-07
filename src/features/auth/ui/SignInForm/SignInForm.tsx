@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { ButtonVariant, TypographyVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 import { Card } from '@/common/ui/Card'
@@ -49,9 +51,9 @@ export const SignInForm = ({ className, onSubmit }: Props) => {
         name="rememberMe"
       />
       <Typography
-        as="a"
+        as={Link}
         className={s.forgotNav}
-        onClick={() => 'navigate to forgot password form'}
+        to="/forgot-password"
         variant={TypographyVariant.body2}
       >
         Forgot Password?
@@ -62,12 +64,7 @@ export const SignInForm = ({ className, onSubmit }: Props) => {
       <Typography className={s.signUpText} variant={TypographyVariant.body2}>
         Don`t have an account?
       </Typography>
-      <Button
-        as="a"
-        className={s.signUpNav}
-        onClick={() => 'navigate to Sign up form'}
-        variant={ButtonVariant.link}
-      >
+      <Button as={Link} className={s.signUpNav} to="/sign-up" variant={ButtonVariant.link}>
         Sign Up
       </Button>
     </Card>
