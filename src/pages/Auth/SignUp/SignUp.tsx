@@ -2,9 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Page } from '@/common/ui/Page'
-import { SignUpForm } from '@/features/auth'
-import { useSignUpMutation } from '@/features/auth/model/services/auth.service'
-import { SignUpArgs } from '@/features/auth/model/types/service.types'
+import { SignUpArgs, SignUpForm, useSignUpMutation } from '@/features/auth'
 
 export const SignUp = () => {
   const [signUp] = useSignUpMutation()

@@ -1,4 +1,5 @@
-export { useMeQuery } from './model/services/auth.service'
+export { useMeQuery, useSignUpMutation } from './model/services/auth.service'
+export type { SignUpArgs } from './model/types/service.types'
 export { CheckEmail } from './ui/CheckEmail'
 export { CreateNewPasswordForm } from './ui/CreateNewPasswordForm'
 export { ForgotPasswordForm } from './ui/ForgotPasswordForm'
