@@ -1,12 +1,12 @@
 import { baseApi } from '@/api'
 import { SignInFormData } from '@/features/auth/model/hooks/useSignInForm'
 
-import { LoginResponse, User } from '../types/service.types'
+import { User } from '../types/service.types'
 
 const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      login: builder.mutation<LoginResponse, SignInFormData>({
+      login: builder.mutation<void, SignInFormData>({
         invalidatesTags: ['Me'],
         query: body => ({
           body,

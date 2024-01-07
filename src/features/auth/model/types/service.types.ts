@@ -7,7 +7,3 @@ export interface User {
   name: string
   updated: string
 }
-
-export type LoginResponse = {
-  accessToken: string
-}
