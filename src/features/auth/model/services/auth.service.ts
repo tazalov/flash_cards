@@ -6,6 +6,10 @@ import { SignUpArgs, User } from '../types/service.types'
 const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      logout: builder.mutation<void, void>({
+        invalidatesTags: ['Me'],
+        query: () => ({ method: 'POST', url: '/v1/auth/logout' })
+       }),
       login: builder.mutation<void, SignInFormData>({
         invalidatesTags: ['Me'],
         query: body => ({
@@ -51,6 +55,7 @@ const authService = baseApi.injectEndpoints({
 
 export const {
   useLoginMutation,
+  useLogoutMutation,
   useMeQuery,
   useRecoverPasswordMutation,
   useResetPasswordMutation,

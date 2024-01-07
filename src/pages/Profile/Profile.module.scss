@@ -1,0 +1,15 @@
+.link {
+  cursor: pointer;
+
+  display: flex;
+  gap: 0.375rem;
+  align-items: center;
+
+  margin-bottom: 2.25rem;
+}
+
+.iconArrow {
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-light-100);
+}

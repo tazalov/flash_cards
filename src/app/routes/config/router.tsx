@@ -7,6 +7,7 @@ import { SignIn } from '@/pages/Auth/SignIn'
 import { SignUp } from '@/pages/Auth/SignUp'
 import { CardsList } from '@/pages/CardsList'
 import { DecksList } from '@/pages/DecksList'
+import { Profile } from '@/pages/Profile'
 
 import { PrivateRedirect } from '../ui/PrivateRedirect'
 import { PublicRedirect } from '../ui/PublicRedirect'
@@ -21,6 +22,7 @@ const publicRoutes: RouteObject[] = [
 const privateRoutes: RouteObject[] = [
   { element: <DecksList />, path: '/' },
   { element: <CardsList />, path: '/:deckId/cards' },
+  { element: <Profile />, path: '/profile' },
 ]
 
 const appRoutes: RouteObject[] = [

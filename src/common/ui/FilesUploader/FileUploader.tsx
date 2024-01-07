@@ -20,7 +20,7 @@ type Props = {
 } & ComponentPropsWithoutRef<'input'>
 
 export const FileUploader = forwardRef<ElementRef<'input'>, Props>(
-  ({ name, setFile, trigger, validationSchema, ...rest }, ref) => {
+  ({ className, name, setFile, trigger, validationSchema, ...rest }, ref) => {
     const [error, setError] = useState<null | string>(null)
 
     const handleChangeCover = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,12 @@ export const FileUploader = forwardRef<ElementRef<'input'>, Props>(
     }
 
     return (
-      <Typography as="label" htmlFor={name} variant={TypographyVariant.caption}>
+      <Typography
+        as="label"
+        className={className}
+        htmlFor={name}
+        variant={TypographyVariant.caption}
+      >
         {trigger}
         <input
           className={s.input}

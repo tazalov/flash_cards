@@ -7,10 +7,10 @@ import { Typography } from '@/common/ui/Typography'
 import s from './ProfileInfo.module.scss'
 
 interface Props {
-  email: string
+  email?: string
   handleActiveEditMode: () => void
   handleLogout: () => void
-  username: string
+  username?: string
 }
 
 export const ProfileInfo = ({ email, handleActiveEditMode, handleLogout, username }: Props) => {
