@@ -6,10 +6,6 @@ import { SignUpArgs, User } from '../types/service.types'
 const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      logout: builder.mutation<void, void>({
-        invalidatesTags: ['Me'],
-        query: () => ({ method: 'POST', url: '/v1/auth/logout' })
-       }),
       login: builder.mutation<void, SignInFormData>({
         invalidatesTags: ['Me'],
         query: body => ({
@@ -18,16 +14,13 @@ const authService = baseApi.injectEndpoints({
           url: '/v1/auth/login',
         }),
       }),
+      logout: builder.mutation<void, void>({
+        invalidatesTags: ['Me'],
+        query: () => ({ method: 'POST', url: '/v1/auth/logout' }),
+      }),
       me: builder.query<User, void>({
         providesTags: ['Me'],
         query: () => ({ url: '/v1/auth/me' }),
-      }),
-      signUp: builder.mutation<User, SignUpArgs>({
-        query: body => ({
-          body,
-          method: 'POST',
-          url: '/v1/auth/sign-up',
-        }),
       }),
       recoverPassword: builder.mutation<void, string>({
         query: email => ({
@@ -49,6 +42,13 @@ const authService = baseApi.injectEndpoints({
           url: `/v1/auth/reset-password/${token}`,
         }),
       }),
+      signUp: builder.mutation<User, SignUpArgs>({
+        query: body => ({
+          body,
+          method: 'POST',
+          url: '/v1/auth/sign-up',
+        }),
+      }),
     }
   },
 })
@@ -59,5 +59,5 @@ export const {
   useMeQuery,
   useRecoverPasswordMutation,
   useResetPasswordMutation,
-  useSignUpMutation
+  useSignUpMutation,
 } = authService
