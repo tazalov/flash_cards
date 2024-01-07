@@ -9,12 +9,6 @@
   margin: 0 auto;
 }
 
-.delete {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
 .avatarLoader {
   position: absolute;
   right: 0;
@@ -24,6 +18,21 @@
 .trigger {
   padding: 0.3rem;
   border-radius: 50%;
+}
+
+.crossBtn {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+
+  padding: 0.1rem;
+
+  border-radius: 50%;
+}
+
+.crossIcon {
+  width: 1rem;
+  height: 1rem;
 }
 
 .nickname {

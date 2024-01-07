@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Edit, Trash } from '@/common/assets/icons'
+import { Cross, Edit } from '@/common/assets/icons'
 import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
+import { ButtonVariant } from '@/common/enums'
 import { Avatar } from '@/common/ui/Avatar'
 import { Button } from '@/common/ui/Button'
 import { FileUploader } from '@/common/ui/FilesUploader'
@@ -35,6 +36,8 @@ interface Props {
 }
 
 export const EditProfileForm = ({ avatarUrl, className, initialValue, onSubmit }: Props) => {
+  const fileRef = useRef<HTMLInputElement>(null)
+
   const [avatar, setAvatar] = useState<File | null>(null)
 
   const avatarIsValid =
@@ -53,19 +56,28 @@ export const EditProfileForm = ({ avatarUrl, className, initialValue, onSubmit }
     onSubmit(formData)
   }
 
+  const handleClearCover = () => {
+    setAvatar(null)
+    if (fileRef.current) {
+      fileRef.current.value = ''
+    }
+  }
+
   return (
     <form className={cn(s.form, className)} onSubmit={handleSubmit(handleOnSubmit)}>
       <div className={s.avatarWrapper}>
         <Avatar src={avatarIsValid ? URL.createObjectURL(avatar) : avatarUrl} title="UN" />
         {avatarIsValid && (
           <Button
-            className={cn(s.delete, s.trigger)}
-            onClick={() => setAvatar(null)}
-            startIcon={<Trash />}
+            className={s.crossBtn}
+            onClick={handleClearCover}
+            startIcon={<Cross className={s.crossIcon} />}
+            variant={ButtonVariant.secondary}
           />
         )}
         <FileUploader
           className={s.avatarLoader}
+          ref={fileRef}
           setFile={setAvatar}
           trigger={<Button as="span" className={s.trigger} startIcon={<Edit />} />}
           validationSchema={coverSchema}
