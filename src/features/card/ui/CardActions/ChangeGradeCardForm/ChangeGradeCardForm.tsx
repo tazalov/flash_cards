@@ -26,7 +26,7 @@ export const ChangeGradeCardForm = ({ onSubmit }: Props) => {
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <ControlledRadioGroup className={s.rate} control={control} name="grade" options={options} />
       <Button fullWidth>Next Question</Button>
     </form>

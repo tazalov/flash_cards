@@ -13,9 +13,9 @@ const meta = {
   },
   component: CardBody,
   parameters: {
-    layout: 'fullscreen', //change
+    layout: 'fullscreen',
   },
-  title: 'features/Card/CardBody', //change
+  title: 'features/Card/CardBody',
 } satisfies Meta<typeof CardBody>
 
 export default meta
