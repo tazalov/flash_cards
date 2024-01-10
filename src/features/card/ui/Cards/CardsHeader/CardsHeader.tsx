@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
+import { Link } from 'react-router-dom'
 
 import { Edit, Info, Play, Trash } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
@@ -39,7 +40,14 @@ export const CardsHeader = (props: Props) => {
           </Dropdown.Menu>
         )}
       </div>
-      {!isEmpty && (isOwner ? <CreateCardModal deckId={deckId} /> : <Button>Learn to Pack</Button>)}
+      {!isEmpty &&
+        (isOwner ? (
+          <CreateCardModal deckId={deckId} />
+        ) : (
+          <Button as={Link} to={`/${deckId}/learn/${name}`}>
+            Learn to Pack
+          </Button>
+        ))}
     </div>
   )
 }

@@ -1,0 +1,26 @@
+.root {
+  align-items: flex-start;
+
+  width: 100%;
+  max-width: 26.25rem;
+  margin: 0 auto;
+  padding: 2rem 2.25rem 3rem;
+}
+
+.title {
+  align-self: center;
+  margin-bottom: 2.875rem;
+}
+
+.shots {
+  margin-bottom: 2.5rem;
+  color: var(--color-dark-100);
+}
+
+.answer {
+  margin-bottom: 0.75rem;
+}
+
+.rate {
+  margin-bottom: 2rem;
+}

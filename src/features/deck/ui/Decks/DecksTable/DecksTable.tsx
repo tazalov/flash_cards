@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { Edit, Play } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
@@ -50,6 +50,12 @@ type Props = {
 export const DecksTable = ({ authId, handleChangeSort, items, sort, ...rest }: Props) => {
   const location = useLocation()
 
+  const navigate = useNavigate()
+
+  const handleNavigateToLearnPage = (id: string, name: string) => () => {
+    navigate(`/${id}/learn/${name}`)
+  }
+
   return (
     <Table.Root {...rest}>
       <Table.SortableHeader columns={columns} onSort={handleChangeSort} sort={sort} />
@@ -77,8 +83,9 @@ export const DecksTable = ({ authId, handleChangeSort, items, sort, ...rest }: P
               <Table.Cell className={s.actionsCell}>
                 <IconButton
                   className={s.actionsIcon}
+                  disabled={el.cardsCount === 0}
                   icon={<Play />}
-                  onClick={() => alert('Навигация на страницу play')}
+                  onClick={handleNavigateToLearnPage(el.id, el.name)}
                 />
                 {authId === el.userId && (
                   <>
