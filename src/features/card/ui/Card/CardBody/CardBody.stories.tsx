@@ -15,6 +15,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
+  tags: ['autodocs'],
   title: 'features/Card/CardBody',
 } satisfies Meta<typeof CardBody>
 
