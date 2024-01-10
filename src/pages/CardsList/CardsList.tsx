@@ -68,7 +68,7 @@ export const CardsList = () => {
       {isEmpty ? (
         <div className={s.infoBlock}>
           <Typography className={s.infoText} textAlign="center" variant={TypographyVariant.body2}>
-            This pack is empty.{isOwner && ' Click add new card to fill this pack'}
+            This deck is empty.{isOwner && ' Click add new card to fill this pack'}
           </Typography>
           {isOwner && <CreateCardModal deckId={deck?.id} />}
         </div>
@@ -82,7 +82,7 @@ export const CardsList = () => {
           />
           <CardsTable
             className={s.item}
-            deckItems={data?.items}
+            deckItems={data?.items ?? []}
             handleChangeSort={handleChangeSort}
             isOwner={isOwner}
             sort={getSortObj(orderBy)}
