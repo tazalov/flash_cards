@@ -2,13 +2,14 @@ import { useParams } from 'react-router-dom'
 
 import { Arrow } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
-import { Button } from '@/common/ui/Button'
 import { Page } from '@/common/ui/Page'
 import { Pagination } from '@/common/ui/Pagination'
 import { TextField } from '@/common/ui/TextField'
 import { Typography } from '@/common/ui/Typography'
 import { getSortObj } from '@/common/utils'
+import { useMeQuery } from '@/features/auth'
 import { CardsHeader, CardsTable, useGetCardsByIdQuery } from '@/features/card'
+import { CreateCardModal } from '@/features/card/'
 import { useGetDeckByIdQuery } from '@/features/deck'
 
 import s from './CardsList.module.scss'
@@ -17,6 +18,7 @@ import { useCardsList } from './useCardsList'
 
 export const CardsList = () => {
   const { deckId = '' } = useParams()
+  const { data: userData } = useMeQuery()
 
   const {
     handleChangeItemsPerPage,
@@ -42,7 +44,8 @@ export const CardsList = () => {
       question,
     },
   })
-  const isOwner = deck?.userId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'
+  const isOwner = deck?.userId === userData?.id
+
   const isEmpty = deck && deck.cardsCount === 0
 
   if (isLoading) {
@@ -53,7 +56,7 @@ export const CardsList = () => {
     <Page mt="24px">
       <div className={s.link} onClick={handleToPreviewPage}>
         <Arrow className={s.iconArrow} />
-        <Typography variant={TypographyVariant.body2}>Back to Packs list</Typography>
+        <Typography variant={TypographyVariant.body2}>Back to Decks list</Typography>
       </div>
       <CardsHeader
         className={s.item}
@@ -67,7 +70,7 @@ export const CardsList = () => {
           <Typography className={s.infoText} textAlign="center" variant={TypographyVariant.body2}>
             This pack is empty.{isOwner && ' Click add new card to fill this pack'}
           </Typography>
-          {isOwner && <Button>Add New Card</Button>}
+          {isOwner && <CreateCardModal deckId={deck?.id} />}
         </div>
       ) : (
         <>
