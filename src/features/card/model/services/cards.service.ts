@@ -22,8 +22,21 @@ const cardsService = baseApi.injectEndpoints({
         invalidatesTags: ['Cards'],
         query: ({ id }) => ({ method: 'DELETE', url: `v1/cards/${id}` }),
       }),
+      updateCard: builder.mutation<Card, { body: FormData; id: string }>({
+        invalidatesTags: ['Cards'],
+        query: ({ body, id }) => ({
+          body,
+          method: 'PATCH',
+          url: `/v1/cards/${id}`,
+        }),
+      }),
     }
   },
 })
 
-export const { useCreateCardMutation, useGetCardsByIdQuery, useRemoveCardMutation } = cardsService
+export const {
+  useCreateCardMutation,
+  useGetCardsByIdQuery,
+  useRemoveCardMutation,
+  useUpdateCardMutation,
+} = cardsService
