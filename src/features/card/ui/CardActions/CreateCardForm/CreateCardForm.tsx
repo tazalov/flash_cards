@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef, useRef, useState } from 'react'
 
 import { LoadPicture, Trash } from '@/common/assets/icons'
-import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
 import { ButtonVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 import { FileUploader } from '@/common/ui/FilesUploader'
@@ -9,6 +8,7 @@ import { IconButton } from '@/common/ui/IconButton'
 import { ModalClose } from '@/common/ui/Modals/ModalClose'
 import { Select } from '@/common/ui/Select'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
+import { Card } from '@/features/card'
 import cn from 'classnames'
 
 import s from './CreateCardForm.module.scss'
@@ -16,8 +16,10 @@ import s from './CreateCardForm.module.scss'
 import { CreateCardFormData, useCreateCardForm } from '../../../model/hooks/useCreateCardForm'
 
 type Props = {
+  card?: Card
   isLoading: boolean
   onSubmit: (data: FormData) => void
+  submitTitle?: string
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
 const options = [
@@ -25,7 +27,13 @@ const options = [
   { title: 'Image', value: 'image' },
 ]
 
-export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
+export const CreateCardForm = ({
+  card,
+  className,
+  isLoading,
+  onSubmit,
+  submitTitle = 'Add New Card',
+}: Props) => {
   const {
     coverOptions: { answerCover, coverSchema, questionCover, setAnswerCover, setQuestionCover },
     formValues: {
@@ -34,19 +42,13 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
       formState: { errors },
       handleSubmit,
     },
-  } = useCreateCardForm()
+  } = useCreateCardForm(card)
 
   const [selectQuestion, setSelectQuestion] = useState(options[0].value)
   const [selectAnswer, setSelectAnswer] = useState(options[0].value)
 
-  const questionIsImage =
-    questionCover !== null &&
-    ALLOWED_IMAGES_FORMATS.includes(questionCover.type) &&
-    questionCover.size <= MAX_SIZE_IMAGE
-  const answerIsImage =
-    answerCover !== null &&
-    ALLOWED_IMAGES_FORMATS.includes(answerCover.type) &&
-    answerCover.size <= MAX_SIZE_IMAGE
+  const isDefaultQuestionCover = typeof questionCover === 'string'
+  const isDefaultAnswerCover = typeof answerCover === 'string'
 
   if (errors.question?.message && selectQuestion === 'image') {
     setSelectQuestion(options[0].value)
@@ -60,8 +62,9 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
 
     formData.append('question', formValues.question)
     formData.append('answer', formValues.answer)
-    questionIsImage && formData.append('questionImg', questionCover)
-    answerIsImage && formData.append('answerImg', answerCover)
+    !isDefaultQuestionCover && formData.append('questionImg', questionCover || '')
+    !isDefaultAnswerCover && formData.append('answerImg', answerCover || '')
+
     onSubmit(formData)
   }
 
@@ -112,9 +115,13 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
         />
       ) : (
         <div className={s.input}>
-          {questionIsImage && (
+          {questionCover && (
             <div className={s.answerWrapper}>
-              <img alt="answer" className={s.image} src={URL.createObjectURL(questionCover)} />
+              <img
+                alt="question"
+                className={s.image}
+                src={isDefaultQuestionCover ? questionCover : URL.createObjectURL(questionCover)}
+              />
               <IconButton
                 className={s.clearCover}
                 icon={<Trash />}
@@ -165,9 +172,13 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
         />
       ) : (
         <div className={s.input}>
-          {answerIsImage && (
+          {answerCover && (
             <div className={s.answerWrapper}>
-              <img alt="answer" className={s.image} src={URL.createObjectURL(answerCover)} />
+              <img
+                alt="answer"
+                className={s.image}
+                src={isDefaultAnswerCover ? answerCover : URL.createObjectURL(answerCover)}
+              />
               <IconButton
                 className={s.clearCover}
                 icon={<Trash />}
@@ -205,7 +216,7 @@ export const CreateCardForm = ({ className, isLoading, onSubmit }: Props) => {
           </Button>
         </ModalClose>
         <Button disabled={isLoading} type="submit">
-          Add New Card
+          {submitTitle}
         </Button>
       </div>
     </form>
