@@ -14,7 +14,7 @@ import { ZodEffects, ZodError } from 'zod'
 import s from './FileUploader.module.scss'
 
 type Props = {
-  setFile: (file: File) => void
+  setFile: (file: File | null) => void
   trigger: ReactNode
   validationSchema: ZodEffects<any>
 } & ComponentPropsWithoutRef<'input'>
@@ -24,10 +24,6 @@ export const FileUploader = forwardRef<ElementRef<'input'>, Props>(
     const [error, setError] = useState<null | string>(null)
 
     const handleChangeCover = (e: ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files && e.target.files.length) {
-        setFile(e.target.files[0])
-      }
-
       try {
         const file = e.target.files?.[0]
 
@@ -44,6 +40,7 @@ export const FileUploader = forwardRef<ElementRef<'input'>, Props>(
         } else {
           setError('Native error: ' + error.message)
         }
+        setFile(null)
       }
     }
 
