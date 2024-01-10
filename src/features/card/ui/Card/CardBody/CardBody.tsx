@@ -13,6 +13,7 @@ interface Props {
   card?: CardObj
   className?: string
   deckName?: string
+  disabled?: boolean
   handleShowAnswer: () => void
   hideAnswer: boolean
   onSubmit: (data: Rate) => void
@@ -22,6 +23,7 @@ export const CardBody = ({
   card,
   className,
   deckName,
+  disabled,
   handleShowAnswer,
   hideAnswer,
   onSubmit,
@@ -34,6 +36,7 @@ export const CardBody = ({
       <Typography as="h3" textAlign="left" variant={TypographyVariant.body1}>
         <b>Question:</b> {card?.question}
       </Typography>
+      {card?.questionImg && <img alt="question" className={s.img} src={card.questionImg} />}
       <Typography as="h3" className={s.shots} textAlign="left" variant={TypographyVariant.body2}>
         The number of attempts to answer the question: <b>{card?.shots}</b>
       </Typography>
@@ -50,7 +53,8 @@ export const CardBody = ({
             variant={TypographyVariant.body1}
           >
             <b>Answer:</b> {card?.answer}
-          </Typography>{' '}
+          </Typography>
+          {card?.answerImg && <img alt="answer" className={s.img} src={card.answerImg} />}
           <Typography
             as="h3"
             className={s.answer}
@@ -59,7 +63,7 @@ export const CardBody = ({
           >
             <b>Rate yourself:</b>
           </Typography>
-          <ChangeGradeCardForm onSubmit={onSubmit} />
+          <ChangeGradeCardForm disabled={disabled} onSubmit={onSubmit} />
         </>
       )}
     </Card>

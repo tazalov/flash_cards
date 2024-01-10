@@ -17,10 +17,11 @@ const options: RadioOption[] = [
 ]
 
 type Props = {
+  disabled?: boolean
   onSubmit: (data: Rate) => void
 }
 
-export const ChangeGradeCardForm = ({ onSubmit }: Props) => {
+export const ChangeGradeCardForm = ({ disabled, onSubmit }: Props) => {
   const { control, handleSubmit } = useForm<Rate>({
     defaultValues: { grade: '1' },
   })
@@ -28,7 +29,9 @@ export const ChangeGradeCardForm = ({ onSubmit }: Props) => {
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <ControlledRadioGroup className={s.rate} control={control} name="grade" options={options} />
-      <Button fullWidth>Next Question</Button>
+      <Button disabled={disabled} fullWidth>
+        Next Question
+      </Button>
     </form>
   )
 }

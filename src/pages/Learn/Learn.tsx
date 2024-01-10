@@ -11,7 +11,7 @@ export const Learn = () => {
 
   const { data } = useGetRandomCardQuery({ id: deckId })
 
-  const [changeGrade, {}] = useChangeGradeCardMutation()
+  const [changeGrade, { isLoading }] = useChangeGradeCardMutation()
 
   const handleSubmitGrade = (formData: Rate) => {
     changeGrade({ cardId: data!.id, deckId, grade: Number(formData.grade) })
@@ -26,6 +26,7 @@ export const Learn = () => {
       <CardBody
         card={data}
         deckName={deckName}
+        disabled={isLoading}
         handleShowAnswer={handleShowAnswer}
         hideAnswer={hideAnswer}
         onSubmit={handleSubmitGrade}
