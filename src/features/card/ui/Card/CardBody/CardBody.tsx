@@ -33,7 +33,7 @@ export const CardBody = ({
       <Typography as="h2" className={s.title} variant={TypographyVariant.large}>
         Learn &quot;{deckName}&quot;
       </Typography>
-      <Typography as="h3" textAlign="left" variant={TypographyVariant.body1}>
+      <Typography as="h3" variant={TypographyVariant.body1}>
         <b>Question:</b> {card?.question}
       </Typography>
       {card?.questionImg && <img alt="question" className={s.img} src={card.questionImg} />}
@@ -46,21 +46,11 @@ export const CardBody = ({
         </Button>
       ) : (
         <>
-          <Typography
-            as="h3"
-            className={s.answer}
-            textAlign="left"
-            variant={TypographyVariant.body1}
-          >
+          <Typography as="h3" className={s.answer} variant={TypographyVariant.body1}>
             <b>Answer:</b> {card?.answer}
           </Typography>
           {card?.answerImg && <img alt="answer" className={s.img} src={card.answerImg} />}
-          <Typography
-            as="h3"
-            className={s.answer}
-            textAlign="left"
-            variant={TypographyVariant.body1}
-          >
+          <Typography as="h3" className={s.answer} variant={TypographyVariant.body1}>
             <b>Rate yourself:</b>
           </Typography>
           <ChangeGradeCardForm disabled={disabled} onSubmit={onSubmit} />
