@@ -13,3 +13,5 @@ export interface Card {
   updated: Date
   userId: string
 }
+
+export type Rate = { grade: string }
