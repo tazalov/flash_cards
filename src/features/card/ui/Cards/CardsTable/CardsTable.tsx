@@ -1,13 +1,12 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Edit } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Column, Sort } from '@/common/types'
-import { IconButton } from '@/common/ui/IconButton'
 import { Rating } from '@/common/ui/Rating'
 import { Table } from '@/common/ui/Table'
 import { Typography } from '@/common/ui/Typography'
 import { Card } from '@/features/card'
+import { UpdateCardModal } from '@/features/card/ui/CardActions/UpdateCardModal/UpdateCardModal'
 
 import s from './CardsTable.module.scss'
 
@@ -84,7 +83,7 @@ export const CardsTable = (props: Props) => {
               <Table.Cell className={s.actionsCell}>
                 {isOwner && (
                   <>
-                    <IconButton icon={<Edit />} />
+                    <UpdateCardModal card={el} />
                     <RemoveCardModal cardId={el.id} cardName={el.question} />
                   </>
                 )}
