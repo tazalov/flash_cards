@@ -28,7 +28,7 @@ export const DecksList = () => {
 
   const { data: userData } = useMeQuery()
 
-  const { data, error, isLoading } = useGetDecksQuery({
+  const { currentData, data, error, isLoading } = useGetDecksQuery({
     authorId: show === 'my' ? userData?.id : undefined,
     currentPage,
     itemsPerPage,
@@ -65,7 +65,7 @@ export const DecksList = () => {
         authId={userData?.id ?? ''}
         className={s.table}
         handleChangeSort={handleChangeSort}
-        items={data?.items ?? []}
+        items={currentData?.items ?? []}
         sort={getSortObj(orderBy)}
       />
       <Pagination

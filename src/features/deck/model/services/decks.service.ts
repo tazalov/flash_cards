@@ -11,6 +11,7 @@ const decksService = baseApi.injectEndpoints({
         query: body => ({ body, method: 'POST', url: `v1/decks` }),
       }),
       getDeckById: builder.query<Deck, { id: string }>({
+        providesTags: ['Decks', 'Deck'],
         query: ({ id }) => ({ url: `v1/decks/${id}` }),
       }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
@@ -21,6 +22,28 @@ const decksService = baseApi.injectEndpoints({
         invalidatesTags: ['Decks'],
         query: ({ id }) => ({ method: 'DELETE', url: `v1/decks/${id}` }),
       }),
+      updateDeck: builder.mutation<Deck, { body: FormData; id: string }>({
+        invalidatesTags: ['Decks'],
+
+        // async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
+        //   const patchResult = dispatch(
+        //     decksService.util.updateQueryData('getDecks', {}, draft => {
+        //       Object.assign(draft, patch)
+        //     })
+        //   )
+        //
+        //   try {
+        //     await queryFulfilled
+        //   } catch {
+        //     patchResult.undo()
+        //   }
+        // },
+        query: ({ body, id }) => ({
+          body,
+          method: 'PATCH',
+          url: `/v1/decks/${id}`,
+        }),
+      }),
     }
   },
 })
@@ -30,4 +53,5 @@ export const {
   useGetDeckByIdQuery,
   useGetDecksQuery,
   useRemoveDeckMutation,
+  useUpdateDeckMutation,
 } = decksService

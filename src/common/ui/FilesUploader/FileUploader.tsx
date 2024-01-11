@@ -14,7 +14,7 @@ import { ZodEffects, ZodError } from 'zod'
 import s from './FileUploader.module.scss'
 
 type Props = {
-  setFile: (file: File) => void
+  setFile: (file: File | null) => void
   trigger: ReactNode
   validationSchema: ZodEffects<any>
 } & ComponentPropsWithoutRef<'input'>
@@ -44,6 +44,7 @@ export const FileUploader = forwardRef<ElementRef<'input'>, Props>(
         } else {
           setError('Native error: ' + error.message)
         }
+        setFile(null)
       }
     }
 
