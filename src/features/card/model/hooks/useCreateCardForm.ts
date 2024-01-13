@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
+import { Card } from '@/features/card'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -23,13 +24,15 @@ const createCardSchema = z.object({
 
 export type CreateCardFormData = z.input<typeof createCardSchema>
 
-export const useCreateCardForm = () => {
-  const [questionCover, setQuestionCover] = useState<File | null>(null)
-  const [answerCover, setAnswerCover] = useState<File | null>(null)
+export const useCreateCardForm = (card?: Card) => {
+  const [questionCover, setQuestionCover] = useState<File | null | string>(
+    card?.questionImg || null
+  )
+  const [answerCover, setAnswerCover] = useState<File | null | string>(card?.answerImg || null)
   const formValues = useForm<CreateCardFormData>({
     defaultValues: {
-      answer: '',
-      question: '',
+      answer: card?.answer || '',
+      question: card?.question || '',
     },
     resolver: zodResolver(createCardSchema),
   })

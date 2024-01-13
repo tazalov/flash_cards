@@ -7,7 +7,7 @@ import cn from 'classnames'
 import s from './CreateCardModal.module.scss'
 
 import { useCreateCardMutation } from '../../../model/services/cards.service'
-import { CreateCardForm } from '../CreateCardForm/CreateCardForm'
+import { ActionsCardForm } from '../CreateCardForm/ActionsCardForm'
 
 type Props = {
   className?: string
@@ -33,9 +33,9 @@ export const CreateCardModal = ({ className, deckId }: Props) => {
       onOpenChange={setOpen}
       open={open}
       title="Add new Card"
-      trigger={<Button>Create new Card</Button>}
+      trigger={<Button>Create New Card</Button>}
     >
-      <CreateCardForm isLoading={isLoading} onSubmit={handleSubmit} />
+      <ActionsCardForm isLoading={isLoading} onSubmit={handleSubmit} />
     </Modal>
   )
 }

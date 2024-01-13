@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef, useRef } from 'react'
 
 import { LoadPicture, Trash } from '@/common/assets/icons'
-import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
 import { ButtonVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 import { FileUploader } from '@/common/ui/FilesUploader'
@@ -9,17 +8,19 @@ import { IconButton } from '@/common/ui/IconButton'
 import { ModalClose } from '@/common/ui/Modals/ModalClose'
 import { ControlledCheckbox } from '@/common/ui_controlled/ControlledCheckbox'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
+import { CreateDeckFormData } from '@/features/deck/model/hooks/useCreateDeckForm'
+import { useDeckActionsForm } from '@/features/deck/model/hooks/useUpdateDeckForm'
+import { Deck } from '@/features/deck/model/types/decks.types'
 
-import s from './CreateDeckForm.module.scss'
-
-import { CreateDeckFormData, useCreateDeckForm } from '../../../../model/hooks/useCreateDeckForm'
+import s from './DeckActionsForm.module.scss'
 
 type Props = {
-  isLoading?: boolean
+  deck?: Pick<Deck, 'cover' | 'isPrivate' | 'name'>
+  isLoading: boolean
   onSubmit: (data: FormData) => void
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
-export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
+export const DeckActionsForm = ({ deck, isLoading, onSubmit }: Props) => {
   const {
     coverOptions: { cover, coverSchema, setCover },
     formOptions: {
@@ -27,35 +28,38 @@ export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
       formState: { errors },
       handleSubmit,
     },
-  } = useCreateDeckForm()
+  } = useDeckActionsForm(deck)
+
   const fileRef = useRef<HTMLInputElement>(null)
-  const coverIsValid =
-    cover !== null && ALLOWED_IMAGES_FORMATS.includes(cover.type) && cover.size <= MAX_SIZE_IMAGE
+
+  const isDefaultCover = typeof cover === 'string'
 
   const handleSubmitDeck = (data: CreateDeckFormData) => {
     const formData = new FormData()
 
     formData.append('name', data.name)
     formData.append('isPrivate', `${data.isPrivate}`)
-    if (coverIsValid) {
-      formData.append('cover', cover)
-    }
+    !isDefaultCover && formData.append('cover', cover || '')
+
     onSubmit(formData)
   }
+
   const handleClearCover = () => {
     setCover(null)
-    if (fileRef.current) {
-      fileRef.current.value = ''
-    }
   }
 
   return (
-    <form className={s.addNewDeckForm} onSubmit={handleSubmit(handleSubmitDeck)} {...props}>
-      {coverIsValid && (
+    <form className={s.addNewDeckForm} onSubmit={handleSubmit(handleSubmitDeck)}>
+      {cover && (
         <div className={s.coverWrapper}>
-          <img alt="cover" className={s.cover} src={URL.createObjectURL(cover)} />
+          <img
+            alt="cover"
+            className={s.cover}
+            src={isDefaultCover ? cover : URL.createObjectURL(cover)}
+          />
           <IconButton
             className={s.clearCover}
+            disabled={isLoading}
             icon={<Trash />}
             onClick={handleClearCover}
             size={1.5}
@@ -66,6 +70,7 @@ export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
         </div>
       )}
       <FileUploader
+        disabled={isLoading}
         ref={fileRef}
         setFile={setCover}
         trigger={
@@ -76,7 +81,7 @@ export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
             startIcon={<LoadPicture />}
             variant={ButtonVariant.secondary}
           >
-            Add cover for Deck
+            Change Cover
           </Button>
         }
         validationSchema={coverSchema}
@@ -84,6 +89,7 @@ export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
       <ControlledTextField
         className={s.marginItem}
         control={control}
+        disabled={isLoading}
         errorText={errors?.name?.message}
         label="Name Deck"
         name="name"
@@ -91,15 +97,18 @@ export const CreateDeckForm = ({ isLoading, onSubmit, ...props }: Props) => {
       <ControlledCheckbox
         className={s.addNewDeckCheckBox}
         control={control}
+        disabled={isLoading}
         label="Private Deck"
         name="isPrivate"
       />
       <div className={s.btnWrapper}>
         <ModalClose>
-          <Button variant={ButtonVariant.secondary}>Cancel</Button>
+          <Button disabled={isLoading} variant={ButtonVariant.secondary}>
+            Cancel
+          </Button>
         </ModalClose>
         <Button disabled={isLoading} type="submit">
-          Add New Deck
+          Save Changes
         </Button>
       </div>
     </form>

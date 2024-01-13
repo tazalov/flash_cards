@@ -1,16 +1,16 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { CreateCardForm } from './CreateCardForm'
+import { ActionsCardForm } from './ActionsCardForm'
 
 const meta = {
   args: {
     isLoading: false,
     onSubmit: (data: FormData) => console.log(data),
   },
-  component: CreateCardForm,
+  component: ActionsCardForm,
   tags: ['autodocs'],
   title: 'features/Card/Actions/CreateCardForm',
-} satisfies Meta<typeof CreateCardForm>
+} satisfies Meta<typeof ActionsCardForm>
 
 export default meta
 type Story = StoryObj<typeof meta>

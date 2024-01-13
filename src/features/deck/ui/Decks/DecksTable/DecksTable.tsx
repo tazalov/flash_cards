@@ -8,6 +8,7 @@ import { IconButton } from '@/common/ui/IconButton'
 import { Table } from '@/common/ui/Table'
 import { Typography } from '@/common/ui/Typography'
 import { Deck } from '@/features/deck/model/types/decks.types'
+import { UpdateDeckModal } from '@/features/deck/ui/DeckActions/UpdateDeckModal'
 
 import s from './DecksTable.module.scss'
 
@@ -89,11 +90,7 @@ export const DecksTable = ({ authId, handleChangeSort, items, sort, ...rest }: P
                 />
                 {authId === el.userId && (
                   <>
-                    <IconButton
-                      className={s.actionsIcon}
-                      icon={<Edit />}
-                      onClick={() => alert('Откроет модалку Edit')}
-                    />
+                    <UpdateDeckModal deck={el} trigger={<IconButton icon={<Edit />} />} />
                     <RemoveDeckModal deckId={el.id} deckName={el.name} />
                   </>
                 )}
