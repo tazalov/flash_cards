@@ -82,7 +82,9 @@ export const CardsList = () => {
           />
           <CardsTable
             className={s.item}
+            currentPage={page}
             deckItems={data?.items ?? []}
+            handleChangePage={handleChangePage}
             handleChangeSort={handleChangeSort}
             isOwner={isOwner}
             sort={getSortObj(orderBy)}

@@ -13,7 +13,9 @@ import s from './CardsTable.module.scss'
 import { RemoveCardModal } from '../../CardActions/RemoveCardModal/RemoveCardModal'
 
 type Props = {
+  currentPage: number
   deckItems?: Card[]
+  handleChangePage: (newPage: number) => void
   handleChangeSort: (sort: Sort) => void
   isOwner: boolean
   sort?: Sort
@@ -48,7 +50,8 @@ const columns: Column[] = [
 ]
 
 export const CardsTable = (props: Props) => {
-  const { className, deckItems, handleChangeSort, isOwner, sort } = props
+  const { className, currentPage, deckItems, handleChangePage, handleChangeSort, isOwner, sort } =
+    props
 
   return (
     <Table.Root className={className}>
@@ -83,7 +86,11 @@ export const CardsTable = (props: Props) => {
               <Table.Cell className={s.actionsCell}>
                 {isOwner && (
                   <>
-                    <UpdateCardModal card={el} />
+                    <UpdateCardModal
+                      card={el}
+                      currentPage={currentPage}
+                      handleChangePage={handleChangePage}
+                    />
                     <RemoveCardModal cardId={el.id} cardName={el.question} />
                   </>
                 )}

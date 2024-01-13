@@ -14,24 +14,29 @@ import { CreateCardForm } from '../CreateCardForm/CreateCardForm'
 type Props = {
   card: Card
   className?: string
+  currentPage: number
+  handleChangePage: (newPage: number) => void
   trigger?: ReactNode
 }
 
 export const UpdateCardModal = ({
   card,
   className,
+  currentPage,
+  handleChangePage,
   trigger = <IconButton icon={<Edit />} />,
 }: Props) => {
   const [open, setOpen] = useState(false)
 
   const [update, { isLoading }] = useUpdateCardMutation()
   const handleUpdateCard = (formValues: FormData) => {
-    update({ body: formValues, id: card.id })
+    setOpen(false)
+    handleChangePage(1)
+    update({ body: formValues, card })
       .unwrap()
-      .then(data => {
-        if (data) {
-          setOpen(false)
-        }
+      .finally(() => setOpen(false))
+      .catch(() => {
+        handleChangePage(currentPage)
       })
   }
 
