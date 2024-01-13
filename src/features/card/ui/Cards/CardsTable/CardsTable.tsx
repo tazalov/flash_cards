@@ -1,20 +1,21 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Edit } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Column, Sort } from '@/common/types'
-import { IconButton } from '@/common/ui/IconButton'
 import { Rating } from '@/common/ui/Rating'
 import { Table } from '@/common/ui/Table'
 import { Typography } from '@/common/ui/Typography'
 import { Card } from '@/features/card'
+import { UpdateCardModal } from '@/features/card/ui/CardActions/UpdateCardModal/UpdateCardModal'
 
 import s from './CardsTable.module.scss'
 
 import { RemoveCardModal } from '../../CardActions/RemoveCardModal/RemoveCardModal'
 
 type Props = {
+  currentPage: number
   deckItems?: Card[]
+  handleChangePage: (newPage: number) => void
   handleChangeSort: (sort: Sort) => void
   isOwner: boolean
   sort?: Sort
@@ -49,7 +50,8 @@ const columns: Column[] = [
 ]
 
 export const CardsTable = (props: Props) => {
-  const { className, deckItems, handleChangeSort, isOwner, sort } = props
+  const { className, currentPage, deckItems, handleChangePage, handleChangeSort, isOwner, sort } =
+    props
 
   return (
     <Table.Root className={className}>
@@ -84,7 +86,11 @@ export const CardsTable = (props: Props) => {
               <Table.Cell className={s.actionsCell}>
                 {isOwner && (
                   <>
-                    <IconButton icon={<Edit />} />
+                    <UpdateCardModal
+                      card={el}
+                      currentPage={currentPage}
+                      handleChangePage={handleChangePage}
+                    />
                     <RemoveCardModal cardId={el.id} cardName={el.question} />
                   </>
                 )}

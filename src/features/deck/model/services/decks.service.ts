@@ -11,7 +11,7 @@ const decksService = baseApi.injectEndpoints({
         query: body => ({ body, method: 'POST', url: `v1/decks` }),
       }),
       getDeckById: builder.query<Deck, { id: string }>({
-        providesTags: ['Decks', 'Deck'],
+        providesTags: ['Deck'],
         query: ({ id }) => ({ url: `v1/decks/${id}` }),
       }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({

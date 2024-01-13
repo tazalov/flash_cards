@@ -9,7 +9,7 @@ import { Typography } from '@/common/ui/Typography'
 import { getSortObj } from '@/common/utils'
 import { useMeQuery } from '@/features/auth'
 import { CardsHeader, CardsTable, useGetCardsByIdQuery } from '@/features/card'
-import { CreateCardModal } from '@/features/card/ui/CardActions/CreateCardModal/CreateCardModal'
+import { CreateCardModal } from '@/features/card'
 import { useGetDeckByIdQuery } from '@/features/deck'
 import { Deck } from '@/features/deck/model/types/decks.types'
 
@@ -19,6 +19,7 @@ import { useCardsList } from './useCardsList'
 
 export const CardsList = () => {
   const { deckId = '' } = useParams()
+  const { data: userData } = useMeQuery()
 
   const {
     handleChangeItemsPerPage,
@@ -45,7 +46,6 @@ export const CardsList = () => {
     },
   })
 
-  const { data: userData } = useMeQuery()
   const isOwner = deck?.userId === userData?.id
   const isEmpty = deck && deck.cardsCount === 0
 
@@ -57,7 +57,7 @@ export const CardsList = () => {
     <Page mt="24px">
       <div className={s.link} onClick={handleToPreviewPage}>
         <Arrow className={s.iconArrow} />
-        <Typography variant={TypographyVariant.body2}>Back to Packs list</Typography>
+        <Typography variant={TypographyVariant.body2}>Back to Decks list</Typography>
       </div>
       <CardsHeader
         className={s.item}
@@ -69,7 +69,7 @@ export const CardsList = () => {
       {isEmpty ? (
         <div className={s.infoBlock}>
           <Typography className={s.infoText} textAlign="center" variant={TypographyVariant.body2}>
-            This pack is empty.{isOwner && ' Click add new card to fill this pack'}
+            This deck is empty.{isOwner && ' Click add new card to fill this deck'}
           </Typography>
           {isOwner && <CreateCardModal deckId={deckId} />}
         </div>
@@ -83,7 +83,9 @@ export const CardsList = () => {
           />
           <CardsTable
             className={s.item}
-            deckItems={data?.items}
+            currentPage={page}
+            deckItems={data?.items ?? []}
+            handleChangePage={handleChangePage}
             handleChangeSort={handleChangeSort}
             isOwner={isOwner}
             sort={getSortObj(orderBy)}
