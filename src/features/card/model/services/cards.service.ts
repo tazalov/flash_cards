@@ -119,9 +119,9 @@ const cardsService = baseApi.injectEndpoints({
 
 export const {
   useChangeGradeCardMutation,
-  useGetRandomCardQuery,
   useCreateCardMutation,
   useGetCardsByIdQuery,
+  useGetRandomCardQuery,
   useRemoveCardMutation,
   useUpdateCardMutation,
 } = cardsService
