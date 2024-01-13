@@ -9,7 +9,7 @@ import cn from 'classnames'
 import s from './UpdateCardModal.module.scss'
 
 import { useUpdateCardMutation } from '../../../model/services/cards.service'
-import { CreateCardForm } from '../CreateCardForm/CreateCardForm'
+import { ActionsCardForm } from '../CreateCardForm/ActionsCardForm'
 
 type Props = {
   card: Card
@@ -48,7 +48,7 @@ export const UpdateCardModal = ({
       title="Update Card"
       trigger={trigger}
     >
-      <CreateCardForm
+      <ActionsCardForm
         card={card}
         isLoading={isLoading}
         onSubmit={handleUpdateCard}

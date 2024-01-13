@@ -11,7 +11,7 @@ import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
 import { Card } from '@/features/card'
 import cn from 'classnames'
 
-import s from './CreateCardForm.module.scss'
+import s from './ActionsCardForm.module.scss'
 
 import { CreateCardFormData, useCreateCardForm } from '../../../model/hooks/useCreateCardForm'
 
@@ -27,7 +27,7 @@ const options = [
   { title: 'Image', value: 'image' },
 ]
 
-export const CreateCardForm = ({
+export const ActionsCardForm = ({
   card,
   className,
   isLoading,
