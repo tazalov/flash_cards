@@ -33,9 +33,12 @@ export const CardsList = () => {
     question,
   } = useCardsList()
 
+  const { data: userData } = useMeQuery()
+
   const { data: deck } = useGetDeckByIdQuery({
     id: deckId,
   })
+
   const { data, isLoading } = useGetCardsByIdQuery({
     id: deckId,
     params: {

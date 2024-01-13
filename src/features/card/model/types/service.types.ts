@@ -13,3 +13,14 @@ export interface GetCardsArgs {
   orderBy?: string
   question?: string
 }
+
+export interface GetRandomCardArgs {
+  id: string
+  previousCardId?: string
+}
+
+export interface ChangeGradeCardArgs {
+  cardId: string
+  deckId: string
+  grade: number
+}

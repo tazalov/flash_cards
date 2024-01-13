@@ -20,5 +20,5 @@ export const ControlledRadioGroup = <T extends FieldValues>(
     shouldUnregister,
   })
 
-  return <RadioGroup id={name} onChange={onChange} value={value} {...rest} />
+  return <RadioGroup id={name} onValueChange={onChange} value={value} {...rest} />
 }
