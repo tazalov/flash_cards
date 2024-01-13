@@ -9,8 +9,9 @@ import { Typography } from '@/common/ui/Typography'
 import { getSortObj } from '@/common/utils'
 import { useMeQuery } from '@/features/auth'
 import { CardsHeader, CardsTable, useGetCardsByIdQuery } from '@/features/card'
-import { CreateCardModal } from '@/features/card/'
+import { CreateCardModal } from '@/features/card'
 import { useGetDeckByIdQuery } from '@/features/deck'
+import { Deck } from '@/features/deck/model/types/decks.types'
 
 import s from './CardsList.module.scss'
 
@@ -44,8 +45,8 @@ export const CardsList = () => {
       question,
     },
   })
-  const isOwner = deck?.userId === userData?.id
 
+  const isOwner = deck?.userId === userData?.id
   const isEmpty = deck && deck.cardsCount === 0
 
   if (isLoading) {
@@ -60,17 +61,17 @@ export const CardsList = () => {
       </div>
       <CardsHeader
         className={s.item}
+        deck={deck || ({} as Deck)}
         deckId={deckId}
         isEmpty={isEmpty}
         isOwner={isOwner}
-        name={deck?.name}
       />
       {isEmpty ? (
         <div className={s.infoBlock}>
           <Typography className={s.infoText} textAlign="center" variant={TypographyVariant.body2}>
             This deck is empty.{isOwner && ' Click add new card to fill this deck'}
           </Typography>
-          {isOwner && <CreateCardModal deckId={deck?.id} />}
+          {isOwner && <CreateCardModal deckId={deckId} />}
         </div>
       ) : (
         <>

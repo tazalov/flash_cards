@@ -6,6 +6,8 @@ import { Button } from '@/common/ui/Button'
 import { Dropdown } from '@/common/ui/DropDownMenu'
 import { IconButton } from '@/common/ui/IconButton'
 import { Typography } from '@/common/ui/Typography'
+import { Deck } from '@/features/deck/model/types/decks.types'
+import { UpdateDeckModal } from '@/features/deck/ui/DeckActions/UpdateDeckModal/UpdateDeckModal'
 import cn from 'classnames'
 
 import s from './CardsHeader.module.scss'
@@ -13,19 +15,19 @@ import s from './CardsHeader.module.scss'
 import { CreateCardModal } from '../../CardActions/CreateCardModal/CreateCardModal'
 
 type Props = {
+  deck: Deck
   deckId: string
   isEmpty?: boolean
   isOwner: boolean
-  name?: string
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
 
 export const CardsHeader = (props: Props) => {
-  const { className, deckId, isEmpty, isOwner, name } = props
+  const { className, deck, deckId, isEmpty, isOwner } = props
 
   return (
     <div className={cn(s.header, className)}>
       <div className={s.headerLeft}>
-        <Typography variant={TypographyVariant.large}>{name}</Typography>
+        <Typography variant={TypographyVariant.large}>{deck?.name}</Typography>
         {!isEmpty && isOwner && (
           <Dropdown.Menu
             sideOffset={10}
@@ -33,7 +35,10 @@ export const CardsHeader = (props: Props) => {
           >
             <Dropdown.Item startIcon={<Play />}>Learn</Dropdown.Item>
             <Dropdown.Separator />
-            <Dropdown.Item startIcon={<Edit />}>Edit</Dropdown.Item>
+            <Dropdown.Item onSelect={(e: Event) => e.preventDefault()} startIcon={<Edit />}>
+              <UpdateDeckModal deck={deck} trigger={<span>Edit</span>} />
+            </Dropdown.Item>
+
             <Dropdown.Separator />
             <Dropdown.Item startIcon={<Trash />}>Delete</Dropdown.Item>
           </Dropdown.Menu>

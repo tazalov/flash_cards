@@ -33,7 +33,7 @@ export const CreateCardModal = ({ className, deckId }: Props) => {
       onOpenChange={setOpen}
       open={open}
       title="Add new Card"
-      trigger={<Button>Create new Card</Button>}
+      trigger={<Button>Create New Card</Button>}
     >
       <ActionsCardForm isLoading={isLoading} onSubmit={handleSubmit} />
     </Modal>

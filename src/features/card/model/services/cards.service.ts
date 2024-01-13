@@ -1,7 +1,7 @@
 import { baseApi } from '@/api'
 import { getOptimisticUpdateCardPatch } from '@/common/utils'
+import { Card } from '@/features/card'
 
-import { Card } from '../types/cards.types'
 import { GetCardsArgs, GetCardsResponse } from '../types/service.types'
 
 const cardsService = baseApi.injectEndpoints({
