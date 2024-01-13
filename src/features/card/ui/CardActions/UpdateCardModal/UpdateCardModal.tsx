@@ -34,7 +34,6 @@ export const UpdateCardModal = ({
     handleChangePage(1)
     update({ body: formValues, card })
       .unwrap()
-      .finally(() => setOpen(false))
       .catch(() => {
         handleChangePage(currentPage)
       })
