@@ -8,8 +8,7 @@ import { TextField } from '@/common/ui/TextField'
 import { Typography } from '@/common/ui/Typography'
 import { getSortObj } from '@/common/utils'
 import { useMeQuery } from '@/features/auth'
-import { CardsHeader, CardsTable, useGetCardsByIdQuery } from '@/features/card'
-import { CreateCardModal } from '@/features/card'
+import { CardsHeader, CardsTable, CreateCardModal, useGetCardsByIdQuery } from '@/features/card'
 import { useGetDeckByIdQuery } from '@/features/deck'
 import { Deck } from '@/features/deck/model/types/decks.types'
 
@@ -32,8 +31,6 @@ export const CardsList = () => {
     page,
     question,
   } = useCardsList()
-
-  const { data: userData } = useMeQuery()
 
   const { data: deck } = useGetDeckByIdQuery({
     id: deckId,
