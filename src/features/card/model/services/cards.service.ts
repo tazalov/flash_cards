@@ -1,13 +1,13 @@
 import { baseApi } from '@/api'
+import { Card } from '@/features/card'
 
-import { Card } from '../types/cards.types'
 import { GetCardsArgs, GetCardsResponse } from '../types/service.types'
 
 const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       createCard: builder.mutation<Card, { body: FormData; id: string }>({
-        invalidatesTags: ['Cards'],
+        invalidatesTags: ['Cards', 'Deck'],
         query: ({ body, id }) => ({
           body,
           method: 'POST',
@@ -19,7 +19,7 @@ const cardsService = baseApi.injectEndpoints({
         query: ({ id, params }) => ({ params, url: `v1/decks/${id}/cards` }),
       }),
       removeCard: builder.mutation<Card, { id: string }>({
-        invalidatesTags: ['Cards'],
+        invalidatesTags: ['Cards', 'Deck'],
         query: ({ id }) => ({ method: 'DELETE', url: `v1/cards/${id}` }),
       }),
     }
