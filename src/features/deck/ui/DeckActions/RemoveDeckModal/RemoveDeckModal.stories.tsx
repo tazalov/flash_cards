@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
 import { store } from '@/app/store'
+import { Trash } from '@/common/assets/icons'
+import { IconButton } from '@/common/ui/IconButton'
 
 import { RemoveDeckModal } from './RemoveDeckModal'
 
@@ -23,6 +25,7 @@ export const Demo: Story = {
   args: {
     deckId: '123',
     deckName: 'Some deck name',
+    trigger: <IconButton icon={<Trash />} />,
   },
   render: args => (
     <Provider store={store}>
