@@ -7,7 +7,7 @@ import cn from 'classnames'
 import s from './CreateCardModal.module.scss'
 
 import { useCreateCardMutation } from '../../../model/services/cards.service'
-import { ActionsCardForm } from '../CreateCardForm/ActionsCardForm'
+import { ActionsCardForm } from '../ActionsCardForm/ActionsCardForm'
 
 type Props = {
   className?: string

@@ -7,7 +7,7 @@ import cn from 'classnames'
 import s from './UpdateCardModal.module.scss'
 
 import { useUpdateCardMutation } from '../../../model/services/cards.service'
-import { ActionsCardForm } from '../CreateCardForm/ActionsCardForm'
+import { ActionsCardForm } from '../ActionsCardForm/ActionsCardForm'
 
 type Props = {
   card: Card
