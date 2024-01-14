@@ -5,7 +5,13 @@ import { Arrow } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Page } from '@/common/ui/Page'
 import { Typography } from '@/common/ui/Typography'
-import { CardBody, Rate, useChangeGradeCardMutation, useGetRandomCardQuery } from '@/features/card'
+import {
+  CardBody,
+  CardBodySkeleton,
+  Rate,
+  useChangeGradeCardMutation,
+  useGetRandomCardQuery,
+} from '@/features/card'
 
 import s from './Learn.module.scss'
 
@@ -32,16 +38,20 @@ export const Learn = () => {
     <Page mt="24px">
       <div className={s.link} onClick={() => navigate(-1)}>
         <Arrow className={s.iconArrow} />
-        <Typography variant={TypographyVariant.body2}>Back to deck list</Typography>
+        <Typography variant={TypographyVariant.body2}>Back to previous page</Typography>
       </div>
-      <CardBody
-        card={data}
-        deckName={deckName}
-        disabled={isLoading}
-        handleShowAnswer={handleShowAnswer}
-        hideAnswer={hideAnswer}
-        onSubmit={handleSubmitGrade}
-      />
+      {isLoading ? (
+        <CardBodySkeleton />
+      ) : (
+        <CardBody
+          card={data}
+          deckName={deckName}
+          disabled={isLoading}
+          handleShowAnswer={handleShowAnswer}
+          hideAnswer={hideAnswer}
+          onSubmit={handleSubmitGrade}
+        />
+      )}
     </Page>
   )
 }
