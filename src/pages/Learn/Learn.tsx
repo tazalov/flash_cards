@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Arrow } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Page } from '@/common/ui/Page'
+import { Preloader } from '@/common/ui/Preloader'
 import { Typography } from '@/common/ui/Typography'
 import {
   CardBody,
@@ -22,7 +23,7 @@ export const Learn = () => {
 
   const [hideAnswer, setHideAnswer] = useState(true)
 
-  const { data } = useGetRandomCardQuery({ id: deckId })
+  const { data, isLoading: isLoadRandomCard } = useGetRandomCardQuery({ id: deckId })
 
   const [changeGrade, { isLoading }] = useChangeGradeCardMutation()
 
@@ -33,6 +34,10 @@ export const Learn = () => {
   }
 
   const handleShowAnswer = () => setHideAnswer(false)
+
+  if (isLoadRandomCard) {
+    return <Preloader size={100} />
+  }
 
   return (
     <Page mt="24px">
