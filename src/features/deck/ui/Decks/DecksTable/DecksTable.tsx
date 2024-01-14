@@ -8,12 +8,12 @@ import { IconButton } from '@/common/ui/IconButton'
 import { Table } from '@/common/ui/Table'
 import { Typography } from '@/common/ui/Typography'
 import { Deck } from '@/features/deck/model/types/decks.types'
-import { UpdateDeckModal } from '@/features/deck/ui/DeckActions/UpdateDeckModal'
-import { DecksTableSkeleton } from '@/features/deck/ui/Decks/DecksTable/DecksTableSkeleton'
 
 import s from './DecksTable.module.scss'
 
 import { RemoveDeckModal } from '../../DeckActions/RemoveDeckModal/RemoveDeckModal'
+import { UpdateDeckModal } from '../../DeckActions/UpdateDeckModal'
+import { DecksTableSkeleton } from './DecksTableSkeleton'
 
 const columns: Column[] = [
   {

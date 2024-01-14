@@ -8,11 +8,7 @@ import s from './CreateDeckModal.module.scss'
 import { useCreateDeckMutation } from '../../../model/services/decks.service'
 import { DeckActionsForm } from '../DeckActionsForm/DeckActionsForm'
 
-interface Props {
-  isLoading: boolean
-}
-
-export const CreateDeckModal = ({ isLoading }: Props) => {
+export const CreateDeckModal = () => {
   const [open, setOpen] = useState(false)
 
   const [createDeck, { isLoading: isLoadCreateDeck }] = useCreateDeckMutation()
@@ -23,7 +19,7 @@ export const CreateDeckModal = ({ isLoading }: Props) => {
       onOpenChange={setOpen}
       open={open}
       title="Add new Deck"
-      trigger={<Button disabled={isLoading}>Add New Deck</Button>}
+      trigger={<Button>Add New Deck</Button>}
     >
       <DeckActionsForm isLoading={isLoadCreateDeck} onSubmit={createDeck} />
     </Modal>

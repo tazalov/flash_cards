@@ -47,7 +47,7 @@ export const DecksList = () => {
 
   return (
     <Page mt="33px">
-      <DecksHeader isLoading={isFetching} />
+      <DecksHeader />
       <DecksFilters
         cardsCounts={[minCardsCount, maxCardsCount ?? startMaxCardsCount]}
         className={s.filters}

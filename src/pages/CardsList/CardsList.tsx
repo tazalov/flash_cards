@@ -4,6 +4,7 @@ import { Arrow } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Page } from '@/common/ui/Page'
 import { Pagination } from '@/common/ui/Pagination'
+import { Preloader } from '@/common/ui/Preloader'
 import { TextField } from '@/common/ui/TextField'
 import { Typography } from '@/common/ui/Typography'
 import { getSortObj } from '@/common/utils'
@@ -36,7 +37,7 @@ export const CardsList = () => {
     id: deckId,
   })
 
-  const { data, isLoading } = useGetCardsByIdQuery({
+  const { data, isFetching, isLoading } = useGetCardsByIdQuery({
     id: deckId,
     params: {
       currentPage: page,
@@ -50,7 +51,7 @@ export const CardsList = () => {
   const isEmpty = deck && deck.cardsCount === 0
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Preloader size={100} />
   }
 
   return (
@@ -77,6 +78,7 @@ export const CardsList = () => {
         <>
           <TextField
             className={s.item}
+            disabled={isFetching}
             onChangeValue={handleChangeQuestion}
             type="search"
             value={question || ''}
@@ -87,7 +89,9 @@ export const CardsList = () => {
             deckItems={data?.items ?? []}
             handleChangePage={handleChangePage}
             handleChangeSort={handleChangeSort}
+            isLoading={isFetching}
             isOwner={isOwner}
+            itemsPerPage={itemsPerPage}
             sort={getSortObj(orderBy)}
           />
           <Pagination

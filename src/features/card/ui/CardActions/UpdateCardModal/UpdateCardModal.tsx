@@ -1,7 +1,5 @@
 import { ReactNode, useState } from 'react'
 
-import { Edit } from '@/common/assets/icons'
-import { IconButton } from '@/common/ui/IconButton'
 import { Modal } from '@/common/ui/Modals'
 import { Card } from '@/features/card'
 import cn from 'classnames'
@@ -16,7 +14,7 @@ type Props = {
   className?: string
   currentPage: number
   handleChangePage: (newPage: number) => void
-  trigger?: ReactNode
+  trigger: ReactNode
 }
 
 export const UpdateCardModal = ({
@@ -24,11 +22,12 @@ export const UpdateCardModal = ({
   className,
   currentPage,
   handleChangePage,
-  trigger = <IconButton icon={<Edit />} />,
+  trigger,
 }: Props) => {
   const [open, setOpen] = useState(false)
 
   const [update, { isLoading }] = useUpdateCardMutation()
+
   const handleUpdateCard = (formValues: FormData) => {
     setOpen(false)
     handleChangePage(1)
