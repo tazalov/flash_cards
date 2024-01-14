@@ -27,6 +27,12 @@ export const Profile = () => {
       .then(() => setEditMode(false))
   }
 
+  const handleLogout = () => {
+    logout()
+      .unwrap()
+      .then(() => navigate('/sign-in'))
+  }
+
   return (
     <Page>
       <div className={s.link} onClick={() => navigate(-1)}>
@@ -42,7 +48,7 @@ export const Profile = () => {
           }
         }
         editMode={editMode}
-        handleLogout={logout}
+        handleLogout={handleLogout}
         handleUpdate={handleUpdate}
         isLoadLogout={isLoadLogout}
         isLoadUpdate={isLoadUpdate}
