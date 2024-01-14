@@ -48,3 +48,9 @@
   color: var(--color-accent-500);
   text-decoration: underline 1px;
 }
+
+.disabled {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.5;
+}
