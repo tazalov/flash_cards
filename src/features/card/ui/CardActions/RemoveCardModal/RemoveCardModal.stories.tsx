@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>
 export const Demo: Story = {
   args: {
     cardId: '123',
-    cardName: 'Some deck name',
+    cardName: 'SomeCardName',
   },
   render: args => (
     <Provider store={store}>
