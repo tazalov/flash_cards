@@ -1,9 +1,7 @@
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 
-import { Remove } from '@/common/assets/icons'
 import { ButtonVariant, TypographyVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
-import { IconButton } from '@/common/ui/IconButton'
 import { Modal } from '@/common/ui/Modals'
 import { ModalClose } from '@/common/ui/Modals/ModalClose'
 import { Typography } from '@/common/ui/Typography'
@@ -17,6 +15,7 @@ interface Props {
   isLoading: boolean
   itemName: string
   title?: string
+  trigger: ReactNode
 }
 
 export const RemoveItemModal = ({
@@ -25,6 +24,7 @@ export const RemoveItemModal = ({
   isLoading,
   itemName,
   title = 'Remove item',
+  trigger,
 }: Props) => {
   const [open, setOpen] = useState(false)
 
@@ -34,7 +34,7 @@ export const RemoveItemModal = ({
       onOpenChange={setOpen}
       open={open}
       title={title}
-      trigger={<IconButton icon={<Remove />} />}
+      trigger={trigger}
     >
       <div className={s.body}>
         <Typography className={s.text} variant={TypographyVariant.body1}>

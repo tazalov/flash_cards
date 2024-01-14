@@ -8,6 +8,7 @@ import { Dropdown } from '@/common/ui/DropDownMenu'
 import { IconButton } from '@/common/ui/IconButton'
 import { Typography } from '@/common/ui/Typography'
 import { Deck } from '@/features/deck/model/types/decks.types'
+import { RemoveDeckModal } from '@/features/deck/ui/DeckActions/RemoveDeckModal/RemoveDeckModal'
 import { UpdateDeckModal } from '@/features/deck/ui/DeckActions/UpdateDeckModal/UpdateDeckModal'
 import cn from 'classnames'
 
@@ -25,23 +26,29 @@ type Props = {
 export const CardsHeader = (props: Props) => {
   const { className, deck, deckId, isEmpty, isOwner } = props
 
+  const handleSelectItem = (e: Event) => e.preventDefault()
+
   return (
     <div className={cn(s.header, className)}>
       <div className={s.headerLeft}>
-        <Typography variant={TypographyVariant.large}>{deck?.name}</Typography>
+        <Typography variant={TypographyVariant.large}>{deck.name}</Typography>
         {!isEmpty && isOwner && (
           <Dropdown.Menu
             sideOffset={10}
             trigger={<IconButton className={s.btnIcon} icon={<Info />} size={1.125} />}
           >
-            <Dropdown.Item startIcon={<Play />}>Learn</Dropdown.Item>
+            <Dropdown.Item startIcon={<Play />}>
+              <Link to={`/${deckId}/learn/${deck.name}`}>Learn</Link>
+            </Dropdown.Item>
             <Dropdown.Separator />
-            <Dropdown.Item onSelect={(e: Event) => e.preventDefault()} startIcon={<Edit />}>
+            <Dropdown.Item onSelect={handleSelectItem} startIcon={<Edit />}>
               <UpdateDeckModal deck={deck} trigger={<span>Edit</span>} />
             </Dropdown.Item>
 
             <Dropdown.Separator />
-            <Dropdown.Item startIcon={<Trash />}>Delete</Dropdown.Item>
+            <Dropdown.Item onSelect={handleSelectItem} startIcon={<Trash />}>
+              <RemoveDeckModal deckId={deckId} deckName={deck.name} trigger={<span>Delete</span>} />
+            </Dropdown.Item>
           </Dropdown.Menu>
         )}
       </div>
@@ -49,7 +56,7 @@ export const CardsHeader = (props: Props) => {
         (isOwner ? (
           <CreateCardModal deckId={deckId} />
         ) : (
-          <Button as={Link} to={`/${deckId}/learn/${name}`}>
+          <Button as={Link} to={`/${deckId}/learn/${deck.name}`}>
             Learn to Pack
           </Button>
         ))}

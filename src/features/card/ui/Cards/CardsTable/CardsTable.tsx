@@ -1,7 +1,9 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import { Remove } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Column, Sort } from '@/common/types'
+import { IconButton } from '@/common/ui/IconButton'
 import { Rating } from '@/common/ui/Rating'
 import { Table } from '@/common/ui/Table'
 import { Typography } from '@/common/ui/Typography'
@@ -91,7 +93,11 @@ export const CardsTable = (props: Props) => {
                       currentPage={currentPage}
                       handleChangePage={handleChangePage}
                     />
-                    <RemoveCardModal cardId={el.id} cardName={el.question} />
+                    <RemoveCardModal
+                      cardId={el.id}
+                      cardName={el.question}
+                      trigger={<IconButton icon={<Remove />} />}
+                    />
                   </>
                 )}
               </Table.Cell>

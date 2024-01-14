@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import { RemoveItemModal } from '@/common/ui/RemoveItemModal'
 
 import { useRemoveCardMutation } from '../../../model/services/cards.service'
@@ -6,9 +8,10 @@ interface Props {
   cardId: string
   cardName: string
   className?: string
+  trigger: ReactNode
 }
 
-export const RemoveCardModal = ({ cardId, cardName, className }: Props) => {
+export const RemoveCardModal = ({ cardId, cardName, ...rest }: Props) => {
   const [removeCard, { isLoading }] = useRemoveCardMutation()
 
   const handleRemoveCard = () => {
@@ -17,11 +20,11 @@ export const RemoveCardModal = ({ cardId, cardName, className }: Props) => {
 
   return (
     <RemoveItemModal
-      className={className}
       handleRemoveItem={handleRemoveCard}
       isLoading={isLoading}
       itemName={cardName}
       title="Remove card"
+      {...rest}
     />
   )
 }
