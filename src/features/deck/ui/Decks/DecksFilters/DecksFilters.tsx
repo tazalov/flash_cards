@@ -17,11 +17,13 @@ type Props = {
   handleChangeSearch: (newValue: string) => void
   handleChangeTabValue: (newValue: string) => void
   handleClearFilters: () => void
+  isLoading: boolean
   max: number | undefined
   min?: number
   searchValue: string
   tabValue: string
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
+
 export const DecksFilters = ({
   cardsCounts,
   className,
@@ -29,6 +31,7 @@ export const DecksFilters = ({
   handleChangeSearch,
   handleChangeTabValue,
   handleClearFilters,
+  isLoading,
   max,
   min = 0,
   searchValue,
@@ -39,21 +42,27 @@ export const DecksFilters = ({
     <div className={cn(s.filters, className)} {...rest}>
       <TextField
         className={s.input}
+        disabled={isLoading}
         onChangeValue={handleChangeSearch}
         type="search"
         value={searchValue}
-      ></TextField>
+      />
       <Tabs
         className={s.tabs}
-        label="Show packs cards"
+        label="Show decks"
         onValueChange={handleChangeTabValue}
         value={tabValue}
       >
-        <TabItem value="my">My Cards</TabItem>
-        <TabItem value="all">All Cards</TabItem>
+        <TabItem disabled={isLoading} value="my">
+          My Decks
+        </TabItem>
+        <TabItem disabled={isLoading} value="all">
+          All Decks
+        </TabItem>
       </Tabs>
       <Slider
         className={s.slider}
+        disabled={isLoading}
         max={max}
         min={min}
         onValueChange={handleChangeCardsCounts}
@@ -61,6 +70,7 @@ export const DecksFilters = ({
       />
       <Button
         className={s.button}
+        disabled={isLoading}
         onClick={handleClearFilters}
         startIcon={<Edit />}
         variant={ButtonVariant.secondary}

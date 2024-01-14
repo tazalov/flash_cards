@@ -9,14 +9,15 @@ import { CreateDeckModal } from '../../DeckActions/CreateDeckModal'
 
 type Props = {
   headerText?: string
+  isLoading: boolean
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
-export const DecksHeader = ({ headerText = 'DecksList', ...props }: Props) => {
+export const DecksHeader = ({ headerText = 'Decks list', isLoading, ...props }: Props) => {
   return (
     <div className={s.header} {...props}>
       <Typography as="h1" variant={TypographyVariant.large}>
         {headerText}
       </Typography>
-      <CreateDeckModal />
+      <CreateDeckModal isLoading={isLoading} />
     </div>
   )
 }
