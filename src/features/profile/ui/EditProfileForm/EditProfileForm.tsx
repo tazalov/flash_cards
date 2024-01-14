@@ -31,11 +31,20 @@ export interface EditProfileValues {
 interface Props {
   avatarUrl?: string
   className?: string
+  handleDeactivateEditMode: () => void
   initialValue?: string
+  isLoading: boolean
   onSubmit: (data: FormData) => void
 }
 
-export const EditProfileForm = ({ avatarUrl, className, initialValue, onSubmit }: Props) => {
+export const EditProfileForm = ({
+  avatarUrl,
+  className,
+  handleDeactivateEditMode,
+  initialValue,
+  isLoading,
+  onSubmit,
+}: Props) => {
   const fileRef = useRef<HTMLInputElement>(null)
 
   const [avatar, setAvatar] = useState<File | null>(null)
@@ -70,6 +79,7 @@ export const EditProfileForm = ({ avatarUrl, className, initialValue, onSubmit }
         {avatarIsValid && (
           <Button
             className={s.crossBtn}
+            disabled={isLoading}
             onClick={handleClearCover}
             startIcon={<Cross className={s.crossIcon} />}
             variant={ButtonVariant.secondary}
@@ -77,6 +87,7 @@ export const EditProfileForm = ({ avatarUrl, className, initialValue, onSubmit }
         )}
         <FileUploader
           className={s.avatarLoader}
+          disabled={isLoading}
           ref={fileRef}
           setFile={setAvatar}
           trigger={<Button as="span" className={s.trigger} startIcon={<Edit />} />}
@@ -87,10 +98,21 @@ export const EditProfileForm = ({ avatarUrl, className, initialValue, onSubmit }
         className={s.nickname}
         control={control}
         defaultValue={initialValue}
+        disabled={isLoading}
         label="Nickname"
         name="username"
       />
-      <Button fullWidth type="submit">
+      <Button
+        className={s.cancel}
+        disabled={isLoading}
+        fullWidth
+        onClick={handleDeactivateEditMode}
+        type="button"
+        variant={ButtonVariant.secondary}
+      >
+        Cancel
+      </Button>
+      <Button disabled={isLoading} fullWidth type="submit">
         Save changes
       </Button>
     </form>
