@@ -1,15 +1,6 @@
-import { useState } from 'react'
+import { ReactNode } from 'react'
 
-import { Remove } from '@/common/assets/icons'
-import { ButtonVariant, TypographyVariant } from '@/common/enums'
-import { Button } from '@/common/ui/Button'
-import { IconButton } from '@/common/ui/IconButton'
-import { Modal } from '@/common/ui/Modals'
-import { ModalClose } from '@/common/ui/Modals/ModalClose'
-import { Typography } from '@/common/ui/Typography'
-import cn from 'classnames'
-
-import s from './RemoveDeckModal.module.scss'
+import { RemoveItemModal } from '@/common/ui/RemoveItemModal'
 
 import { useRemoveDeckMutation } from '../../../model/services/decks.service'
 
@@ -17,11 +8,10 @@ interface Props {
   className?: string
   deckId: string
   deckName: string
+  trigger: ReactNode
 }
 
-export const RemoveDeckModal = ({ className, deckId, deckName }: Props) => {
-  const [open, setOpen] = useState(false)
-
+export const RemoveDeckModal = ({ deckId, deckName, ...rest }: Props) => {
   const [removeDeck, { isLoading }] = useRemoveDeckMutation()
 
   const handleRemoveDeck = () => {
@@ -29,30 +19,12 @@ export const RemoveDeckModal = ({ className, deckId, deckName }: Props) => {
   }
 
   return (
-    <Modal
-      className={cn(s.modal, className)}
-      onOpenChange={setOpen}
-      open={open}
+    <RemoveItemModal
+      handleRemoveItem={handleRemoveDeck}
+      isLoading={isLoading}
+      itemName={deckName}
       title="Remove deck"
-      trigger={<IconButton icon={<Remove />} />}
-    >
-      <div className={s.body}>
-        <Typography className={s.text} variant={TypographyVariant.body1}>
-          Do you really want to remove <b>{deckName}?</b>
-          <br />
-          All cards will be deleted.
-        </Typography>
-        <div className={s.buttons}>
-          <ModalClose>
-            <Button disabled={isLoading} variant={ButtonVariant.secondary}>
-              Cancel
-            </Button>
-          </ModalClose>
-          <Button disabled={isLoading} onClick={handleRemoveDeck}>
-            Remove Deck
-          </Button>
-        </div>
-      </div>
-    </Modal>
+      {...rest}
+    />
   )
 }

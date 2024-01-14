@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-import { Edit, Play } from '@/common/assets/icons'
+import { Edit, Play, Remove } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Column, Sort } from '@/common/types'
 import { IconButton } from '@/common/ui/IconButton'
@@ -91,7 +91,11 @@ export const DecksTable = ({ authId, handleChangeSort, items, sort, ...rest }: P
                 {authId === el.userId && (
                   <>
                     <UpdateDeckModal deck={el} trigger={<IconButton icon={<Edit />} />} />
-                    <RemoveDeckModal deckId={el.id} deckName={el.name} />
+                    <RemoveDeckModal
+                      deckId={el.id}
+                      deckName={el.name}
+                      trigger={<IconButton icon={<Remove />} />}
+                    />
                   </>
                 )}
               </Table.Cell>
