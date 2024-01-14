@@ -47,7 +47,7 @@ export const ForgotPasswordForm = ({ className, isLoading, onSubmit }: Props) =>
       </Typography>
       <Button
         as={Link}
-        className={cn(s.signUpNav, { [s.disabled]: isLoading })}
+        className={cn(s.signUpNav, { disabledLink: isLoading })}
         to="/sign-in"
         variant={ButtonVariant.link}
       >

@@ -56,7 +56,7 @@ export const SignInForm = ({ className, isLoading, onSubmit }: Props) => {
       />
       <Typography
         as={Link}
-        className={cn(s.forgotNav, { [s.disabled]: isLoading })}
+        className={cn(s.forgotNav, { disabledLink: isLoading })}
         to="/forgot-password"
         variant={TypographyVariant.body2}
       >
@@ -70,7 +70,7 @@ export const SignInForm = ({ className, isLoading, onSubmit }: Props) => {
       </Typography>
       <Button
         as={Link}
-        className={cn(s.signUpNav, { [s.disabled]: isLoading })}
+        className={cn(s.signUpNav, { disabledLink: isLoading })}
         to="/sign-up"
         variant={ButtonVariant.link}
       >

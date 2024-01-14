@@ -5,8 +5,10 @@ import { Page } from '@/common/ui/Page'
 import { SignUpArgs, SignUpForm, useSignUpMutation } from '@/features/auth'
 
 export const SignUp = () => {
-  const [signUp] = useSignUpMutation()
+  const [signUp, { isLoading }] = useSignUpMutation()
+
   const [error, setError] = useState('')
+
   const navigate = useNavigate()
 
   const handleSubmit = async ({ email, password }: SignUpArgs) => {
@@ -22,7 +24,12 @@ export const SignUp = () => {
 
   return (
     <Page>
-      <SignUpForm errorMessage={error} onSubmit={handleSubmit} setError={setError} />
+      <SignUpForm
+        errorMessage={error}
+        isLoading={isLoading}
+        onSubmit={handleSubmit}
+        setError={setError}
+      />
     </Page>
   )
 }
