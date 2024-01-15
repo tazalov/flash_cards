@@ -12,6 +12,7 @@ import { useMeQuery } from '@/features/auth'
 import { CardsHeader, CardsTable, CreateCardModal, useGetCardsByIdQuery } from '@/features/card'
 import { useGetDeckByIdQuery } from '@/features/deck'
 import { Deck } from '@/features/deck/model/types/decks.types'
+import cn from 'classnames'
 
 import s from './CardsList.module.scss'
 
@@ -83,7 +84,7 @@ export const CardsList = () => {
             type="search"
             value={question || ''}
           />
-          <div className={s.item}>
+          <div className={cn(s.item, s.tableContainer)}>
             <CardsTable
               className={s.table}
               currentPage={page}
