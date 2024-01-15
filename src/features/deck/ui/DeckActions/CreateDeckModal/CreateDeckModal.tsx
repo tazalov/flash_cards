@@ -10,7 +10,7 @@ import { DeckActionsForm } from '../DeckActionsForm/DeckActionsForm'
 
 export const CreateDeckModal = () => {
   const [open, setOpen] = useState(false)
-  const [createDeck, { isLoading }] = useCreateDeckMutation()
+  const [createDeck, { error, isLoading, isSuccess }] = useCreateDeckMutation()
 
   return (
     <Modal

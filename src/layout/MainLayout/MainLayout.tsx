@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { Outlet } from 'react-router-dom'
+import { Bounce, ToastContainer } from 'react-toastify'
 
 import { AppOutletContext } from '@/common/hooks/useAppOutletContext'
 import { useLogoutMutation, useMeQuery } from '@/features/auth'
@@ -36,6 +37,19 @@ export const MainLayout = forwardRef<ElementRef<'div'>, Props>((props, ref) => {
       <main className={s.main}>
         <Outlet context={{ isAuth } satisfies AppOutletContext} />
       </main>
+      <ToastContainer
+        autoClose={5000}
+        closeOnClick
+        draggable={false}
+        hideProgressBar={false}
+        newestOnTop
+        pauseOnFocusLoss={false}
+        pauseOnHover
+        position="bottom-left"
+        rtl={false}
+        theme="dark"
+        transition={Bounce}
+      />
     </div>
   )
 })

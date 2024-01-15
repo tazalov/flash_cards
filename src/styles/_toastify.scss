@@ -1,0 +1,28 @@
+:root {
+  --toastify-color-light: var(--color-light-100);
+  --toastify-color-dark: var(--color-dark-700);
+  --toastify-color-info: var(--color-info-500);
+  --toastify-color-success: var(--color-success-500);
+  --toastify-color-warning: var(--color-warning-500);
+  --toastify-color-error: var(--color-danger-500);
+
+  // default bg
+  --toastify-toast-background: var(--color-light-100);
+
+  // text-color
+  --toastify-text-color-light: var(--color-dark-700);
+  --toastify-text-color-dark: var(--color-light-100);
+
+  // Used only for colored theme
+  --toastify-text-color-info: var(--color-light-100);
+  --toastify-text-color-success: var(--color-light-100);
+  --toastify-text-color-warning: var(--color-light-100);
+  --toastify-text-color-error: var(--color-light-100);
+
+  // Used when no type is provided
+  --toastify-color-progress-light: var(--color-accent-500);
+  --toastify-color-progress-dark: var(--color-accent-500);
+
+  // sizes
+  --toastify-toast-width: 25rem;
+}

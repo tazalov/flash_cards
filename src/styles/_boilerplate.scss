@@ -43,3 +43,27 @@ body {
 
   background-color: var(--color-dark-900);
 }
+
+* {
+  scrollbar-color: var(--color-accent-500) var(--color-dark-500);
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--color-dark-500);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent-500);
+}
+
+.disabledLink {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.5;
+}
