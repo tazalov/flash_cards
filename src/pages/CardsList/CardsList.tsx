@@ -83,7 +83,7 @@ export const CardsList = () => {
             type="search"
             value={question || ''}
           />
-          <div className={s.tableContainer}>
+          <div className={s.item}>
             <CardsTable
               className={s.table}
               currentPage={page}
