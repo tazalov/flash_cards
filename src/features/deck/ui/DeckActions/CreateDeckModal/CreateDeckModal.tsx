@@ -10,7 +10,8 @@ import { DeckActionsForm } from '../DeckActionsForm/DeckActionsForm'
 
 export const CreateDeckModal = () => {
   const [open, setOpen] = useState(false)
-  const [createDeck, { isLoading }] = useCreateDeckMutation()
+
+  const [createDeck, { isLoading: isLoadCreateDeck }] = useCreateDeckMutation()
 
   return (
     <Modal
@@ -20,7 +21,7 @@ export const CreateDeckModal = () => {
       title="Add new Deck"
       trigger={<Button>Add New Deck</Button>}
     >
-      <DeckActionsForm isLoading={isLoading} onSubmit={createDeck} />
+      <DeckActionsForm isLoading={isLoadCreateDeck} onSubmit={createDeck} />
     </Modal>
   )
 }

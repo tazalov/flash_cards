@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import { AppOutletContext } from '@/common/hooks/useAppOutletContext'
+import { Preloader } from '@/common/ui/Preloader'
 import { useLogoutMutation, useMeQuery } from '@/features/auth'
 import { Header } from '@/layout/Header'
 
@@ -17,7 +18,7 @@ export const MainLayout = forwardRef<ElementRef<'div'>, Props>((props, ref) => {
   const isAuth = !isError
 
   if (isLoading) {
-    return <div>loading layout</div>
+    return <Preloader fullHeight size={200} />
   }
 
   return (

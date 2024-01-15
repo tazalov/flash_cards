@@ -14,9 +14,10 @@ import { SignInFormData, useSignInForm } from '../../model/hooks/useSignInForm'
 
 interface Props {
   className?: string
+  isLoading: boolean
   onSubmit: (data: SignInFormData) => void
 }
-export const SignInForm = ({ className, onSubmit }: Props) => {
+export const SignInForm = ({ className, isLoading, onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -31,6 +32,7 @@ export const SignInForm = ({ className, onSubmit }: Props) => {
       <ControlledTextField
         className={s.input}
         control={control}
+        disabled={isLoading}
         errorText={errors?.email?.message}
         label="Email"
         name="email"
@@ -39,6 +41,7 @@ export const SignInForm = ({ className, onSubmit }: Props) => {
       <ControlledTextField
         className={s.input}
         control={control}
+        disabled={isLoading}
         errorText={errors?.password?.message}
         label="Password"
         name="password"
@@ -47,24 +50,30 @@ export const SignInForm = ({ className, onSubmit }: Props) => {
       <ControlledCheckbox
         className={s.checkbox}
         control={control}
+        disabled={isLoading}
         label="Remember me"
         name="rememberMe"
       />
       <Typography
         as={Link}
-        className={s.forgotNav}
+        className={cn(s.forgotNav, { disabledLink: isLoading })}
         to="/forgot-password"
         variant={TypographyVariant.body2}
       >
         Forgot Password?
       </Typography>
-      <Button className={s.signInBtn} fullWidth type="submit">
+      <Button className={s.signInBtn} disabled={isLoading} fullWidth type="submit">
         Sign In
       </Button>
       <Typography className={s.signUpText} variant={TypographyVariant.body2}>
         Don`t have an account?
       </Typography>
-      <Button as={Link} className={s.signUpNav} to="/sign-up" variant={ButtonVariant.link}>
+      <Button
+        as={Link}
+        className={cn(s.signUpNav, { disabledLink: isLoading })}
+        to="/sign-up"
+        variant={ButtonVariant.link}
+      >
         Sign Up
       </Button>
     </Card>

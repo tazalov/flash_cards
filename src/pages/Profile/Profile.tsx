@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Arrow } from '@/common/assets/icons'
@@ -12,11 +13,25 @@ import s from './Profile.module.scss'
 export const Profile = () => {
   const navigate = useNavigate()
 
+  const [editMode, setEditMode] = useState(false)
+
   const { data } = useMeQuery()
 
-  const [updateProfile, {}] = useUpdateProfileMutation()
+  const [updateProfile, { isLoading: isLoadUpdate }] = useUpdateProfileMutation()
 
-  const [logout, {}] = useLogoutMutation()
+  const [logout, { isLoading: isLoadLogout }] = useLogoutMutation()
+
+  const handleUpdate = (data: FormData) => {
+    updateProfile(data)
+      .unwrap()
+      .then(() => setEditMode(false))
+  }
+
+  const handleLogout = () => {
+    logout()
+      .unwrap()
+      .then(() => navigate('/sign-in'))
+  }
 
   return (
     <Page>
@@ -32,8 +47,12 @@ export const Profile = () => {
             username: data.name,
           }
         }
-        handleLogout={logout}
-        handleUpdate={updateProfile}
+        editMode={editMode}
+        handleLogout={handleLogout}
+        handleUpdate={handleUpdate}
+        isLoadLogout={isLoadLogout}
+        isLoadUpdate={isLoadUpdate}
+        setEditMode={setEditMode}
       />
     </Page>
   )

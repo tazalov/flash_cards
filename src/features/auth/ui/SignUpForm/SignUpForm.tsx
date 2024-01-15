@@ -5,6 +5,7 @@ import { Button } from '@/common/ui/Button'
 import { Card } from '@/common/ui/Card'
 import { Typography } from '@/common/ui/Typography'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
+import cn from 'classnames'
 
 import s from './SignUpForm.module.scss'
 
@@ -12,11 +13,12 @@ import { SignUpFormValues, useSignUpForm } from '../../model/hooks/useSignUpForm
 
 interface Props {
   errorMessage?: string
+  isLoading: boolean
   onSubmit: (data: SignUpFormValues) => void
   setError: (msg: string) => void
 }
 
-export const SignUpForm = ({ errorMessage, onSubmit, setError }: Props) => {
+export const SignUpForm = ({ errorMessage, isLoading, onSubmit, setError }: Props) => {
   const { control, errors, handleSubmit } = useSignUpForm()
   const handleClearErrorMessage = () => {
     if (errorMessage) {
@@ -32,6 +34,7 @@ export const SignUpForm = ({ errorMessage, onSubmit, setError }: Props) => {
       <ControlledTextField
         className={s.input}
         control={control}
+        disabled={isLoading}
         errorText={errorMessage ? errorMessage : errors.email?.message}
         label="Email"
         name="email"
@@ -41,6 +44,7 @@ export const SignUpForm = ({ errorMessage, onSubmit, setError }: Props) => {
       <ControlledTextField
         className={s.input}
         control={control}
+        disabled={isLoading}
         errorText={errors.password?.message}
         label="Password"
         name="password"
@@ -49,18 +53,24 @@ export const SignUpForm = ({ errorMessage, onSubmit, setError }: Props) => {
       <ControlledTextField
         className={s.input}
         control={control}
+        disabled={isLoading}
         errorText={errors.confirmPassword?.message}
         label="Confirm password"
         name="confirmPassword"
         type="password"
       />
-      <Button className={s.btnSubmit} fullWidth type="submit">
+      <Button className={s.btnSubmit} disabled={isLoading} fullWidth type="submit">
         Sign Up
       </Button>
       <Typography className={s.formFooterText} variant={TypographyVariant.body2}>
         Already have an account?
       </Typography>
-      <Button as={Link} className={s.formBtnLink} to="/sign-in" variant={ButtonVariant.link}>
+      <Button
+        as={Link}
+        className={cn(s.formBtnLink, { disabledLink: isLoading })}
+        to="/sign-in"
+        variant={ButtonVariant.link}
+      >
         Sign in
       </Button>
     </Card>
