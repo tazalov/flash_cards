@@ -3,6 +3,10 @@
   margin-bottom: 1.5rem;
 }
 
+.table {
+  margin-bottom: 0.5rem;
+}
+
 .link {
   cursor: pointer;
 
@@ -13,7 +17,8 @@
   margin-bottom: 2.25rem;
 }
 
-.item {
+.item,
+.tableContainer {
   margin-bottom: 1.5rem;
 }
 
@@ -31,4 +36,10 @@
   width: 1rem;
   height: 1rem;
   color: var(--color-light-100);
+}
+
+@media screen and (width <= 1024px) {
+  .tableContainer {
+    overflow-y: auto;
+  }
 }

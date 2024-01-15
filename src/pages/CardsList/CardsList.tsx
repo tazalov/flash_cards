@@ -83,17 +83,19 @@ export const CardsList = () => {
             type="search"
             value={question || ''}
           />
-          <CardsTable
-            className={s.item}
-            currentPage={page}
-            deckItems={data?.items ?? []}
-            handleChangePage={handleChangePage}
-            handleChangeSort={handleChangeSort}
-            isLoading={isFetching}
-            isOwner={isOwner}
-            itemsPerPage={itemsPerPage}
-            sort={getSortObj(orderBy)}
-          />
+          <div className={s.tableContainer}>
+            <CardsTable
+              className={s.table}
+              currentPage={page}
+              deckItems={data?.items ?? []}
+              handleChangePage={handleChangePage}
+              handleChangeSort={handleChangeSort}
+              isLoading={isFetching}
+              isOwner={isOwner}
+              itemsPerPage={itemsPerPage}
+              sort={getSortObj(orderBy)}
+            />
+          </div>
           <Pagination
             className={s.pagination}
             currentPage={page}
