@@ -16,3 +16,15 @@
   display: flex;
   gap: 1rem;
 }
+
+@media screen and (width <= 1024px) {
+  .img {
+    max-height: 14rem;
+  }
+}
+
+@media screen and (width <= 640px) {
+  .img {
+    max-height: 8rem;
+  }
+}
