@@ -8,6 +8,7 @@ import { SignUp } from '@/pages/Auth/SignUp'
 import { CardsList } from '@/pages/CardsList'
 import { DecksList } from '@/pages/DecksList'
 import { Learn } from '@/pages/Learn'
+import { NotFound } from '@/pages/NotFound'
 import { Profile } from '@/pages/Profile'
 
 import { PrivateRedirect } from '../ui/PrivateRedirect'
@@ -36,5 +37,9 @@ export const router = createBrowserRouter([
   {
     children: appRoutes,
     element: <MainLayout />,
+  },
+  {
+    element: <NotFound />,
+    path: '*',
   },
 ])
