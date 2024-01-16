@@ -1,5 +1,6 @@
 .headCell {
   cursor: pointer;
+  white-space: nowrap;
   transition: all 0.1s linear;
 
   &:hover {

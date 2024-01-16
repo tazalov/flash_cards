@@ -19,13 +19,13 @@ export const ProfileInfo = ({
   handleActiveEditMode,
   handleLogout,
   isLoading,
-  username,
+  username = '',
 }: Props) => {
   return (
     <div className={s.root}>
       <div className={s.username}>
         <Typography as="h3" variant={TypographyVariant.h1}>
-          {username}
+          {username.length > 10 ? username.slice(0, 10) + '...' : username}
         </Typography>
         <IconButton icon={<Edit />} onClick={handleActiveEditMode} />
       </div>

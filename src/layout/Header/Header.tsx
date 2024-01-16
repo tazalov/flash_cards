@@ -22,7 +22,9 @@ export const Header = forwardRef<ElementRef<'header'>, Props>(
     return (
       <header className={cn(s.header, className)} ref={ref} {...rest}>
         <Page className={s.container} mt={0}>
-          <img alt="logo" className={s.logo} src={Logo} />
+          <Link className={s.mainLink} to="/">
+            <img alt="logo" className={s.logo} src={Logo} />
+          </Link>
           {isAuth && data ? (
             <HeaderUser data={data} logout={logout} />
           ) : (

@@ -16,6 +16,13 @@
   text-decoration: none;
 }
 
+@media screen and (width <= 1024px) {
+  .name {
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+}
+
 .cover {
   width: 7.5rem;
   max-height: 3rem;

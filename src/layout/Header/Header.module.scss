@@ -1,5 +1,6 @@
 .header {
   position: fixed;
+  z-index: 100;
   top: 0;
   right: 0;
   left: 0;
@@ -16,6 +17,22 @@
   justify-content: space-between;
 }
 
+.mainLink {
+  line-height: 0;
+}
+
 .logo {
   max-height: 2.25rem;
+}
+
+@media screen and (width <= 1024px) {
+  .logo {
+    max-height: 1.8rem;
+  }
+}
+
+@media screen and (width <= 640px) {
+  .logo {
+    max-height: 1.4rem;
+  }
 }

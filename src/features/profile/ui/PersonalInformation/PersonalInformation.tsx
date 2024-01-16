@@ -40,7 +40,7 @@ export const PersonalInformation = ({
   return (
     <Card className={cn(s.root, className)}>
       <Typography as="h1" className={s.title} variant={TypographyVariant.large}>
-        Personal information
+        Profile
       </Typography>
       {editMode ? (
         <EditProfileForm

@@ -60,15 +60,17 @@ export const DecksList = () => {
         searchValue={name}
         tabValue={show}
       />
-      <DecksTable
-        authId={userData?.id ?? ''}
-        className={s.table}
-        handleChangeSort={handleChangeSort}
-        isLoading={isFetching}
-        items={data?.items}
-        itemsPerPage={itemsPerPage}
-        sort={getSortObj(orderBy)}
-      />
+      <div className={s.tableContainer}>
+        <DecksTable
+          authId={userData?.id ?? ''}
+          className={s.table}
+          handleChangeSort={handleChangeSort}
+          isLoading={isFetching}
+          items={data?.items}
+          itemsPerPage={itemsPerPage}
+          sort={getSortObj(orderBy)}
+        />
+      </div>
       <Pagination
         className={s.pagination}
         currentPage={currentPage}

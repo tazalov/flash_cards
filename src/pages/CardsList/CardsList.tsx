@@ -12,6 +12,7 @@ import { useMeQuery } from '@/features/auth'
 import { CardsHeader, CardsTable, CreateCardModal, useGetCardsByIdQuery } from '@/features/card'
 import { useGetDeckByIdQuery } from '@/features/deck'
 import { Deck } from '@/features/deck/model/types/decks.types'
+import cn from 'classnames'
 
 import s from './CardsList.module.scss'
 
@@ -83,17 +84,19 @@ export const CardsList = () => {
             type="search"
             value={question || ''}
           />
-          <CardsTable
-            className={s.item}
-            currentPage={page}
-            deckItems={data?.items ?? []}
-            handleChangePage={handleChangePage}
-            handleChangeSort={handleChangeSort}
-            isLoading={isFetching}
-            isOwner={isOwner}
-            itemsPerPage={itemsPerPage}
-            sort={getSortObj(orderBy)}
-          />
+          <div className={cn(s.item, s.tableContainer)}>
+            <CardsTable
+              className={s.table}
+              currentPage={page}
+              deckItems={data?.items ?? []}
+              handleChangePage={handleChangePage}
+              handleChangeSort={handleChangeSort}
+              isLoading={isFetching}
+              isOwner={isOwner}
+              itemsPerPage={itemsPerPage}
+              sort={getSortObj(orderBy)}
+            />
+          </div>
           <Pagination
             className={s.pagination}
             currentPage={page}

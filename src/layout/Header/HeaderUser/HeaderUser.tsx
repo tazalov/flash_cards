@@ -32,7 +32,7 @@ export const HeaderUser = ({ data, logout }: Props) => {
         sideOffset={10}
         trigger={
           <Typography as="h3" className={s.trigger} variant={TypographyVariant.subtitle1}>
-            {username}
+            {username.length > 10 ? username.slice(0, 10) + '...' : username}
           </Typography>
         }
       >
@@ -53,7 +53,7 @@ export const HeaderUser = ({ data, logout }: Props) => {
         </Dropdown.Item>
         <Dropdown.Separator />
         <Dropdown.Item onSelect={logout} startIcon={<Logout />}>
-          <Typography variant={TypographyVariant.caption}>Sign Out</Typography>
+          <Typography variant={TypographyVariant.caption}>Logout</Typography>
         </Dropdown.Item>
       </Dropdown.Menu>
       <Avatar size="small" src={avatar} title={titleNoAvatar} />
