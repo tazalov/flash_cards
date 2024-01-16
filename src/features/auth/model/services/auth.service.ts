@@ -16,9 +16,19 @@ const authService = baseApi.injectEndpoints({
       }),
       logout: builder.mutation<void, void>({
         invalidatesTags: ['Me'],
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          const patchResult = dispatch(authService.util.updateQueryData('me', _, () => null))
+
+          try {
+            await queryFulfilled
+            dispatch(baseApi.util.resetApiState())
+          } catch (e) {
+            patchResult.undo()
+          }
+        },
         query: () => ({ method: 'POST', url: '/v1/auth/logout' }),
       }),
-      me: builder.query<User, void>({
+      me: builder.query<User | null, void>({
         providesTags: ['Me'],
         query: () => ({ url: '/v1/auth/me' }),
       }),
