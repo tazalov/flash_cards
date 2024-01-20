@@ -5,8 +5,8 @@ import { Arrow } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Page } from '@/common/ui/Page'
 import { Typography } from '@/common/ui/Typography'
-import { useLogoutMutation, useMeQuery } from '@/features/auth'
-import { PersonalInformation, useUpdateProfileMutation } from '@/features/profile'
+import { useLogoutMutation, useMeQuery, useUpdateProfileMutation } from '@/features/auth'
+import { PersonalInformation } from '@/features/profile'
 
 import s from './Profile.module.scss'
 
@@ -23,8 +23,7 @@ export const Profile = () => {
 
   const handleUpdate = (data: FormData) => {
     updateProfile(data)
-      .unwrap()
-      .then(() => setEditMode(false))
+    setEditMode(false)
   }
 
   const handleLogout = () => {
