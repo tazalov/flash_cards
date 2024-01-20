@@ -7,7 +7,6 @@ import { TypographyVariant } from '@/common/enums'
 import { Page } from '@/common/ui/Page'
 import { Preloader } from '@/common/ui/Preloader'
 import { Typography } from '@/common/ui/Typography'
-import { handleErrorResponse } from '@/common/utils'
 import {
   CardBody,
   CardBodySkeleton,
@@ -35,10 +34,8 @@ export const Learn = () => {
     useChangeGradeCardMutation()
 
   const handleSubmitGrade = (formData: Rate) => {
-    changeGrade({ cardId: data!.id, deckId, grade: Number(formData.grade) }).then(data => {
-      if ('error' in data) {
-        return handleErrorResponse(data.error)
-      } else {
+    changeGrade({ cardId: data!.id, deckId, grade: Number(formData.grade) }).then(res => {
+      if ('data' in res) {
         toast.success(`Grade has been successfully counted!`)
         setHideAnswer(true)
       }
