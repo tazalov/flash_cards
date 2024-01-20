@@ -1,6 +1,6 @@
 import { baseApi } from '@/api'
-import { SignInFormData } from '@/features/auth/model/hooks/useSignInForm'
 
+import { SignInFormData } from '../../model/hooks/useSignInForm'
 import { SignUpArgs, User } from '../types/service.types'
 
 const authService = baseApi.injectEndpoints({
