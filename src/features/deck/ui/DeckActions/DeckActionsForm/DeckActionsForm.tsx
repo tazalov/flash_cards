@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, useRef } from 'react'
 
 import { LoadPicture, Trash } from '@/common/assets/icons'
+import { COVER_SCHEMA } from '@/common/const'
 import { ButtonVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 import { FileUploader } from '@/common/ui/FilesUploader'
@@ -8,25 +9,27 @@ import { IconButton } from '@/common/ui/IconButton'
 import { ModalClose } from '@/common/ui/Modals/ModalClose'
 import { ControlledCheckbox } from '@/common/ui_controlled/ControlledCheckbox'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
-import { CreateDeckFormData } from '@/features/deck/model/hooks/useCreateDeckForm'
-import { useDeckActionsForm } from '@/features/deck/model/hooks/useUpdateDeckForm'
-import { Deck } from '@/features/deck/model/types/decks.types'
+import { CatchingData } from '@/common/utils/handleMutationRequest'
 
 import s from './DeckActionsForm.module.scss'
 
+import { CreateDeckFormData, useDeckActionsForm } from '../../../model/hooks/useDeckActionsForm'
+import { Deck } from '../../../model/types/decks.types'
+
 type Props = {
   deck?: Pick<Deck, 'cover' | 'isPrivate' | 'name'>
-  isLoading: boolean
-  onSubmit: (data: FormData) => void
+  disabled: boolean
+  onSubmit: (body: FormData) => Promise<CatchingData | undefined>
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
-export const DeckActionsForm = ({ deck, isLoading, onSubmit }: Props) => {
+export const DeckActionsForm = ({ deck, disabled, onSubmit }: Props) => {
   const {
-    coverOptions: { cover, coverSchema, setCover },
+    coverOptions: { cover, setCover },
     formOptions: {
       control,
       formState: { errors },
       handleSubmit,
+      setError,
     },
   } = useDeckActionsForm(deck)
 
@@ -34,14 +37,20 @@ export const DeckActionsForm = ({ deck, isLoading, onSubmit }: Props) => {
 
   const isDefaultCover = typeof cover === 'string'
 
-  const handleSubmitDeck = (data: CreateDeckFormData) => {
-    const formData = new FormData()
+  const handleSubmitAction = (data: CreateDeckFormData) => {
+    const body = new FormData()
 
-    formData.append('name', data.name)
-    formData.append('isPrivate', `${data.isPrivate}`)
-    !isDefaultCover && formData.append('cover', cover || '')
+    body.append('name', data.name)
+    body.append('isPrivate', `${data.isPrivate}`)
+    typeof cover !== 'string' && body.append('cover', cover || '')
 
-    onSubmit(formData)
+    onSubmit(body).then(error => {
+      if (error && error.fieldErrors) {
+        error.fieldErrors?.forEach(el => {
+          setError(el.field as keyof CreateDeckFormData, { message: el.message })
+        })
+      }
+    })
   }
 
   const handleClearCover = () => {
@@ -49,7 +58,7 @@ export const DeckActionsForm = ({ deck, isLoading, onSubmit }: Props) => {
   }
 
   return (
-    <form className={s.addNewDeckForm} onSubmit={handleSubmit(handleSubmitDeck)}>
+    <form className={s.addNewDeckForm} onSubmit={handleSubmit(handleSubmitAction)}>
       {cover && (
         <div className={s.coverWrapper}>
           <img
@@ -59,7 +68,7 @@ export const DeckActionsForm = ({ deck, isLoading, onSubmit }: Props) => {
           />
           <IconButton
             className={s.clearCover}
-            disabled={isLoading}
+            disabled={disabled}
             icon={<Trash />}
             onClick={handleClearCover}
             size={1.5}
@@ -70,7 +79,7 @@ export const DeckActionsForm = ({ deck, isLoading, onSubmit }: Props) => {
         </div>
       )}
       <FileUploader
-        disabled={isLoading}
+        disabled={disabled}
         ref={fileRef}
         setFile={setCover}
         trigger={
@@ -84,12 +93,12 @@ export const DeckActionsForm = ({ deck, isLoading, onSubmit }: Props) => {
             Change Cover
           </Button>
         }
-        validationSchema={coverSchema}
+        validationSchema={COVER_SCHEMA}
       />
       <ControlledTextField
         className={s.marginItem}
         control={control}
-        disabled={isLoading}
+        disabled={disabled}
         errorText={errors?.name?.message}
         label="Name Deck"
         name="name"
@@ -97,17 +106,17 @@ export const DeckActionsForm = ({ deck, isLoading, onSubmit }: Props) => {
       <ControlledCheckbox
         className={s.addNewDeckCheckBox}
         control={control}
-        disabled={isLoading}
+        disabled={disabled}
         label="Private Deck"
         name="isPrivate"
       />
       <div className={s.btnWrapper}>
         <ModalClose>
-          <Button disabled={isLoading} variant={ButtonVariant.secondary}>
+          <Button disabled={disabled} variant={ButtonVariant.secondary}>
             Cancel
           </Button>
         </ModalClose>
-        <Button disabled={isLoading} type="submit">
+        <Button disabled={disabled} type="submit">
           Save Changes
         </Button>
       </div>
