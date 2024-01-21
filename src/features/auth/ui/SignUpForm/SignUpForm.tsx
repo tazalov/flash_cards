@@ -5,6 +5,7 @@ import { Button } from '@/common/ui/Button'
 import { Card } from '@/common/ui/Card'
 import { Typography } from '@/common/ui/Typography'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
+import { CatchingData } from '@/common/utils/handleErrorResponse'
 import cn from 'classnames'
 
 import s from './SignUpForm.module.scss'
@@ -12,22 +13,29 @@ import s from './SignUpForm.module.scss'
 import { SignUpFormValues, useSignUpForm } from '../../model/hooks/useSignUpForm'
 
 interface Props {
-  errorMessage?: string
   isLoading: boolean
-  onSubmit: (data: SignUpFormValues) => void
-  setError: (msg: string) => void
+  onSubmit: (body: SignUpFormValues) => Promise<CatchingData | undefined>
 }
 
-export const SignUpForm = ({ errorMessage, isLoading, onSubmit, setError }: Props) => {
-  const { control, errors, handleSubmit } = useSignUpForm()
-  const handleClearErrorMessage = () => {
-    if (errorMessage) {
-      setError('')
-    }
+export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    setError,
+  } = useSignUpForm()
+  const handleSubmitAction = (data: SignUpFormValues) => {
+    onSubmit(data).then(error => {
+      if (error && error.fieldErrors) {
+        error.fieldErrors?.forEach(el => {
+          setError(el.field as keyof SignUpFormValues, { message: el.message })
+        })
+      }
+    })
   }
 
   return (
-    <Card as="form" className={s.formContent} onSubmit={handleSubmit(onSubmit)}>
+    <Card as="form" className={s.formContent} onSubmit={handleSubmit(handleSubmitAction)}>
       <Typography as="h2" className={s.formTitle} variant={TypographyVariant.large}>
         Sign Up
       </Typography>
@@ -35,10 +43,9 @@ export const SignUpForm = ({ errorMessage, isLoading, onSubmit, setError }: Prop
         className={s.input}
         control={control}
         disabled={isLoading}
-        errorText={errorMessage ? errorMessage : errors.email?.message}
+        errorText={errors.email?.message}
         label="Email"
         name="email"
-        onChangeValue={handleClearErrorMessage}
         type="email"
       />
       <ControlledTextField
@@ -69,6 +76,7 @@ export const SignUpForm = ({ errorMessage, isLoading, onSubmit, setError }: Prop
         as={Link}
         className={cn(s.formBtnLink, { disabledLink: isLoading })}
         to="/sign-in"
+        type="submit"
         variant={ButtonVariant.link}
       >
         Sign in
