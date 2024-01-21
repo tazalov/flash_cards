@@ -23,21 +23,7 @@ const decksService = baseApi.injectEndpoints({
         query: ({ id }) => ({ method: 'DELETE', url: `v1/decks/${id}` }),
       }),
       updateDeck: builder.mutation<Deck, { body: FormData; id: string }>({
-        invalidatesTags: ['Decks'],
-
-        // async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
-        //   const patchResult = dispatch(
-        //     decksService.util.updateQueryData('getDecks', {}, draft => {
-        //       Object.assign(draft, patch)
-        //     })
-        //   )
-        //
-        //   try {
-        //     await queryFulfilled
-        //   } catch {
-        //     patchResult.undo()
-        //   }
-        // },
+        invalidatesTags: (_, error) => (error ? [] : ['Decks']),
         query: ({ body, id }) => ({
           body,
           method: 'PATCH',
