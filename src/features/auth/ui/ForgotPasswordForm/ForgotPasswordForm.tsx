@@ -5,6 +5,7 @@ import { Button } from '@/common/ui/Button'
 import { Card } from '@/common/ui/Card'
 import { Typography } from '@/common/ui/Typography'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
+import { CatchingData } from '@/common/utils/handleErrorResponse'
 import cn from 'classnames'
 
 import s from './ForgotPasswordForm.module.scss'
@@ -14,17 +15,27 @@ import { ForgotPasswordFormData, useForgotPassword } from '../../model/hooks/use
 interface Props {
   className?: string
   isLoading: boolean
-  onSubmit: (data: ForgotPasswordFormData) => void
+  onSubmit: (data: ForgotPasswordFormData) => Promise<CatchingData | undefined>
 }
 export const ForgotPasswordForm = ({ className, isLoading, onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
     handleSubmit,
+    setError,
   } = useForgotPassword()
+  const handleSubmitAction = (data: ForgotPasswordFormData) => {
+    onSubmit(data).then(error => {
+      if (error && error.fieldErrors) {
+        error.fieldErrors?.forEach(el => {
+          setError(el.field as keyof ForgotPasswordFormData, { message: el.message })
+        })
+      }
+    })
+  }
 
   return (
-    <Card as="form" className={cn(s.form, className)} onSubmit={handleSubmit(onSubmit)}>
+    <Card as="form" className={cn(s.form, className)} onSubmit={handleSubmit(handleSubmitAction)}>
       <Typography as="h2" className={s.headerText} variant={TypographyVariant.large}>
         Forgot your password?
       </Typography>
