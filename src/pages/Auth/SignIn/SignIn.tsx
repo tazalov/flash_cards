@@ -1,11 +1,18 @@
 import { Page } from '@/common/ui/Page'
+import { handleErrorResponse } from '@/common/utils'
 import { SignInForm, SignInFormData, useLoginMutation } from '@/features/auth'
 
 export const SignIn = () => {
   const [login, { isLoading }] = useLoginMutation()
 
   const handleLoginSubmit = (args: SignInFormData) => {
-    login(args)
+    login(args).then(data => {
+      if ('error' in data) {
+        console.log(data.error)
+
+        return handleErrorResponse(data.error)
+      }
+    })
   }
 
   return (
