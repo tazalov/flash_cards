@@ -3,6 +3,7 @@ import { Button } from '@/common/ui/Button'
 import { Card } from '@/common/ui/Card'
 import { Typography } from '@/common/ui/Typography'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
+import { CatchingData } from '@/common/utils/handleErrorResponse'
 
 import s from './CreateNewPasswordForm.module.scss'
 
@@ -13,14 +14,28 @@ import {
 
 interface Props {
   isLoading: boolean
-  onSubmit: (data: CreateNewPasswordFormValues) => void
+  onSubmit: (data: CreateNewPasswordFormValues) => Promise<CatchingData | undefined>
 }
 
 export const CreateNewPasswordForm = ({ isLoading, onSubmit }: Props) => {
-  const { control, errors, handleSubmit } = useCreateNewPasswordForm()
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    setError,
+  } = useCreateNewPasswordForm()
+  const handleSubmitAction = (data: CreateNewPasswordFormValues) => {
+    onSubmit(data).then(error => {
+      if (error && error.fieldErrors) {
+        error.fieldErrors?.forEach(el => {
+          setError(el.field as keyof CreateNewPasswordFormValues, { message: el.message })
+        })
+      }
+    })
+  }
 
   return (
-    <Card as="form" className={s.formContent} onSubmit={handleSubmit(onSubmit)}>
+    <Card as="form" className={s.formContent} onSubmit={handleSubmit(handleSubmitAction)}>
       <Typography as="h2" className={s.formTitle} variant={TypographyVariant.large}>
         Create new password
       </Typography>
