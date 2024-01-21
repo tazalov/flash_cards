@@ -8,6 +8,7 @@ import { IconButton } from '@/common/ui/IconButton'
 import { ModalClose } from '@/common/ui/Modals/ModalClose'
 import { Select } from '@/common/ui/Select'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
+import { CatchingData } from '@/common/utils/handleErrorResponse'
 import { Card } from '@/features/card'
 import cn from 'classnames'
 
@@ -18,7 +19,7 @@ import { CreateCardFormData, useCreateCardForm } from '../../../model/hooks/useC
 type Props = {
   card?: Card
   isLoading: boolean
-  onSubmit: (data: FormData) => void
+  onSubmit: (data: FormData) => Promise<CatchingData | undefined>
   submitTitle?: string
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
@@ -41,6 +42,7 @@ export const ActionsCardForm = ({
       control,
       formState: { errors },
       handleSubmit,
+      setError,
     },
   } = useCreateCardForm(card)
 
@@ -65,9 +67,14 @@ export const ActionsCardForm = ({
     !isDefaultQuestionCover && formData.append('questionImg', questionCover || '')
     !isDefaultAnswerCover && formData.append('answerImg', answerCover || '')
 
-    onSubmit(formData)
+    onSubmit(formData).then(error => {
+      if (error && error.fieldErrors) {
+        error.fieldErrors?.forEach(el => {
+          setError(el.field as keyof CreateCardFormData, { message: el.message })
+        })
+      }
+    })
   }
-
   const handleChangeSelectQuestion = (value: string) => {
     setSelectQuestion(value)
     clearErrors(['question'])
