@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { Arrow } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Page } from '@/common/ui/Page'
 import { Typography } from '@/common/ui/Typography'
+import { handleErrorResponse } from '@/common/utils'
 import { useLogoutMutation, useMeQuery } from '@/features/auth'
 import { PersonalInformation, useUpdateProfileMutation } from '@/features/profile'
 
@@ -15,6 +17,16 @@ export const Profile = () => {
   const { data } = useMeQuery()
 
   const [updateProfile, {}] = useUpdateProfileMutation()
+
+  const handleSubmit = async (body: FormData) => {
+    return updateProfile(body).then(data => {
+      if ('error' in data) {
+        return handleErrorResponse(data.error)
+      } else {
+        toast.success(`Profile updated`)
+      }
+    })
+  }
 
   const [logout, {}] = useLogoutMutation()
 
@@ -33,7 +45,7 @@ export const Profile = () => {
           }
         }
         handleLogout={logout}
-        handleUpdate={updateProfile}
+        handleUpdate={handleSubmit}
       />
     </Page>
   )
