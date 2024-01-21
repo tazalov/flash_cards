@@ -1,29 +1,33 @@
 import { ReactNode, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { Modal } from '@/common/ui/Modals'
+import { handleErrorResponse } from '@/common/utils'
 import { useUpdateDeckMutation } from '@/features/deck/model/services/decks.service'
-import { Deck } from '@/features/deck/model/types/decks.types'
 
 import s from './UpdateDeckModal.module.scss'
 
+import { Deck } from '../../../model/types/decks.types'
 import { DeckActionsForm } from '../DeckActionsForm/DeckActionsForm'
 
 type Props = {
-  deck: Deck
+  deck: Pick<Deck, 'cover' | 'id' | 'isPrivate' | 'name'>
   trigger: ReactNode
 }
 
 export const UpdateDeckModal = ({ deck, trigger }: Props) => {
   const [open, setOpen] = useState(false)
   const [update, { isLoading }] = useUpdateDeckMutation()
-  const handleSubmit = (body: FormData) => {
-    update({ body, id: deck.id })
-      .unwrap()
-      .then(data => {
-        if (data) {
-          setOpen(false)
-        }
-      })
+
+  const handleSubmit = async (body: FormData) => {
+    return update({ body, id: deck.id }).then(data => {
+      if ('error' in data) {
+        return handleErrorResponse(data.error)
+      } else {
+        toast.success(`Deck "${body.get('name')}" success updated`)
+        setOpen(false)
+      }
+    })
   }
 
   return (
@@ -34,7 +38,7 @@ export const UpdateDeckModal = ({ deck, trigger }: Props) => {
       title="Edit deck"
       trigger={trigger}
     >
-      <DeckActionsForm deck={deck} isLoading={isLoading} onSubmit={handleSubmit} />
+      <DeckActionsForm deck={deck} disabled={isLoading} onSubmit={handleSubmit} />
     </Modal>
   )
 }
