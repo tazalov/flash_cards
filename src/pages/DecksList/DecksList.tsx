@@ -1,3 +1,4 @@
+import { useDebounce } from '@/common/hooks/useDebounce'
 import { Page } from '@/common/ui/Page'
 import { Pagination } from '@/common/ui/Pagination'
 import { Preloader } from '@/common/ui/Preloader'
@@ -27,15 +28,19 @@ export const DecksList = () => {
     show,
   } = useDecksFilters()
 
+  const debounceName = useDebounce(name)
+  const debounceMin = useDebounce(minCardsCount)
+  const debounceMax = useDebounce(maxCardsCount)
+
   const { data: userData } = useMeQuery()
 
   const { data, isFetching, isLoading } = useGetDecksQuery({
     authorId: show === 'my' ? userData?.id : undefined,
     currentPage,
     itemsPerPage,
-    maxCardsCount,
-    minCardsCount,
-    name,
+    maxCardsCount: debounceMax,
+    minCardsCount: debounceMin,
+    name: debounceName,
     orderBy,
   })
 
