@@ -9,7 +9,7 @@ import { IconButton } from '@/common/ui/IconButton'
 import { ModalClose } from '@/common/ui/Modals/ModalClose'
 import { ControlledCheckbox } from '@/common/ui_controlled/ControlledCheckbox'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
-import { CatchingData } from '@/common/utils/handleMutationRequest'
+import { CatchingData } from '@/common/utils/handleErrorResponse'
 
 import s from './DeckActionsForm.module.scss'
 
