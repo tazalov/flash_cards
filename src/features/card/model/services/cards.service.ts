@@ -39,7 +39,7 @@ const cardsService = baseApi.injectEndpoints({
         }),
       }),
       getCardsById: builder.query<GetCardsResponse, { id: string; params: GetCardsArgs }>({
-        providesTags: ['Cards'],
+        providesTags: (_, error) => (error ? [] : ['Cards']),
         query: ({ id, params }) => ({ params, url: `v1/decks/${id}/cards` }),
       }),
       getRandomCard: builder.query<Card, GetRandomCardArgs>({
@@ -49,7 +49,7 @@ const cardsService = baseApi.injectEndpoints({
         }),
       }),
       removeCard: builder.mutation<Card, { id: string }>({
-        invalidatesTags: ['Cards', 'Decks', 'Deck'],
+        invalidatesTags: (_, error) => (error ? [] : ['Cards', 'Decks', 'Deck']),
         query: ({ id }) => ({ method: 'DELETE', url: `v1/cards/${id}` }),
       }),
       updateCard: builder.mutation<Card, { body: FormData; card: Card }>({
