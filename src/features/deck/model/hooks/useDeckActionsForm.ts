@@ -1,22 +1,10 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import { Deck } from '../types/decks.types'
-
-const coverSchema = z
-  .instanceof(File)
-  .refine(
-    file => file.size <= MAX_SIZE_IMAGE,
-    `Max image size is 1MB. The file will not be uploaded.`
-  )
-  .refine(
-    file => ALLOWED_IMAGES_FORMATS.includes(file.type),
-    'Only .jpg, .jpeg, .png and .webp formats are supported. The file will not be uploaded.'
-  )
 
 const createDeckSchema = z.object({
   isPrivate: z.boolean().default(false),
@@ -34,5 +22,5 @@ export const useDeckActionsForm = (deck?: Pick<Deck, 'cover' | 'isPrivate' | 'na
     resolver: zodResolver(createDeckSchema),
   })
 
-  return { coverOptions: { cover, coverSchema, setCover }, formOptions }
+  return { coverOptions: { cover, setCover }, formOptions }
 }
