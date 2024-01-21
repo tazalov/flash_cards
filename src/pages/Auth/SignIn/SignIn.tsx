@@ -8,8 +8,6 @@ export const SignIn = () => {
   const handleLoginSubmit = (args: SignInFormData) => {
     login(args).then(data => {
       if ('error' in data) {
-        console.log(data.error)
-
         return handleErrorResponse(data.error)
       }
     })
