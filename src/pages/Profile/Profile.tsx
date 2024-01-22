@@ -27,7 +27,7 @@ export const Profile = () => {
       if ('error' in data) {
         return handleErrorResponse(data.error)
       } else {
-        toast.success(`Profile updated`)
+        toast.success(t(`Profile updated`))
         setEditMode(false)
       }
     })
