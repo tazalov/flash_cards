@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 
 import { Arrow } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
+import { useDebounce } from '@/common/hooks/useDebounce'
 import { Page } from '@/common/ui/Page'
 import { Pagination } from '@/common/ui/Pagination'
 import { Preloader } from '@/common/ui/Preloader'
@@ -33,6 +34,7 @@ export const CardsList = () => {
     page,
     question,
   } = useCardsList()
+  const debounceQuestion = useDebounce(question)
 
   const { data: deck } = useGetDeckByIdQuery({
     id: deckId,
@@ -44,7 +46,7 @@ export const CardsList = () => {
       currentPage: page,
       itemsPerPage,
       orderBy,
-      question,
+      question: debounceQuestion,
     },
   })
 

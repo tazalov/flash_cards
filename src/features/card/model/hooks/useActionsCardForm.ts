@@ -22,14 +22,14 @@ const createCardSchema = z.object({
   question: z.string().min(3, 'Question must be longer than or equal to 3 characters').trim(),
 })
 
-export type CreateCardFormData = z.input<typeof createCardSchema>
+export type ActionsCardFormData = z.input<typeof createCardSchema>
 
-export const useCreateCardForm = (card?: Card) => {
+export const useActionsCardForm = (card?: Card) => {
   const [questionCover, setQuestionCover] = useState<File | null | string>(
     card?.questionImg || null
   )
   const [answerCover, setAnswerCover] = useState<File | null | string>(card?.answerImg || null)
-  const formValues = useForm<CreateCardFormData>({
+  const formValues = useForm<ActionsCardFormData>({
     defaultValues: {
       answer: card?.answer || '',
       question: card?.question || '',

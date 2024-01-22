@@ -57,7 +57,6 @@ const columns: Column[] = [
 export const CardsTable = (props: Props) => {
   const {
     className,
-    currentPage,
     deckItems,
     handleChangePage,
     handleChangeSort,
@@ -105,7 +104,6 @@ export const CardsTable = (props: Props) => {
                     <>
                       <UpdateCardModal
                         card={el}
-                        currentPage={currentPage}
                         handleChangePage={handleChangePage}
                         trigger={<IconButton icon={<Edit />} />}
                       />

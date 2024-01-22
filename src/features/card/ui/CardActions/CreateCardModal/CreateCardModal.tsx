@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { Button } from '@/common/ui/Button'
 import { Modal } from '@/common/ui/Modals'
+import { handleErrorResponse } from '@/common/utils'
 import cn from 'classnames'
 
 import s from './CreateCardModal.module.scss'
@@ -18,13 +20,14 @@ export const CreateCardModal = ({ className, deckId }: Props) => {
   const [open, setOpen] = useState(false)
   const [createCard, { isLoading }] = useCreateCardMutation()
   const handleSubmit = (values: FormData) => {
-    createCard({ body: values, id: deckId })
-      .unwrap()
-      .then(data => {
-        if (data) {
-          setOpen(false)
-        }
-      })
+    return createCard({ body: values, id: deckId }).then(data => {
+      if ('error' in data) {
+        return handleErrorResponse(data.error)
+      } else {
+        toast.success('A new card has been created')
+        setOpen(false)
+      }
+    })
   }
 
   return (
@@ -35,7 +38,7 @@ export const CreateCardModal = ({ className, deckId }: Props) => {
       title="Add new Card"
       trigger={<Button>Create New Card</Button>}
     >
-      <ActionsCardForm isLoading={isLoading} onSubmit={handleSubmit} />
+      <ActionsCardForm disabled={isLoading} onSubmit={handleSubmit} />
     </Modal>
   )
 }

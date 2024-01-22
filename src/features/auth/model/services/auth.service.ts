@@ -7,7 +7,7 @@ const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       login: builder.mutation<void, SignInFormData>({
-        invalidatesTags: ['Me'],
+        invalidatesTags: (_, error) => (error ? [] : ['Me']),
         query: body => ({
           body,
           method: 'POST',

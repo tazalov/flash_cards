@@ -9,17 +9,10 @@ const createNewPasswordSchema = z.object({
 
 export type CreateNewPasswordFormValues = z.input<typeof createNewPasswordSchema>
 
-export const useCreateNewPasswordForm = () => {
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<CreateNewPasswordFormValues>({
+export const useCreateNewPasswordForm = () =>
+  useForm<CreateNewPasswordFormValues>({
     defaultValues: {
       password: '',
     },
     resolver: zodResolver(createNewPasswordSchema),
   })
-
-  return { control, errors, handleSubmit }
-}

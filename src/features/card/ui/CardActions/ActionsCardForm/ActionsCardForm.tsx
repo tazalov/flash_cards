@@ -8,17 +8,18 @@ import { IconButton } from '@/common/ui/IconButton'
 import { ModalClose } from '@/common/ui/Modals/ModalClose'
 import { Select } from '@/common/ui/Select'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
+import { CatchingData } from '@/common/utils/handleErrorResponse'
 import { Card } from '@/features/card'
 import cn from 'classnames'
 
 import s from './ActionsCardForm.module.scss'
 
-import { CreateCardFormData, useCreateCardForm } from '../../../model/hooks/useCreateCardForm'
+import { ActionsCardFormData, useActionsCardForm } from '../../../model/hooks/useActionsCardForm'
 
 type Props = {
   card?: Card
-  isLoading: boolean
-  onSubmit: (data: FormData) => void
+  disabled: boolean
+  onSubmit: (data: FormData) => Promise<CatchingData | undefined>
   submitTitle?: string
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
@@ -30,7 +31,7 @@ const options = [
 export const ActionsCardForm = ({
   card,
   className,
-  isLoading,
+  disabled,
   onSubmit,
   submitTitle = 'Add New Card',
 }: Props) => {
@@ -41,8 +42,9 @@ export const ActionsCardForm = ({
       control,
       formState: { errors },
       handleSubmit,
+      setError,
     },
-  } = useCreateCardForm(card)
+  } = useActionsCardForm(card)
 
   const [selectQuestion, setSelectQuestion] = useState(options[0].value)
   const [selectAnswer, setSelectAnswer] = useState(options[0].value)
@@ -57,7 +59,7 @@ export const ActionsCardForm = ({
     setSelectAnswer(options[0].value)
   }
 
-  const handleCreateCard = (formValues: CreateCardFormData) => {
+  const handleCreateCard = (formValues: ActionsCardFormData) => {
     const formData = new FormData()
 
     formData.append('question', formValues.question)
@@ -65,9 +67,14 @@ export const ActionsCardForm = ({
     !isDefaultQuestionCover && formData.append('questionImg', questionCover || '')
     !isDefaultAnswerCover && formData.append('answerImg', answerCover || '')
 
-    onSubmit(formData)
+    onSubmit(formData).then(error => {
+      if (error && error.fieldErrors) {
+        error.fieldErrors?.forEach(el => {
+          setError(el.field as keyof ActionsCardFormData, { message: el.message })
+        })
+      }
+    })
   }
-
   const handleChangeSelectQuestion = (value: string) => {
     setSelectQuestion(value)
     clearErrors(['question'])
@@ -97,7 +104,7 @@ export const ActionsCardForm = ({
     <form className={cn(s.form, className)} onSubmit={handleSubmit(handleCreateCard)}>
       <Select
         className={s.input}
-        disabled={isLoading}
+        disabled={disabled}
         fullWidth
         label="Choose a question format"
         onValueChange={handleChangeSelectQuestion}
@@ -108,7 +115,7 @@ export const ActionsCardForm = ({
         <ControlledTextField
           className={s.input}
           control={control}
-          disabled={isLoading}
+          disabled={disabled}
           errorText={errors.question?.message}
           label="Question"
           name="question"
@@ -134,7 +141,7 @@ export const ActionsCardForm = ({
             </div>
           )}
           <FileUploader
-            disabled={isLoading}
+            disabled={disabled}
             name="questionImg"
             ref={questionFileRef}
             setFile={setQuestionCover}
@@ -154,7 +161,7 @@ export const ActionsCardForm = ({
       )}
       <Select
         className={s.input}
-        disabled={isLoading}
+        disabled={disabled}
         fullWidth
         label="Choose a question format"
         onValueChange={handleChangeSelectAnswer}
@@ -165,7 +172,7 @@ export const ActionsCardForm = ({
         <ControlledTextField
           className={s.input}
           control={control}
-          disabled={isLoading}
+          disabled={disabled}
           errorText={errors.answer?.message}
           label="Answer"
           name="answer"
@@ -191,7 +198,7 @@ export const ActionsCardForm = ({
             </div>
           )}
           <FileUploader
-            disabled={isLoading}
+            disabled={disabled}
             name="answerImg"
             ref={answerFileRef}
             setFile={setAnswerCover}
@@ -211,11 +218,11 @@ export const ActionsCardForm = ({
       )}
       <div className={s.buttons}>
         <ModalClose>
-          <Button disabled={isLoading} type="button" variant={ButtonVariant.secondary}>
+          <Button disabled={disabled} type="button" variant={ButtonVariant.secondary}>
             Cancel
           </Button>
         </ModalClose>
-        <Button disabled={isLoading} type="submit">
+        <Button disabled={disabled} type="submit">
           {submitTitle}
         </Button>
       </div>
