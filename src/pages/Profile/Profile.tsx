@@ -34,8 +34,6 @@ export const Profile = () => {
     })
   }
 
-  const [logout, {}] = useLogoutMutation()
-  
   const handleLogout = () => {
     logout()
       .unwrap()

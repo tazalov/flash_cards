@@ -34,7 +34,7 @@ const cardsService = baseApi.injectEndpoints({
         }),
       }),
       createCard: builder.mutation<Card, { body: FormData; id: string }>({
-        invalidatesTags: ['Cards', 'Decks', 'Deck'],
+        invalidatesTags: (_, error) => (error ? [] : ['Cards', 'Decks', 'Deck']),
         query: ({ body, id }) => ({
           body,
           method: 'POST',

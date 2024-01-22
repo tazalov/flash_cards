@@ -8,7 +8,7 @@ const decksService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       createDeck: builder.mutation<Deck, FormData>({
-        invalidatesTags: ['Decks'],
+        invalidatesTags: (_, error) => (error ? [] : ['Decks']),
         query: body => ({ body, method: 'POST', url: `v1/decks` }),
       }),
       getDeckById: builder.query<Deck, { id: string }>({
@@ -22,7 +22,7 @@ const decksService = baseApi.injectEndpoints({
         transformErrorResponse: error => handleErrorResponse(error),
       }),
       removeDeck: builder.mutation<Deck, { id: string }>({
-        invalidatesTags: ['Decks'],
+        invalidatesTags: (_, error) => (error ? [] : ['Decks']),
         query: ({ id }) => ({ method: 'DELETE', url: `v1/decks/${id}` }),
       }),
       updateDeck: builder.mutation<Deck, { body: FormData; id: string }>({
