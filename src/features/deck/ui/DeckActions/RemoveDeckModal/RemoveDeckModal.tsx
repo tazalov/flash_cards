@@ -24,7 +24,7 @@ export const RemoveDeckModal = ({ deckId, deckName, ...rest }: Props) => {
       if ('error' in data) {
         return handleErrorResponse(data.error)
       } else {
-        toast.success(`Deck ${deckName} success deleted`)
+        toast.success(`${t('Deck')} ${deckName} ${t('success deleted')}`)
       }
     })
   }

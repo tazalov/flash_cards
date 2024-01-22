@@ -22,7 +22,7 @@ export const CreateDeckModal = () => {
       if ('error' in data) {
         return handleErrorResponse(data.error)
       } else {
-        toast.success(`Deck "${body.get('name')}" created successfully`)
+        toast.success(`${t('Deck')} "${body.get('name')}" ${t('created successfully')}`)
         setOpen(false)
       }
     })

@@ -1,4 +1,5 @@
 {
+  "Deck": "Колода",
   "Show": "Показать",
   "on page": "на странице",
   "Lang": "РУС",
@@ -26,5 +27,8 @@
   "Nickname": "Ник",
   "Profile": "Профиль",
   "Logout": "Выйти",
-  "Back to previous page": "Вернуться назад"
+  "Back to previous page": "Вернуться назад",
+  "created successfully": "успешно добавлена",
+  "success deleted": "успешно удалена",
+  "success updated": "успешно обновлена"
 }

@@ -27,7 +27,7 @@ export const UpdateDeckModal = ({ deck, trigger }: Props) => {
       if ('error' in data) {
         return handleErrorResponse(data.error)
       } else {
-        toast.success(`Deck "${body.get('name')}" success updated`)
+        toast.success(`${t('Deck')} "${body.get('name')}" ${t('success updated')}`)
         setOpen(false)
       }
     })
