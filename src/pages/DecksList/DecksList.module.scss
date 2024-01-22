@@ -1,9 +1,19 @@
 .filters,
-.table {
+.tableContainer {
   margin-bottom: 2.25rem;
+}
+
+.table {
+  margin-bottom: 0.5rem;
 }
 
 .pagination {
   justify-content: center;
   margin-bottom: 1.5rem;
+}
+
+@media screen and (width <= 1024px) {
+  .tableContainer {
+    overflow-y: auto;
+  }
 }

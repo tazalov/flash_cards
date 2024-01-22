@@ -1,24 +1,39 @@
 .filters {
-  display: flex;
+  display: grid;
+  grid-template: 'input tabs slider button' 1fr / 17.5rem 14.375rem 15.625rem 1fr;
+  column-gap: 1.5rem;
   align-items: flex-end;
-  justify-content: space-between;
 }
 
 .input {
-  min-width: 17.5rem;
-  margin-right: 1.5rem;
+  grid-area: input;
 }
 
 .tabs {
-  min-width: 14.375rem;
-  margin-right: 1.5rem;
+  grid-area: tabs;
 }
 
 .slider {
-  min-width: 15.625rem;
-  margin-right: 2.25rem;
+  grid-area: slider;
+  margin-right: 0.75rem;
 }
 
 .button {
-  min-width: 9.5rem;
+  grid-area: button;
+}
+
+@media screen and (width <= 1024px) {
+  .filters {
+    grid-template: 'input tabs' 1fr 'slider button' 1fr / 1.5fr 1fr;
+  }
+
+  .slider {
+    margin-right: 0;
+  }
+}
+
+@media screen and (width <= 640px) {
+  .filters {
+    grid-template: 'tabs' 1fr 'input' 1fr 'slider' 1fr 'button' 1fr / 1fr;
+  }
 }

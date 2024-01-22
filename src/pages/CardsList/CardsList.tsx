@@ -4,6 +4,7 @@ import { Arrow } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Page } from '@/common/ui/Page'
 import { Pagination } from '@/common/ui/Pagination'
+import { Preloader } from '@/common/ui/Preloader'
 import { TextField } from '@/common/ui/TextField'
 import { Typography } from '@/common/ui/Typography'
 import { getSortObj } from '@/common/utils'
@@ -11,6 +12,7 @@ import { useMeQuery } from '@/features/auth'
 import { CardsHeader, CardsTable, CreateCardModal, useGetCardsByIdQuery } from '@/features/card'
 import { useGetDeckByIdQuery } from '@/features/deck'
 import { Deck } from '@/features/deck/model/types/decks.types'
+import cn from 'classnames'
 
 import s from './CardsList.module.scss'
 
@@ -36,7 +38,7 @@ export const CardsList = () => {
     id: deckId,
   })
 
-  const { data, isLoading } = useGetCardsByIdQuery({
+  const { data, isFetching, isLoading } = useGetCardsByIdQuery({
     id: deckId,
     params: {
       currentPage: page,
@@ -50,7 +52,7 @@ export const CardsList = () => {
   const isEmpty = deck && deck.cardsCount === 0
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Preloader size={100} />
   }
 
   return (
@@ -77,19 +79,24 @@ export const CardsList = () => {
         <>
           <TextField
             className={s.item}
+            disabled={isFetching}
             onChangeValue={handleChangeQuestion}
             type="search"
             value={question || ''}
           />
-          <CardsTable
-            className={s.item}
-            currentPage={page}
-            deckItems={data?.items ?? []}
-            handleChangePage={handleChangePage}
-            handleChangeSort={handleChangeSort}
-            isOwner={isOwner}
-            sort={getSortObj(orderBy)}
-          />
+          <div className={cn(s.item, s.tableContainer)}>
+            <CardsTable
+              className={s.table}
+              currentPage={page}
+              deckItems={data?.items ?? []}
+              handleChangePage={handleChangePage}
+              handleChangeSort={handleChangeSort}
+              isLoading={isFetching}
+              isOwner={isOwner}
+              itemsPerPage={itemsPerPage}
+              sort={getSortObj(orderBy)}
+            />
+          </div>
           <Pagination
             className={s.pagination}
             currentPage={page}
@@ -100,7 +107,6 @@ export const CardsList = () => {
               { title: '10', value: '10' },
               { title: '20', value: '20' },
               { title: '30', value: '30' },
-              { title: '50', value: '50' },
             ]}
             pageSize={itemsPerPage}
             totalCount={data?.pagination.totalItems ?? 0}

@@ -1,5 +1,7 @@
 .form {
+  overflow-x: auto;
   width: 100%;
+  max-height: 40rem;
   padding: 1.5rem;
 }
 
@@ -15,7 +17,7 @@
 
 .image {
   width: 100%;
-  max-height: 6.25rem;
+  max-height: 15rem;
   object-fit: cover;
 }
 

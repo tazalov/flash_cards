@@ -12,7 +12,7 @@ type Props = {
 } & ComponentPropsWithoutRef<typeof RadixSlider.Root>
 
 export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>((props, ref) => {
-  const { className, isInputControl = true, onValueChange, value, ...restProps } = props
+  const { className, disabled, isInputControl = true, onValueChange, value, ...restProps } = props
 
   const handleChangeValue =
     (valueCategory: 'max' | 'min') => (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +44,7 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>((pr
         {isInputControl ? (
           <TextField
             className={s.textField}
+            disabled={disabled}
             inputClassName={s.input}
             onChange={handleChangeValue('min')}
             type="number"
@@ -59,6 +60,7 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>((pr
         ref={ref}
         value={value}
         {...restProps}
+        disabled={disabled}
       >
         <RadixSlider.Track className={s.track}>
           <RadixSlider.Range className={s.range} />
@@ -69,6 +71,7 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>((pr
         {isInputControl ? (
           <TextField
             className={s.textField}
+            disabled={disabled}
             inputClassName={s.input}
             onChange={handleChangeValue('max')}
             type="number"

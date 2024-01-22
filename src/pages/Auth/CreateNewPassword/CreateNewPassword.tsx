@@ -9,8 +9,11 @@ import {
 
 export const CreateNewPassword = () => {
   const [resetPassword, { isLoading }] = useResetPasswordMutation()
+
   const navigate = useNavigate()
+
   const { token } = useParams<{ token: string }>()
+
   const handleLoginSubmit = async ({ password }: CreateNewPasswordFormValues) => {
     if (token) {
       await resetPassword({ password, token })
@@ -18,13 +21,9 @@ export const CreateNewPassword = () => {
     }
   }
 
-  if (isLoading) {
-    return <div>Create new password request...</div>
-  }
-
   return (
     <Page>
-      <CreateNewPasswordForm onSubmit={handleLoginSubmit} />
+      <CreateNewPasswordForm isLoading={isLoading} onSubmit={handleLoginSubmit} />
     </Page>
   )
 }

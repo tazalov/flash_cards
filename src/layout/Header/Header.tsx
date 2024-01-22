@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { Link } from 'react-router-dom'
 
 import Logo from '@/common/assets/images/logo.png'
 import { ProfileData } from '@/common/types'
@@ -21,8 +22,16 @@ export const Header = forwardRef<ElementRef<'header'>, Props>(
     return (
       <header className={cn(s.header, className)} ref={ref} {...rest}>
         <Page className={s.container} mt={0}>
-          <img alt="logo" className={s.logo} src={Logo} />
-          {isAuth && data ? <HeaderUser data={data} logout={logout} /> : <Button>Sign In</Button>}
+          <Link className={s.mainLink} to="/">
+            <img alt="logo" className={s.logo} src={Logo} />
+          </Link>
+          {isAuth && data ? (
+            <HeaderUser data={data} logout={logout} />
+          ) : (
+            <Button as={Link} to="/sign-in">
+              Sign In
+            </Button>
+          )}
         </Page>
       </header>
     )

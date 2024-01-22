@@ -12,10 +12,11 @@ import {
 } from '../../model/hooks/useCreateNewPasswordForm'
 
 interface Props {
+  isLoading: boolean
   onSubmit: (data: CreateNewPasswordFormValues) => void
 }
 
-export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
+export const CreateNewPasswordForm = ({ isLoading, onSubmit }: Props) => {
   const { control, errors, handleSubmit } = useCreateNewPasswordForm()
 
   return (
@@ -34,7 +35,7 @@ export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
       <Typography className={s.formInfoText} variant={TypographyVariant.body2}>
         Create new password and we will send you further instructions to email
       </Typography>
-      <Button fullWidth type="submit">
+      <Button disabled={isLoading} fullWidth type="submit">
         Create New Password
       </Button>
     </Card>

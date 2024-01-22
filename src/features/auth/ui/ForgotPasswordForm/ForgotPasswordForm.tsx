@@ -13,9 +13,10 @@ import { ForgotPasswordFormData, useForgotPassword } from '../../model/hooks/use
 
 interface Props {
   className?: string
+  isLoading: boolean
   onSubmit: (data: ForgotPasswordFormData) => void
 }
-export const ForgotPasswordForm = ({ className, onSubmit }: Props) => {
+export const ForgotPasswordForm = ({ className, isLoading, onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -38,13 +39,18 @@ export const ForgotPasswordForm = ({ className, onSubmit }: Props) => {
       <Typography className={s.descriptionText} variant={TypographyVariant.body2}>
         Enter your email address and we will send you further instructions
       </Typography>
-      <Button className={s.submitBtn} fullWidth type="submit">
+      <Button className={s.submitBtn} disabled={isLoading} fullWidth type="submit">
         Send Instructions
       </Button>
       <Typography className={s.forgotPasswordText} variant={TypographyVariant.body2}>
         Did you remember your password?
       </Typography>
-      <Button as={Link} className={s.signUpNav} to="/sign-in" variant={ButtonVariant.link}>
+      <Button
+        as={Link}
+        className={cn(s.signUpNav, { disabledLink: isLoading })}
+        to="/sign-in"
+        variant={ButtonVariant.link}
+      >
         Try logging in
       </Button>
     </Card>

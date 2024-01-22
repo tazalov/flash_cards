@@ -12,6 +12,10 @@
   margin-bottom: 2.875rem;
 }
 
+.skeletonShots {
+  margin-top: 0.25rem;
+}
+
 .shots {
   margin-bottom: 2.5rem;
   color: var(--color-dark-100);
@@ -27,6 +31,6 @@
 
 .img {
   width: 100%;
-  max-height: 12rem;
+  max-height: 15rem;
   object-fit: cover;
 }

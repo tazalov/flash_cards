@@ -10,14 +10,12 @@ import {
 
 export const ForgotPassword = () => {
   const [recoverPassword, { isLoading, isSuccess }] = useRecoverPasswordMutation()
+
   const [email, setEmail] = useState('')
+
   const handleLoginSubmit = async ({ email }: ForgotPasswordFormData) => {
     await recoverPassword(email)
     setEmail(email)
-  }
-
-  if (isLoading) {
-    return <div>Forgot password request...</div>
   }
 
   return (
@@ -25,7 +23,7 @@ export const ForgotPassword = () => {
       {isSuccess ? (
         <CheckEmail email={email} />
       ) : (
-        <ForgotPasswordForm onSubmit={handleLoginSubmit} />
+        <ForgotPasswordForm isLoading={isLoading} onSubmit={handleLoginSubmit} />
       )}
     </Page>
   )

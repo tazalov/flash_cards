@@ -31,7 +31,9 @@ export const CardsHeader = (props: Props) => {
   return (
     <div className={cn(s.header, className)}>
       <div className={s.headerLeft}>
-        <Typography variant={TypographyVariant.large}>{deck.name}</Typography>
+        <Typography className={s.title} variant={TypographyVariant.large}>
+          {deck.name}
+        </Typography>
         {!isEmpty && isOwner && (
           <Dropdown.Menu
             sideOffset={10}

@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { TypographyVariant } from '@/common/enums'
 import { ProfileData } from '@/common/types'
 import { Avatar } from '@/common/ui/Avatar'
@@ -15,32 +13,42 @@ import { ProfileInfo } from '../ProfileInfo/ProfileInfo'
 interface Props {
   className?: string
   data?: ProfileData
+  editMode: boolean
   handleLogout: () => void
   handleUpdate: (data: FormData) => void
+  isLoadLogout: boolean
+  isLoadUpdate: boolean
+  setEditMode: (mode: boolean) => void
 }
 
-export const PersonalInformation = ({ className, data, handleLogout, handleUpdate }: Props) => {
+export const PersonalInformation = ({
+  className,
+  data,
+  editMode,
+  handleLogout,
+  handleUpdate,
+  isLoadLogout,
+  isLoadUpdate,
+  setEditMode,
+}: Props) => {
   const titleNoAvatar = data?.username.slice(0, 1).toUpperCase() || 'UN'
-
-  const [editMode, setEditMode] = useState(false)
 
   const handleActiveEditMode = () => setEditMode(true)
 
-  const handleSubmit = (data: FormData) => {
-    handleUpdate(data)
-    setEditMode(false)
-  }
+  const handleDeactivateEditMode = () => setEditMode(false)
 
   return (
     <Card className={cn(s.root, className)}>
       <Typography as="h1" className={s.title} variant={TypographyVariant.large}>
-        Personal information
+        Profile
       </Typography>
       {editMode ? (
         <EditProfileForm
           avatarUrl={data?.avatar}
+          handleDeactivateEditMode={handleDeactivateEditMode}
           initialValue={data?.username}
-          onSubmit={handleSubmit}
+          isLoading={isLoadUpdate}
+          onSubmit={handleUpdate}
         />
       ) : (
         <>
@@ -49,6 +57,7 @@ export const PersonalInformation = ({ className, data, handleLogout, handleUpdat
             email={data?.email}
             handleActiveEditMode={handleActiveEditMode}
             handleLogout={handleLogout}
+            isLoading={isLoadLogout}
             username={data?.username}
           />
         </>

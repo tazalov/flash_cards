@@ -1,5 +1,6 @@
 import { baseApi } from '@/api'
-import { getOptimisticUpdateCardPatch } from '@/common/utils'
+import { getOptimisticUpdateCardPatch, handleErrorResponse } from '@/common/utils'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 import { Card } from '../types/cards.types'
 import {
@@ -21,7 +22,9 @@ const cardsService = baseApi.injectEndpoints({
               cardsService.util.updateQueryData('getRandomCard', { id: deckId }, () => nextCard)
             )
           } catch (error) {
-            console.log(error)
+            if (error && typeof error === 'object' && 'error' in error) {
+              handleErrorResponse(error.error as FetchBaseQueryError)
+            }
           }
         },
         query: ({ deckId, ...restArgs }) => ({
@@ -39,17 +42,19 @@ const cardsService = baseApi.injectEndpoints({
         }),
       }),
       getCardsById: builder.query<GetCardsResponse, { id: string; params: GetCardsArgs }>({
-        providesTags: ['Cards'],
+        providesTags: (_, error) => (error ? [] : ['Cards']),
         query: ({ id, params }) => ({ params, url: `v1/decks/${id}/cards` }),
+        transformErrorResponse: error => handleErrorResponse(error),
       }),
       getRandomCard: builder.query<Card, GetRandomCardArgs>({
         query: ({ id, previousCardId }) => ({
           params: { previousCardId },
           url: `v1/decks/${id}/learn`,
         }),
+        transformErrorResponse: error => handleErrorResponse(error),
       }),
       removeCard: builder.mutation<Card, { id: string }>({
-        invalidatesTags: ['Cards', 'Decks', 'Deck'],
+        invalidatesTags: (_, error) => (error ? [] : ['Cards', 'Decks', 'Deck']),
         query: ({ id }) => ({ method: 'DELETE', url: `v1/cards/${id}` }),
       }),
       updateCard: builder.mutation<Card, { body: FormData; card: Card }>({

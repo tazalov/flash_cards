@@ -1,5 +1,6 @@
 import { Page } from '@/common/ui/Page'
 import { Pagination } from '@/common/ui/Pagination'
+import { Preloader } from '@/common/ui/Preloader'
 import { getSortObj } from '@/common/utils'
 import { useMeQuery } from '@/features/auth'
 import { DecksFilters, DecksHeader, DecksTable, useGetDecksQuery } from '@/features/deck'
@@ -28,7 +29,7 @@ export const DecksList = () => {
 
   const { data: userData } = useMeQuery()
 
-  const { data, error, isLoading } = useGetDecksQuery({
+  const { data, isFetching, isLoading } = useGetDecksQuery({
     authorId: show === 'my' ? userData?.id : undefined,
     currentPage,
     itemsPerPage,
@@ -39,10 +40,7 @@ export const DecksList = () => {
   })
 
   if (isLoading) {
-    return <div>Loading</div>
-  }
-  if (error) {
-    return <div>error</div>
+    return <Preloader size={100} />
   }
 
   const startMaxCardsCount = Number((data && data.maxCardsCount) || maxCardsCount)
@@ -57,17 +55,22 @@ export const DecksList = () => {
         handleChangeSearch={handleChangeSearch}
         handleChangeTabValue={handleChangeTabValue}
         handleClearFilters={handleClearFilters}
+        isLoading={isFetching}
         max={data?.maxCardsCount}
         searchValue={name}
         tabValue={show}
       />
-      <DecksTable
-        authId={userData?.id ?? ''}
-        className={s.table}
-        handleChangeSort={handleChangeSort}
-        items={data?.items ?? []}
-        sort={getSortObj(orderBy)}
-      />
+      <div className={s.tableContainer}>
+        <DecksTable
+          authId={userData?.id ?? ''}
+          className={s.table}
+          handleChangeSort={handleChangeSort}
+          isLoading={isFetching}
+          items={data?.items}
+          itemsPerPage={itemsPerPage}
+          sort={getSortObj(orderBy)}
+        />
+      </div>
       <Pagination
         className={s.pagination}
         currentPage={currentPage}
@@ -78,7 +81,6 @@ export const DecksList = () => {
           { title: '10', value: '10' },
           { title: '20', value: '20' },
           { title: '30', value: '30' },
-          { title: '50', value: '50' },
         ]}
         pageSize={itemsPerPage}
         totalCount={data?.pagination.totalItems ?? 0}

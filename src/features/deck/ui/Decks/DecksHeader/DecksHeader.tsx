@@ -10,7 +10,7 @@ import { CreateDeckModal } from '../../DeckActions/CreateDeckModal'
 type Props = {
   headerText?: string
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
-export const DecksHeader = ({ headerText = 'DecksList', ...props }: Props) => {
+export const DecksHeader = ({ headerText = 'Decks list', ...props }: Props) => {
   return (
     <div className={s.header} {...props}>
       <Typography as="h1" variant={TypographyVariant.large}>

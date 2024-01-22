@@ -4,6 +4,14 @@
   justify-content: space-between;
 }
 
+@media screen and (width <= 640px) {
+  .header {
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+}
+
 .headerLeft {
   display: flex;
   gap: 1rem;

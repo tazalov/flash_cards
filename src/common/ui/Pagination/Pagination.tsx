@@ -33,7 +33,13 @@ export const Pagination = ({
   })
 
   if (currentPage === 0 || paginationRange.length < 2) {
-    return null
+    return (
+      <Typography as="div" className={s.selectContainer} variant={TypographyVariant.body2}>
+        Показать
+        <Select {...restProps} pagination />
+        на странице
+      </Typography>
+    )
   }
 
   const handleClickPrev = () => {
@@ -49,44 +55,46 @@ export const Pagination = ({
 
   return (
     <div className={cn(s.container, className)}>
-      <button
-        className={cn(s.item, { [s.disabled]: isFirstPage })}
-        disabled={isFirstPage}
-        onClick={handleClickPrev}
-      >
-        <ChevronUp className={s.left} />
-      </button>
-      {paginationRange.map((num, i) => {
-        if (num === 0) {
+      <div className={s.pagination}>
+        <button
+          className={cn(s.item, { [s.disabled]: isFirstPage })}
+          disabled={isFirstPage}
+          onClick={handleClickPrev}
+        >
+          <ChevronUp className={s.left} />
+        </button>
+        {paginationRange.map((num, i) => {
+          if (num === 0) {
+            return (
+              <span className={cn(s.item, s.dots)} key={i}>
+                &#8230;
+              </span>
+            )
+          }
+          const isCurrentPage = num === currentPage
+
+          const handleChangePage = () => onChangePage(num)
+
           return (
-            <span className={cn(s.item, s.dots)} key={i}>
-              &#8230;
-            </span>
+            <button
+              className={cn(s.item, { [s.selected]: isCurrentPage })}
+              key={i}
+              onClick={handleChangePage}
+            >
+              <Typography as="span" variant={TypographyVariant.body2}>
+                {num}
+              </Typography>
+            </button>
           )
-        }
-        const isCurrentPage = num === currentPage
-
-        const handleChangePage = () => onChangePage(num)
-
-        return (
-          <button
-            className={cn(s.item, { [s.selected]: isCurrentPage })}
-            key={i}
-            onClick={handleChangePage}
-          >
-            <Typography as="span" variant={TypographyVariant.body2}>
-              {num}
-            </Typography>
-          </button>
-        )
-      })}
-      <button
-        className={cn(s.item, { [s.disabled]: isLastPage })}
-        disabled={isLastPage}
-        onClick={handleClickNext}
-      >
-        <ChevronUp className={s.right} />
-      </button>
+        })}
+        <button
+          className={cn(s.item, { [s.disabled]: isLastPage })}
+          disabled={isLastPage}
+          onClick={handleClickNext}
+        >
+          <ChevronUp className={s.right} />
+        </button>
+      </div>
       <Typography as="div" className={s.selectContainer} variant={TypographyVariant.body2}>
         Показать
         <Select {...restProps} pagination />
