@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { Edit } from '@/common/assets/icons'
 import { ButtonVariant } from '@/common/enums'
@@ -38,6 +39,8 @@ export const DecksFilters = ({
   tabValue,
   ...rest
 }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <div className={cn(s.filters, className)} {...rest}>
       <TextField
@@ -49,15 +52,15 @@ export const DecksFilters = ({
       />
       <Tabs
         className={s.tabs}
-        label="Show decks"
+        label={t('Show decks')}
         onValueChange={handleChangeTabValue}
         value={tabValue}
       >
         <TabItem disabled={isLoading} value="my">
-          My Decks
+          {t('My Decks')}
         </TabItem>
         <TabItem disabled={isLoading} value="all">
-          All Decks
+          {t('All Decks')}
         </TabItem>
       </Tabs>
       <Slider
@@ -75,7 +78,7 @@ export const DecksFilters = ({
         startIcon={<Edit />}
         variant={ButtonVariant.secondary}
       >
-        Clear filter
+        {t('Clear filter')}
       </Button>
     </div>
   )

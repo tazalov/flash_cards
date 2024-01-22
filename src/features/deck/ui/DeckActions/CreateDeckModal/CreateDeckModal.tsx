@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { Button } from '@/common/ui/Button'
@@ -12,6 +13,7 @@ import { DeckActionsForm } from '../DeckActionsForm/DeckActionsForm'
 
 export const CreateDeckModal = () => {
   const [open, setOpen] = useState(false)
+  const { t } = useTranslation()
 
   const [createDeck, { isLoading: isLoadCreateDeck }] = useCreateDeckMutation()
 
@@ -31,10 +33,14 @@ export const CreateDeckModal = () => {
       className={s.modal}
       onOpenChange={setOpen}
       open={open}
-      title="Add new Deck"
-      trigger={<Button>Add New Deck</Button>}
+      title={t('Add New Deck')}
+      trigger={<Button>{t('Add New Deck')}</Button>}
     >
-      <DeckActionsForm disabled={isLoadCreateDeck} onSubmit={handleSubmit} />
+      <DeckActionsForm
+        btnTitle={t('Create Deck')}
+        disabled={isLoadCreateDeck}
+        onSubmit={handleSubmit}
+      />
     </Modal>
   )
 }
