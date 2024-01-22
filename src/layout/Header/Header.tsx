@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Logo from '@/common/assets/images/logo.png'
 import { ProfileData } from '@/common/types'
 import { Button } from '@/common/ui/Button'
+import { LangSwitcher } from '@/common/ui/LangSwitcher'
 import { Page } from '@/common/ui/Page'
 import cn from 'classnames'
 
@@ -32,6 +33,7 @@ export const Header = forwardRef<ElementRef<'header'>, Props>(
               Sign In
             </Button>
           )}
+          <LangSwitcher />
         </Page>
       </header>
     )
