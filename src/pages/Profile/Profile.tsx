@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { Arrow } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Page } from '@/common/ui/Page'
 import { Typography } from '@/common/ui/Typography'
+import { handleErrorResponse } from '@/common/utils'
 import { useLogoutMutation, useMeQuery, useUpdateProfileMutation } from '@/features/auth'
 import { PersonalInformation } from '@/features/profile'
 
@@ -21,11 +23,19 @@ export const Profile = () => {
 
   const [logout, { isLoading: isLoadLogout }] = useLogoutMutation()
 
-  const handleUpdate = (data: FormData) => {
-    updateProfile(data)
-    setEditMode(false)
+  const handleSubmit = async (body: FormData) => {
+    return updateProfile(body).then(data => {
+      if ('error' in data) {
+        return handleErrorResponse(data.error)
+      } else {
+        toast.success(`Profile updated`)
+        setEditMode(false)
+      }
+    })
   }
 
+  const [logout, {}] = useLogoutMutation()
+  
   const handleLogout = () => {
     logout()
       .unwrap()
@@ -48,7 +58,7 @@ export const Profile = () => {
         }
         editMode={editMode}
         handleLogout={handleLogout}
-        handleUpdate={handleUpdate}
+        handleUpdate={handleSubmit}
         isLoadLogout={isLoadLogout}
         isLoadUpdate={isLoadUpdate}
         setEditMode={setEditMode}

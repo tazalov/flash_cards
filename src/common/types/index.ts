@@ -32,4 +32,3 @@ export interface Pagination {
 
 export type Cover = File | null | string
 
-export type AppMaybeDrafted<T> = Draft<T> | T
