@@ -27,3 +27,5 @@ export interface Pagination {
   totalItems: number
   totalPages: number
 }
+
+export type Cover = File | null | string

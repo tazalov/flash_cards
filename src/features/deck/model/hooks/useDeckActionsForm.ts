@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { Cover } from '@/common/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -13,7 +14,7 @@ const createDeckSchema = z.object({
 
 export type CreateDeckFormData = z.infer<typeof createDeckSchema>
 export const useDeckActionsForm = (deck?: Pick<Deck, 'cover' | 'isPrivate' | 'name'>) => {
-  const [cover, setCover] = useState<File | null | string>(deck?.cover || null)
+  const [cover, setCover] = useState<Cover>(deck?.cover || null)
   const formOptions = useForm<CreateDeckFormData>({
     defaultValues: {
       isPrivate: deck?.isPrivate || false,
