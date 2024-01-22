@@ -4,7 +4,7 @@ import { ActionsCardForm } from './ActionsCardForm'
 
 const meta = {
   args: {
-    isLoading: false,
+    disabled: false,
     onSubmit: (data: FormData) => console.log(data),
   },
   component: ActionsCardForm,

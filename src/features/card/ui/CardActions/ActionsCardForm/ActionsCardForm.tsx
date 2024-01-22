@@ -18,7 +18,7 @@ import { ActionsCardFormData, useActionsCardForm } from '../../../model/hooks/us
 
 type Props = {
   card?: Card
-  isLoading: boolean
+  disabled: boolean
   onSubmit: (data: FormData) => Promise<CatchingData | undefined>
   submitTitle?: string
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
@@ -31,7 +31,7 @@ const options = [
 export const ActionsCardForm = ({
   card,
   className,
-  isLoading,
+  disabled,
   onSubmit,
   submitTitle = 'Add New Card',
 }: Props) => {
@@ -104,7 +104,7 @@ export const ActionsCardForm = ({
     <form className={cn(s.form, className)} onSubmit={handleSubmit(handleCreateCard)}>
       <Select
         className={s.input}
-        disabled={isLoading}
+        disabled={disabled}
         fullWidth
         label="Choose a question format"
         onValueChange={handleChangeSelectQuestion}
@@ -115,7 +115,7 @@ export const ActionsCardForm = ({
         <ControlledTextField
           className={s.input}
           control={control}
-          disabled={isLoading}
+          disabled={disabled}
           errorText={errors.question?.message}
           label="Question"
           name="question"
@@ -141,7 +141,7 @@ export const ActionsCardForm = ({
             </div>
           )}
           <FileUploader
-            disabled={isLoading}
+            disabled={disabled}
             name="questionImg"
             ref={questionFileRef}
             setFile={setQuestionCover}
@@ -161,7 +161,7 @@ export const ActionsCardForm = ({
       )}
       <Select
         className={s.input}
-        disabled={isLoading}
+        disabled={disabled}
         fullWidth
         label="Choose a question format"
         onValueChange={handleChangeSelectAnswer}
@@ -172,7 +172,7 @@ export const ActionsCardForm = ({
         <ControlledTextField
           className={s.input}
           control={control}
-          disabled={isLoading}
+          disabled={disabled}
           errorText={errors.answer?.message}
           label="Answer"
           name="answer"
@@ -198,7 +198,7 @@ export const ActionsCardForm = ({
             </div>
           )}
           <FileUploader
-            disabled={isLoading}
+            disabled={disabled}
             name="answerImg"
             ref={answerFileRef}
             setFile={setAnswerCover}
@@ -218,11 +218,11 @@ export const ActionsCardForm = ({
       )}
       <div className={s.buttons}>
         <ModalClose>
-          <Button disabled={isLoading} type="button" variant={ButtonVariant.secondary}>
+          <Button disabled={disabled} type="button" variant={ButtonVariant.secondary}>
             Cancel
           </Button>
         </ModalClose>
-        <Button disabled={isLoading} type="submit">
+        <Button disabled={disabled} type="submit">
           {submitTitle}
         </Button>
       </div>

@@ -38,7 +38,7 @@ export const CreateCardModal = ({ className, deckId }: Props) => {
       title="Add new Card"
       trigger={<Button>Create New Card</Button>}
     >
-      <ActionsCardForm isLoading={isLoading} onSubmit={handleSubmit} />
+      <ActionsCardForm disabled={isLoading} onSubmit={handleSubmit} />
     </Modal>
   )
 }

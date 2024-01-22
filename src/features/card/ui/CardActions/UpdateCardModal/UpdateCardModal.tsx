@@ -44,7 +44,7 @@ export const UpdateCardModal = ({ card, className, handleChangePage, trigger }: 
     >
       <ActionsCardForm
         card={card}
-        isLoading={isLoading}
+        disabled={isLoading}
         onSubmit={handleUpdateCard}
         submitTitle="Update Card"
       />
