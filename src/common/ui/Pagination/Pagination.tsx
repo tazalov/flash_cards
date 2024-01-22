@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { ChevronUp } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { Select, SelectProps } from '@/common/ui/Select'
@@ -25,6 +27,8 @@ export const Pagination = ({
   totalCount,
   ...restProps
 }: Props) => {
+  const { t } = useTranslation()
+
   const paginationRange = usePagination({
     currentPage,
     pageSize,
@@ -35,9 +39,9 @@ export const Pagination = ({
   if (currentPage === 0 || paginationRange.length < 2) {
     return (
       <Typography as="div" className={s.selectContainer} variant={TypographyVariant.body2}>
-        Показать
+        {t('Show')}
         <Select {...restProps} pagination />
-        на странице
+        {t('on page')}
       </Typography>
     )
   }
@@ -96,9 +100,9 @@ export const Pagination = ({
         </button>
       </div>
       <Typography as="div" className={s.selectContainer} variant={TypographyVariant.body2}>
-        Показать
+        {t('Show')}
         <Select {...restProps} pagination />
-        на странице
+        {t('on page')}
       </Typography>
     </div>
   )
