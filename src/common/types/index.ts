@@ -31,4 +31,3 @@ export interface Pagination {
 }
 
 export type Cover = File | null | string
-
