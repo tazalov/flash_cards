@@ -1,4 +1,5 @@
 import { baseApi } from '@/api'
+import { handleErrorResponse } from '@/common/utils'
 
 import { Deck } from '../types/decks.types'
 import { GetDecksArgs, GetDecksResponse } from '../types/service.types'
@@ -11,33 +12,21 @@ const decksService = baseApi.injectEndpoints({
         query: body => ({ body, method: 'POST', url: `v1/decks` }),
       }),
       getDeckById: builder.query<Deck, { id: string }>({
-        providesTags: ['Deck'],
+        providesTags: (_, error) => (error ? [] : ['Deck']),
         query: ({ id }) => ({ url: `v1/decks/${id}` }),
+        transformErrorResponse: error => handleErrorResponse(error),
       }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
-        providesTags: ['Decks'],
+        providesTags: (_, error) => (error ? [] : ['Decks']),
         query: params => ({ params: params ?? {}, url: `v1/decks` }),
+        transformErrorResponse: error => handleErrorResponse(error),
       }),
       removeDeck: builder.mutation<Deck, { id: string }>({
         invalidatesTags: ['Decks'],
         query: ({ id }) => ({ method: 'DELETE', url: `v1/decks/${id}` }),
       }),
       updateDeck: builder.mutation<Deck, { body: FormData; id: string }>({
-        invalidatesTags: ['Decks'],
-
-        // async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
-        //   const patchResult = dispatch(
-        //     decksService.util.updateQueryData('getDecks', {}, draft => {
-        //       Object.assign(draft, patch)
-        //     })
-        //   )
-        //
-        //   try {
-        //     await queryFulfilled
-        //   } catch {
-        //     patchResult.undo()
-        //   }
-        // },
+        invalidatesTags: (_, error) => (error ? [] : ['Decks']),
         query: ({ body, id }) => ({
           body,
           method: 'PATCH',

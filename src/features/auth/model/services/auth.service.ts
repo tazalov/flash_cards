@@ -1,6 +1,6 @@
 import { baseApi } from '@/api'
-import { SignInFormData } from '@/features/auth/model/hooks/useSignInForm'
 
+import { SignInFormData } from '../../model/hooks/useSignInForm'
 import { SignUpArgs, User } from '../types/service.types'
 
 const authService = baseApi.injectEndpoints({
@@ -16,9 +16,19 @@ const authService = baseApi.injectEndpoints({
       }),
       logout: builder.mutation<void, void>({
         invalidatesTags: ['Me'],
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          const patchResult = dispatch(authService.util.updateQueryData('me', _, () => {}))
+
+          try {
+            await queryFulfilled
+            dispatch(baseApi.util.resetApiState())
+          } catch (e) {
+            patchResult.undo()
+          }
+        },
         query: () => ({ method: 'POST', url: '/v1/auth/logout' }),
       }),
-      me: builder.query<User, void>({
+      me: builder.query<User | undefined, void>({
         providesTags: ['Me'],
         query: () => ({ url: '/v1/auth/me' }),
       }),
@@ -49,6 +59,37 @@ const authService = baseApi.injectEndpoints({
           url: '/v1/auth/sign-up',
         }),
       }),
+      updateProfile: builder.mutation<User, FormData>({
+        invalidatesTags: ['Me'],
+        async onQueryStarted(body, { dispatch, queryFulfilled }) {
+          let avatar
+
+          const patchResult = dispatch(
+            authService.util.updateQueryData('me', undefined, draft => {
+              const name = body.get('name') as string
+              const avatarFile = body.get('avatar')
+
+              if (draft && avatarFile instanceof File) {
+                avatar = URL.createObjectURL(avatarFile)
+                draft.avatar = URL.createObjectURL(avatarFile)
+              }
+
+              if (draft && name) {
+                draft.name = name
+              }
+            })
+          )
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult.undo()
+          } finally {
+            avatar && URL.revokeObjectURL(avatar)
+          }
+        },
+        query: body => ({ body, method: 'PATCH', url: `v1/auth/me` }),
+      }),
     }
   },
 })
@@ -60,4 +101,5 @@ export const {
   useRecoverPasswordMutation,
   useResetPasswordMutation,
   useSignUpMutation,
+  useUpdateProfileMutation,
 } = authService

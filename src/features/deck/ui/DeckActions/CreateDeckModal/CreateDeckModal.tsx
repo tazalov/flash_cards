@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { Button } from '@/common/ui/Button'
 import { Modal } from '@/common/ui/Modals'
+import { handleErrorResponse } from '@/common/utils'
 
 import s from './CreateDeckModal.module.scss'
 
@@ -13,6 +15,17 @@ export const CreateDeckModal = () => {
 
   const [createDeck, { isLoading: isLoadCreateDeck }] = useCreateDeckMutation()
 
+  const handleSubmit = async (body: FormData) => {
+    return createDeck(body).then(data => {
+      if ('error' in data) {
+        return handleErrorResponse(data.error)
+      } else {
+        toast.success(`Deck "${body.get('name')}" created successfully`)
+        setOpen(false)
+      }
+    })
+  }
+
   return (
     <Modal
       className={s.modal}
@@ -21,7 +34,7 @@ export const CreateDeckModal = () => {
       title="Add new Deck"
       trigger={<Button>Add New Deck</Button>}
     >
-      <DeckActionsForm isLoading={isLoadCreateDeck} onSubmit={createDeck} />
+      <DeckActionsForm disabled={isLoadCreateDeck} onSubmit={handleSubmit} />
     </Modal>
   )
 }

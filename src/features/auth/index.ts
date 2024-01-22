@@ -8,6 +8,7 @@ export {
   useRecoverPasswordMutation,
   useResetPasswordMutation,
   useSignUpMutation,
+  useUpdateProfileMutation,
 } from './model/services/auth.service'
 export type { User } from './model/types/service.types'
 export type { SignUpArgs } from './model/types/service.types'
