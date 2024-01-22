@@ -14,7 +14,7 @@ import cn from 'classnames'
 
 import s from './ActionsCardForm.module.scss'
 
-import { CreateCardFormData, useCreateCardForm } from '../../../model/hooks/useCreateCardForm'
+import { ActionsCardFormData, useActionsCardForm } from '../../../model/hooks/useActionsCardForm'
 
 type Props = {
   card?: Card
@@ -44,7 +44,7 @@ export const ActionsCardForm = ({
       handleSubmit,
       setError,
     },
-  } = useCreateCardForm(card)
+  } = useActionsCardForm(card)
 
   const [selectQuestion, setSelectQuestion] = useState(options[0].value)
   const [selectAnswer, setSelectAnswer] = useState(options[0].value)
@@ -59,7 +59,7 @@ export const ActionsCardForm = ({
     setSelectAnswer(options[0].value)
   }
 
-  const handleCreateCard = (formValues: CreateCardFormData) => {
+  const handleCreateCard = (formValues: ActionsCardFormData) => {
     const formData = new FormData()
 
     formData.append('question', formValues.question)
@@ -70,7 +70,7 @@ export const ActionsCardForm = ({
     onSubmit(formData).then(error => {
       if (error && error.fieldErrors) {
         error.fieldErrors?.forEach(el => {
-          setError(el.field as keyof CreateCardFormData, { message: el.message })
+          setError(el.field as keyof ActionsCardFormData, { message: el.message })
         })
       }
     })

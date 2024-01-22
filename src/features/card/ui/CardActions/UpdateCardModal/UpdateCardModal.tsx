@@ -1,6 +1,8 @@
 import { ReactNode, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { Modal } from '@/common/ui/Modals'
+import { handleErrorResponse } from '@/common/utils'
 import { Card } from '@/features/card'
 import cn from 'classnames'
 
@@ -12,30 +14,24 @@ import { ActionsCardForm } from '../ActionsCardForm/ActionsCardForm'
 type Props = {
   card: Card
   className?: string
-  currentPage: number
   handleChangePage: (newPage: number) => void
   trigger: ReactNode
 }
 
-export const UpdateCardModal = ({
-  card,
-  className,
-  currentPage,
-  handleChangePage,
-  trigger,
-}: Props) => {
+export const UpdateCardModal = ({ card, className, handleChangePage, trigger }: Props) => {
   const [open, setOpen] = useState(false)
 
   const [update, { isLoading }] = useUpdateCardMutation()
 
   const handleUpdateCard = (formValues: FormData) => {
-    setOpen(false)
-    handleChangePage(1)
-    update({ body: formValues, card })
-      .unwrap()
-      .catch(() => {
-        handleChangePage(currentPage)
-      })
+    return update({ body: formValues, card }).then(data => {
+      if ('error' in data) {
+        return handleErrorResponse(data.error)
+      } else {
+        handleChangePage(1)
+        toast.success('The card has been successfully updated')
+      }
+    })
   }
 
   return (
