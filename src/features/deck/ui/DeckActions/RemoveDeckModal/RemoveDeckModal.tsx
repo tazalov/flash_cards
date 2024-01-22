@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { RemoveItemModal } from '@/common/ui/RemoveItemModal'
@@ -16,6 +17,8 @@ interface Props {
 export const RemoveDeckModal = ({ deckId, deckName, ...rest }: Props) => {
   const [removeDeck, { isLoading }] = useRemoveDeckMutation()
 
+  const { t } = useTranslation()
+
   const handleRemoveDeck = () => {
     removeDeck({ id: deckId }).then(data => {
       if ('error' in data) {
@@ -31,7 +34,7 @@ export const RemoveDeckModal = ({ deckId, deckName, ...rest }: Props) => {
       handleRemoveItem={handleRemoveDeck}
       isLoading={isLoading}
       itemName={deckName}
-      title="Remove deck"
+      title={t('Remove deck')}
       {...rest}
     />
   )

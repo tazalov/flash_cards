@@ -1,19 +1,18 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { Arrow } from '@/common/assets/icons'
-import { TypographyVariant } from '@/common/enums'
+import { BackToPreviousPage } from '@/common/ui/BackToPreviusPage'
 import { Page } from '@/common/ui/Page'
-import { Typography } from '@/common/ui/Typography'
 import { handleErrorResponse } from '@/common/utils'
 import { useLogoutMutation, useMeQuery, useUpdateProfileMutation } from '@/features/auth'
 import { PersonalInformation } from '@/features/profile'
 
-import s from './Profile.module.scss'
-
 export const Profile = () => {
   const navigate = useNavigate()
+
+  const { t } = useTranslation()
 
   const [editMode, setEditMode] = useState(false)
 
@@ -42,10 +41,7 @@ export const Profile = () => {
 
   return (
     <Page>
-      <div className={s.link} onClick={() => navigate(-1)}>
-        <Arrow className={s.iconArrow} />
-        <Typography variant={TypographyVariant.body2}>Back to previous page</Typography>
-      </div>
+      <BackToPreviousPage handleNavigate={() => navigate(-1)} title={t('Back to previous page')} />
       <PersonalInformation
         data={
           data && {
