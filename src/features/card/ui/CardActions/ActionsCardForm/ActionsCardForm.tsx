@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { LoadPicture, Trash } from '@/common/assets/icons'
+import { COVER_SCHEMA } from '@/common/const'
 import { ButtonVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 import { FileUploader } from '@/common/ui/FilesUploader'
@@ -31,7 +32,7 @@ const options = [
 
 export const ActionsCardForm = ({ card, className, disabled, onSubmit, submitTitle }: Props) => {
   const {
-    coverOptions: { answerCover, coverSchema, questionCover, setAnswerCover, setQuestionCover },
+    coverOptions: { answerCover, questionCover, setAnswerCover, setQuestionCover },
     formValues: {
       clearErrors,
       control,
@@ -151,7 +152,7 @@ export const ActionsCardForm = ({ card, className, disabled, onSubmit, submitTit
                 {t('Change cover')}
               </Button>
             }
-            validationSchema={coverSchema}
+            validationSchema={COVER_SCHEMA}
           />
         </div>
       )}
@@ -208,7 +209,7 @@ export const ActionsCardForm = ({ card, className, disabled, onSubmit, submitTit
                 {t('Change cover')}
               </Button>
             }
-            validationSchema={coverSchema}
+            validationSchema={COVER_SCHEMA}
           />
         </div>
       )}
