@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { TypographyVariant } from '@/common/enums'
 import { Typography } from '@/common/ui/Typography'
@@ -10,11 +11,13 @@ import { CreateDeckModal } from '../../DeckActions/CreateDeckModal'
 type Props = {
   headerText?: string
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
-export const DecksHeader = ({ headerText = 'Decks list', ...props }: Props) => {
+export const DecksHeader = ({ headerText, ...props }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <div className={s.header} {...props}>
       <Typography as="h1" variant={TypographyVariant.large}>
-        {headerText}
+        {headerText || t('Decks list')}
       </Typography>
       <CreateDeckModal />
     </div>

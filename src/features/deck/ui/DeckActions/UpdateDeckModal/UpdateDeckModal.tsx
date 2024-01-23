@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { Modal } from '@/common/ui/Modals'
@@ -19,12 +20,14 @@ export const UpdateDeckModal = ({ deck, trigger }: Props) => {
   const [open, setOpen] = useState(false)
   const [update, { isLoading }] = useUpdateDeckMutation()
 
+  const { t } = useTranslation()
+
   const handleSubmit = async (body: FormData) => {
     return update({ body, id: deck.id }).then(data => {
       if ('error' in data) {
         return handleErrorResponse(data.error)
       } else {
-        toast.success(`Deck "${body.get('name')}" success updated`)
+        toast.success(`${t('Deck')} "${body.get('name')}" ${t('success updated')}`)
         setOpen(false)
       }
     })
@@ -35,10 +38,15 @@ export const UpdateDeckModal = ({ deck, trigger }: Props) => {
       className={s.modal}
       onOpenChange={setOpen}
       open={open}
-      title="Edit deck"
+      title={t('Edit deck')}
       trigger={trigger}
     >
-      <DeckActionsForm deck={deck} disabled={isLoading} onSubmit={handleSubmit} />
+      <DeckActionsForm
+        btnTitle={t('Save changes')}
+        deck={deck}
+        disabled={isLoading}
+        onSubmit={handleSubmit}
+      />
     </Modal>
   )
 }

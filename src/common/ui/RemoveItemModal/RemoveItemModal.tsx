@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { ButtonVariant, TypographyVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
@@ -23,10 +24,12 @@ export const RemoveItemModal = ({
   handleRemoveItem,
   isLoading,
   itemName,
-  title = 'Remove item',
+  title,
   trigger,
 }: Props) => {
   const [open, setOpen] = useState(false)
+
+  const { t } = useTranslation()
 
   return (
     <Modal
@@ -38,16 +41,16 @@ export const RemoveItemModal = ({
     >
       <div className={s.body}>
         <Typography className={s.text} variant={TypographyVariant.body1}>
-          Do you really want to remove <b>{itemName}?</b>
+          {t('Do you really want to remove')} <b>{itemName}?</b>
         </Typography>
         <div className={s.buttons}>
           <ModalClose>
             <Button disabled={isLoading} variant={ButtonVariant.secondary}>
-              Cancel
+              {t('Cancel')}
             </Button>
           </ModalClose>
           <Button disabled={isLoading} onClick={handleRemoveItem}>
-            {title}
+            {title || t('Remove item')}
           </Button>
         </div>
       </div>
