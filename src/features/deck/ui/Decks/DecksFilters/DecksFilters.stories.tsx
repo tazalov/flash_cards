@@ -34,6 +34,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     cardsCounts: [10, 90],
+    isLoading: false,
     max: 100,
     min: 0,
     searchValue: '',
