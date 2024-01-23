@@ -48,9 +48,8 @@ const columns: Column[] = [
     title: 'Grade',
   },
   {
-    key: '',
+    key: 'buttons',
     sortable: false,
-    title: '',
   },
 ]
 

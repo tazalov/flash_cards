@@ -39,7 +39,6 @@ const columns: Column[] = [
   {
     key: 'buttons',
     sortable: false,
-    title: '',
   },
 ]
 

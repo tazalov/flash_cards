@@ -33,8 +33,7 @@
   "created successfully": "успешно добавлена",
   "success deleted": "успешно удалена",
   "success updated": "успешно обновлена",
-  "Profile updated": "Профиль обновлен"
+  "Profile updated": "Профиль обновлен",
   "Sign In": "Войти",
-  "My profile": "Мой профиль",
-  "Logout": "Выйти"
+  "My profile": "Мой профиль"
 }
