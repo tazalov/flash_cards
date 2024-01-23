@@ -7,7 +7,7 @@ const signUpSchema = z
   .object({
     confirmPassword: z.string().trim(),
     email: z.string().email('Enter valid email').trim(),
-    password: z.string().min(3, 'Min 3').trim(),
+    password: z.string().min(3, 'password must be longer than or equal to 3 characters').trim(),
   })
   .refine(data => data.password === data.confirmPassword, {
     message: 'Password mismatch',

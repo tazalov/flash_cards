@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { RemoveItemModal } from '@/common/ui/RemoveItemModal'
@@ -16,12 +17,13 @@ interface Props {
 export const RemoveCardModal = ({ cardId, cardName, ...rest }: Props) => {
   const [removeCard, { isLoading }] = useRemoveCardMutation()
 
+  const { t } = useTranslation()
   const handleRemoveCard = () => {
     removeCard({ id: cardId }).then(data => {
       if ('error' in data) {
         return handleErrorResponse(data.error)
       } else {
-        toast.success('The card has been deleted')
+        toast.success(t('The card has been deleted'))
       }
     })
   }
@@ -31,7 +33,7 @@ export const RemoveCardModal = ({ cardId, cardName, ...rest }: Props) => {
       handleRemoveItem={handleRemoveCard}
       isLoading={isLoading}
       itemName={cardName}
-      title="Remove card"
+      title={t('Remove card')}
       {...rest}
     />
   )

@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { Column, Sort } from '@/common/types'
 import cn from 'classnames'
@@ -34,6 +35,7 @@ export const SortableHeader = forwardRef<ElementRef<'thead'>, HeaderWithSortProp
         }
       }
     }
+    const { t } = useTranslation()
 
     return (
       <Table.Head {...restProps} ref={ref}>
@@ -44,7 +46,7 @@ export const SortableHeader = forwardRef<ElementRef<'thead'>, HeaderWithSortProp
               key={key}
               onClick={handleSort(key, sortable)}
             >
-              {title}
+              {t(title)}
               {sort && sort.key === key && <span>{sort.direction === 'asc' ? ' ▲' : ' ▼'}</span>}
             </Table.TitleCell>
           ))}

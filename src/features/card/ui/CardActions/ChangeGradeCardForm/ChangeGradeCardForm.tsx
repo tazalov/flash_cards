@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/common/ui/Button'
 import { RadioOption } from '@/common/ui/RadioGroup'
@@ -25,12 +26,13 @@ export const ChangeGradeCardForm = ({ disabled, onSubmit }: Props) => {
   const { control, handleSubmit } = useForm<Rate>({
     defaultValues: { grade: '1' },
   })
+  const { t } = useTranslation()
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <ControlledRadioGroup className={s.rate} control={control} name="grade" options={options} />
       <Button disabled={disabled} fullWidth>
-        Next Question
+        {t('Next Question')}
       </Button>
     </form>
   )

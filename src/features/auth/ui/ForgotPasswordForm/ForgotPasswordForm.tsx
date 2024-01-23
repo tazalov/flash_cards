@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { ButtonVariant, TypographyVariant } from '@/common/enums'
@@ -33,28 +34,29 @@ export const ForgotPasswordForm = ({ className, isLoading, onSubmit }: Props) =>
       }
     })
   }
+  const { t } = useTranslation()
 
   return (
     <Card as="form" className={cn(s.form, className)} onSubmit={handleSubmit(handleSubmitAction)}>
       <Typography as="h2" className={s.headerText} variant={TypographyVariant.large}>
-        Forgot your password?
+        {t('Forgot your password')}?
       </Typography>
       <ControlledTextField
         className={s.input}
         control={control}
         errorText={errors?.email?.message}
-        label="Email"
+        label={t('Email')}
         name="email"
         type="email"
       />
       <Typography className={s.descriptionText} variant={TypographyVariant.body2}>
-        Enter your email address and we will send you further instructions
+        {t('Enter email for instruction')}
       </Typography>
       <Button className={s.submitBtn} disabled={isLoading} fullWidth type="submit">
-        Send Instructions
+        {t('Send Instructions')}
       </Button>
       <Typography className={s.forgotPasswordText} variant={TypographyVariant.body2}>
-        Did you remember your password?
+        {t('Did you remember your password')}?
       </Typography>
       <Button
         as={Link}
@@ -62,7 +64,7 @@ export const ForgotPasswordForm = ({ className, isLoading, onSubmit }: Props) =>
         to="/sign-in"
         variant={ButtonVariant.link}
       >
-        Try logging in
+        {t('Try logging in')}
       </Button>
     </Card>
   )

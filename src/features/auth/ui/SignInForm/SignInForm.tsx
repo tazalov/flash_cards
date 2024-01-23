@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { ButtonVariant, TypographyVariant } from '@/common/enums'
@@ -11,7 +12,6 @@ import cn from 'classnames'
 import s from './SignInForm.module.scss'
 
 import { SignInFormData, useSignInForm } from '../../model/hooks/useSignInForm'
-
 interface Props {
   className?: string
   isLoading: boolean
@@ -23,18 +23,19 @@ export const SignInForm = ({ className, isLoading, onSubmit }: Props) => {
     formState: { errors },
     handleSubmit,
   } = useSignInForm()
+  const { t } = useTranslation()
 
   return (
     <Card as="form" className={cn(s.form, className)} onSubmit={handleSubmit(onSubmit)}>
       <Typography as="h2" className={s.headerText} variant={TypographyVariant.large}>
-        Sign In
+        {t('Sign In')}
       </Typography>
       <ControlledTextField
         className={s.input}
         control={control}
         disabled={isLoading}
         errorText={errors?.email?.message}
-        label="Email"
+        label={t('Email')}
         name="email"
         type="email"
       />
@@ -43,7 +44,7 @@ export const SignInForm = ({ className, isLoading, onSubmit }: Props) => {
         control={control}
         disabled={isLoading}
         errorText={errors?.password?.message}
-        label="Password"
+        label={t('Password')}
         name="password"
         type="password"
       />
@@ -51,7 +52,7 @@ export const SignInForm = ({ className, isLoading, onSubmit }: Props) => {
         className={s.checkbox}
         control={control}
         disabled={isLoading}
-        label="Remember me"
+        label={t('Remember me')}
         name="rememberMe"
       />
       <Typography
@@ -60,13 +61,13 @@ export const SignInForm = ({ className, isLoading, onSubmit }: Props) => {
         to="/forgot-password"
         variant={TypographyVariant.body2}
       >
-        Forgot Password?
+        {t('Forgot Password')}?
       </Typography>
       <Button className={s.signInBtn} disabled={isLoading} fullWidth type="submit">
-        Sign In
+        {t('Sign In')}
       </Button>
       <Typography className={s.signUpText} variant={TypographyVariant.body2}>
-        Don`t have an account?
+        {t('Don`t have an account')}?
       </Typography>
       <Button
         as={Link}
@@ -74,7 +75,7 @@ export const SignInForm = ({ className, isLoading, onSubmit }: Props) => {
         to="/sign-up"
         variant={ButtonVariant.link}
       >
-        Sign Up
+        {t('Sign Up')}
       </Button>
     </Card>
   )

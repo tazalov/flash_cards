@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { Edit, Info, Play, Trash } from '@/common/assets/icons'
@@ -27,6 +28,7 @@ export const CardsHeader = (props: Props) => {
   const { className, deck, deckId, isEmpty, isOwner } = props
 
   const handleSelectItem = (e: Event) => e.preventDefault()
+  const { t } = useTranslation()
 
   return (
     <div className={cn(s.header, className)}>
@@ -40,16 +42,20 @@ export const CardsHeader = (props: Props) => {
             trigger={<IconButton className={s.btnIcon} icon={<Info />} size={1.125} />}
           >
             <Dropdown.Item startIcon={<Play />}>
-              <Link to={`/${deckId}/learn/${deck.name}`}>Learn</Link>
+              <Link to={`/${deckId}/learn/${deck.name}`}>{t('Learn')}</Link>
             </Dropdown.Item>
             <Dropdown.Separator />
             <Dropdown.Item onSelect={handleSelectItem} startIcon={<Edit />}>
-              <UpdateDeckModal deck={deck} trigger={<span>Edit</span>} />
+              <UpdateDeckModal deck={deck} trigger={<span>{t('Edit')}</span>} />
             </Dropdown.Item>
 
             <Dropdown.Separator />
             <Dropdown.Item onSelect={handleSelectItem} startIcon={<Trash />}>
-              <RemoveDeckModal deckId={deckId} deckName={deck.name} trigger={<span>Delete</span>} />
+              <RemoveDeckModal
+                deckId={deckId}
+                deckName={deck.name}
+                trigger={<span>{t('Delete')}</span>}
+              />
             </Dropdown.Item>
           </Dropdown.Menu>
         )}
@@ -59,7 +65,7 @@ export const CardsHeader = (props: Props) => {
           <CreateCardModal deckId={deckId} />
         ) : (
           <Button as={Link} to={`/${deckId}/learn/${deck.name}`}>
-            Learn to Pack
+            {t('Learn to Pack')}
           </Button>
         ))}
     </div>

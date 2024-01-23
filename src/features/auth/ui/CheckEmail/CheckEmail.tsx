@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import checkEmail from '@/common/assets/images/checkEmail.svg'
@@ -16,10 +17,12 @@ interface Props {
 }
 
 export const CheckEmail = ({ className, email }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <Card className={cn(s.form, className)}>
       <Typography as="h2" className={s.headerText} variant={TypographyVariant.large}>
-        Check Email
+        {t('Check email')}
       </Typography>
       <Avatar className={s.image} src={checkEmail} title="" />
       <Typography
@@ -27,10 +30,10 @@ export const CheckEmail = ({ className, email }: Props) => {
         textAlign="center"
         variant={TypographyVariant.body2}
       >
-        We’ve sent an Email with instructions to {email}
+        {t('Sent email instruction')} {email}
       </Typography>
       <Button as={Link} className={s.signInNav} fullWidth to="/sign-in">
-        Back to Sign In
+        {t('Back to sign in')}
       </Button>
     </Card>
   )
