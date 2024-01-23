@@ -38,7 +38,7 @@ export const Learn = () => {
   const handleSubmitGrade = (formData: Rate) => {
     changeGrade({ cardId: data!.id, deckId, grade: Number(formData.grade) }).then(res => {
       if ('data' in res) {
-        toast.success(`Grade has been successfully counted!`)
+        toast.success(t('Grade has been successfully counted!'))
         setHideAnswer(true)
       }
     })

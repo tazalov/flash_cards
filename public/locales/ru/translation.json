@@ -52,7 +52,7 @@
   "Name Deck": "Имя колоды",
   "Private Deck": "Приватная колода",
   "Remove item": "Удалить элемент",
-  "Save changes": "Сохранить изменения",
+  "Save changes": "Сохранить",
   "Edit deck": "Изменение колоды",
   "Decks list": "Список колод",
   "Show decks": "Показать колоды",
@@ -81,5 +81,8 @@
   "Forgot": "Забыл",
   "A lot of thought": "Долго вспоминал",
   "Confused": "Слегка озадачился",
-  "Knew the answer": "Знал ответ"
+  "Knew the answer": "Знал ответ",
+  "Grade has been successfully counted!": "Оценка успешно подсчитана!",
+  "This deck is empty": "Эта колода пуста",
+  "Click add new card to fill this deck": "Нажмите 'Добавить карточку', чтобы заполнить колоду"
 }

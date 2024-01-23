@@ -74,7 +74,8 @@ export const CardsList = () => {
       {isEmpty ? (
         <div className={s.infoBlock}>
           <Typography className={s.infoText} textAlign="center" variant={TypographyVariant.body2}>
-            This deck is empty.{isOwner && ' Click add new card to fill this deck'}
+            {t('This deck is empty') +
+              (isOwner ? '. ' + t('Click add new card to fill this deck') : '')}
           </Typography>
           {isOwner && <CreateCardModal deckId={deckId} />}
         </div>

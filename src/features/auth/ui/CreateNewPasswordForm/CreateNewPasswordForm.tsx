@@ -52,7 +52,7 @@ export const CreateNewPasswordForm = ({ isLoading, onSubmit }: Props) => {
         type="password"
       />
       <Typography className={s.formInfoText} variant={TypographyVariant.body2}>
-        {t('Create new password with instruction')}
+        {t('Create new password and we will send you further instructions to email')}
       </Typography>
       <Button disabled={isLoading} fullWidth type="submit">
         {t('Create new password')}
