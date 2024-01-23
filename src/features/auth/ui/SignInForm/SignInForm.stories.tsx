@@ -1,5 +1,3 @@
-import { MemoryRouter } from 'react-router-dom'
-
 import { Meta, StoryObj } from '@storybook/react'
 
 import { SignInForm } from './SignInForm'
@@ -18,10 +16,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const SignInFormDefault: Story = {
-  render: args => (
-    <MemoryRouter initialEntries={['/']}>
-      <SignInForm {...args} />
-    </MemoryRouter>
-  ),
+export const Default: Story = {
+  args: {
+    isLoading: false,
+    onSubmit: () => new Promise(res => res({ error: null, fieldErrors: null })),
+  },
+}
+
+export const IsLoading: Story = {
+  args: {
+    isLoading: true,
+    onSubmit: () => new Promise(res => res({ error: null, fieldErrors: null })),
+  },
 }

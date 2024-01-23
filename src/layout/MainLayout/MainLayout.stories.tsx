@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { MainLayout } from './MainLayout'
 
 const meta = {
-  argTypes: {},
   component: MainLayout,
   parameters: {
     layout: 'fullscreen',
@@ -15,6 +14,4 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Demo: Story = {
-  args: {},
-}
+export const Demo: Story = {}

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SignInForm } from '@/features/auth/ui/SignInForm'
+import { SignInForm } from '@/features/auth'
 
 import { Page } from './Page'
 
@@ -19,6 +19,6 @@ type Story = StoryObj<typeof meta>
 
 export const Demo: Story = {
   args: {
-    children: <SignInForm onSubmit={() => {}} />,
+    children: <SignInForm isLoading onSubmit={() => {}} />,
   },
 }

@@ -1,7 +1,3 @@
-import { Provider } from 'react-redux'
-import { MemoryRouter } from 'react-router-dom'
-
-import { store } from '@/app/store'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { CardsHeader } from './CardsHeader'
@@ -15,33 +11,42 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const deck = {
+  author: {
+    id: '1',
+    name: 'Authorname',
+  },
+  cardsCount: 1,
+  cover: null,
+  created: '',
+  id: '1',
+  isPrivate: false,
+  name: 'JS',
+  shots: 10,
+  updated: '',
+  userId: '1',
+}
+
 export const isOwner: Story = {
   args: {
+    deck,
     deckId: 'clkyc7rlm0020yb2qwnggodrn',
     isOwner: true,
-    name: 'JS',
   },
-  render: args => (
-    <Provider store={store}>
-      <MemoryRouter initialEntries={[`/`]}>
-        <CardsHeader {...args} />
-      </MemoryRouter>
-    </Provider>
-  ),
 }
 export const isEmpty: Story = {
   args: {
+    deck,
     deckId: 'clkyc7rlm0020yb2qwnggodrn',
     isEmpty: true,
     isOwner: true,
-    name: 'JS',
   },
 }
 export const NotIsOwner: Story = {
   args: {
+    deck,
     deckId: 'clkyc7rlm0020yb2qwnggodrn',
     isEmpty: false,
     isOwner: false,
-    name: 'JS',
   },
 }

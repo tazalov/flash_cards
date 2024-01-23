@@ -12,7 +12,7 @@ import { Deck } from '@/features/deck/model/types/decks.types'
 import s from './DecksTable.module.scss'
 
 import { RemoveDeckModal } from '../../DeckActions/RemoveDeckModal/RemoveDeckModal'
-import { UpdateDeckModal } from '../../DeckActions/UpdateDeckModal'
+import { UpdateDeckModal } from '../../DeckActions/UpdateDeckModal/UpdateDeckModal'
 import { DecksTableSkeleton } from './DecksTableSkeleton'
 
 const columns: Column[] = [
