@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import { Logout, Person } from '@/common/assets/icons'
@@ -18,6 +19,8 @@ export const HeaderUser = ({ data, logout }: Props) => {
   const { avatar, email, username } = data
 
   const titleNoAvatar = username.slice(0, 1).toUpperCase()
+
+  const { t } = useTranslation()
 
   const navigate = useNavigate()
 
@@ -51,11 +54,11 @@ export const HeaderUser = ({ data, logout }: Props) => {
         </Dropdown.Item>
         <Dropdown.Separator />
         <Dropdown.Item onSelect={handleNavigateToProfile} startIcon={<Person />}>
-          <Typography variant={TypographyVariant.caption}>My profile</Typography>
+          <Typography variant={TypographyVariant.caption}>{t('My profile')}</Typography>
         </Dropdown.Item>
         <Dropdown.Separator />
         <Dropdown.Item onSelect={logout} startIcon={<Logout />}>
-          <Typography variant={TypographyVariant.caption}>Logout</Typography>
+          <Typography variant={TypographyVariant.caption}>{t('Logout')}</Typography>
         </Dropdown.Item>
       </Dropdown.Menu>
       <Avatar size="small" src={avatar} title={titleNoAvatar} />

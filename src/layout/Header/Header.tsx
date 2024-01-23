@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import Logo from '@/common/assets/images/logo.png'
@@ -20,20 +21,24 @@ type Props = {
 
 export const Header = forwardRef<ElementRef<'header'>, Props>(
   ({ className, data, isAuth, logout, ...rest }, ref) => {
+    const { t } = useTranslation()
+
     return (
       <header className={cn(s.header, className)} ref={ref} {...rest}>
         <Page className={s.container} mt={0}>
           <Link className={s.mainLink} to="/">
             <img alt="logo" className={s.logo} src={Logo} />
           </Link>
-          {isAuth && data ? (
-            <HeaderUser data={data} logout={logout} />
-          ) : (
-            <Button as={Link} to="/sign-in">
-              Sign In
-            </Button>
-          )}
-          <LangSwitcher />
+          <div className={s.rightBlock}>
+            {isAuth && data ? (
+              <HeaderUser data={data} logout={logout} />
+            ) : (
+              <Button as={Link} to="/sign-in">
+                {t('Sign In')}
+              </Button>
+            )}
+            <LangSwitcher />
+          </div>
         </Page>
       </header>
     )
