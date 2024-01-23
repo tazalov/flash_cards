@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { LoadPicture, Trash } from '@/common/assets/icons'
 import { ButtonVariant } from '@/common/enums'
@@ -20,7 +21,7 @@ type Props = {
   card?: Card
   disabled: boolean
   onSubmit: (data: FormData) => Promise<CatchingData | undefined>
-  submitTitle?: string
+  submitTitle: string
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
 const options = [
@@ -28,13 +29,7 @@ const options = [
   { title: 'Image', value: 'image' },
 ]
 
-export const ActionsCardForm = ({
-  card,
-  className,
-  disabled,
-  onSubmit,
-  submitTitle = 'Add New Card',
-}: Props) => {
+export const ActionsCardForm = ({ card, className, disabled, onSubmit, submitTitle }: Props) => {
   const {
     coverOptions: { answerCover, coverSchema, questionCover, setAnswerCover, setQuestionCover },
     formValues: {
@@ -45,6 +40,7 @@ export const ActionsCardForm = ({
       setError,
     },
   } = useActionsCardForm(card)
+  const { t } = useTranslation()
 
   const [selectQuestion, setSelectQuestion] = useState(options[0].value)
   const [selectAnswer, setSelectAnswer] = useState(options[0].value)
@@ -106,7 +102,7 @@ export const ActionsCardForm = ({
         className={s.input}
         disabled={disabled}
         fullWidth
-        label="Choose a question format"
+        label={t('Choose a question format')}
         onValueChange={handleChangeSelectQuestion}
         options={options}
         value={selectQuestion}
@@ -117,7 +113,7 @@ export const ActionsCardForm = ({
           control={control}
           disabled={disabled}
           errorText={errors.question?.message}
-          label="Question"
+          label={t('Question')}
           name="question"
         />
       ) : (
@@ -152,7 +148,7 @@ export const ActionsCardForm = ({
                 startIcon={<LoadPicture />}
                 variant={ButtonVariant.secondary}
               >
-                Change cover
+                {t('Change cover')}
               </Button>
             }
             validationSchema={coverSchema}
@@ -163,7 +159,7 @@ export const ActionsCardForm = ({
         className={s.input}
         disabled={disabled}
         fullWidth
-        label="Choose a question format"
+        label={t('Choose a question format')}
         onValueChange={handleChangeSelectAnswer}
         options={options}
         value={selectAnswer}
@@ -174,7 +170,7 @@ export const ActionsCardForm = ({
           control={control}
           disabled={disabled}
           errorText={errors.answer?.message}
-          label="Answer"
+          label={t('Answer')}
           name="answer"
         />
       ) : (
@@ -209,7 +205,7 @@ export const ActionsCardForm = ({
                 startIcon={<LoadPicture />}
                 variant={ButtonVariant.secondary}
               >
-                Change cover
+                {t('Change cover')}
               </Button>
             }
             validationSchema={coverSchema}
@@ -219,7 +215,7 @@ export const ActionsCardForm = ({
       <div className={s.buttons}>
         <ModalClose>
           <Button disabled={disabled} type="button" variant={ButtonVariant.secondary}>
-            Cancel
+            {t('Cancel')}
           </Button>
         </ModalClose>
         <Button disabled={disabled} type="submit">

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { Button } from '@/common/ui/Button'
@@ -24,21 +25,26 @@ export const CreateCardModal = ({ className, deckId }: Props) => {
       if ('error' in data) {
         return handleErrorResponse(data.error)
       } else {
-        toast.success('A new card has been created')
+        toast.success(t('A new card has been created'))
         setOpen(false)
       }
     })
   }
+  const { t } = useTranslation()
 
   return (
     <Modal
       className={cn(s.modal, className)}
       onOpenChange={setOpen}
       open={open}
-      title="Add new Card"
+      title={t('Add card title')}
       trigger={<Button>Create New Card</Button>}
     >
-      <ActionsCardForm disabled={isLoading} onSubmit={handleSubmit} />
+      <ActionsCardForm
+        disabled={isLoading}
+        onSubmit={handleSubmit}
+        submitTitle={t('Add New Card')}
+      />
     </Modal>
   )
 }

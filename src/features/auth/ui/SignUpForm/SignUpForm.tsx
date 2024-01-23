@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { ButtonVariant, TypographyVariant } from '@/common/enums'
@@ -24,6 +25,7 @@ export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
     handleSubmit,
     setError,
   } = useSignUpForm()
+  const { t } = useTranslation()
   const handleSubmitAction = (data: SignUpFormValues) => {
     onSubmit(data).then(error => {
       if (error && error.fieldErrors) {
@@ -44,7 +46,7 @@ export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
         control={control}
         disabled={isLoading}
         errorText={errors.email?.message}
-        label="Email"
+        label={t('Email')}
         name="email"
         type="email"
       />
@@ -53,7 +55,7 @@ export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
         control={control}
         disabled={isLoading}
         errorText={errors.password?.message}
-        label="Password"
+        label={t('Password')}
         name="password"
         type="password"
       />
@@ -62,15 +64,15 @@ export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
         control={control}
         disabled={isLoading}
         errorText={errors.confirmPassword?.message}
-        label="Confirm password"
+        label={t('Confirm password')}
         name="confirmPassword"
         type="password"
       />
       <Button className={s.btnSubmit} disabled={isLoading} fullWidth type="submit">
-        Sign Up
+        {t('Sign Up')}
       </Button>
       <Typography className={s.formFooterText} variant={TypographyVariant.body2}>
-        Already have an account?
+        {t('Already have an account')}?
       </Typography>
       <Button
         as={Link}
@@ -79,7 +81,7 @@ export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
         type="submit"
         variant={ButtonVariant.link}
       >
-        Sign in
+        {t('Sign in')}
       </Button>
     </Card>
   )

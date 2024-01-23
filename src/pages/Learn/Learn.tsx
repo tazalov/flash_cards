@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -19,6 +20,7 @@ import s from './Learn.module.scss'
 
 export const Learn = () => {
   const { deckId = '', deckName } = useParams()
+  const { t } = useTranslation()
 
   const navigate = useNavigate()
 
@@ -52,7 +54,7 @@ export const Learn = () => {
     <Page mt="24px">
       <div className={s.link} onClick={() => navigate(-1)}>
         <Arrow className={s.iconArrow} />
-        <Typography variant={TypographyVariant.body2}>Back to previous page</Typography>
+        <Typography variant={TypographyVariant.body2}>{t('Back to previous page')}</Typography>
       </div>
       {isLoadChangeGrade || isErrorGetCard || isErrorChangeGrade ? (
         <CardBodySkeleton />

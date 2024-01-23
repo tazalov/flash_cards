@@ -37,6 +37,7 @@ export const SortableHeader = forwardRef<ElementRef<'thead'>, HeaderWithSortProp
         }
       }
     }
+    const { t } = useTranslation()
 
     return (
       <Table.Head {...restProps} ref={ref}>
@@ -47,7 +48,7 @@ export const SortableHeader = forwardRef<ElementRef<'thead'>, HeaderWithSortProp
               key={key}
               onClick={handleSort(key, sortable)}
             >
-              {t(title) || title}
+              {t(title)}
               {sort && sort.key === key && <span>{sort.direction === 'asc' ? ' ▲' : ' ▼'}</span>}
             </Table.TitleCell>
           ))}

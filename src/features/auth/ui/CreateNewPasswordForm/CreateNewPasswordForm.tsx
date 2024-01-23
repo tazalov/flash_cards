@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { TypographyVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
 import { Card } from '@/common/ui/Card'
@@ -34,24 +36,26 @@ export const CreateNewPasswordForm = ({ isLoading, onSubmit }: Props) => {
     })
   }
 
+  const { t } = useTranslation()
+
   return (
     <Card as="form" className={s.formContent} onSubmit={handleSubmit(handleSubmitAction)}>
       <Typography as="h2" className={s.formTitle} variant={TypographyVariant.large}>
-        Create new password
+        {t('Create new password')}
       </Typography>
       <ControlledTextField
         className={s.input}
         control={control}
         errorText={errors.password?.message}
-        label="Password"
+        label={t('Password')}
         name="password"
         type="password"
       />
       <Typography className={s.formInfoText} variant={TypographyVariant.body2}>
-        Create new password and we will send you further instructions to email
+        {t('Create new password with instruction')}
       </Typography>
       <Button disabled={isLoading} fullWidth type="submit">
-        Create New Password
+        {t('Create new password')}
       </Button>
     </Card>
   )

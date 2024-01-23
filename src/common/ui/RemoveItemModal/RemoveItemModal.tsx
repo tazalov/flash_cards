@@ -28,6 +28,7 @@ export const RemoveItemModal = ({
   trigger,
 }: Props) => {
   const [open, setOpen] = useState(false)
+  const { t } = useTranslation()
 
   const { t } = useTranslation()
 

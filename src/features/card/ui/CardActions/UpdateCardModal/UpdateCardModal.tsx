@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { Modal } from '@/common/ui/Modals'
@@ -22,14 +23,14 @@ export const UpdateCardModal = ({ card, className, handleChangePage, trigger }: 
   const [open, setOpen] = useState(false)
 
   const [update, { isLoading }] = useUpdateCardMutation()
-
+  const { t } = useTranslation()
   const handleUpdateCard = (formValues: FormData) => {
     return update({ body: formValues, card }).then(data => {
       if ('error' in data) {
         return handleErrorResponse(data.error)
       } else {
         handleChangePage(1)
-        toast.success('The card has been successfully updated')
+        toast.success(t('Success updated card'))
       }
     })
   }
@@ -39,14 +40,14 @@ export const UpdateCardModal = ({ card, className, handleChangePage, trigger }: 
       className={cn(s.modal, className)}
       onOpenChange={setOpen}
       open={open}
-      title="Update Card"
+      title={t('Update Card title')}
       trigger={trigger}
     >
       <ActionsCardForm
         card={card}
         disabled={isLoading}
         onSubmit={handleUpdateCard}
-        submitTitle="Update Card"
+        submitTitle={t('Update Card button')}
       />
     </Modal>
   )
