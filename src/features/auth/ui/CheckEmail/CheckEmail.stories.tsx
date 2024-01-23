@@ -1,13 +1,8 @@
-import { MemoryRouter } from 'react-router-dom'
-
 import { Meta, StoryObj } from '@storybook/react'
 
 import { CheckEmail } from './CheckEmail'
 
 const meta = {
-  args: {
-    email: 'example@mail.com',
-  },
   component: CheckEmail,
   tags: ['autodocs'],
   title: 'features/Auth/CheckEmail',
@@ -16,10 +11,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const CheckEmailDefault: Story = {
-  render: args => (
-    <MemoryRouter initialEntries={['/']}>
-      <CheckEmail {...args} />
-    </MemoryRouter>
-  ),
+export const Default: Story = {
+  args: {
+    email: 'example@mail.com',
+  },
 }

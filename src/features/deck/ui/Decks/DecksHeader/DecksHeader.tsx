@@ -6,7 +6,7 @@ import { Typography } from '@/common/ui/Typography'
 
 import s from './DecksHeader.module.scss'
 
-import { CreateDeckModal } from '../../DeckActions/CreateDeckModal'
+import { CreateDeckModal } from '../../DeckActions/CreateDeckModal/CreateDeckModal'
 
 type Props = {
   headerText?: string

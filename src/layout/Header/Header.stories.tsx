@@ -4,6 +4,9 @@ import { Header } from './Header'
 
 const meta = {
   argTypes: {
+    isAuth: {
+      control: false,
+    },
     logout: {
       action: 'Logout!',
     },
