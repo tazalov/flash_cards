@@ -1,7 +1,5 @@
 import { ElementRef, ElementType, Ref } from 'react'
 
-import { Draft } from '@reduxjs/toolkit'
-
 export interface PolymorphRef<T extends ElementType> {
   ref?: Ref<ElementRef<T>>
 }
@@ -20,7 +18,7 @@ export type Sort = {
 export interface Column {
   key: string
   sortable: boolean
-  title: string
+  title?: string
 }
 
 export interface Pagination {

@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { LoadPicture, Trash } from '@/common/assets/icons'
 import { COVER_SCHEMA } from '@/common/const'
@@ -17,12 +18,13 @@ import { CreateDeckFormData, useDeckActionsForm } from '../../../model/hooks/use
 import { Deck } from '../../../model/types/decks.types'
 
 type Props = {
+  btnTitle: string
   deck?: Pick<Deck, 'cover' | 'isPrivate' | 'name'>
   disabled: boolean
   onSubmit: (body: FormData) => Promise<CatchingData | undefined>
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
-export const DeckActionsForm = ({ deck, disabled, onSubmit }: Props) => {
+export const DeckActionsForm = ({ btnTitle, deck, disabled, onSubmit }: Props) => {
   const {
     coverOptions: { cover, setCover },
     formOptions: {
@@ -32,6 +34,8 @@ export const DeckActionsForm = ({ deck, disabled, onSubmit }: Props) => {
       setError,
     },
   } = useDeckActionsForm(deck)
+
+  const { t } = useTranslation()
 
   const fileRef = useRef<HTMLInputElement>(null)
 
@@ -74,7 +78,7 @@ export const DeckActionsForm = ({ deck, disabled, onSubmit }: Props) => {
             size={1.5}
             type="button"
           >
-            clear
+            {t('clear')}
           </IconButton>
         </div>
       )}
@@ -90,7 +94,7 @@ export const DeckActionsForm = ({ deck, disabled, onSubmit }: Props) => {
             startIcon={<LoadPicture />}
             variant={ButtonVariant.secondary}
           >
-            Change Cover
+            {t('Change Cover')}
           </Button>
         }
         validationSchema={COVER_SCHEMA}
@@ -100,24 +104,24 @@ export const DeckActionsForm = ({ deck, disabled, onSubmit }: Props) => {
         control={control}
         disabled={disabled}
         errorText={errors?.name?.message}
-        label="Name Deck"
+        label={t('Name Deck')}
         name="name"
       />
       <ControlledCheckbox
         className={s.addNewDeckCheckBox}
         control={control}
         disabled={disabled}
-        label="Private Deck"
+        label={t('Private Deck')}
         name="isPrivate"
       />
       <div className={s.btnWrapper}>
         <ModalClose>
           <Button disabled={disabled} variant={ButtonVariant.secondary}>
-            Cancel
+            {t('Cancel')}
           </Button>
         </ModalClose>
         <Button disabled={disabled} type="submit">
-          Save Changes
+          {btnTitle}
         </Button>
       </div>
     </form>

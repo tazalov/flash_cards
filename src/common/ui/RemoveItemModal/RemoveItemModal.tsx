@@ -24,10 +24,12 @@ export const RemoveItemModal = ({
   handleRemoveItem,
   isLoading,
   itemName,
-  title = 'Remove item',
+  title,
   trigger,
 }: Props) => {
   const [open, setOpen] = useState(false)
+  const { t } = useTranslation()
+
   const { t } = useTranslation()
 
   return (
@@ -49,7 +51,7 @@ export const RemoveItemModal = ({
             </Button>
           </ModalClose>
           <Button disabled={isLoading} onClick={handleRemoveItem}>
-            {title}
+            {title || t('Remove item')}
           </Button>
         </div>
       </div>

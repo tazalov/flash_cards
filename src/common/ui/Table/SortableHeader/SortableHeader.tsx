@@ -16,6 +16,8 @@ type HeaderWithSortProps = {
 
 export const SortableHeader = forwardRef<ElementRef<'thead'>, HeaderWithSortProps>(
   ({ columns, onSort, sort, ...restProps }, ref) => {
+    const { t } = useTranslation()
+
     const handleSort = (key: string, sortable?: boolean) => () => {
       if (!onSort || !sortable) {
         return

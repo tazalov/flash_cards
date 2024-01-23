@@ -21,6 +21,12 @@
   line-height: 0;
 }
 
+.rightBlock {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .logo {
   max-height: 2.25rem;
 }

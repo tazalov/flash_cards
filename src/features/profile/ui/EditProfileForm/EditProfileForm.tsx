@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { Cross, Edit } from '@/common/assets/icons'
 import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
@@ -54,6 +55,7 @@ export const EditProfileForm = ({
 
   const { control, handleSubmit } = useForm<EditProfileValues>()
 
+  const { t } = useTranslation()
   const handleOnSubmit = (data: EditProfileValues) => {
     const formData = new FormData()
 
@@ -99,7 +101,7 @@ export const EditProfileForm = ({
         control={control}
         defaultValue={initialValue}
         disabled={isLoading}
-        label="Nickname"
+        label={t('Nickname')}
         name="username"
       />
       <Button
@@ -110,10 +112,10 @@ export const EditProfileForm = ({
         type="button"
         variant={ButtonVariant.secondary}
       >
-        Cancel
+        {t('Cancel')}
       </Button>
       <Button disabled={isLoading} fullWidth type="submit">
-        Save changes
+        {t('Save changes')}
       </Button>
     </form>
   )

@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { TypographyVariant } from '@/common/enums'
 import { ProfileData } from '@/common/types'
 import { Avatar } from '@/common/ui/Avatar'
@@ -31,6 +33,8 @@ export const PersonalInformation = ({
   isLoadUpdate,
   setEditMode,
 }: Props) => {
+  const { t } = useTranslation()
+
   const titleNoAvatar = data?.username.slice(0, 1).toUpperCase() || 'UN'
 
   const handleActiveEditMode = () => setEditMode(true)
@@ -40,7 +44,7 @@ export const PersonalInformation = ({
   return (
     <Card className={cn(s.root, className)}>
       <Typography as="h1" className={s.title} variant={TypographyVariant.large}>
-        Profile
+        {t('Profile')}
       </Typography>
       {editMode ? (
         <EditProfileForm

@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { Edit, Logout } from '@/common/assets/icons'
 import { ButtonVariant, TypographyVariant } from '@/common/enums'
 import { Button } from '@/common/ui/Button'
@@ -21,6 +23,8 @@ export const ProfileInfo = ({
   isLoading,
   username = '',
 }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <div className={s.root}>
       <div className={s.username}>
@@ -38,7 +42,7 @@ export const ProfileInfo = ({
         startIcon={<Logout />}
         variant={ButtonVariant.secondary}
       >
-        Logout
+        {t('Logout')}
       </Button>
     </div>
   )
