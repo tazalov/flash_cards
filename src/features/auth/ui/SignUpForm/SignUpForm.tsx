@@ -39,7 +39,7 @@ export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
   return (
     <Card as="form" className={s.formContent} onSubmit={handleSubmit(handleSubmitAction)}>
       <Typography as="h2" className={s.formTitle} variant={TypographyVariant.large}>
-        Sign Up
+        {t('Sign Up')}
       </Typography>
       <ControlledTextField
         className={s.input}
@@ -81,7 +81,7 @@ export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
         type="submit"
         variant={ButtonVariant.link}
       >
-        {t('Sign in')}
+        {t('Sign In')}
       </Button>
     </Card>
   )

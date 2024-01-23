@@ -30,8 +30,6 @@ export const RemoveItemModal = ({
   const [open, setOpen] = useState(false)
   const { t } = useTranslation()
 
-  const { t } = useTranslation()
-
   return (
     <Modal
       className={cn(s.modal, className)}

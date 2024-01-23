@@ -1,8 +1,9 @@
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
-import { Arrow } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
 import { useDebounce } from '@/common/hooks/useDebounce'
+import { BackToPreviousPage } from '@/common/ui/BackToPreviusPage'
 import { Page } from '@/common/ui/Page'
 import { Pagination } from '@/common/ui/Pagination'
 import { Preloader } from '@/common/ui/Preloader'
@@ -34,7 +35,10 @@ export const CardsList = () => {
     page,
     question,
   } = useCardsList()
+
   const debounceQuestion = useDebounce(question)
+
+  const { t } = useTranslation()
 
   const { data: deck } = useGetDeckByIdQuery({
     id: deckId,
@@ -59,10 +63,7 @@ export const CardsList = () => {
 
   return (
     <Page mt="24px">
-      <div className={s.link} onClick={handleToPreviewPage}>
-        <Arrow className={s.iconArrow} />
-        <Typography variant={TypographyVariant.body2}>Back to Decks list</Typography>
-      </div>
+      <BackToPreviousPage handleNavigate={handleToPreviewPage} title={t('Back to Decks list')} />
       <CardsHeader
         className={s.item}
         deck={deck || ({} as Deck)}

@@ -33,7 +33,7 @@ export const CreateDeckModal = () => {
       className={s.modal}
       onOpenChange={setOpen}
       open={open}
-      title={t('Add New Deck')}
+      title={t('Creating New Deck')}
       trigger={<Button>{t('Add New Deck')}</Button>}
     >
       <DeckActionsForm

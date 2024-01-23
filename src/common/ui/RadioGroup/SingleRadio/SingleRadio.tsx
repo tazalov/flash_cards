@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { TypographyVariant } from '@/common/enums'
 import { Typography } from '@/common/ui/Typography'
@@ -12,6 +13,8 @@ type Props = {
 } & Omit<ComponentPropsWithoutRef<typeof RadixRadio.Item>, 'asChild'>
 
 export const SingleRadio = ({ className, disabled, label, ...rest }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <Typography
       as="label"
@@ -21,7 +24,7 @@ export const SingleRadio = ({ className, disabled, label, ...rest }: Props) => {
       <RadixRadio.Item className={s.item} disabled={disabled} {...rest}>
         <RadixRadio.Indicator className={s.indicator} />
       </RadixRadio.Item>
-      {label}
+      {t(label)}
     </Typography>
   )
 }

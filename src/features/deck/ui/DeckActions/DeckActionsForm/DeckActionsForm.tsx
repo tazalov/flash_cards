@@ -94,7 +94,7 @@ export const DeckActionsForm = ({ btnTitle, deck, disabled, onSubmit }: Props) =
             startIcon={<LoadPicture />}
             variant={ButtonVariant.secondary}
           >
-            {t('Change Cover')}
+            {t('Change cover')}
           </Button>
         }
         validationSchema={COVER_SCHEMA}

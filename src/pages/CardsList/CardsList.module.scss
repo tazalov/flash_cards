@@ -7,16 +7,6 @@
   margin-bottom: 0.5rem;
 }
 
-.link {
-  cursor: pointer;
-
-  display: flex;
-  gap: 0.375rem;
-  align-items: center;
-
-  margin-bottom: 2.25rem;
-}
-
 .item {
   margin-bottom: 1.5rem;
 }
@@ -29,12 +19,6 @@
 .infoBlock {
   margin-top: 2.875rem;
   text-align: center;
-}
-
-.iconArrow {
-  width: 1rem;
-  height: 1rem;
-  color: var(--color-light-100);
 }
 
 @media screen and (width <= 1024px) {

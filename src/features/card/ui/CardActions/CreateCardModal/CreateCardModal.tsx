@@ -37,8 +37,8 @@ export const CreateCardModal = ({ className, deckId }: Props) => {
       className={cn(s.modal, className)}
       onOpenChange={setOpen}
       open={open}
-      title={t('Add card title')}
-      trigger={<Button>Create New Card</Button>}
+      title={t('Creating New Card')}
+      trigger={<Button>{t('Add New Card')}</Button>}
     >
       <ActionsCardForm
         disabled={isLoading}

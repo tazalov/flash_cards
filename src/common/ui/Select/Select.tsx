@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { ChevronUp } from '@/common/assets/icons'
 import { TypographyVariant } from '@/common/enums'
@@ -37,6 +38,8 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
     },
     ref
   ) => {
+    const { t } = useTranslation()
+
     const textVariant = pagination ? TypographyVariant.body2 : TypographyVariant.body1
 
     const classes = {
@@ -79,7 +82,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
                   value={el.value}
                   variant={textVariant}
                 >
-                  {el.title}
+                  {typeof el.title === 'string' ? t(el.title) : el.title}
                 </SelectItem>
               ))}
             </RadixSelect.Viewport>

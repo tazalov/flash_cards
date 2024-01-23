@@ -24,6 +24,7 @@ export const UpdateCardModal = ({ card, className, handleChangePage, trigger }: 
 
   const [update, { isLoading }] = useUpdateCardMutation()
   const { t } = useTranslation()
+
   const handleUpdateCard = (formValues: FormData) => {
     return update({ body: formValues, card }).then(data => {
       if ('error' in data) {
@@ -40,14 +41,14 @@ export const UpdateCardModal = ({ card, className, handleChangePage, trigger }: 
       className={cn(s.modal, className)}
       onOpenChange={setOpen}
       open={open}
-      title={t('Update Card title')}
+      title={t('Edit card')}
       trigger={trigger}
     >
       <ActionsCardForm
         card={card}
         disabled={isLoading}
         onSubmit={handleUpdateCard}
-        submitTitle={t('Update Card button')}
+        submitTitle={t('Save changes')}
       />
     </Modal>
   )
