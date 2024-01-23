@@ -34,4 +34,7 @@
   "success deleted": "success deleted",
   "success updated": "success updated",
   "Profile updated": "Profile updated"
+  "Sign In": "Sign In",
+  "My profile": "My profile",
+  "Logout": "Logout"
 }

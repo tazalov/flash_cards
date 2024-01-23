@@ -2,7 +2,7 @@
   "Deck": "Колода",
   "Show": "Показать",
   "on page": "на странице",
-  "Lang": "РУС",
+  "Lang": "РУ",
   "Add New Deck": "Добавление колоды",
   "clear": "очистить",
   "Change Cover": "Изменить обложку",
@@ -34,4 +34,7 @@
   "success deleted": "успешно удалена",
   "success updated": "успешно обновлена",
   "Profile updated": "Профиль обновлен"
+  "Sign In": "Войти",
+  "My profile": "Мой профиль",
+  "Logout": "Выйти"
 }
