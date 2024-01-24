@@ -7,8 +7,29 @@ import { Button } from './Button'
 
 const meta = {
   argTypes: {
+    as: {
+      control: false,
+      description: 'Prop for polymorph render',
+    },
+    endIcon: {
+      control: false,
+      description: 'Icon after text',
+    },
+    fullWidth: {
+      control: 'boolean',
+      description: 'Flag for fullwidth style',
+    },
+    ref: {
+      control: false,
+      description: 'Standard React ref obj',
+    },
+    startIcon: {
+      control: false,
+      description: 'Icon before text',
+    },
     variant: {
       control: { type: 'radio' },
+      description: 'Variant for button render',
       options: ['primary', 'secondary', 'outlined', 'link'],
     },
   },

@@ -14,7 +14,7 @@ const meta = {
     },
     ref: {
       control: false,
-      description: 'Standart React ref obj',
+      description: 'Standard React ref obj',
     },
     title: {
       description: 'Text for link',
