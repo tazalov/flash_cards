@@ -18,6 +18,7 @@ export const RemoveCardModal = ({ cardId, cardName, ...rest }: Props) => {
   const [removeCard, { isLoading }] = useRemoveCardMutation()
 
   const { t } = useTranslation()
+
   const handleRemoveCard = () => {
     removeCard({ id: cardId }).then(data => {
       if ('error' in data) {
@@ -30,8 +31,8 @@ export const RemoveCardModal = ({ cardId, cardName, ...rest }: Props) => {
 
   return (
     <RemoveItemModal
+      disabled={isLoading}
       handleRemoveItem={handleRemoveCard}
-      isLoading={isLoading}
       itemName={cardName}
       title={t('Remove card')}
       {...rest}
