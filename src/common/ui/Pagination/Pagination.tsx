@@ -10,13 +10,13 @@ import s from './Pagination.module.scss'
 
 import { usePagination } from './usePagination'
 
-interface Props extends SelectProps {
+type Props = {
   currentPage: number
   onChangePage: (page: number) => void
   pageSize: number
   siblingCount?: number
   totalCount: number
-}
+} & Omit<SelectProps, 'fullWidth' | 'label' | 'pagination'>
 
 export const Pagination = ({
   className,
