@@ -1,11 +1,12 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { TypographyVariant } from '@/common/enums'
-import { SortableHeader } from '@/common/ui/Table/SortableHeader'
 import { Typography } from '@/common/ui/Typography'
 import cn from 'classnames'
 
 import s from './Table.module.scss'
+
+import { SortableHeader } from './SortableHeader'
 
 const Root = forwardRef<ElementRef<'table'>, ComponentPropsWithoutRef<'table'>>(
   ({ children, className, ...restProps }, ref) => {
