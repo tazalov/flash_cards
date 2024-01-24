@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 import { Cross, Edit } from '@/common/assets/icons'
-import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
+import { ALLOWED_IMAGES_FORMATS, COVER_SCHEMA, MAX_SIZE_IMAGE } from '@/common/const'
 import { ButtonVariant } from '@/common/enums'
 import { Cover } from '@/common/types'
 import { Avatar } from '@/common/ui/Avatar'
@@ -11,20 +11,8 @@ import { Button } from '@/common/ui/Button'
 import { FileUploader } from '@/common/ui/FilesUploader'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
 import cn from 'classnames'
-import { z } from 'zod'
 
 import s from './EditProfileForm.module.scss'
-
-const coverSchema = z
-  .instanceof(File)
-  .refine(
-    file => file.size <= MAX_SIZE_IMAGE,
-    `Max image size is 1MB. The file will not be uploaded.`
-  )
-  .refine(
-    file => ALLOWED_IMAGES_FORMATS.includes(file.type),
-    'Only .jpg, .jpeg, .png and .webp formats are supported. The file will not be uploaded.'
-  )
 
 export interface EditProfileValues {
   username: string
@@ -96,7 +84,7 @@ export const EditProfileForm = ({
           ref={fileRef}
           setFile={setAvatar}
           trigger={<Button as="span" className={s.trigger} startIcon={<Edit />} />}
-          validationSchema={coverSchema}
+          validationSchema={COVER_SCHEMA}
         />
       </div>
       <ControlledTextField
