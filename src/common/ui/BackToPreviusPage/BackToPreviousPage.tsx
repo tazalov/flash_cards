@@ -14,8 +14,11 @@ type Props<T extends ElementType> = {
   title: string
 } & ComponentPropsWithoutRef<T>
 
-type CardComponent = <T extends ElementType = 'div'>(props: Props<T> & PolymorphRef<T>) => ReactNode
-export const BackToPreviousPage: CardComponent = forwardRef(
+type BackToPreviousPageComponent = <T extends ElementType = 'div'>(
+  props: Props<T> & PolymorphRef<T>
+) => ReactNode
+
+export const BackToPreviousPage: BackToPreviousPageComponent = forwardRef(
   <T extends ElementType = 'div'>(
     { as, className, handleNavigate, title, ...restProps }: Props<T>,
     ref: ElementRef<T>

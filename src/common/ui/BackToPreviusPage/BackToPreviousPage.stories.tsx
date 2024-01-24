@@ -4,11 +4,26 @@ import { BackToPreviousPage } from './BackToPreviousPage'
 
 const meta = {
   argTypes: {
+    as: {
+      control: false,
+      description: 'Prop for polymorph render',
+    },
     handleNavigate: {
-      control: 'Back to Previous Page ',
+      action: 'Back to Previous Page',
+      description: 'Navigate function handler',
+    },
+    ref: {
+      control: false,
+      description: 'Standart React ref obj',
+    },
+    title: {
+      description: 'Text for link',
     },
   },
   component: BackToPreviousPage,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'Components/BackToPreviousPage',
 } satisfies Meta<typeof BackToPreviousPage>
@@ -17,5 +32,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {},
+  args: {
+    title: 'Back to prev page',
+  },
 }

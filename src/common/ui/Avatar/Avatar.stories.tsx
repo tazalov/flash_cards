@@ -14,7 +14,7 @@ const meta = {
       description: 'Source image (string)',
     },
     title: {
-      description: 'title for fallback text',
+      description: 'Title for fallback text',
     },
   },
   component: Avatar,
