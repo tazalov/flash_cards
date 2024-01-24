@@ -11,6 +11,10 @@ const meta = {
       control: false,
       description: 'Prop for polymorph render',
     },
+    disabled: {
+      control: 'boolean',
+      description: 'Flag for disabling the component',
+    },
     endIcon: {
       control: false,
       description: 'Icon after text',
