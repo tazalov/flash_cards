@@ -3,7 +3,16 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Preloader } from './Preloader'
 
 const meta = {
-  argTypes: {},
+  argTypes: {
+    fullHeight: {
+      control: 'boolean',
+      description: 'Flag for render component with 100vh',
+    },
+    size: {
+      control: 'number',
+      description: 'Size button in px (width + height)',
+    },
+  },
   component: Preloader,
   parameters: {
     layout: 'fullscreen',
@@ -16,8 +25,15 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Demo: Story = {
+export const Default: Story = {
   args: {
+    size: 100,
+  },
+}
+
+export const FullHeight: Story = {
+  args: {
+    fullHeight: true,
     size: 100,
   },
 }
