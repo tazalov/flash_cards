@@ -1,10 +1,33 @@
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 
 import { Meta, StoryObj } from '@storybook/react'
 
-import { TextField, TextFieldProps } from './'
+import { TextField } from './TextField'
 
 const meta = {
+  argTypes: {
+    inputClassName: {
+      control: false,
+      description: 'Classname for input',
+    },
+    label: {
+      control: 'text',
+      description: 'Text above tex field',
+    },
+    onChangeValue: {
+      action: 'Value changed',
+      description: 'Callback for control change value. Used instead of the standard "onChange"',
+    },
+    onPressEnter: {
+      action: 'Value changed',
+      control: false,
+      description: 'Callback is an add-on to the standard "onKeyDown"',
+    },
+    value: {
+      control: 'text',
+      description: 'Current value for text field',
+    },
+  },
   component: TextField,
   parameters: {
     layout: 'centered',
@@ -16,16 +39,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const DefaultTextField: Story = {}
+export const Default: Story = {}
 
-export const ErrorTextField: Story = {
+export const WithError: Story = {
   args: {
     errorText: 'Some error',
     type: 'text',
   },
 }
 
-export const DisabledTextField: Story = {
+export const Disabled: Story = {
   args: {
     disabled: true,
     label: 'Input',
@@ -35,7 +58,7 @@ export const DisabledTextField: Story = {
   },
 }
 
-export const SearchTextField: Story = {
+export const TypeSearch: Story = {
   args: {
     label: 'Search',
     type: 'search',
@@ -43,46 +66,35 @@ export const SearchTextField: Story = {
   },
 }
 
-const Component = (args: TextFieldProps) => {
-  const [value, setValue] = useState('')
-
-  const onChangeValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value)
-  }
-
-  const handlePressOnEnter = () => {
-    setValue('')
-  }
-
-  const handleChangeValue = (value: string) => {
-    setValue(value)
-  }
-
-  return (
-    <TextField
-      {...args}
-      onChange={onChangeValueHandler}
-      onChangeValue={handleChangeValue}
-      onPressEnter={handlePressOnEnter}
-      value={value}
-    />
-  )
-}
-
-export const DefaultControlled: Story = {
-  render: () => <Component />,
-}
-export const SearchControlled: Story = {
-  args: {
-    label: 'Search input',
-    type: 'search',
-  },
-  render: (args: TextFieldProps) => <Component {...args} />,
-}
-export const PasswordControlled: Story = {
+export const TypePassword: Story = {
   args: {
     label: 'Password',
     type: 'password',
   },
-  render: (args: TextFieldProps) => <Component {...args} />,
+}
+
+export const Controlled: Story = {
+  args: {
+    label: 'Some label text',
+  },
+  render: args => {
+    const [value, setValue] = useState('')
+
+    const handlePressOnEnter = () => {
+      setValue('')
+    }
+
+    const handleChangeValue = (value: string) => {
+      setValue(value)
+    }
+
+    return (
+      <TextField
+        {...args}
+        onChangeValue={handleChangeValue}
+        onPressEnter={handlePressOnEnter}
+        value={value}
+      />
+    )
+  },
 }
