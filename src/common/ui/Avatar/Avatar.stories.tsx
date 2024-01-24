@@ -6,7 +6,15 @@ const meta = {
   argTypes: {
     size: {
       control: 'radio',
+      description: 'Size for avatar',
       options: ['small', 'large'],
+    },
+    src: {
+      control: false,
+      description: 'Source image (string)',
+    },
+    title: {
+      description: 'Title for fallback text',
     },
   },
   component: Avatar,
@@ -37,9 +45,16 @@ export const Large: Story = {
   },
 }
 
-export const Fallback: Story = {
+export const FallbackSmall: Story = {
   args: {
     size: 'small',
+    title: 'TDD',
+  },
+}
+
+export const FallbackLarge: Story = {
+  args: {
+    size: 'large',
     title: 'TDD',
   },
 }

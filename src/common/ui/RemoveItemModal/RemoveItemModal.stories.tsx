@@ -6,8 +6,25 @@ import { RemoveItemModal } from './RemoveItemModal'
 
 const meta = {
   argTypes: {
+    disabled: {
+      control: 'boolean',
+      description: 'Flag for disable buttons',
+    },
     handleRemoveItem: {
       action: 'Item removed',
+      description: 'Callback for delete item',
+    },
+    itemName: {
+      control: 'text',
+      description: 'Text for question in body modal',
+    },
+    title: {
+      control: 'text',
+      description: 'Title for modal',
+    },
+    trigger: {
+      control: false,
+      description: 'A component for controlling the display of the modal',
     },
   },
   component: RemoveItemModal,
@@ -21,17 +38,17 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Demo: Story = {
+export const Default: Story = {
   args: {
-    isLoading: false,
     itemName: 'SomeItemName',
+    title: 'Some title remove item modal',
     trigger: <Button>Open modal</Button>,
   },
 }
 
-export const isLoading: Story = {
+export const Disabled: Story = {
   args: {
-    isLoading: true,
+    disabled: true,
     itemName: 'SomeItemName',
     trigger: <Button>Open modal</Button>,
   },

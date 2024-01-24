@@ -1,5 +1,6 @@
 .link {
   cursor: pointer;
+  user-select: none;
 
   display: flex;
   gap: 0.375rem;

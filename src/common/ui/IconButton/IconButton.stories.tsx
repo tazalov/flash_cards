@@ -6,14 +6,24 @@ import { IconButton } from './IconButton'
 
 const meta = {
   argTypes: {
-    onClick: {
-      action: 'Clicked!',
+    disabled: {
+      control: 'boolean',
+      description: 'Flag for disabling the component',
+    },
+    icon: {
+      control: false,
+      description: 'Icon for render component',
+    },
+    size: {
+      control: 'number',
+      description: 'Size button in rem (width + height)',
     },
   },
   component: IconButton,
   parameters: {
     layout: 'centered',
   },
+  tags: ['autodocs'],
   title: 'components/IconButton',
 } satisfies Meta<typeof IconButton>
 
@@ -21,8 +31,15 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Demo: Story = {
+export const Default: Story = {
   args: {
+    icon: <Search />,
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
     icon: <Search />,
   },
 }

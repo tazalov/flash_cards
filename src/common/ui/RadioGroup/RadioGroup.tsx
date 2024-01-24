@@ -8,7 +8,7 @@ import s from './RadioGroup.module.scss'
 import { SingleRadio } from './SingleRadio'
 
 export interface RadioOption {
-  disabled: boolean
+  disabled?: boolean
   label: string
   value: string
 }

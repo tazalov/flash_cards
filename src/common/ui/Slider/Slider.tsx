@@ -9,7 +9,7 @@ import s from './Slider.module.scss'
 
 type Props = {
   isInputControl?: boolean
-} & ComponentPropsWithoutRef<typeof RadixSlider.Root>
+} & Omit<ComponentPropsWithoutRef<typeof RadixSlider.Root>, 'asChild'>
 
 export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>((props, ref) => {
   const { className, disabled, isInputControl = true, onValueChange, value, ...restProps } = props

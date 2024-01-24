@@ -3,6 +3,17 @@ import { Meta, StoryObj } from '@storybook/react'
 import { Rating } from './'
 
 const meta = {
+  argTypes: {
+    maxRating: {
+      control: false,
+      description: 'Max value for rating',
+    },
+    rating: {
+      control: { type: 'radio' },
+      description: 'Current rating value',
+      options: [0, 1, 2, 3, 4, 5],
+    },
+  },
   component: Rating,
   parameters: {
     layout: 'centered',

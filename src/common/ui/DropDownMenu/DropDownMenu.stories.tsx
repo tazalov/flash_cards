@@ -6,6 +6,25 @@ import { Button } from '@/common/ui/Button'
 import { Dropdown } from './'
 
 const meta = {
+  argTypes: {
+    align: {
+      control: { type: 'radio' },
+      description: 'The preferred alignment against the trigger. May change when collisions occur.',
+      options: ['top', 'right', 'bottom', 'left'],
+    },
+    children: {
+      control: false,
+      description: 'Content for drop-down',
+    },
+    sideOffset: {
+      control: 'number',
+      description: 'The distance in pixels from the trigger.',
+    },
+    trigger: {
+      control: false,
+      description: 'A component for controlling the display of the dropdown menu',
+    },
+  },
   component: Dropdown.Menu,
   parameters: {
     layout: 'centered',
@@ -18,16 +37,13 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Demo: Story = {
+export const Default: Story = {
   args: {
-    align: 'start',
     children: (
       <>
         <Dropdown.Item startIcon={<Check />}>Check all</Dropdown.Item>
         <Dropdown.Separator />
         <Dropdown.Item endIcon={<OpenEye />}>View all</Dropdown.Item>
-        <Dropdown.Separator />
-        <Dropdown.Item>Item1</Dropdown.Item>
         <Dropdown.Separator />
         <Dropdown.Item>
           <Button>Logout</Button>

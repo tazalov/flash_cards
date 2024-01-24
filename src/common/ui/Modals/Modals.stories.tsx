@@ -4,6 +4,24 @@ import { Meta, StoryObj } from '@storybook/react'
 import { Modal } from './'
 
 const meta: Meta<typeof Modal> = {
+  argTypes: {
+    children: {
+      control: false,
+      description: 'Any content of the modal',
+    },
+    className: {
+      control: false,
+      description: 'Class name for CONTENT part modal',
+    },
+    title: {
+      control: 'text',
+      description: 'Title for modal',
+    },
+    trigger: {
+      control: false,
+      description: 'A component for controlling the display of the modal',
+    },
+  },
   component: Modal,
   parameters: {
     layout: 'centered',
@@ -15,21 +33,7 @@ const meta: Meta<typeof Modal> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const ModalWithTitle: Story = {
-  args: {
-    children: (
-      <div style={{ padding: '18px 24px' }}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus blanditiis eaque eveniet
-        expedita in iste necessitatibus nulla sint temporibus. Ipsam.
-      </div>
-    ),
-    defaultOpen: false,
-    title: 'title',
-    trigger: <Button>Open modal</Button>,
-  },
-}
-
-export const DefaultModal: Story = {
+export const Default: Story = {
   args: {
     children: (
       <div style={{ padding: '18px 24px' }}>
@@ -41,6 +45,20 @@ export const DefaultModal: Story = {
       </div>
     ),
     defaultOpen: false,
+    trigger: <Button>Open modal</Button>,
+  },
+}
+
+export const WithTitle: Story = {
+  args: {
+    children: (
+      <div style={{ padding: '18px 24px' }}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus blanditiis eaque eveniet
+        expedita in iste necessitatibus nulla sint temporibus. Ipsam.
+      </div>
+    ),
+    defaultOpen: false,
+    title: 'Lorem ipsum dolor sit amet',
     trigger: <Button>Open modal</Button>,
   },
 }

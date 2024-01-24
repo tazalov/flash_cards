@@ -31,8 +31,8 @@ export const RemoveDeckModal = ({ deckId, deckName, ...rest }: Props) => {
 
   return (
     <RemoveItemModal
+      disabled={isLoading}
       handleRemoveItem={handleRemoveDeck}
-      isLoading={isLoading}
       itemName={deckName}
       title={t('Remove deck')}
       {...rest}

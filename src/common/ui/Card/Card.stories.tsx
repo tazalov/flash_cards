@@ -16,10 +16,19 @@ const paddingsAndGap = {
 
 const meta = {
   argTypes: {
+    as: {
+      control: false,
+      description: 'Prop for polymorph render',
+    },
+    ref: {
+      control: false,
+      description: 'Standard React ref obj',
+    },
     style: {
       control: {
         type: 'select',
       },
+      description: 'Added for visual demonstration',
       mapping: paddingsAndGap,
       name: 'paddings and gap',
       options: Object.keys(paddingsAndGap),
@@ -36,7 +45,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const CardWithContent: Story = {
+export const Default: Story = {
   args: {
     children: [
       <Button key={0} variant={ButtonVariant.secondary}>

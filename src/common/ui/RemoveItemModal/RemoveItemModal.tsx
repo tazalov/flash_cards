@@ -12,8 +12,8 @@ import s from './RemoveItemModal.module.scss'
 
 interface Props {
   className?: string
+  disabled?: boolean
   handleRemoveItem: () => void
-  isLoading: boolean
   itemName: string
   title?: string
   trigger: ReactNode
@@ -21,8 +21,8 @@ interface Props {
 
 export const RemoveItemModal = ({
   className,
+  disabled,
   handleRemoveItem,
-  isLoading,
   itemName,
   title,
   trigger,
@@ -44,11 +44,11 @@ export const RemoveItemModal = ({
         </Typography>
         <div className={s.buttons}>
           <ModalClose>
-            <Button disabled={isLoading} variant={ButtonVariant.secondary}>
+            <Button disabled={disabled} variant={ButtonVariant.secondary}>
               {t('Cancel')}
             </Button>
           </ModalClose>
-          <Button disabled={isLoading} onClick={handleRemoveItem}>
+          <Button disabled={disabled} onClick={handleRemoveItem}>
             {title || t('Remove item')}
           </Button>
         </div>

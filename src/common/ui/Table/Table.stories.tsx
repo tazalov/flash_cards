@@ -12,6 +12,7 @@ import { Table } from './Table'
 const meta = {
   argTypes: {},
   component: Table.Root,
+  tags: ['autodocs'],
   title: 'components/Table',
 } satisfies Meta<typeof Table.Root>
 
@@ -62,7 +63,6 @@ export const RowCells: Story = {
 }
 
 export const TableDemo: Story = {
-  args: {},
   render: () => (
     <Table.Root>
       <Table.Head>

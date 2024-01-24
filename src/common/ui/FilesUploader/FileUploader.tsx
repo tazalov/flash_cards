@@ -8,15 +8,16 @@ import {
 } from 'react'
 
 import { TypographyVariant } from '@/common/enums'
+import { Cover } from '@/common/types'
 import { Typography } from '@/common/ui/Typography'
 import { ZodEffects, ZodError } from 'zod'
 
 import s from './FileUploader.module.scss'
 
 type Props = {
-  setFile: (file: File | null) => void
+  setFile: (file: Cover) => void
   trigger: ReactNode
-  validationSchema: ZodEffects<any>
+  validationSchema?: ZodEffects<any>
 } & ComponentPropsWithoutRef<'input'>
 
 export const FileUploader = forwardRef<ElementRef<'input'>, Props>(
@@ -30,7 +31,7 @@ export const FileUploader = forwardRef<ElementRef<'input'>, Props>(
         if (file) {
           setFile(file)
           setError(null)
-          validationSchema.parse(file)
+          validationSchema?.parse(file)
         }
       } catch (e) {
         const error = e as Error | ZodError

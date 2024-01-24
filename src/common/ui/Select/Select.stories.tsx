@@ -2,27 +2,33 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
 
-import { TypographyVariant } from '@/common/enums'
-import { Typography } from '@/common/ui/Typography'
-
-import { Option, Select } from './Select'
+import { Select } from './Select'
 
 const meta = {
   argTypes: {
     disabled: {
       control: 'boolean',
+      description: 'Flag for disable buttons',
     },
     fullWidth: {
       control: 'boolean',
+      description: 'Flag for fullwidth style',
     },
     label: {
       control: 'text',
+      description: 'Text above select',
     },
     onValueChange: {
       action: 'Select value changed!',
+      description: 'Callback for control change value',
+    },
+    pagination: {
+      control: false,
+      description: 'Flag for render select inside pagination. Use with caution!',
     },
     placeholder: {
       control: 'text',
+      description: 'Text for 1st render select',
     },
   },
   component: Select,
@@ -41,24 +47,7 @@ const options = [
   { title: 'title4', value: 'title4' },
 ]
 
-const ControlledSelect = ({ options }: { options: Option[] }) => {
-  const [current, setCurrent] = useState<null | string>(null)
-
-  const handleChangeCurrentOption = (value: string) => {
-    setCurrent(value)
-  }
-
-  return (
-    <>
-      <Typography variant={TypographyVariant.h3}>
-        Current option value: {current || 'none'}
-      </Typography>
-      <Select onValueChange={handleChangeCurrentOption} options={options} />
-    </>
-  )
-}
-
-export const WithLabel: Story = {
+export const Default: Story = {
   args: {
     label: 'Some text for label',
     options,
@@ -66,14 +55,23 @@ export const WithLabel: Story = {
   },
 }
 
-export const ControlledDemo: Story = {
+export const Controlled: Story = {
   args: { options },
-  render: args => <ControlledSelect {...args} />,
-}
+  render: args => {
+    const [current, setCurrent] = useState<null | string>(null)
 
-export const Default: Story = {
-  args: {
-    options,
+    const handleChangeCurrentOption = (value: string) => {
+      debugger
+      setCurrent(value)
+    }
+
+    return (
+      <Select
+        label={`Current option value: ${current || 'none'}`}
+        onValueChange={handleChangeCurrentOption}
+        options={args.options}
+      />
+    )
   },
 }
 

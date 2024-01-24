@@ -9,7 +9,7 @@ type Props = {
   size?: 'large' | 'small'
   src?: string
   title: string
-} & ComponentPropsWithoutRef<typeof RadixAvatar.Root>
+} & Omit<ComponentPropsWithoutRef<typeof RadixAvatar.Root>, 'asChild'>
 
 export const Avatar = forwardRef<ElementRef<typeof RadixAvatar.Root>, Props>(
   ({ className, size = 'large', src, title, ...rest }, ref) => {
