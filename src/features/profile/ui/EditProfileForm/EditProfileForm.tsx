@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Cross, Edit } from '@/common/assets/icons'
 import { ALLOWED_IMAGES_FORMATS, MAX_SIZE_IMAGE } from '@/common/const'
 import { ButtonVariant } from '@/common/enums'
+import { Cover } from '@/common/types'
 import { Avatar } from '@/common/ui/Avatar'
 import { Button } from '@/common/ui/Button'
 import { FileUploader } from '@/common/ui/FilesUploader'
@@ -48,10 +49,12 @@ export const EditProfileForm = ({
 }: Props) => {
   const fileRef = useRef<HTMLInputElement>(null)
 
-  const [avatar, setAvatar] = useState<File | null>(null)
+  const [avatar, setAvatar] = useState<Cover>(null)
 
   const avatarIsValid =
-    avatar !== null && ALLOWED_IMAGES_FORMATS.includes(avatar.type) && avatar.size <= MAX_SIZE_IMAGE
+    avatar instanceof File &&
+    ALLOWED_IMAGES_FORMATS.includes(avatar.type) &&
+    avatar.size <= MAX_SIZE_IMAGE
 
   const { control, handleSubmit } = useForm<EditProfileValues>()
 

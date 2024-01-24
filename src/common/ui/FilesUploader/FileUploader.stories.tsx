@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
 import { ALLOWED_IMAGES_FORMATS, COVER_SCHEMA } from '@/common/const'
+import { Cover } from '@/common/types'
 
 import { FileUploader } from './FileUploader'
 
@@ -46,9 +47,9 @@ export const ControlledImageUploader: Story = {
     validationSchema: COVER_SCHEMA,
   },
   render: () => {
-    const [cover, setCover] = useState<File | null>(null)
+    const [cover, setCover] = useState<Cover>(null)
 
-    const coverIsValidImage = cover !== null && ALLOWED_IMAGES_FORMATS.includes(cover.type)
+    const coverIsValidImage = cover instanceof File && ALLOWED_IMAGES_FORMATS.includes(cover.type)
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '500px' }}>
