@@ -1,3 +1,4 @@
+import { PAGINATION_OPTIONS } from '@/common/const'
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { Page } from '@/common/ui/Page'
 import { Pagination } from '@/common/ui/Pagination'
@@ -81,12 +82,7 @@ export const DecksList = () => {
         currentPage={currentPage}
         onChangePage={handleChangePage}
         onValueChange={handleChangeItemsPerPage}
-        options={[
-          { title: '5', value: '5' },
-          { title: '10', value: '10' },
-          { title: '20', value: '20' },
-          { title: '30', value: '30' },
-        ]}
+        options={PAGINATION_OPTIONS}
         pageSize={itemsPerPage}
         totalCount={data?.pagination.totalItems ?? 0}
         value={String(itemsPerPage)}
