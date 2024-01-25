@@ -2,8 +2,9 @@ import { ComponentPropsWithoutRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { Edit, Play, Remove } from '@/common/assets/icons'
+import { DECKS_COLUMNS } from '@/common/const'
 import { TypographyVariant } from '@/common/enums'
-import { Column, Sort } from '@/common/types'
+import { Sort } from '@/common/types'
 import { IconButton } from '@/common/ui/IconButton'
 import { Table } from '@/common/ui/Table'
 import { Typography } from '@/common/ui/Typography'
@@ -14,33 +15,6 @@ import { Deck } from '../../../model/types/decks.types'
 import { RemoveDeckModal } from '../../DeckActions/RemoveDeckModal/RemoveDeckModal'
 import { UpdateDeckModal } from '../../DeckActions/UpdateDeckModal/UpdateDeckModal'
 import { DecksTableSkeleton } from './DecksTableSkeleton'
-
-const columns: Column[] = [
-  {
-    key: 'name',
-    sortable: true,
-    title: 'Name',
-  },
-  {
-    key: 'cardsCount',
-    sortable: true,
-    title: 'Cards',
-  },
-  {
-    key: 'updated',
-    sortable: true,
-    title: 'Last Updated',
-  },
-  {
-    key: 'created',
-    sortable: true,
-    title: 'Created by',
-  },
-  {
-    key: 'buttons',
-    sortable: false,
-  },
-]
 
 type Props = {
   authId: string
@@ -70,7 +44,7 @@ export const DecksTable = ({
 
   return (
     <Table.Root {...rest}>
-      <Table.SortableHeader columns={columns} onSort={handleChangeSort} sort={sort} />
+      <Table.SortableHeader columns={DECKS_COLUMNS} onSort={handleChangeSort} sort={sort} />
       <Table.Body>
         {isLoading ? (
           <DecksTableSkeleton countCell={itemsPerPage} />

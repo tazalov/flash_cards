@@ -1,8 +1,9 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { Edit, Remove } from '@/common/assets/icons'
+import { CARDS_COLUMNS } from '@/common/const'
 import { TypographyVariant } from '@/common/enums'
-import { Column, Sort } from '@/common/types'
+import { Sort } from '@/common/types'
 import { IconButton } from '@/common/ui/IconButton'
 import { Rating } from '@/common/ui/Rating'
 import { Table } from '@/common/ui/Table'
@@ -26,33 +27,6 @@ type Props = {
   sort?: Sort
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
 
-const columns: Column[] = [
-  {
-    key: 'question',
-    sortable: true,
-    title: 'Question',
-  },
-  {
-    key: 'answer',
-    sortable: true,
-    title: 'Answer',
-  },
-  {
-    key: 'updated',
-    sortable: true,
-    title: 'Last Updated',
-  },
-  {
-    key: 'grade',
-    sortable: true,
-    title: 'Grade',
-  },
-  {
-    key: 'buttons',
-    sortable: false,
-  },
-]
-
 export const CardsTable = (props: Props) => {
   const {
     cards,
@@ -69,7 +43,7 @@ export const CardsTable = (props: Props) => {
     <Table.Root className={className}>
       <Table.SortableHeader
         className={s.table}
-        columns={columns}
+        columns={CARDS_COLUMNS}
         onSort={handleChangeSort}
         sort={sort}
       />
