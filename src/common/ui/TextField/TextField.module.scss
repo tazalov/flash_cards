@@ -36,6 +36,8 @@
   border-radius: 2px;
   outline: none;
 
+  transition: all 0.2s linear;
+
   &.isLeftIcon {
     padding-left: 2.5rem;
   }
