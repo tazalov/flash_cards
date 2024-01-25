@@ -2,6 +2,7 @@
   all: unset;
 
   cursor: pointer;
+  user-select: none;
 
   display: inline-flex;
   gap: 10px;
