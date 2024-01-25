@@ -24,3 +24,11 @@
 .email {
   color: var(--color-dark-100);
 }
+
+.dropItem {
+  transition: all 0.2s linear;
+
+  &:hover {
+    color: var(--color-light-900);
+  }
+}
