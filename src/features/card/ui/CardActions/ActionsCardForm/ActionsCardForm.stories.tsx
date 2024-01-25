@@ -1,25 +1,47 @@
+import { ON_SUBMIT_SB } from '@/common/const'
 import { Modal } from '@/common/ui/Modals'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { ActionsCardForm } from './ActionsCardForm'
 
 const meta = {
+  argTypes: {
+    btnTitle: {
+      control: 'text',
+      description: 'Title for button type submit',
+    },
+    card: {
+      control: false,
+      description: 'Current card data',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Flag for disable buttons',
+    },
+    onSubmit: {
+      action: 'Form submitted',
+      description: 'Callback for send form data',
+    },
+  },
   component: ActionsCardForm,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
-  title: 'features/Card/Actions/CreateCardForm',
+  title: 'features/Card/Actions/ActionsCardForm',
 } satisfies Meta<typeof ActionsCardForm>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const CreateCardFormStory: Story = {
+export const Default: Story = {
   args: {
+    btnTitle: 'Action text',
     disabled: false,
-    onSubmit: () => new Promise(res => res({ error: null, fieldErrors: null })),
-    submitTitle: 'Action text',
+    onSubmit: ON_SUBMIT_SB,
   },
   render: args => (
-    <Modal title="Some title modal" trigger={<span>Click me</span>}>
+    <Modal title="Actions Card Form" trigger={<span>Click me</span>}>
       <ActionsCardForm {...args} />
     </Modal>
   ),

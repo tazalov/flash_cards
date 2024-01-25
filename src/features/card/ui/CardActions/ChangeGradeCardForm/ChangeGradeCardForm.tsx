@@ -10,11 +10,11 @@ import s from './ChangeGradeCardForm.module.scss'
 import { Rate } from '../../../model/types/cards.types'
 
 const options: RadioOption[] = [
-  { disabled: false, label: 'Did not know', value: '1' },
-  { disabled: false, label: 'Forgot', value: '2' },
-  { disabled: false, label: 'A lot of thought', value: '3' },
-  { disabled: false, label: 'Confused', value: '4' },
-  { disabled: false, label: 'Knew the answer', value: '5' },
+  { label: 'Did not know', value: '1' },
+  { label: 'Forgot', value: '2' },
+  { label: 'A lot of thought', value: '3' },
+  { label: 'Confused', value: '4' },
+  { label: 'Knew the answer', value: '5' },
 ]
 
 type Props = {

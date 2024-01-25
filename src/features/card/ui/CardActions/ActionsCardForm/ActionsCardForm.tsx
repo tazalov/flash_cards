@@ -10,19 +10,19 @@ import { IconButton } from '@/common/ui/IconButton'
 import { ModalClose } from '@/common/ui/Modals/ModalClose'
 import { Select } from '@/common/ui/Select'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
-import { CatchingData } from '@/common/utils/handleErrorResponse'
-import { Card } from '@/features/card'
+import { CatchingData } from '@/common/utils'
 import cn from 'classnames'
 
 import s from './ActionsCardForm.module.scss'
 
 import { ActionsCardFormData, useActionsCardForm } from '../../../model/hooks/useActionsCardForm'
+import { Card } from '../../../model/types/cards.types'
 
 type Props = {
+  btnTitle: string
   card?: Card
-  disabled: boolean
+  disabled?: boolean
   onSubmit: (data: FormData) => Promise<CatchingData | undefined>
-  submitTitle: string
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
 const options = [
@@ -30,7 +30,7 @@ const options = [
   { title: 'Image', value: 'image' },
 ]
 
-export const ActionsCardForm = ({ card, className, disabled, onSubmit, submitTitle }: Props) => {
+export const ActionsCardForm = ({ btnTitle, card, className, disabled, onSubmit }: Props) => {
   const {
     coverOptions: { answerCover, questionCover, setAnswerCover, setQuestionCover },
     formValues: {
@@ -220,7 +220,7 @@ export const ActionsCardForm = ({ card, className, disabled, onSubmit, submitTit
           </Button>
         </ModalClose>
         <Button disabled={disabled} type="submit">
-          {submitTitle}
+          {btnTitle}
         </Button>
       </div>
     </form>

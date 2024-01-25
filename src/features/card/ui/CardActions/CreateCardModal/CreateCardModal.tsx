@@ -19,7 +19,9 @@ type Props = {
 
 export const CreateCardModal = ({ className, deckId }: Props) => {
   const [open, setOpen] = useState(false)
+
   const [createCard, { isLoading }] = useCreateCardMutation()
+
   const handleSubmit = (values: FormData) => {
     return createCard({ body: values, id: deckId }).then(data => {
       if ('error' in data) {
@@ -30,6 +32,7 @@ export const CreateCardModal = ({ className, deckId }: Props) => {
       }
     })
   }
+
   const { t } = useTranslation()
 
   return (
@@ -40,11 +43,7 @@ export const CreateCardModal = ({ className, deckId }: Props) => {
       title={t('Creating New Card')}
       trigger={<Button>{t('Add New Card')}</Button>}
     >
-      <ActionsCardForm
-        disabled={isLoading}
-        onSubmit={handleSubmit}
-        submitTitle={t('Add New Card')}
-      />
+      <ActionsCardForm btnTitle={t('Add New Card')} disabled={isLoading} onSubmit={handleSubmit} />
     </Modal>
   )
 }
