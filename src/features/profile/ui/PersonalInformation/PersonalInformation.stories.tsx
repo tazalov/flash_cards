@@ -4,26 +4,43 @@ import { PersonalInformation } from './PersonalInformation'
 
 const meta = {
   argTypes: {
+    data: {
+      control: false,
+      description: 'Current auth user data',
+    },
+    editMode: {
+      control: 'boolean',
+      description: 'Flag for show/hide edit profile form',
+    },
     handleLogout: {
       action: 'Success logout',
       control: false,
+      description: 'Callback for logout user',
     },
     handleUpdate: {
       action: 'Success update username',
       control: false,
+      description: 'Callback for change user data',
+    },
+    isLoadLogout: {
+      control: 'boolean',
+      description: 'Flag for disabled buttons in no-active edit mode',
     },
     isLoadUpdate: {
       control: 'boolean',
+      description: 'Flag for disabled buttons in active edit mode',
     },
     setEditMode: {
       action: 'Edit mode changed',
       control: false,
+      description: 'Callback for change current state for edit mode',
     },
   },
   component: PersonalInformation,
   parameters: {
     layout: 'fullscreen',
   },
+  tags: ['autodocs'],
   title: 'features/Profile/PersonalInformation',
 } satisfies Meta<typeof PersonalInformation>
 
@@ -44,7 +61,7 @@ export const Default: Story = {
   },
 }
 
-export const DefaultIsLoading: Story = {
+export const DefaultDisabled: Story = {
   args: {
     data: {
       avatar: 'https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-1024.png',
@@ -57,19 +74,7 @@ export const DefaultIsLoading: Story = {
   },
 }
 
-export const NoAvatar: Story = {
-  args: {
-    data: {
-      email: 'example@email.com',
-      username: 'MyUsername',
-    },
-    editMode: false,
-    isLoadLogout: false,
-    isLoadUpdate: false,
-  },
-}
-
-export const ActiveEditMode: Story = {
+export const EditMode: Story = {
   args: {
     data: {
       email: 'example@email.com',
@@ -81,7 +86,7 @@ export const ActiveEditMode: Story = {
   },
 }
 
-export const ActiveEditModeIsLoading: Story = {
+export const EditModeDisabled: Story = {
   args: {
     data: {
       email: 'example@email.com',
