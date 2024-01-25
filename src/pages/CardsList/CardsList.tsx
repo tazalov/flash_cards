@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
+import { PAGINATION_OPTIONS } from '@/common/const'
 import { TypographyVariant } from '@/common/enums'
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { BackToPreviousPage } from '@/common/ui/BackToPreviusPage'
@@ -106,12 +107,7 @@ export const CardsList = () => {
             currentPage={page}
             onChangePage={handleChangePage}
             onValueChange={handleChangeItemsPerPage}
-            options={[
-              { title: '5', value: '5' },
-              { title: '10', value: '10' },
-              { title: '20', value: '20' },
-              { title: '30', value: '30' },
-            ]}
+            options={PAGINATION_OPTIONS}
             pageSize={itemsPerPage}
             totalCount={data?.pagination.totalItems ?? 0}
             value={itemsPerPage.toString()}

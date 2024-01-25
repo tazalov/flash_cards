@@ -60,7 +60,7 @@ const authService = baseApi.injectEndpoints({
         }),
       }),
       updateProfile: builder.mutation<User, FormData>({
-        invalidatesTags: ['Me'],
+        invalidatesTags: (_, error) => (error ? [] : ['Me']),
         async onQueryStarted(body, { dispatch, queryFulfilled }) {
           let avatar
 

@@ -31,43 +31,46 @@ export const CardsHeader = (props: Props) => {
   const { t } = useTranslation()
 
   return (
-    <div className={cn(s.header, className)}>
-      <div className={s.headerLeft}>
-        <Typography className={s.title} variant={TypographyVariant.large}>
-          {deck.name}
-        </Typography>
-        {!isEmpty && isOwner && (
-          <Dropdown.Menu
-            sideOffset={10}
-            trigger={<IconButton className={s.btnIcon} icon={<Info />} size={1.125} />}
-          >
-            <Dropdown.Item startIcon={<Play />}>
-              <Link to={`/${deckId}/learn/${deck.name}`}>{t('Learn')}</Link>
-            </Dropdown.Item>
-            <Dropdown.Separator />
-            <Dropdown.Item onSelect={handleSelectItem} startIcon={<Edit />}>
-              <UpdateDeckModal deck={deck} trigger={<span>{t('Edit')}</span>} />
-            </Dropdown.Item>
+    <div className={s.headerWrapper}>
+      <div className={cn(s.header, className)}>
+        <div className={s.headerLeft}>
+          <Typography className={s.title} variant={TypographyVariant.large}>
+            {deck.name}
+          </Typography>
+          {!isEmpty && isOwner && (
+            <Dropdown.Menu
+              sideOffset={10}
+              trigger={<IconButton className={s.btnIcon} icon={<Info />} size={1.125} />}
+            >
+              <Dropdown.Item startIcon={<Play />}>
+                <Link to={`/${deckId}/learn/${deck.name}`}>{t('Learn')}</Link>
+              </Dropdown.Item>
+              <Dropdown.Separator />
+              <Dropdown.Item onSelect={handleSelectItem} startIcon={<Edit />}>
+                <UpdateDeckModal deck={deck} trigger={<span>{t('Edit')}</span>} />
+              </Dropdown.Item>
 
-            <Dropdown.Separator />
-            <Dropdown.Item onSelect={handleSelectItem} startIcon={<Trash />}>
-              <RemoveDeckModal
-                deckId={deckId}
-                deckName={deck.name}
-                trigger={<span>{t('Delete')}</span>}
-              />
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        )}
+              <Dropdown.Separator />
+              <Dropdown.Item onSelect={handleSelectItem} startIcon={<Trash />}>
+                <RemoveDeckModal
+                  deckId={deckId}
+                  deckName={deck.name}
+                  trigger={<span>{t('Delete')}</span>}
+                />
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          )}
+        </div>
+        {!isEmpty &&
+          (isOwner ? (
+            <CreateCardModal deckId={deckId} />
+          ) : (
+            <Button as={Link} to={`/${deckId}/learn/${deck.name}`}>
+              {t('Learn to Pack')}
+            </Button>
+          ))}
       </div>
-      {!isEmpty &&
-        (isOwner ? (
-          <CreateCardModal deckId={deckId} />
-        ) : (
-          <Button as={Link} to={`/${deckId}/learn/${deck.name}`}>
-            {t('Learn to Pack')}
-          </Button>
-        ))}
+      {deck?.cover && <img alt="Deck cover" className={s.deckCover} src={deck.cover} />}
     </div>
   )
 }
