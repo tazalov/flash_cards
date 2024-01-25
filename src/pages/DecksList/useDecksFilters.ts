@@ -9,7 +9,7 @@ export const useDecksFilters = () => {
   const maxCardsCount =
     searchParams.get('max') === null ? undefined : Number(searchParams.get('max'))
   const currentPage = Number(searchParams.get('page')) || 1
-  const itemsPerPage = Number(searchParams.get('items')) || 5
+  const itemsPerPage = Number(searchParams.get('items')) || 10
   const name = searchParams.get('search') === null ? '' : String(searchParams.get('search'))
   const show = searchParams.get('show') || 'all'
   const orderBy = searchParams.get('sort') || undefined
