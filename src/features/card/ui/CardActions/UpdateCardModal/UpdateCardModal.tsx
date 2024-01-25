@@ -45,10 +45,10 @@ export const UpdateCardModal = ({ card, className, handleChangePage, trigger }: 
       trigger={trigger}
     >
       <ActionsCardForm
+        btnTitle={t('Save changes')}
         card={card}
         disabled={isLoading}
         onSubmit={handleUpdateCard}
-        submitTitle={t('Save changes')}
       />
     </Modal>
   )

@@ -90,9 +90,9 @@ export const CardsList = () => {
           />
           <div className={cn(s.item, s.tableContainer)}>
             <CardsTable
+              cards={data?.items ?? []}
               className={s.table}
               currentPage={page}
-              deckItems={data?.items ?? []}
               handleChangePage={handleChangePage}
               handleChangeSort={handleChangeSort}
               isLoading={isFetching}
