@@ -6,7 +6,7 @@ import { Button } from '@/common/ui/Button'
 import { Card } from '@/common/ui/Card'
 import { Typography } from '@/common/ui/Typography'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
-import { CatchingData } from '@/common/utils/handleErrorResponse'
+import { CatchingData } from '@/common/utils'
 import cn from 'classnames'
 
 import s from './ForgotPasswordForm.module.scss'
@@ -15,10 +15,10 @@ import { ForgotPasswordFormData, useForgotPassword } from '../../model/hooks/use
 
 interface Props {
   className?: string
-  isLoading: boolean
+  disabled?: boolean
   onSubmit: (data: ForgotPasswordFormData) => Promise<CatchingData | undefined>
 }
-export const ForgotPasswordForm = ({ className, isLoading, onSubmit }: Props) => {
+export const ForgotPasswordForm = ({ className, disabled, onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -52,7 +52,7 @@ export const ForgotPasswordForm = ({ className, isLoading, onSubmit }: Props) =>
       <Typography className={s.descriptionText} variant={TypographyVariant.body2}>
         {t('Enter email for instruction')}
       </Typography>
-      <Button className={s.submitBtn} disabled={isLoading} fullWidth type="submit">
+      <Button className={s.submitBtn} disabled={disabled} fullWidth type="submit">
         {t('Send Instructions')}
       </Button>
       <Typography className={s.forgotPasswordText} variant={TypographyVariant.body2}>
@@ -60,7 +60,7 @@ export const ForgotPasswordForm = ({ className, isLoading, onSubmit }: Props) =>
       </Typography>
       <Button
         as={Link}
-        className={cn(s.signUpNav, { disabledLink: isLoading })}
+        className={cn(s.signUpNav, { disabledLink: disabled })}
         to="/sign-in"
         variant={ButtonVariant.link}
       >

@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 const createNewPasswordSchema = z.object({
-  password: z.string().min(3, 'Min 3').trim(),
+  password: z.string().min(3, 'Use 3 characters or more for your password').trim(),
 })
 
 export type CreateNewPasswordFormValues = z.input<typeof createNewPasswordSchema>

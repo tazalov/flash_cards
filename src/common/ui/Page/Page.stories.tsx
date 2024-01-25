@@ -29,6 +29,6 @@ type Story = StoryObj<typeof meta>
 
 export const Demo: Story = {
   args: {
-    children: <SignInForm isLoading onSubmit={() => {}} />,
+    children: <SignInForm disabled onSubmit={() => {}} />,
   },
 }

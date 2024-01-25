@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SortableHeader } from './SortableHeader'
+import { Table } from '../Table'
 
 const meta = {
   argTypes: {
@@ -17,10 +17,10 @@ const meta = {
       description: 'Current sort value',
     },
   },
-  component: SortableHeader,
+  component: Table.SortableHeader,
   tags: ['autodocs'],
   title: 'components/Table/SortableHeader',
-} satisfies Meta<typeof SortableHeader>
+} satisfies Meta<typeof Table.SortableHeader>
 
 export default meta
 

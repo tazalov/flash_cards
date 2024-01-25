@@ -14,11 +14,12 @@ import s from './SignUpForm.module.scss'
 import { SignUpFormValues, useSignUpForm } from '../../model/hooks/useSignUpForm'
 
 interface Props {
-  isLoading: boolean
+  className?: string
+  disabled?: boolean
   onSubmit: (body: SignUpFormValues) => Promise<CatchingData | undefined>
 }
 
-export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
+export const SignUpForm = ({ className, disabled, onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -37,14 +38,18 @@ export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
   }
 
   return (
-    <Card as="form" className={s.formContent} onSubmit={handleSubmit(handleSubmitAction)}>
+    <Card
+      as="form"
+      className={cn(s.formContent, className)}
+      onSubmit={handleSubmit(handleSubmitAction)}
+    >
       <Typography as="h2" className={s.formTitle} variant={TypographyVariant.large}>
         {t('Sign Up')}
       </Typography>
       <ControlledTextField
         className={s.input}
         control={control}
-        disabled={isLoading}
+        disabled={disabled}
         errorText={errors.email?.message}
         label={t('Email')}
         name="email"
@@ -53,7 +58,7 @@ export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
       <ControlledTextField
         className={s.input}
         control={control}
-        disabled={isLoading}
+        disabled={disabled}
         errorText={errors.password?.message}
         label={t('Password')}
         name="password"
@@ -62,13 +67,13 @@ export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
       <ControlledTextField
         className={s.input}
         control={control}
-        disabled={isLoading}
+        disabled={disabled}
         errorText={errors.confirmPassword?.message}
         label={t('Confirm password')}
         name="confirmPassword"
         type="password"
       />
-      <Button className={s.btnSubmit} disabled={isLoading} fullWidth type="submit">
+      <Button className={s.btnSubmit} disabled={disabled} fullWidth type="submit">
         {t('Sign Up')}
       </Button>
       <Typography className={s.formFooterText} variant={TypographyVariant.body2}>
@@ -76,7 +81,7 @@ export const SignUpForm = ({ isLoading, onSubmit }: Props) => {
       </Typography>
       <Button
         as={Link}
-        className={cn(s.formBtnLink, { disabledLink: isLoading })}
+        className={cn(s.formBtnLink, { disabledLink: disabled })}
         to="/sign-in"
         type="submit"
         variant={ButtonVariant.link}

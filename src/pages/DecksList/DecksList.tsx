@@ -56,11 +56,11 @@ export const DecksList = () => {
       <DecksFilters
         cardsCounts={[minCardsCount, maxCardsCount ?? startMaxCardsCount]}
         className={s.filters}
+        disabled={isFetching}
         handleChangeCardsCounts={handleChangeCardsCounts}
         handleChangeSearch={handleChangeSearch}
         handleChangeTabValue={handleChangeTabValue}
         handleClearFilters={handleClearFilters}
-        isLoading={isFetching}
         max={data?.maxCardsCount}
         searchValue={name}
         tabValue={show}

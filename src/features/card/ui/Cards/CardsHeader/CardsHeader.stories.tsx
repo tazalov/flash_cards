@@ -3,6 +3,24 @@ import { Meta, StoryObj } from '@storybook/react'
 import { CardsHeader } from './CardsHeader'
 
 const meta = {
+  argTypes: {
+    deck: {
+      control: false,
+      description: 'Current deck data',
+    },
+    deckId: {
+      control: false,
+      description: 'Current deckId from URI parameter',
+    },
+    isEmpty: {
+      control: 'boolean',
+      description: 'A flag indicating whether the deck is empty',
+    },
+    isOwner: {
+      control: 'boolean',
+      description: 'A flag indicating whether this is your deck',
+    },
+  },
   component: CardsHeader,
   tags: ['autodocs'],
   title: 'features/Card/CardsHeader',
@@ -27,25 +45,18 @@ const deck = {
   userId: '1',
 }
 
-export const isOwner: Story = {
+export const IsOwner: Story = {
   args: {
     deck,
-    deckId: 'clkyc7rlm0020yb2qwnggodrn',
+    deckId: '1',
     isOwner: true,
   },
 }
-export const isEmpty: Story = {
-  args: {
-    deck,
-    deckId: 'clkyc7rlm0020yb2qwnggodrn',
-    isEmpty: true,
-    isOwner: true,
-  },
-}
+
 export const NotIsOwner: Story = {
   args: {
     deck,
-    deckId: 'clkyc7rlm0020yb2qwnggodrn',
+    deckId: '1',
     isEmpty: false,
     isOwner: false,
   },

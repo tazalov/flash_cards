@@ -4,11 +4,37 @@ import { CardsTable } from './CardsTable'
 
 const meta = {
   argTypes: {
+    cards: {
+      control: false,
+      description: 'Array of cards',
+    },
+    currentPage: {
+      control: 'number',
+      description: 'Current page for render',
+    },
     handleChangePage: {
       action: 'Page changed',
+      description: 'Callback for change current page',
     },
     handleChangeSort: {
       action: 'Sort changed',
+      description: 'Callback for change current sort direction',
+    },
+    isLoading: {
+      control: 'boolean',
+      description: 'Flag for hide/show table skeleton',
+    },
+    isOwner: {
+      control: 'boolean',
+      description: 'A flag indicating whether this is your deck',
+    },
+    itemsPerPage: {
+      control: 'number',
+      description: 'Count items per page for render skeletons',
+    },
+    sort: {
+      control: false,
+      description: 'Current sort value',
     },
   },
   component: CardsTable,
@@ -19,7 +45,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const initialState = [
+const cards = [
   {
     answer: 'i dont know',
     answerImg: '',
@@ -52,21 +78,33 @@ const initialState = [
   },
 ]
 
-export const isOwner: Story = {
+export const IsOwner: Story = {
   args: {
+    cards,
     currentPage: 1,
-    deckItems: initialState,
     isLoading: false,
     isOwner: true,
     itemsPerPage: 5,
     sort: null,
   },
 }
+
 export const NotIsOwner: Story = {
   args: {
+    cards,
     currentPage: 1,
-    deckItems: initialState,
     isLoading: false,
+    isOwner: false,
+    itemsPerPage: 5,
+    sort: null,
+  },
+}
+
+export const IsLoading: Story = {
+  args: {
+    cards,
+    currentPage: 1,
+    isLoading: true,
     isOwner: false,
     itemsPerPage: 5,
     sort: null,

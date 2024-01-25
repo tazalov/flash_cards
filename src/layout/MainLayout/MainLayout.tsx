@@ -24,6 +24,7 @@ export const MainLayout = forwardRef<ElementRef<'div'>, Props>((props, ref) => {
   return (
     <div ref={ref} {...props}>
       <Header
+        className={s.header}
         data={
           data && {
             avatar: data.avatar,

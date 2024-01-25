@@ -4,11 +4,33 @@ import { CardBody } from './CardBody'
 
 const meta = {
   argTypes: {
+    card: {
+      control: false,
+      description: 'Current card data',
+    },
+    className: {
+      control: false,
+      description: 'The class that is passed from the parent component is used for positioning.',
+    },
+    deckName: {
+      control: 'text',
+      description: 'Deck name for title current card',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Flag for disable buttons',
+    },
     handleShowAnswer: {
       action: 'State changed',
+      description: 'Callback for change show/hide state for answer',
+    },
+    hideAnswer: {
+      control: 'boolean',
+      description: 'Flag for show/hide state for answer',
     },
     onSubmit: {
       action: 'Form submitted',
+      description: 'Callback for send form data',
     },
   },
   component: CardBody,
@@ -30,9 +52,9 @@ export const ShowAnswer: Story = {
       answerImg: null,
       answerVideo: null,
       created: '2023-08-24T19:54:22.655Z',
-      deckId: 'cllpefqyo07j9vo2qe7cvwgut',
+      deckId: '1',
       grade: 0,
-      id: 'cllpl1b9d07qjvo2qa3oxgaie',
+      id: '1',
       question: 'Что делает метод pop() в JavaScript?',
       questionImg: null,
       questionVideo: null,
@@ -51,9 +73,9 @@ export const HideAnswer: Story = {
       answerImg: null,
       answerVideo: null,
       created: '2023-08-24T19:54:22.655Z',
-      deckId: 'cllpefqyo07j9vo2qe7cvwgut',
+      deckId: '1',
       grade: 0,
-      id: 'cllpl1b9d07qjvo2qa3oxgaie',
+      id: '1',
       question: 'Что делает метод pop() в JavaScript?',
       questionImg: null,
       questionVideo: null,

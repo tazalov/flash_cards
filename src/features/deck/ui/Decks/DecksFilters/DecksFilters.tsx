@@ -14,11 +14,11 @@ import s from './DecksFilters.module.scss'
 
 type Props = {
   cardsCounts: number[]
+  disabled?: boolean
   handleChangeCardsCounts: (newCardsCounts: number[]) => void
   handleChangeSearch: (newValue: string) => void
   handleChangeTabValue: (newValue: string) => void
   handleClearFilters: () => void
-  isLoading: boolean
   max: number | undefined
   min?: number
   searchValue: string
@@ -28,11 +28,11 @@ type Props = {
 export const DecksFilters = ({
   cardsCounts,
   className,
+  disabled,
   handleChangeCardsCounts,
   handleChangeSearch,
   handleChangeTabValue,
   handleClearFilters,
-  isLoading,
   max,
   min = 0,
   searchValue,
@@ -45,7 +45,7 @@ export const DecksFilters = ({
     <div className={cn(s.filters, className)} {...rest}>
       <TextField
         className={s.input}
-        disabled={isLoading}
+        disabled={disabled}
         onChangeValue={handleChangeSearch}
         type="search"
         value={searchValue}
@@ -56,16 +56,16 @@ export const DecksFilters = ({
         onValueChange={handleChangeTabValue}
         value={tabValue}
       >
-        <TabItem disabled={isLoading} value="my">
+        <TabItem disabled={disabled} value="my">
           {t('My Decks')}
         </TabItem>
-        <TabItem disabled={isLoading} value="all">
+        <TabItem disabled={disabled} value="all">
           {t('All Decks')}
         </TabItem>
       </Tabs>
       <Slider
         className={s.slider}
-        disabled={isLoading}
+        disabled={disabled}
         max={max}
         min={min}
         onValueChange={handleChangeCardsCounts}
@@ -73,7 +73,7 @@ export const DecksFilters = ({
       />
       <Button
         className={s.button}
-        disabled={isLoading}
+        disabled={disabled}
         onClick={handleClearFilters}
         startIcon={<Edit />}
         variant={ButtonVariant.secondary}

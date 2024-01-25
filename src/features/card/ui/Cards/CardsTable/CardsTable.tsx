@@ -16,8 +16,8 @@ import { UpdateCardModal } from '../../CardActions/UpdateCardModal/UpdateCardMod
 import { CardsTableSkeleton } from './CardsTableSkeleton'
 
 type Props = {
+  cards?: Card[]
   currentPage: number
-  deckItems?: Card[]
   handleChangePage: (newPage: number) => void
   handleChangeSort: (sort: Sort) => void
   isLoading: boolean
@@ -55,8 +55,8 @@ const columns: Column[] = [
 
 export const CardsTable = (props: Props) => {
   const {
+    cards,
     className,
-    deckItems,
     handleChangePage,
     handleChangeSort,
     isLoading,
@@ -77,7 +77,7 @@ export const CardsTable = (props: Props) => {
         {isLoading ? (
           <CardsTableSkeleton countCell={itemsPerPage} />
         ) : (
-          deckItems?.map(el => {
+          cards?.map(el => {
             return (
               <Table.Row key={el.id}>
                 <Table.Cell className={s.questionCell}>

@@ -4,11 +4,19 @@ import { ChangeGradeCardForm } from './ChangeGradeCardForm'
 
 const meta = {
   argTypes: {
+    disabled: {
+      control: 'boolean',
+      description: 'Flag for disable buttons',
+    },
     onSubmit: {
-      action: 'FormSubmitted',
+      action: 'Form submitted',
+      description: 'Callback for send form data',
     },
   },
   component: ChangeGradeCardForm,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'features/Card/Actions/ChangeGradeCardForm',
 } satisfies Meta<typeof ChangeGradeCardForm>
@@ -16,4 +24,4 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Demo: Story = {}
+export const Default: Story = {}

@@ -20,7 +20,7 @@ import { Deck } from '../../../model/types/decks.types'
 type Props = {
   btnTitle: string
   deck?: Pick<Deck, 'cover' | 'isPrivate' | 'name'>
-  disabled: boolean
+  disabled?: boolean
   onSubmit: (body: FormData) => Promise<CatchingData | undefined>
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 

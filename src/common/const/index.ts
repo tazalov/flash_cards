@@ -13,3 +13,5 @@ export const COVER_SCHEMA = z
     file => ALLOWED_IMAGES_FORMATS.includes(file.type),
     'Only .jpg, .jpeg, .png and .webp formats are supported. The file will not be uploaded.'
   )
+
+export const ON_SUBMIT_SB = () => Promise.resolve({ error: null, fieldErrors: null })

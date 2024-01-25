@@ -31,7 +31,7 @@ export const ForgotPassword = () => {
       {isSuccess ? (
         <CheckEmail email={email} />
       ) : (
-        <ForgotPasswordForm isLoading={isLoading} onSubmit={handleLoginSubmit} />
+        <ForgotPasswordForm disabled={isLoading} onSubmit={handleLoginSubmit} />
       )}
     </Page>
   )

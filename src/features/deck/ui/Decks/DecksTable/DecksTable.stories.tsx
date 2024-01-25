@@ -4,8 +4,30 @@ import { DecksTable } from './DecksTable'
 
 const meta = {
   argTypes: {
+    authId: {
+      control: false,
+      description:
+        'The current ID of the authorized user. You need to know which decks are yours and which are not yours',
+    },
     handleChangeSort: {
-      action: 'Sort value changed',
+      action: 'Sort changed',
+      description: 'Callback for change current sort direction',
+    },
+    isLoading: {
+      control: 'boolean',
+      description: 'Flag for hide/show table skeleton',
+    },
+    items: {
+      control: false,
+      description: 'Array of decks',
+    },
+    itemsPerPage: {
+      control: 'number',
+      description: 'Count items per page for render skeletons',
+    },
+    sort: {
+      control: false,
+      description: 'Current sort value',
     },
   },
   component: DecksTable,
