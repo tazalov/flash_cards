@@ -7,15 +7,6 @@ import { Typography } from '@/common/ui/Typography'
 
 import { Pagination } from './Pagination'
 
-/*
- currentPage: number
- onChangePage: (page: number) => void
- pageSize: number
- siblingCount?: number
- totalCount: number
-
- */
-
 const meta = {
   argTypes: {
     currentPage: {

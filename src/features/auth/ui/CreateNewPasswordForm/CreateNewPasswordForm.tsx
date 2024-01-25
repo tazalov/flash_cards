@@ -5,7 +5,8 @@ import { Button } from '@/common/ui/Button'
 import { Card } from '@/common/ui/Card'
 import { Typography } from '@/common/ui/Typography'
 import { ControlledTextField } from '@/common/ui_controlled/ControlledTextField'
-import { CatchingData } from '@/common/utils/handleErrorResponse'
+import { CatchingData } from '@/common/utils'
+import cn from 'classnames'
 
 import s from './CreateNewPasswordForm.module.scss'
 
@@ -15,11 +16,12 @@ import {
 } from '../../model/hooks/useCreateNewPasswordForm'
 
 interface Props {
-  isLoading: boolean
+  className?: string
+  disabled?: boolean
   onSubmit: (data: CreateNewPasswordFormValues) => Promise<CatchingData | undefined>
 }
 
-export const CreateNewPasswordForm = ({ isLoading, onSubmit }: Props) => {
+export const CreateNewPasswordForm = ({ className, disabled, onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -39,7 +41,11 @@ export const CreateNewPasswordForm = ({ isLoading, onSubmit }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <Card as="form" className={s.formContent} onSubmit={handleSubmit(handleSubmitAction)}>
+    <Card
+      as="form"
+      className={cn(s.formContent, className)}
+      onSubmit={handleSubmit(handleSubmitAction)}
+    >
       <Typography as="h2" className={s.formTitle} variant={TypographyVariant.large}>
         {t('Create new password')}
       </Typography>
@@ -54,7 +60,7 @@ export const CreateNewPasswordForm = ({ isLoading, onSubmit }: Props) => {
       <Typography className={s.formInfoText} variant={TypographyVariant.body2}>
         {t('Create new password and we will send you further instructions to email')}
       </Typography>
-      <Button disabled={isLoading} fullWidth type="submit">
+      <Button disabled={disabled} fullWidth type="submit">
         {t('Create new password')}
       </Button>
     </Card>
