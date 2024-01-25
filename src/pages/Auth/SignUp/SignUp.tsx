@@ -23,7 +23,7 @@ export const SignUp = () => {
 
   return (
     <Page>
-      <SignUpForm isLoading={isLoading} onSubmit={handleSubmit} />
+      <SignUpForm disabled={isLoading} onSubmit={handleSubmit} />
     </Page>
   )
 }

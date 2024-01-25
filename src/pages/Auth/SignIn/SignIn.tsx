@@ -15,7 +15,7 @@ export const SignIn = () => {
 
   return (
     <Page>
-      <SignInForm isLoading={isLoading} onSubmit={handleLoginSubmit} />
+      <SignInForm disabled={isLoading} onSubmit={handleLoginSubmit} />
     </Page>
   )
 }

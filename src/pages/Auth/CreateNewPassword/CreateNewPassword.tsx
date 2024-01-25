@@ -33,7 +33,7 @@ export const CreateNewPassword = () => {
 
   return (
     <Page>
-      <CreateNewPasswordForm isLoading={isLoading} onSubmit={handleLoginSubmit} />
+      <CreateNewPasswordForm disabled={isLoading} onSubmit={handleLoginSubmit} />
     </Page>
   )
 }
