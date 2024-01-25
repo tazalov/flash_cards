@@ -3,11 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { Arrow } from '@/common/assets/icons'
-import { TypographyVariant } from '@/common/enums'
+import { BackToPreviousPage } from '@/common/ui/BackToPreviusPage'
 import { Page } from '@/common/ui/Page'
 import { Preloader } from '@/common/ui/Preloader'
-import { Typography } from '@/common/ui/Typography'
 import {
   CardBody,
   CardBodySkeleton,
@@ -15,8 +13,6 @@ import {
   useChangeGradeCardMutation,
   useGetRandomCardQuery,
 } from '@/features/card'
-
-import s from './Learn.module.scss'
 
 export const Learn = () => {
   const { deckId = '', deckName } = useParams()
@@ -49,13 +45,13 @@ export const Learn = () => {
   if (isLoadRandomCard) {
     return <Preloader size={100} />
   }
+  const handleToPreviewPage = () => {
+    navigate(-1)
+  }
 
   return (
     <Page mt="24px">
-      <div className={s.link} onClick={() => navigate(-1)}>
-        <Arrow className={s.iconArrow} />
-        <Typography variant={TypographyVariant.body2}>{t('Back to previous page')}</Typography>
-      </div>
+      <BackToPreviousPage handleNavigate={handleToPreviewPage} title={t('Back to previous page')} />
       {isLoadChangeGrade || isErrorGetCard || isErrorChangeGrade ? (
         <CardBodySkeleton />
       ) : (
