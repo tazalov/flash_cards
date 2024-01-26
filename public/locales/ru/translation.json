@@ -84,5 +84,9 @@
   "Knew the answer": "Знал ответ",
   "Grade has been successfully counted!": "Оценка успешно подсчитана!",
   "This deck is empty": "Эта колода пуста",
-  "Click add new card to fill this deck": "Нажмите 'Добавить карточку', чтобы заполнить колоду"
+  "Click add new card to fill this deck": "Нажмите 'Добавить карточку', чтобы заполнить колоду",
+  "5": "5",
+  "10": "10",
+  "20": "20",
+  "30": "30"
 }
