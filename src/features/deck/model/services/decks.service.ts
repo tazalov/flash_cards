@@ -12,12 +12,12 @@ const decksService = baseApi.injectEndpoints({
         query: body => ({ body, method: 'POST', url: `v1/decks` }),
       }),
       getDeckById: builder.query<Deck, { id: string }>({
-        providesTags: (_, error) => (error ? [] : ['Deck']),
+        providesTags: ['Deck'],
         query: ({ id }) => ({ url: `v1/decks/${id}` }),
         transformErrorResponse: error => handleErrorResponse(error),
       }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
-        providesTags: (_, error) => (error ? [] : ['Decks']),
+        providesTags: ['Decks'],
         query: params => ({ params: params ?? {}, url: `v1/decks` }),
         transformErrorResponse: error => handleErrorResponse(error),
       }),

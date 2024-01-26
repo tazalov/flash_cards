@@ -26,6 +26,8 @@ export const UpdateCardModal = ({ card, className, handleChangePage, trigger }: 
   const { t } = useTranslation()
 
   const handleUpdateCard = (formValues: FormData) => {
+    setOpen(false)
+
     return update({ body: formValues, card }).then(data => {
       if ('error' in data) {
         return handleErrorResponse(data.error)

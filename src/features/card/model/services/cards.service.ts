@@ -1,4 +1,5 @@
 import { baseApi } from '@/api'
+import { Cover } from '@/common/types'
 import { handleErrorResponse } from '@/common/utils'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
@@ -42,7 +43,7 @@ const cardsService = baseApi.injectEndpoints({
         }),
       }),
       getCardsById: builder.query<GetCardsResponse, { id: string; params: GetCardsArgs }>({
-        providesTags: (_, error) => (error ? [] : ['Cards']),
+        providesTags: ['Cards'],
         query: ({ id, params }) => ({ params, url: `v1/decks/${id}/cards` }),
         transformErrorResponse: error => handleErrorResponse(error),
       }),
@@ -59,6 +60,60 @@ const cardsService = baseApi.injectEndpoints({
       }),
       updateCard: builder.mutation<Card, { body: FormData; card: Card }>({
         invalidatesTags: (_, error) => (error ? [] : ['Cards']),
+        onQueryStarted: async ({ body, card }, { dispatch, getState, queryFulfilled }) => {
+          let patchResult
+
+          for (const { endpointName, originalArgs } of cardsService.util.selectInvalidatedBy(
+            getState(),
+            ['Cards']
+          )) {
+            if (endpointName !== 'getCardsById') {
+              continue
+            }
+
+            patchResult = dispatch(
+              cardsService.util.updateQueryData(
+                'getCardsById',
+                {
+                  id: card.deckId,
+                  params: originalArgs.params,
+                },
+                draft => {
+                  const idxForUpdate = draft.items.findIndex(el => el.id === card.id)
+
+                  if (idxForUpdate !== -1) {
+                    const updatedCardData: Partial<Card> = {
+                      answer: getTextFormData(body.get('answer')),
+                      question: getTextFormData(body.get('question')),
+                    }
+
+                    const questionImg = getFileFormData(body.get('questionImg'))
+                    const answerImg = getFileFormData(body.get('answerImg'))
+
+                    if (questionImg) {
+                      updatedCardData.questionImg = URL.createObjectURL(questionImg)
+                    }
+
+                    if (answerImg) {
+                      updatedCardData.answerImg = URL.createObjectURL(answerImg)
+                    }
+
+                    draft.items[idxForUpdate] = {
+                      ...draft.items[idxForUpdate],
+                      ...updatedCardData,
+                    }
+                  }
+                }
+              )
+            )
+          }
+
+          try {
+            await queryFulfilled
+          } catch (e) {
+            patchResult?.undo()
+          }
+        },
         query: ({ body, card }) => ({
           body,
           method: 'PATCH',
@@ -77,3 +132,19 @@ export const {
   useRemoveCardMutation,
   useUpdateCardMutation,
 } = cardsService
+
+export const getFileFormData = (item: Cover) => {
+  if (item !== null && item instanceof File) {
+    return item
+  }
+
+  return null
+}
+
+export const getTextFormData = (item: Cover) => {
+  if (typeof item === 'string') {
+    return item
+  }
+
+  return ''
+}

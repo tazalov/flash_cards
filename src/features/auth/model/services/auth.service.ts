@@ -15,7 +15,7 @@ const authService = baseApi.injectEndpoints({
         }),
       }),
       logout: builder.mutation<void, void>({
-        invalidatesTags: ['Me'],
+        invalidatesTags: (_, error) => (error ? [] : ['Me']),
         async onQueryStarted(_, { dispatch, queryFulfilled }) {
           const patchResult = dispatch(authService.util.updateQueryData('me', _, () => {}))
 
