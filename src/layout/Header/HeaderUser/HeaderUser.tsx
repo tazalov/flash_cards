@@ -53,11 +53,15 @@ export const HeaderUser = ({ data, logout }: Props) => {
           </div>
         </Dropdown.Item>
         <Dropdown.Separator />
-        <Dropdown.Item onSelect={handleNavigateToProfile} startIcon={<Person />}>
+        <Dropdown.Item
+          className={s.dropItem}
+          onSelect={handleNavigateToProfile}
+          startIcon={<Person />}
+        >
           <Typography variant={TypographyVariant.caption}>{t('My profile')}</Typography>
         </Dropdown.Item>
         <Dropdown.Separator />
-        <Dropdown.Item onSelect={logout} startIcon={<Logout />}>
+        <Dropdown.Item className={s.dropItem} onSelect={logout} startIcon={<Logout />}>
           <Typography variant={TypographyVariant.caption}>{t('Logout')}</Typography>
         </Dropdown.Item>
       </Dropdown.Menu>

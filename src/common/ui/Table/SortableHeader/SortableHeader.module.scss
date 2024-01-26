@@ -1,7 +1,7 @@
 .headCell {
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.1s linear;
+  transition: all 0.2s linear;
 
   &:hover {
     background-color: var(--color-accent-500);

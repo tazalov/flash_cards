@@ -42,16 +42,24 @@ export const CardsHeader = (props: Props) => {
               sideOffset={10}
               trigger={<IconButton className={s.btnIcon} icon={<Info />} size={1.125} />}
             >
-              <Dropdown.Item startIcon={<Play />}>
+              <Dropdown.Item className={s.menuItem} startIcon={<Play />}>
                 <Link to={`/${deckId}/learn/${deck.name}`}>{t('Learn')}</Link>
               </Dropdown.Item>
               <Dropdown.Separator />
-              <Dropdown.Item onSelect={handleSelectItem} startIcon={<Edit />}>
+              <Dropdown.Item
+                className={s.menuItem}
+                onSelect={handleSelectItem}
+                startIcon={<Edit />}
+              >
                 <UpdateDeckModal deck={deck} trigger={<span>{t('Edit')}</span>} />
               </Dropdown.Item>
 
               <Dropdown.Separator />
-              <Dropdown.Item onSelect={handleSelectItem} startIcon={<Trash />}>
+              <Dropdown.Item
+                className={s.menuItem}
+                onSelect={handleSelectItem}
+                startIcon={<Trash />}
+              >
                 <RemoveDeckModal
                   deckId={deckId}
                   deckName={deck.name}
